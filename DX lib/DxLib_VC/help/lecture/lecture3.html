@@ -1,0 +1,125 @@
+<title>ゲームプログラムの基礎知識</title>
+<html>
+	<head>
+		<meta name="keyword" content="講座 シューティングプログラム シューティング">
+	</head>
+	<body bgcolor="#ffffff" text="#000000" link="#0033cc" vlink="#800040">
+
+		<font size="2">ゲーム制作講座３<br><br></font>
+		<font size="6"><b>３．ダブルバッファリング</b></font>
+		<hr><br><br>
+
+		<font size="3"><B>
+		　今回の講座の発端をおさらいをしましょう。<br>
+		　<font color="#770000">第２回『絵を動かそう』</font>で<font color="#770000">『消えている』→『表示』→『消えている』→『表示』</font>を繰り返すと<br>
+		画面の表示がちかちかしてしまい、とても見苦しいのでなんとか常に<font color="#770000">『表示』</font>の状態を保てないか、<br>
+		という所から今回の<font color="#770000">『ダブルバッファリング』</font>の話題になったわけです。<br><br>
+
+		　常に<font color="#770000">『表示』</font>の状態を保つための<font color="#770000">『ダブルバッファリング』</font>と言う手法の仕組みをここで説明したいと<br>
+		思います。<br><br>
+
+		　まず現在の手法を見なおしてみると<br><br>
+		
+<font color="#770000">
+		１.画面をまず初期化(真っ黒に)する<br>
+		　　　↓<br>
+		２.画面に必要なキャラクターや背景グラフィックを描く<br>
+		　　　↓<br>
+		３.１フレーム分の画面の完成<br>
+		　　　↓<br>
+		１.『画面の初期化』に戻る<br><br>
+</font>
+
+		　という手順を繰り返しています。<br>
+		　プレイヤーに見てもらいたいのは<font color="#770000">３</font>の完成した画面だけなのですが、現在の手法では上記の手順の間<br>
+		ずっとプレイヤーはその過程を見る事になり結果見苦しくなってしまっています。<br><br>
+		
+		　ここで確認すべき重要点は<font color="#770000">プレイヤーに見せるべきは完成された画面だけ</font>、という事です。<br>
+		　つまり<font color="#770000">画面を初期化したり必要なグラフィックを画面に描画しているとき</font>をプレイヤーに見られなければ<br>
+		良いのです。ですが今のままでは画面の初期化をした時点でプレイヤーにそれを確認されてしまいます。<br>
+		さあ困りました。<br><br>
+
+		　困りましたが、答えは当然出ています。それは<br>
+		　<font color="#770000">『ならばプレイヤーには見えない画面を作ってしまえ。』</font><br>
+		　です。<br><br>
+
+		　つまり<font color="#770000">普段プレイヤーが見えないもう一つの画面</font>を用意して、その画面に<font color="#770000">必要な描画</font>を行い、<font color="#770000">画面が完成</font>してから<BR>
+		プレイヤーが見えている画面にそれを<font color="#770000">丸ごとコピー</font>してしまおうというのです。<BR>
+		　この方法を実現するための苦労は私達には必要はありません。何故ならＤＸライブラリにこの機能が備わっているからです。<BR>
+		尚、もう既にお気付きかと思いますがこの手法こそ<font color="#770000">ダブルバッファリング</font>という技術であります。<BR><BR>
+
+		
+		　ともあれＤＸライブラリにダブルバッファリングの機能が備わっているわけですから、早速使ってみましょう。<BR><BR>
+
+		　というわけでダブルバッファリング機能を使うように手を加えた<font color="#770000">ゲーム制作講座２</font>のサンプルプログラムは<BR>
+		次の通りです。
+<font color="#000066"><pre>
+#include "DxLib.h"
+
+int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,
+			 LPSTR lpCmdLine, int nCmdShow )
+{
+	int i ;
+
+	// ＤＸライブラリ初期化処理
+	if( DxLib_Init() == -1 ) return -1 ;
+
+<font color="#550000">	// 描画先を裏画面にする
+	SetDrawScreen( DX_SCREEN_BACK ) ;</font>
+
+	// 一番左上に絵を表示、２０分の１秒待つ、を１３回繰り返す
+	for( i = 0 ; i < 13 ; i ++ )
+	{
+		// 画面に描かれているものを一回全部消す
+		ClearDrawScreen() ;
+
+		// 絵を表示
+		LoadGraphScreen( i * 10 , 100 , "test1.bmp" , FALSE ) ;
+
+<font color="#550000">		// 裏画面の内容を表画面に反映させる
+		ScreenFlip() ;</font>
+
+		// ２０分の１秒待つ
+		WaitTimer( 50 ) ;
+	}
+
+	// キーの入力待ち
+	WaitKey() ;
+
+
+	// ＤＸライブラリ使用の終了処理
+	DxLib_End() ;
+
+	// ソフトの終了
+	return 0 ;
+}
+</font></pre>
+
+		<font color="#008800"><実行例></font><BR>
+		<IMG SRC="image/i5.jpg" WIDTH="256" HEIGHT="192" HSPACE="20" VSPACE="20"><BR>
+		　実行例の画面グラフィックは何も変わりませんが、実行してみればちらちらしなくなったことを確認できると<br>
+		思います。<br><br>
+
+		　さて今回の主役であるダブルバッファリングを扱うための関数は２つあります。一つは <a href="../dxfunc.html#R4N6">SetDrawScreen</A> 関数<br>
+		もう一つは <a href="../dxfunc.html#R4N7">ScreenFlip</A> 関数です。<br><br>
+
+		　<font color="#770000">SetDrawScreen</font> 関数は<font color="#770000">描画先の画面を指定するための関数</font>です。画面の種類は表画面と裏画面の２種類があり、<br>
+		それぞれ <font color="#770000">#define</font> 定義された <font color="#770000">DX_SCREEN_FRONT</font> と <font color="#770000">DX_SCREEN_BACK</font> で指定します。上記のサンプルでは<br>
+		 <font color="#770000">DX_SCREEN_BACK</font> 、つまり<font color="#770000">これから裏画面に描画する事</font>を指定しています。<br>
+		　<font color="#770000">表画面</font>は先程の<font color="#770000">『プレイヤーに普段見えている画面』</font>のことを示し、<font color="#770000">裏画面</font>は<font color="#770000">『プレイヤーには見えない画面』</font><br>
+		のことを示します。基本的にこの２つの画面は<font color="#770000">プレイヤーに見えているかいないかの違いを除いて扱う上で違いは<br>
+		何一つありません</font>ので使わない手はありません。<br><br>
+
+		　そして<font color="#770000">裏画面</font>への描画が無事終った暁には <font color="#770000">ScreenFlip</font> 関数の出番です。<br>
+		　これは<font color="#770000">裏画面に描かれているグラフィックを丸ごと表画面にコピー</font>する関数で、この関数を使えば晴れて完成<br>
+		された絵がプレイヤーの目に入ります。<br><br>
+
+		　早いですがこれで今回の目的は達成できました。<BR>
+		　ちかちかしないで絵を動かす事も出来るようになりましたので、次はキーボードやゲームパッドを使って絵を動かしてみましょう。<br>
+		<hr>
+
+		<A href="../dxlecture_main.html">戻る</a>
+
+		</b></font>
+	</body>
+</html>
