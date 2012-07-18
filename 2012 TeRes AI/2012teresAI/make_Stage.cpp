@@ -4,7 +4,7 @@
 void make_Stage(int Stage[WIDTH][HEIGHT]){
 	for(int x=0;x<WIDTH;x++){
 		for(int y=0;y<HEIGHT;y++){
-			if(GetRand(10)==0){
+			if(GetRand(3)==0){
 				Stage[x][y]=1;
 			}
 			else{

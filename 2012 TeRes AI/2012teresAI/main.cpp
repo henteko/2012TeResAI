@@ -70,7 +70,7 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
 					}
 				}
 			}
-			
+			if(CheckHitKey(KEY_INPUT_R)==1){gamemode=SETTING;}
 			break;
 		case ENDING:
 			result(ai,death);

@@ -2,8 +2,8 @@
 
 #include "DxLib.h"
 
-#define AI_NUM 15
-#define ROUND_MAX 5
+#define AI_NUM 10
+#define ROUND_MAX 10
 //ステージの規模
 #define WIDTH 32
 #define HEIGHT 24
