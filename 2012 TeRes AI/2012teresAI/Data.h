@@ -29,16 +29,16 @@ typedef enum{
 } Action;
 
 typedef struct{
-	char name[10];
-	int Graph;
-	int x;
-	int y;
-	int s_x;
-	int s_y;
-	int step;
-	Action act;
-	int life;
-	int view[2*VISIBLE+1][2*VISIBLE+1];
+	char name[10];//–¼‘O
+	int Graph;//AI‚Ì‰æ‘œ
+	int x;//À•Wx
+	int y;//À•Wy
+	int s_x;//
+	int s_y;//
+	int step;//
+	Action act;//
+	int life;//
+	int view[2*VISIBLE+1][2*VISIBLE+1];//
 } AI_T;
 
 typedef struct{
