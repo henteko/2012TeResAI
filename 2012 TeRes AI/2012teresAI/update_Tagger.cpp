@@ -1,3 +1,4 @@
+//鬼の更新(AIと同じ)ただし鬼が２倍のペースで更新
 #include "Data.h"
 
 void update_Tagger(Tagger *tagger,int Stage[WIDTH][HEIGHT]){

@@ -7,7 +7,7 @@
 //ステージの規模
 #define WIDTH 32
 #define HEIGHT 24
-
+//1マスの大きさ
 #define BOX (640/WIDTH)
 
 //AIの視界
@@ -33,10 +33,10 @@ typedef struct{
 	int Graph;//AIの画像
 	int x;//座標x
 	int y;//座標y
-	int s_x;//
-	int s_y;//
-	int step;//
-	Action act;//
+	int s_x;//ドットレベルの座標(滑らかな動き）
+	int s_y;//ドットレベルの座標(滑らかな動き）
+	int step;//何歩移動したか
+	Action act;//AIの行動
 	int life;//
 	int view[2*VISIBLE+1][2*VISIBLE+1];//
 } AI_T;

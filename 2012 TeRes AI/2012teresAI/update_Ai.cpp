@@ -1,3 +1,4 @@
+//‚Pƒ}ƒX‚Q‚O•à(ƒhƒbƒg)[„‚O‚ÉXV
 #include "Data.h"
 
 void update_Ai(AI_T *ai,int Stage[WIDTH][HEIGHT]){
@@ -22,7 +23,7 @@ void update_Ai(AI_T *ai,int Stage[WIDTH][HEIGHT]){
 	}
 	ai->x=ai->s_x/BOX;
 	ai->y=ai->s_y/BOX;
-	
+	//•Ç‚ÉÕ“Ë
 	if(Stage[ai->x][ai->y]==1){
 		ai->act=STOP;
 		ai->x=last_x;
