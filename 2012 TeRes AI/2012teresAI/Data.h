@@ -65,3 +65,4 @@ void setview_Ai(AI_T *ai,int Stage[WIDTH][HEIGHT]);
 int death_Ai(AI_T ai,Tagger tagger);
 void result(AI_T ai[],int death[]);
 void update_stage(int Stage[WIDTH][HEIGHT],AI_T ai[],Tagger tagger);
+void ranking(AI_T ai[],int deth[]);//7/23 tao31 ’Ç‰Á

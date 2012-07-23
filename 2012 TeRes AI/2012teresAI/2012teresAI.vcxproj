@@ -89,6 +89,7 @@
     <ClCompile Include="make_Stage.cpp" />
     <ClCompile Include="next_Ai.cpp" />
     <ClCompile Include="next_Tagger.cpp" />
+    <ClCompile Include="Ranking.cpp" />
     <ClCompile Include="result.cpp" />
     <ClCompile Include="setview_Ai.cpp" />
     <ClCompile Include="update_Ai.cpp" />
