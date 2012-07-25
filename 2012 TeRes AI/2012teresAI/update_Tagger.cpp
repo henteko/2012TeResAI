@@ -18,6 +18,8 @@ void update_Tagger(Tagger *tagger,int Stage[WIDTH][HEIGHT]){
 	case W:
 		tagger->s_x-=4;
 		break;
+	case STOP:
+		tagger->act=STOP; //	toshiAI‚ÉŽ~‚Ü‚é‚Æ‚¢‚¤‘I‘ðŽˆ‚ª‚È‚©‚Á‚½‚Ì‚Å’Ç‰Á
 	default:
 		break;
 	}

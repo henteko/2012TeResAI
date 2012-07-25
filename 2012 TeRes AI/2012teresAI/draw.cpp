@@ -22,4 +22,13 @@ void draw(int stage[WIDTH][HEIGHT],AI_T ai[AI_NUM],Tagger tagger){
 	
 	DrawCircle(tagger.s_x,tagger.s_y,10,GetColor(0,0,255),1);
 	DrawBox(BOX*tagger.x,BOX*tagger.y,BOX*(tagger.x+1),BOX*(tagger.y+1),GetColor(255,0,0),0);
+
+	//鬼が手動か自動か表示
+    char Buf[ 256 ] ;
+	GetHitKeyStateAll( Buf ) ;
+	if( Buf[ KEY_INPUT_A ] == 1 )
+		DrawString( 15, 15, "鬼手動モード" ,GetColor(255,0,255) );
+	else
+		DrawString( 15, 15, "鬼AIモード" ,GetColor(255,0,255) );
+
 }

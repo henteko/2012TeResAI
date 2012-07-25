@@ -5,7 +5,12 @@
 Action next_Tagger(Tagger tagger,int Stage[WIDTH][HEIGHT]){
 	int r;
 	int cx=tagger.x,cy=tagger.y;
-	
+
+	//ƒL[‚ª‰Ÿ‚³‚ê‚Ä‚¢‚é‚©‚Ç‚¤‚©
+	char Buf[ 256 ] ;
+	GetHitKeyStateAll( Buf ) ;
+
+	if( Buf[ KEY_INPUT_A ] == 0 ){//A‚ª‰Ÿ‚³‚ê‚Ä‚¢‚È‚¢
 		r=GetRand(4);
 		switch(r%4){
 		case 0:
@@ -24,6 +29,20 @@ Action next_Tagger(Tagger tagger,int Stage[WIDTH][HEIGHT]){
 			if(Stage[cx-1][cy]!=1)
 				return W;
 			break;
-		
+		}
 	}
+	else{//A‚ª‰Ÿ‚³‚ê‚Ä‚¢‚é
+		if( Buf[ KEY_INPUT_N ] == 1 )//N‚ª‰Ÿ‚³‚ê‚Ä‚¢‚é
+			return N;
+		else if( Buf[ KEY_INPUT_E ] == 1 )//‚d‚ª‰Ÿ‚³‚ê‚ê‚Ä‚¢‚é
+			return E;
+		else if( Buf[ KEY_INPUT_S ] == 1 )//S‚ª‰Ÿ‚³‚ê‚Ä‚¢‚é
+			return S;
+		else if( Buf[ KEY_INPUT_W ] == 1 )//W‚ª‰Ÿ‚³‚ê‚Ä‚¢‚é
+			return W;
+		else 
+			return STOP;//‰½‚à‰Ÿ‚³‚ê‚Ä‚¢‚È‚¢
+	}
+	return STOP;
+
 }
