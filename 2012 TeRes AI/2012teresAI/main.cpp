@@ -26,9 +26,11 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
 		case SETTING:
 			make_Stage(STAGE);//マップ構成
 			init_Tagger(&tagger,STAGE);//鬼の初期化
-			for(int i=0;i<AI_NUM;i++){//AIの初期化
-				init_Ai(&ai[i],STAGE);
-			}
+
+			//for(int i=0;i<AI_NUM;i++){//AIの初期化 //henteko : aiをすべてinit_Aiに渡す
+			init_Ai(ai,STAGE);
+			//}
+
 			round++;
 			gamemode=RUNNING;
 
@@ -41,7 +43,8 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
 			for(int i=0;i<AI_NUM;i++){
 				if(ai[i].step==0){
 					setview_Ai(&ai[i],STAGE);
-					ai[i].act=next_Ai(ai[i].view);
+					//ai[i].act=next_Ai(ai[i].view); //henteko : 下のmoveFunc()を使うためコメントアウト
+					ai[i].act = ai[i].moveFunc(ai[i].view);
 				}
 			}
 
@@ -58,7 +61,8 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
 				for(int i=0;i<AI_NUM;i++){
 					if(death_Ai(ai[i],tagger)==1){
 						death[i]++;
-						DrawString(100,240,"AIがつかまりました。",GetColor(255,0,0));
+						const char* str = strcat(ai[i].name , "がつかまりました"); //文字列連結
+						DrawString(100,240,str,GetColor(255,0,0));
 						WaitTimer(3000);
 						if(round>=ROUND_MAX){
 							gamemode=ENDING;

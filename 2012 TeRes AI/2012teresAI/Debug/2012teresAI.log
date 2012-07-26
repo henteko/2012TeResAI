@@ -1,14 +1,18 @@
-﻿2012/07/27 0:31:05 にビルドを開始しました。
+﻿2012/07/27 2:13:02 にビルドを開始しました。
      1>ノード 2 上のプロジェクト "C:\Documents and Settings\pepe2\My Documents\GitHub\2012TeResAI\2012 TeRes AI\2012teresAI\2012teresAI.vcxproj" (build ターゲット)。
      1>InitializeBuildStatus:
          "AlwaysCreate" が指定されたため "Debug\2012teresAI.unsuccessfulbuild" を作成しています。
        ClCompile:
-         C:\Program Files\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I"C:\Documents and Settings\pepe2\My Documents\GitHub\2012TeResAI\2012 TeRes AI\2012teresAI\DX lib\DxLib_VC\プロジェクトに追加すべきファイル_VC用" /I"C:\Users\Tosjiya\Documents\GitHub\2012TeResAI\2012 TeRes AI\2012teresAI\DX lib\DxLib_VC\プロジェクトに追加すべきファイル_VC用" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _MBCS /Gm /EHsc /RTC1 /MTd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt next_Tagger.cpp
-         next_Tagger.cpp
+         C:\Program Files\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I"C:\Documents and Settings\pepe2\My Documents\GitHub\2012TeResAI\2012 TeRes AI\2012teresAI\DX lib\DxLib_VC\プロジェクトに追加すべきファイル_VC用" /I"C:\Users\Tosjiya\Documents\GitHub\2012TeResAI\2012 TeRes AI\2012teresAI\DX lib\DxLib_VC\プロジェクトに追加すべきファイル_VC用" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _MBCS /Gm /EHsc /RTC1 /MTd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt main.cpp
+         main.cpp
+     1>c:\documents and settings\pepe2\my documents\github\2012teresai\2012 teres ai\2012teresai\main.cpp(64): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files\microsoft visual studio 10.0\vc\include\string.h(110) : 'strcat' の宣言を確認してください。
        ManifestResourceCompile:
          すべての出力が最新のものです。
        Link:
          C:\Program Files\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Documents and Settings\pepe2\My Documents\GitHub\2012TeResAI\2012 TeRes AI\2012teresAI\Debug\2012teresAI.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Documents and Settings\pepe2\My Documents\GitHub\2012TeResAI\2012 TeRes AI\2012teresAI\DX lib\DxLib_VC\プロジェクトに追加すべきファイル_VC用" /LIBPATH:"C:\Users\Tosjiya\Documents\GitHub\2012TeResAI\2012 TeRes AI\2012teresAI\DX lib\DxLib_VC\プロジェクトに追加すべきファイル_VC用" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Debug\2012teresAI.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:\Documents and Settings\pepe2\My Documents\GitHub\2012TeResAI\2012 TeRes AI\2012teresAI\Debug\2012teresAI.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Documents and Settings\pepe2\My Documents\GitHub\2012TeResAI\2012 TeRes AI\2012teresAI\Debug\2012teresAI.lib" /MACHINE:X86 Debug\2012teresAI.exe.embed.manifest.res
+         Debug\aiSample.obj
+         Debug\aiTest.obj
          Debug\death_Ai.obj
          Debug\draw.obj
          Debug\Init_Ai.obj
@@ -37,4 +41,4 @@
 
 ビルドに成功しました。
 
-経過時間 00:00:04.21
+経過時間 00:00:04.85

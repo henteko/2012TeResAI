@@ -3,16 +3,51 @@
 #include "Data.h"
 
 void init_Ai(AI_T *ai,int Stage[WIDTH][HEIGHT]){
-	do{//AIが壁に重ならないように配置
-		ai->x=GetRand(WIDTH);
-		ai->y=GetRand(HEIGHT);
-	}while(Stage[ai->x][ai->y]==1);
 
-	ai->s_x=(ai->x+0.5)*BOX;
-	ai->s_y=(ai->y+0.5)*BOX;
-	ai->act=STOP;
-	ai->step=0;
-	ai->life=1;
+	AI_T *init_ai = ai;
 
-	Stage[ai->x][ai->y]=2;
+	// AIを変更するときにいじる場所
+
+	//	テンプレ
+	//	extern void !初期化関数名!(AI_T &myAi);
+	//	!初期化関数名!(ai[!aiの番号!]);
+	//	extern Action !移動関数名!(int view[2*VISIBLE+1][2*VISIBLE+1]);
+	//	init_ai->moveFunc = !移動関数名!;
+	//!!![重要]!!!!一番初め(aiSample)以外、最初にinit_ai++;を書く!!!!!!!!!!
+	//関数名などが被ると駄目です　名前は早い者勝ちで(基本自分のハンドルネーム)
+
+	// AI0 (aiSample)
+	extern void aiSampleInit(AI_T &myAi);
+	aiSampleInit(*init_ai);
+	extern Action aiSample(int view[2*VISIBLE+1][2*VISIBLE+1]);
+	init_ai->moveFunc = aiSample;
+	// AI0
+
+	// AI1 (aiTest)
+	init_ai++;
+	extern void aiTestInit(AI_T &myAi);
+	aiTestInit(*init_ai);
+	extern Action aiTest(int view[2*VISIBLE+1][2*VISIBLE+1]);
+	init_ai->moveFunc = aiTest;
+	// AI1
+
+
+
+	//位置などの決定
+	for(int i=0;i<AI_NUM;i++,ai++){//AIの初期化
+
+		do{//AIが壁に重ならないように配置
+			ai->x=GetRand(WIDTH);
+			ai->y=GetRand(HEIGHT);
+		}while(Stage[ai->x][ai->y]==1);
+
+		ai->s_x=(ai->x+0.5)*BOX;
+		ai->s_y=(ai->y+0.5)*BOX;
+		ai->act=STOP;
+		ai->step=0;
+		ai->life=1;
+
+
+		Stage[ai->x][ai->y]=2;
+	}
 }

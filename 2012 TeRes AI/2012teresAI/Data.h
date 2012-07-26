@@ -1,8 +1,11 @@
 #pragma once
 
 #include "DxLib.h"
+#include <string.h>
+#include <iostream>
+using namespace std;
 
-#define AI_NUM 10
+#define AI_NUM 2
 #define ROUND_MAX 10
 //ステージの規模
 #define WIDTH 32
@@ -31,6 +34,7 @@ typedef enum{
 typedef struct{
 	char name[10];//名前
 	int Graph;//AIの画像
+	Action (*moveFunc)(int view[2*VISIBLE+1][2*VISIBLE+1]);		// 行動を返す関数
 	int x;//座標x
 	int y;//座標y
 	int s_x;//ドットレベルの座標(滑らかな動き）

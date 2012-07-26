@@ -80,6 +80,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="aiSample.cpp" />
+    <ClCompile Include="aiTest.cpp" />
     <ClCompile Include="death_Ai.cpp" />
     <ClCompile Include="draw.cpp" />
     <ClCompile Include="Init_Ai.cpp" />
