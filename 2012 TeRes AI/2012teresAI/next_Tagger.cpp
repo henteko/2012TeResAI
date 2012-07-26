@@ -32,13 +32,13 @@ Action next_Tagger(Tagger tagger,int Stage[WIDTH][HEIGHT]){
 		}
 	}
 	else{//A‚ª‰Ÿ‚³‚ê‚Ä‚¢‚é
-		if( Buf[ KEY_INPUT_N ] == 1 )//N‚ª‰Ÿ‚³‚ê‚Ä‚¢‚é
+		if( Buf[ KEY_INPUT_UP ] == 1 || Buf[ KEY_INPUT_N ] == 1 )//N‚©ª‚ª‰Ÿ‚³‚ê‚Ä‚¢‚é
 			return N;
-		else if( Buf[ KEY_INPUT_E ] == 1 )//‚d‚ª‰Ÿ‚³‚ê‚ê‚Ä‚¢‚é
+		else if( Buf[ KEY_INPUT_RIGHT ] == 1 || Buf[ KEY_INPUT_E ] == 1 )//‚d‚©¨‚ª‰Ÿ‚³‚ê‚ê‚Ä‚¢‚é
 			return E;
-		else if( Buf[ KEY_INPUT_S ] == 1 )//S‚ª‰Ÿ‚³‚ê‚Ä‚¢‚é
+		else if( Buf[ KEY_INPUT_DOWN ] == 1 || Buf[ KEY_INPUT_S ] == 1 )//S‚©«‚ª‰Ÿ‚³‚ê‚Ä‚¢‚é
 			return S;
-		else if( Buf[ KEY_INPUT_W ] == 1 )//W‚ª‰Ÿ‚³‚ê‚Ä‚¢‚é
+		else if( Buf[ KEY_INPUT_LEFT ] == 1 || Buf[ KEY_INPUT_W ] == 1 )//W‚©©‚ª‰Ÿ‚³‚ê‚Ä‚¢‚é
 			return W;
 		else 
 			return STOP;//‰½‚à‰Ÿ‚³‚ê‚Ä‚¢‚È‚¢
