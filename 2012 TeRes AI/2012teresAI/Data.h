@@ -6,7 +6,7 @@
 using namespace std;
 
 #define AI_NUM 2
-#define ROUND_MAX 10
+#define ROUND_MAX 100
 //ステージの規模
 #define WIDTH 32
 #define HEIGHT 24

@@ -4,7 +4,6 @@
 void update_Tagger(Tagger *tagger,int Stage[WIDTH][HEIGHT]){
 
 	tagger->step+=4;
-	int last_x=tagger->x,last_y=tagger->y;
 	switch(tagger->act){
 	case N:
 		tagger->s_y-=4;
@@ -27,9 +26,23 @@ void update_Tagger(Tagger *tagger,int Stage[WIDTH][HEIGHT]){
 	tagger->y=tagger->s_y/BOX;
 	
 	if(Stage[tagger->x][tagger->y]==1){
+		switch(tagger->act){//7/27 zero:Õ“ËŒã‚ÌÀ•W‚ðis•ûŒü‚ÅŒˆ’è‚·‚é‚æ‚¤‚ÉC³
+		case N:
+			tagger->y++;
+			break;
+		case E:
+			tagger->x--;
+			break;
+		case S:
+			tagger->y--;
+			break;
+		case W:
+			tagger->x++;
+			break;
+		default:
+			break;
+		}
 		tagger->act=STOP;
-		tagger->x=last_x;
-		tagger->y=last_y;
 		tagger->s_x=(tagger->x+0.5)*BOX;
 		tagger->s_y=(tagger->y+0.5)*BOX;
 	}

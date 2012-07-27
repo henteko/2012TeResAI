@@ -39,7 +39,7 @@ void init_Ai(AI_T *ai,int Stage[WIDTH][HEIGHT]){
 		do{//AIが壁に重ならないように配置
 			ai->x=GetRand(WIDTH);
 			ai->y=GetRand(HEIGHT);
-		}while(Stage[ai->x][ai->y]==1);
+		}while(Stage[ai->x][ai->y]==1 || ai->x<0 || ai->x>=WIDTH || ai->y<0 || ai->y>=HEIGHT);//7/27 zero:画面外に出現した場合も考慮
 
 		ai->s_x=(ai->x+0.5)*BOX;
 		ai->s_y=(ai->y+0.5)*BOX;
