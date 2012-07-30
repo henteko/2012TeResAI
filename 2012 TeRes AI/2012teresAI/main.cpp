@@ -38,13 +38,13 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
 		case RUNNING:
 			
 			if(tagger.step==0){
-				tagger.act=next_Tagger(tagger,STAGE);
+				tagger.act=next_Tagger(tagger,STAGE,ai);
 			}
 			for(int i=0;i<AI_NUM;i++){
 				if(ai[i].step==0){
 					setview_Ai(&ai[i],STAGE);
-					//ai[i].act=next_Ai(ai[i].view); //henteko : 下のmoveFunc()を使うためコメントアウト
-					ai[i].act = ai[i].moveFunc(ai[i].view);
+					ai[i].act=next_Ai(ai[i].view); //henteko : 下のmoveFunc()を使うためコメントアウト
+					//ai[i].act = ai[i].moveFunc(ai[i].view);
 				}
 			}
 
@@ -56,6 +56,8 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
 			
 			ClearDrawScreen();
 			draw(STAGE,ai,tagger);
+			DrawFormatString(30,30,GetColor(0,255,255),"ROUND%d",round);
+
 			
 			if(tagger.step==0){
 				for(int i=0;i<AI_NUM;i++){

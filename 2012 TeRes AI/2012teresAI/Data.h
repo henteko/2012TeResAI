@@ -3,6 +3,7 @@
 #include "DxLib.h"
 #include <string.h>
 #include <iostream>
+#include <math.h>
 using namespace std;
 
 #define AI_NUM 2
@@ -62,7 +63,7 @@ void init_Tagger(Tagger *tagger,int Stage[WIDTH][HEIGHT]);
 void init_Ai(AI_T *ai,int Stage[WIDTH][HEIGHT]);
 void draw(int stage[WIDTH][HEIGHT],AI_T ai[],Tagger tagger);
 Action next_Ai(int view[2*VISIBLE+1][2*VISIBLE+1]);
-Action next_Tagger(Tagger tagger,int Stage[WIDTH][HEIGHT]);
+Action next_Tagger(Tagger tagger,int Stage[WIDTH][HEIGHT],AI_T ai[]);//toshi:à¯êîAI_T ai[]í«â¡
 void update_Ai(AI_T *ai,int Stage[WIDTH][HEIGHT]);
 void update_Tagger(Tagger *tagger,int Stage[WIDTH][HEIGHT]);
 void setview_Ai(AI_T *ai,int Stage[WIDTH][HEIGHT]);
