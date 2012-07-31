@@ -4,13 +4,12 @@
 
 #include "Data.h"
 
-
 /**********************************************************
 	‰Šú‰»‚ÉŒÄ‚Î‚ê‚éŠÖ”
 **********************************************************/
 void aiSampleInit(AI_T &myAi)
 {
-	myAi.Graph = LoadGraph("AI_image\blue.png");  //‰æ‘œ‚Ìİ’è
+	myAi.Graph = LoadGraph("AI_image\\blue.png");  //‰æ‘œ‚Ìİ’è
 	strcpy_s(myAi.name, "aiSample");  //©•ª‚ÌAI‚Ì–¼‘Oİ’è
 }
 

@@ -10,7 +10,7 @@
 **********************************************************/
 void aiTestInit(AI_T &myAi)
 {
-	myAi.Graph = LoadGraph("AI_image\red.png");
+	myAi.Graph = LoadGraph("AI_image\\red.png");
 	strcpy_s(myAi.name, "aiTest");
 }
 

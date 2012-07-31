@@ -16,7 +16,8 @@ void draw(int stage[WIDTH][HEIGHT],AI_T ai[AI_NUM],Tagger tagger){
 	}
 	//AIの描画
 	for(int i=0;i<AI_NUM;i++){
-		DrawCircle(ai[i].s_x,ai[i].s_y,5,GetColor(255,0,0),1);
+		DrawRotaGraph(ai[i].s_x,ai[i].s_y,1,0,ai[i].Graph,TRUE,FALSE);//読み込んだ画像表示
+		//DrawCircle(ai[i].s_x,ai[i].s_y,5,GetColor(255,0,0),1);//点表示
 		DrawBox(BOX*ai[i].x,BOX*ai[i].y,BOX*(ai[i].x+1),BOX*(ai[i].y+1),GetColor(255,0,0),0);
 		DrawBox(BOX*(ai[i].x-VISIBLE),BOX*(ai[i].y-VISIBLE),BOX*(ai[i].x+VISIBLE+1),BOX*(ai[i].y+VISIBLE+1),GetColor(255,255,0),0);//AIの視界（確認用）
 	}
