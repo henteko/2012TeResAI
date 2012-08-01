@@ -7,6 +7,7 @@
 using namespace std;
 
 #define AI_NUM 2
+#define TAGGER_NUM 2
 #define ROUND_MAX 100
 //ステージの規模
 #define WIDTH 32
@@ -33,7 +34,7 @@ typedef enum{
 } Action;
 
 typedef struct{
-	char name[10];//名前
+	char name[100];//名前
 	int Graph;//AIの画像
 	Action (*moveFunc)(int view[2*VISIBLE+1][2*VISIBLE+1]);		// 行動を返す関数
 	int x;//座標x
@@ -47,7 +48,9 @@ typedef struct{
 } AI_T;
 
 typedef struct{
+	char name[100];//名前
 	int Graph;
+	Action (*moveFunc)(int tagger_x , int tagger_y,int Stage[WIDTH][HEIGHT],AI_T ai[]);		// 行動を返す関数
 	int x;
 	int y;
 	int s_x;
@@ -59,7 +62,7 @@ typedef struct{
 
 void intro();
 void make_Stage(int Stage[WIDTH][HEIGHT]);
-void init_Tagger(Tagger *tagger,int Stage[WIDTH][HEIGHT]);
+int init_Tagger(Tagger *tagger,int Stage[WIDTH][HEIGHT]);
 void init_Ai(AI_T *ai,int Stage[WIDTH][HEIGHT]);
 void draw(int stage[WIDTH][HEIGHT],AI_T ai[],Tagger tagger);
 Action next_Ai(int view[2*VISIBLE+1][2*VISIBLE+1]);

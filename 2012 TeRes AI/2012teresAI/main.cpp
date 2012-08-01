@@ -9,10 +9,17 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
 		return -1 ;			// エラーが起きたら直ちに終了
 	}
 
+	//デバック用にコンソールを出現させる
+	AllocConsole();
+	freopen("CONOUT$","w",stdout);
+	freopen("CONIN$","r",stdin);
+
+
 	Mode gamemode=OPENING;
 	AI_T ai[AI_NUM];
 	int death[AI_NUM]={0};
-	Tagger tagger;
+	Tagger tagger[TAGGER_NUM];
+	int tagger_num = 0;
 	int STAGE[WIDTH][HEIGHT]={0};
 	int round=0;
 	int end=0;
@@ -25,7 +32,7 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
 			break;
 		case SETTING:
 			make_Stage(STAGE);//マップ構成
-			init_Tagger(&tagger,STAGE);//鬼の初期化
+			tagger_num = init_Tagger(tagger,STAGE);//鬼の初期化 //tagger_numは鬼の要素番号
 
 			//for(int i=0;i<AI_NUM;i++){//AIの初期化 //henteko : aiをすべてinit_Aiに渡す
 			init_Ai(ai,STAGE);
@@ -37,31 +44,32 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
 			break;
 		case RUNNING:
 			
-			if(tagger.step==0){
-				tagger.act=next_Tagger(tagger,STAGE,ai);
+			if(tagger[tagger_num].step==0){
+				//tagger[tagger_num].act=next_Tagger(tagger[tagger_num],STAGE,ai);
+				tagger[tagger_num].act=tagger[tagger_num].moveFunc(tagger[tagger_num].x,tagger[tagger_num].y,STAGE,ai); //AIと一緒で、moveFunc使う
 			}
 			for(int i=0;i<AI_NUM;i++){
 				if(ai[i].step==0){
 					setview_Ai(&ai[i],STAGE);
-					ai[i].act=next_Ai(ai[i].view); //henteko : 下のmoveFunc()を使うためコメントアウト
-					//ai[i].act = ai[i].moveFunc(ai[i].view);
+					//ai[i].act=next_Ai(ai[i].view); //henteko : 下のmoveFunc()を使うためコメントアウト
+					ai[i].act = ai[i].moveFunc(ai[i].view);
 				}
 			}
 
-			update_Tagger(&tagger,STAGE);
+			update_Tagger(&tagger[tagger_num],STAGE);
 			for(int i=0;i<AI_NUM;i++){
 				update_Ai(&ai[i],STAGE);
 			}
-			update_stage(STAGE,ai,tagger);
+			update_stage(STAGE,ai,tagger[tagger_num]);
 			
 			ClearDrawScreen();
-			draw(STAGE,ai,tagger);
+			draw(STAGE,ai,tagger[tagger_num]);
 			DrawFormatString(30,30,GetColor(0,255,255),"ROUND%d",round);
 
 			
-			if(tagger.step==0){
+			if(tagger[tagger_num].step==0){
 				for(int i=0;i<AI_NUM;i++){
-					if(death_Ai(ai[i],tagger)==1){
+					if(death_Ai(ai[i],tagger[tagger_num])==1){
 						death[i]++;
 						const char* str = strcat(ai[i].name , "がつかまりました"); //文字列連結
 						DrawString(100,240,str,GetColor(255,0,0));
