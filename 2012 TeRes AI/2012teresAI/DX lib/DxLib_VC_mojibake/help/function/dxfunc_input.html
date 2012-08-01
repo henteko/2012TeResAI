@@ -1,0 +1,2158 @@
+<TITLE>ＤＸライブラリ置き場　リファレンスページ</TITLE>
+<HTML>
+	<HEAD>
+	</HEAD>
+	<BODY BGCOLOR="#ffffff" TEXT="#000000" LINK="#0033CC" VLINK="#800040">
+
+	</TABLE>
+	<TABLE ALIGN="CENTER" WIDTH=600 CELLSPACING=0 CELLPADDING=0 >
+
+		<TR><TD><FONT SIZE="3" COLOR="#005500"><B>入力関係の関数</B><BR><BR></FONT></TD></TR>
+
+		<TR><TD COLSPAN=2>
+			<FONT SIZE="3" COLOR="#752400"><B>　　ジョイパッド入力関連関数</B><BR><BR></FONT>
+		</TD></TR>
+
+		<TR><TD><TABLE ALIGN="CENTER" WIDTH=650  CELLSPACING=0 CELLPADDING=0>
+			<TR><TD VALIGN="TOP" WIDTH=100><B><A NAME="R5N3">宣言</TD><TD><FONT COLOR="#000088"><B>int	GetJoypadNum( void ) ;</B></FONT><BR><BR></TD></TR>
+			<TR><TD VALIGN="TOP" WIDTH=100><B>概略</B></TD><TD>ジョイパッドが接続されている数を取得する<BR><BR></TD></TR>
+			<TR><TD VALIGN="TOP" WIDTH=100><B>引数</B></TD><TD>なし</TD></TR>
+			<TR><TD VALIGN="TOP" WIDTH=100><B>戻り値</B></TD><TD>接続されているジョイパッドの数<BR><BR></TD></TR>
+			<TR>
+				<TD VALIGN="TOP" WIDTH=100><B>解説</B></TD>
+				<TD>　ジョイパッドがパソコンに接続されている数を取得します。<BR><BR>
+				</TD>
+			</TR>
+		</TABLE></TD></TR>
+
+		<TR><TD>
+			<B>サンプル</B><BR><BR>
+			　ありません
+			<BR><BR><BR><BR>
+		</TD></TR>
+
+		<TR><TD>
+		<TABLE ALIGN="CENTER" WIDTH=650  CELLSPACING=0 CELLPADDING=0>
+			<TR><TD VALIGN="TOP" WIDTH=100><B><A NAME="R5N4">宣言</TD><TD><FONT COLOR="#000088"><B>int	GetJoypadInputState( int InputType ) ;</B></FONT><BR><BR></TD></TR>
+			<TR><TD VALIGN="TOP" WIDTH=100><B>概略</B></TD><TD>ジョイパッドの入力状態を得る<BR><BR></TD></TR>
+			<TR><TD VALIGN="TOP" WIDTH=100><B>引数</B></TD>
+				<TD>InputType : 入力状態を取得するパッドの識別子<BR>
+					　　　　　　　　DX_INPUT_KEY_PAD1　　: キー入力とパッド１<BR>
+					　　　　　　　　DX_INPUT_PAD1　　　　: パッド１<BR>
+					　　　　　　　　DX_INPUT_PAD2　　　　: パッド２<BR>
+					　　　　　　　　DX_INPUT_PAD3　　　　: パッド３<BR>
+					　　　　　　　　DX_INPUT_PAD4　　　　: パッド４<BR>
+					　　　　　　　　DX_INPUT_KEY　　　　 : キー入力<BR><BR></TD>
+			</TR>
+			<TR><TD VALIGN="TOP" WIDTH=100><B>戻り値</B></TD><TD>パッドの入力状態<BR><BR></TD></TR>
+			<TR>
+				<TD VALIGN="TOP" WIDTH=100><B>解説</B></TD>
+				<TD>　指定した識別子のパッドの入力状態が返ります。<BR>
+					　入力状態取得タイプにキー入力とありますがこれはパッドとキー入力を別々に取得するのは面倒かなと思いつけた機能です、
+					DX_INPUT_KEY_PAD1 を指定するとキー入力と（キー入力のパッド入力の対応は以下の通り）パッド１の入力状態を得ることが出来ます。<BR>
+					　DX_INPUT_KEY は下記の対応表のキー入力部のみの入力状態を得ます。<BR>
+					　入力状態は int型 データとして返り、
+					次に示すパッドの入力マスクを戻り値とAND演算をして結果が０でなければそのボタンが押されている事を示します。<BR><BR>
+					
+					<TABLE ALIGN="CENTER" CELLSPACING=0 CELLPADDING=0>
+						<TR><TD>PAD_INPUT_DOWN　</TD><TD>// ↓チェックマスク(下キー or テンキーの２キー)</TD></TR>
+						<TR><TD>PAD_INPUT_LEFT　</TD><TD>// ←チェックマスク(左キー or テンキーの４キー)</TD></TR>
+						<TR><TD>PAD_INPUT_RIGHT　</TD><TD>// →チェックマスク(右キー or テンキーの６キー)</TD></TR>
+						<TR><TD>PAD_INPUT_UP　</TD><TD>// ↑チェックマスク(上キー or テンキーの８キー)</TD></TR>
+						<TR><TD>PAD_INPUT_1　</TD><TD>// 1ボタンチェックマスク(Ｚキー)</TD></TR>
+						<TR><TD>PAD_INPUT_2　</TD><TD>// 2ボタンチェックマスク(Ｘキー)</TD></TR>
+						<TR><TD>PAD_INPUT_3　</TD><TD>// 3ボタンチェックマスク(Ｃキー)</TD></TR>
+						<TR><TD>PAD_INPUT_4　</TD><TD>// 4ボタンチェックマスク(Ａキー)</TD></TR>
+						<TR><TD>PAD_INPUT_5　</TD><TD>// 5ボタンチェックマスク(Ｓキー)</TD></TR>
+						<TR><TD>PAD_INPUT_6　</TD><TD>// 6ボタンチェックマスク(Ｄキー)</TD></TR>
+						<TR><TD>PAD_INPUT_7　</TD><TD>// 7ボタンチェックマスク(Ｑキー)</TD></TR>
+						<TR><TD>PAD_INPUT_8　</TD><TD>// 8ボタンチェックマスク(Ｗキー)</TD></TR>
+						<TR><TD>PAD_INPUT_9　</TD><TD>// 9ボタンチェックマスク(ＥＳＣキー)</TD></TR>
+						<TR><TD>PAD_INPUT_10　</TD><TD>// 10ボタンチェックマスク(スペースキー)</TD></TR>
+						<TR><TD>PAD_INPUT_28　</TD><TD>// こんな感じで28番目のボタンまで対応しています(初期状態では11番以降はキーボードキーとの対応はありません)</TD></TR>
+					</TABLE>
+
+					<BR><BR><BR>
+					<B>例</B>	パッド１の上ボタンが押されているか調べる<BR><BR>
+
+<PRE>
+	if( ( GetJoypadInputState( DX_INPUT_PAD1 ) & PAD_INPUT_UP ) == 0 )
+	{
+		// 押されていない
+	}
+	else
+	{
+		// 押されている
+	}
+</PRE>
+					<BR>
+
+					<FONT COLOR="#004500"><B>≪余談≫</B></FONT><BR><BR>
+
+					　この関数には秘密があります。<BR>
+					　実はこの関数は返される値の各ビットが各ボタンに対応していて最大で
+					２８個のボタンの状態を調べることが出来ます。<BR>
+					各ビットの構成は以下のようになっています。<BR>
+					　ビットが１になっていれば押されていることを示し、０の場合はおされて
+					いないことを示しています。<BR><BR><BR>
+
+
+					(MSB)上位ビット　　　　　　　　　　(LSB)下位ビット<BR>
+
+					BBBBBBBBBBBBBBBBBBBBBBBBBBBBURLD<BR><BR>
+
+					D・L・R・U：それぞれ方向キー下・左・右・上　　B:ボタン<BR><BR><BR>
+
+
+					　つまり下ボタンの状態を知りたい場合は<BR><BR>
+
+<PRE>
+	int DownState ;
+	int InputState ;
+
+	InputState = GetJoypadInputState( DX_INPUT_PAD1 ) ;
+	DownState = InputState & 1 ;
+</PRE>
+<BR>
+					 　とし、DownState が０でなければ下キーが押されていることを示します。<BR>
+					 　１６個目のボタンの状態を知りたい場合は<BR><BR>
+
+<PRE>
+	int ButtomState ;
+	int InputState ;
+
+	InputState = GetJoypadInputState( DX_INPUT_PAD1 ) ;
+	ButtomState = InputState & 0x80000 ;
+</PRE>
+<BR>
+
+					 　とし、ButtomState が０でなければ１６個目のボタンが押されていること
+					 になります。<BR>
+					 　もし DX_INPUT_KEY_PAD1 又は DX_INPUT_KEY としても当然キーボードの
+					 入力が反映されるのは１４ビット目までで、１４ビット以上のビットは
+					 ジョイスティックのボタン入力のみの入力状態となります。<BR><BR>
+					
+
+				</TD>
+			</TR>
+		</TABLE></TD></TR>
+
+		<TR><TD>
+			<B>サンプル</B><BR><BR>
+
+				　パッド１の9ボタン（ＥＳＣキー）が押されるまで待つ<BR>
+			<HR>
+<PRE>
+#include "DxLib.h"
+
+int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,
+		 LPSTR lpCmdLine, int nCmdShow )
+{
+	int Cr , PadInput ;
+
+	if( DxLib_Init() == -1 )	// ＤＸライブラリ初期化処理
+	{
+		 return -1;	// エラーが起きたら直ちに終了
+	}
+
+	// 白色の値を取得
+	Cr = GetColor( 255 , 255 , 255 ) ;
+
+	// 文字列の描画
+	DrawString( 150 , 240 - 32 , "パッドのSTARTボタンを押してください" , Cr );
+
+	// パッド１の9ボタンの入力待ち
+	PadInput = GetJoypadInputState( DX_INPUT_KEY_PAD1 ) ;
+	while( ( PadInput & PAD_INPUT_9 ) == 0 )
+	{
+		// メッセージ処理
+		if( ProcessMessage() == -1 )
+		{
+			 break ;	// エラーが発生したらループを抜ける
+		}
+
+		// パッド１の入力を取得
+		PadInput = GetJoypadInputState( DX_INPUT_KEY_PAD1 ) ;
+	}
+
+	DxLib_End() ;		// ＤＸライブラリ使用の終了処理
+
+	return 0 ;		// ソフトの終了
+}
+</PRE>
+
+			<HR>
+			<BR><BR>
+		</TD></TR>
+
+		<TR><TD>
+		<TABLE ALIGN="CENTER" WIDTH=650  CELLSPACING=0 CELLPADDING=0>
+			<TR><TD VALIGN="TOP" WIDTH=100><B><A NAME="R5N24">宣言</TD><TD><FONT COLOR="#000088"><B>int GetJoypadAnalogInput( int *XBuf , int *YBuf , int InputType) ;</B></FONT><BR><BR></TD></TR>
+			<TR><TD VALIGN="TOP" WIDTH=100><B>概略</B></TD><TD>ジョイパッドのアナログ的なレバー入力情報を得る<BR><BR></TD></TR>
+			<TR><TD VALIGN="TOP" WIDTH=100><B>引数</B></TD>
+				<TD>int *XBuf : パッドレバーの左右の入力状態を格納する int 型変数のアドレス<BR>
+					int *YBuf : パッドレバーの上下の入力状態を格納する int 型変数のアドレス<BR>
+					InputType : 入力状態を取得するパッドの識別子<BR>
+					　　　　　　　　DX_INPUT_PAD1　　　　: パッド１<BR>
+					　　　　　　　　DX_INPUT_PAD2　　　　: パッド２<BR>
+					　　　　　　　　DX_INPUT_PAD3　　　　: パッド３<BR>
+					　　　　　　　　DX_INPUT_PAD4　　　　: パッド４<BR><BR>
+			</TR>
+			<TR><TD VALIGN="TOP" WIDTH=100><B>戻り値</B></TD><TD>　０：成功</TD></TR>
+			<TR><TD WIDTH=100>　</TD><TD>－１：エラー発生<BR><BR></TD></TR>
+			<TR>
+				<TD VALIGN="TOP" WIDTH=100><B>解説</B></TD>
+				<TD>　アナログジョイパッドは『どれだけ左にレバーを倒しているか』
+					などの『倒している』『倒していない』の２種類では表現できない
+					細かい入力が可能となっています。<BR>
+					　この関数はその細かい入力状態を得るためにあります。XBufに
+					指定されたアドレスにはレバーの左右の入力状態を -1000 から 
+					1000 までの数値で表現されたものが格納されます。値はマイナスの
+					場合はレバーは左側に倒されていることをを示し、プラスの場合は
+					右側に倒していることを示します。つまり -1000 だった場合は
+					一番左にレバーは倒されていることを示し、1000 だった場合は
+					その逆、と言うことになります。<BR>
+					　YBufに指定されたアドレスにはレバーの上下(前後)の入力状態を
+					格納します、格納される値は同じく -1000 から 1000 までの間で
+					マイナスの場合はレバーは上に倒されていることを、プラスの場合は
+					下に倒されていることを示します。よって -1000 の場合は…と言う
+					わけです。<BR><BR>
+
+					　なお、アナログ的な入力ではないジョイパッドの場合はおそらく
+					0 か -1000 又は 1000 の値が常に格納されると思われます。<BR>
+				</TD>
+			</TR>
+		</TABLE></TD></TR>
+
+		<TR><TD>
+			<B>サンプル</B><BR><BR>
+
+				　ジョイパッドのアナログ的入力状態を画面に表示します。<BR>
+			<HR>
+<PRE>
+#include "DxLib.h"
+
+int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,
+			 LPSTR lpCmdLine, int nCmdShow )
+{
+	int Cr ;
+	int InputX , InputY ;
+	char String[ 64 ] ;
+
+	if( DxLib_Init() == -1 )	// ＤＸライブラリ初期化処理
+	{
+		 return -1;	// エラーが起きたら直ちに終了
+	}
+
+	// 描画先画面を裏画面にする
+	SetDrawScreen( DX_SCREEN_BACK ) ;
+
+	// 白色の値を取得
+	Cr = GetColor( 255 , 255 , 255 ) ;
+
+	// ＥＳＣキーが押されるまでループ
+	while( ( GetJoypadInputState( DX_INPUT_KEY_PAD1 ) & PAD_INPUT_9 ) == 0 )
+	{
+		// メッセージ処理
+		if( ProcessMessage() == -1 )
+		{
+			 break ;	// エラーが発生したらループを抜ける
+		}
+
+		// パッド１の入力を取得
+		GetJoypadAnalogInput( &InputX , &InputY , DX_INPUT_KEY_PAD1 ) ;
+
+		// 画面に入力状態を表示する
+		{
+			ClearDrawScreen() ;
+
+			wsprintf( String , "X = %d" , InputX ) ;
+			DrawString( 0 , 0 , String , Cr ) ;
+
+			wsprintf( String , "Y = %d" , InputY ) ;
+			DrawString( 0 , 16 , String , Cr ) ;
+		}
+
+		// 裏画面の内容を表画面に反映させる
+		ScreenFlip() ;
+	}
+
+	DxLib_End() ;		// ＤＸライブラリ使用の終了処理
+
+	return 0 ;		// ソフトの終了
+}
+</PRE>
+
+			<HR>
+			<BR><BR>
+		</TD></TR>
+
+<!--
+
+		<TR><TD>
+		<TABLE ALIGN="CENTER" WIDTH=650  CELLSPACING=0 CELLPADDING=0>
+			<TR><TD VALIGN="TOP" WIDTH=100><B><A NAME="R5N29">宣言</TD><TD><FONT COLOR="#000088"><B>int GetJoypadAnalogInputRight( int *XBuf , int *YBuf , int InputType) ;</B></FONT><BR><BR></TD></TR>
+			<TR><TD VALIGN="TOP" WIDTH=100><B>概略</B></TD><TD>ジョイパッドのアナログ的なレバー入力情報を得る(右スティック用)<BR><BR></TD></TR>
+			<TR><TD VALIGN="TOP" WIDTH=100><B>引数</B></TD>
+				<TD>int *XBuf : パッドレバーの左右の入力状態を格納する int 型変数のアドレス<BR>
+					int *YBuf : パッドレバーの上下の入力状態を格納する int 型変数のアドレス<BR>
+					InputType : 入力状態を取得するパッドの識別子<BR>
+					　　　　　　　　DX_INPUT_PAD1　　　　: パッド１<BR>
+					　　　　　　　　DX_INPUT_PAD2　　　　: パッド２<BR>
+					　　　　　　　　DX_INPUT_PAD3　　　　: パッド３<BR>
+					　　　　　　　　DX_INPUT_PAD4　　　　: パッド４<BR><BR>
+			</TR>
+			<TR><TD VALIGN="TOP" WIDTH=100><B>戻り値</B></TD><TD>　０：成功</TD></TR>
+			<TR><TD WIDTH=100>　</TD><TD>－１：エラー発生<BR><BR></TD></TR>
+			<TR>
+				<TD VALIGN="TOP" WIDTH=100><B>解説</B></TD>
+				<TD>　ＰＳのパッドを、変換器を通してＰＣで使用している場合は
+					アナログスティックが左右２個付いていますが、<A HREF="#R5N24"><B>GetJoypadAnalogInput</B></A>関数で
+					は左のスティックの入力状態しか取得できないので、この関数で
+					右スティックの入力状態を取ります。
+					(ＰＳパッド変換器以外のパッドでの入力は保証しません)<BR>
+					　使用法の詳細は<A HREF="#R5N24"><B>GetJoypadAnalogInput</B></A>関数
+					の解説を参照して下さい。<BR><BR>
+				</TD>
+			</TR>
+		</TABLE></TD></TR>
+
+		<TR><TD>
+			<B>サンプル</B><BR><BR>
+
+				　<A HREF="#R5N24"><B>GetJoypadAnalogInput</B></A>関数のサンプルを参照して下さい。<BR><BR>
+			<BR><BR>
+		</TD></TR>
+-->
+		<TR><TD>
+		<TABLE ALIGN="CENTER" WIDTH=650  CELLSPACING=0 CELLPADDING=0>
+			<TR><TD VALIGN="TOP" WIDTH=100><B><A NAME="R5N33">宣言</TD><TD><FONT COLOR="#000088"><B>int SetJoypadInputToKeyInput( int InputType, int PadInput, int KeyInput1, int KeyInput2, int KeyInput3, int KeyInput4 ) ;</B></FONT><BR><BR></TD></TR>
+			<TR><TD VALIGN="TOP" WIDTH=100><B>概略</B></TD><TD>　ジョイパッドの入力に対応したキーボードの入力を設定する<BR><BR></TD></TR>
+			<TR><TD VALIGN="TOP" WIDTH=100><B>引数</B></TD>
+				<TD>InputType : キーとの対応設定を変更するパッドの識別子<BR>
+					　　　　　　　　DX_INPUT_PAD1　　　　: パッド１<BR>
+					　　　　　　　　DX_INPUT_PAD2　　　　: パッド２<BR>
+					　　　　　　　　DX_INPUT_PAD3　　　　: パッド３<BR>
+					　　　　　　　　DX_INPUT_PAD4　　　　: パッド４<BR>
+					PadInput : 設定を変更するパッドのボタン( PAD_INPUT_1 等 )<BR>
+					KeyInput1 : 対応させるキーその１( KEY_INPUT_Z 等 )<BR>
+					KeyInput2 : 対応させるキーその２( 無用な場合は -1 を渡してください )<BR>
+					KeyInput3 : 対応させるキーその３( 無用な場合は -1 を渡してください )<BR>
+					KeyInput4 : 対応させるキーその４( 無用な場合は -1 を渡してください )<BR>
+			</TR>
+			<TR><TD VALIGN="TOP" WIDTH=100><B>戻り値</B></TD><TD>　０：成功</TD></TR>
+			<TR><TD WIDTH=100>　</TD><TD>－１：エラー発生<BR><BR></TD></TR>
+			<TR>
+				<TD VALIGN="TOP" WIDTH=100><B>解説</B></TD>
+				<TD>　<A HREF="#R5N4"><B>GetJoypadInputState</B></A> は例えば<BR><BR>
+					GetJoypadInputState( DX_INPUT_KEY_PAD1 ) ;<BR><BR>
+					
+					　を実行した場合、キーの入力もパッドの入力として取得することができますが、
+					　DX_INPUT_KEY_PAD1 を渡した際のキーとパッドの入力の対応は、パッドの１ボタン＝Ｚキー、２ボタン＝Ｘキー・・・となっています。<BR><BR>
+
+					　１０年以上前のＰＣゲームからＺキーが決定や攻撃ボタンとして使われてはいますが、ときにこの設定を変更したくなることがあると思います。
+					また、パッド２や３に対応するキーを設定したくなることもあると思います。<BR>
+					　そんなときに使用するのがこの関数です。<BR><BR>
+
+					　この関数ではパッドの入力に対応したキーボード側の入力を設定することができます。<BR>
+					　例えばキーボードのＧキーを押したときにパッド１のＡボタンが押されたことにしたいときは<BR><BR>
+
+					SetJoypadInputStateToKeyInput( DX_INPUT_PAD1, PAD_INPUT_1, KEY_INPUT_G, -1, -1, -1 ) ;<BR><BR>
+
+					　を実行します。これを実行した後は、<BR><BR>
+					
+					GetJoypadInputState( DX_INPUT_KEY_PAD1 ) ;<BR><BR>
+					
+					　としたときに、Ｇキーが押されていれば、PAD_INPUT_1 が返ってくるようになります。<BR><BR>
+
+					　ではパッド２以降は設定した後 GetJoypadInputState に何を渡せば良いんだ？という話ですが、
+					こちらは<BR><BR>
+					
+					GetJoypadInputState( DX_INPUT_PAD2 | DX_INPUT_KEY ) ;<BR><BR>
+					
+					 という風に、渡す引数に DX_INPUT_KEY を論理和させて下さい。
+					( パッド１も GetJoypadInputState( DX_INPUT_PAD1 | DX_INPUT_KEY ) ; でもＯＫです )<BR><BR>
+
+					　なお、対応するキーの設定を４つもできるようにしているのは、
+					方向ボタンのように十字キーとテンキーどちらでも入力を対応させたいようなケースを考えてのことですので、
+					殆どの場合は KeyInput2 以降の３つの引数は -1 になると思います。<BR>
+					<BR><BR>
+				</TD>
+			</TR>
+		</TABLE></TD></TR>
+
+		<TR><TD>
+			<B>サンプル</B><BR><BR>
+
+				　パッド１の十字ボタンに対応したキーをＩキー(上)、Ｋキー(下)、Ｊキー(左)、Ｌキー(右)にします<BR>
+				その後Ｉ，Ｋ，Ｊ，Ｌキーでボックスを操作できるようになります<BR>
+			<HR>
+<PRE>
+#include "DxLib.h"
+
+int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow )
+{
+	int x, y, input ;
+
+	// ＤＸライブラリの初期化
+	if( DxLib_Init() < 0 ) return 0;
+
+	// パッド１の十字ボタンの対応を変更
+	SetJoypadInputToKeyInput( DX_INPUT_PAD1, PAD_INPUT_UP,    KEY_INPUT_I, -1, -1, -1 );
+	SetJoypadInputToKeyInput( DX_INPUT_PAD1, PAD_INPUT_DOWN,  KEY_INPUT_K, -1, -1, -1 );
+	SetJoypadInputToKeyInput( DX_INPUT_PAD1, PAD_INPUT_LEFT,  KEY_INPUT_J, -1, -1, -1 );
+	SetJoypadInputToKeyInput( DX_INPUT_PAD1, PAD_INPUT_RIGHT, KEY_INPUT_L, -1, -1, -1 );
+
+	// 描画先を裏画面にセット
+	SetDrawScreen( DX_SCREEN_BACK );
+
+	// ボックスの初期座標をセット
+	x = 320 ;
+	y = 240 ;
+
+	// ＥＳＣキーが押されるまでループ
+	while( ProcessMessage() == 0 && CheckHitKey( KEY_INPUT_ESCAPE ) == 0 )
+	{
+		// パッド１の入力を取得
+		input = GetJoypadInputState( DX_INPUT_PAD1 | DX_INPUT_KEY ) ;
+
+		// 入力に応じてボックスの位置を変更
+		if( input & PAD_INPUT_UP    ) y -= 8 ;
+		if( input & PAD_INPUT_DOWN  ) y += 8 ;
+		if( input & PAD_INPUT_LEFT  ) x -= 8 ;
+		if( input & PAD_INPUT_RIGHT ) x += 8 ;
+
+		// 画面を初期化
+		ClearDrawScreen();
+
+		// ボックスの描画
+		DrawBox( x, y, x + 32, y + 32, GetColor( 255,255,255 ), TRUE ) ;
+
+		// 裏画面の内容を表画面に反映
+		ScreenFlip();
+	}
+
+	// ＤＸライブラリの後始末
+	DxLib_End();
+	
+	// ソフトの終了
+	return 0;
+}
+</PRE>
+
+			<HR>
+			<BR><BR>
+		</TD></TR>
+
+		<TR><TD>
+		<TABLE ALIGN="CENTER" WIDTH=650  CELLSPACING=0 CELLPADDING=0>
+			<TR><TD VALIGN="TOP" WIDTH=100><B><A NAME="R5N30">宣言</TD><TD><FONT COLOR="#000088"><B>int StartJoypadVibration( int InputType, int Power, int Time ) ;</B></FONT><BR><BR></TD></TR>
+			<TR><TD VALIGN="TOP" WIDTH=100><B>概略</B></TD><TD>ジョイパッドの振動を開始する<BR><BR></TD></TR>
+			<TR><TD VALIGN="TOP" WIDTH=100><B>引数</B></TD>
+				<TD>InputType : 振動を開始するパッドの識別子<BR>
+					　　　　　　　　DX_INPUT_PAD1　　　　: パッド１<BR>
+					　　　　　　　　DX_INPUT_PAD2　　　　: パッド２<BR>
+					　　　　　　　　DX_INPUT_PAD3　　　　: パッド３<BR>
+					　　　　　　　　DX_INPUT_PAD4　　　　: パッド４<BR>
+					Power : 振動の強さ(0～1000)<BR>
+					Time : 振動させる時間(ミリ秒単位)<BR>
+					　　　　-1 で StopJoypadVibration が呼ばれるまで振動し続ける<BR><BR>
+			</TR>
+			<TR><TD VALIGN="TOP" WIDTH=100><B>戻り値</B></TD><TD>　０：成功</TD></TR>
+			<TR><TD WIDTH=100>　</TD><TD>－１：エラー発生<BR><BR></TD></TR>
+			<TR>
+				<TD VALIGN="TOP" WIDTH=100><B>解説</B></TD>
+				<TD>　ジョイパッドの中には振動機能がついているものがありますが、
+				この関数はその機能を使用してパッドを振動させたい時に使います。<BR>
+				　振動機能のないパッドでは当然振動しません。<BR><BR>
+				</TD>
+			</TR>
+		</TABLE></TD></TR>
+
+		<TR><TD>
+			<B>サンプル</B><BR><BR>
+
+				　パッド１を最大の振動の強さで２秒間振動させます。<BR>
+			<HR>
+<PRE>
+#include "DxLib.h"
+
+int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,
+			 LPSTR lpCmdLine, int nCmdShow )
+{
+	// ＤＸライブラリ初期化処理
+	if( DxLib_Init() == -1 )
+		 return -1;	// エラーが起きたら直ちに終了
+
+	// 振動開始
+	StartJoypadVibration( DX_INPUT_PAD1, 1000, 2000 ) ;
+
+	// ２秒間経過するまで待つ
+	WaitTimer( 2000 ) ;
+
+	// ＤＸライブラリ使用の終了処理
+	DxLib_End() ;
+
+	// ソフトの終了
+	return 0 ;
+}
+</PRE>
+
+			<HR>
+			<BR><BR>
+		</TD></TR>
+
+		<TR><TD>
+		<TABLE ALIGN="CENTER" WIDTH=650  CELLSPACING=0 CELLPADDING=0>
+			<TR><TD VALIGN="TOP" WIDTH=100><B><A NAME="R5N31">宣言</TD><TD><FONT COLOR="#000088"><B>int StopJoypadVibration( int InputType ) ;</B></FONT><BR><BR></TD></TR>
+			<TR><TD VALIGN="TOP" WIDTH=100><B>概略</B></TD><TD>ジョイパッドの振動を停止する<BR><BR></TD></TR>
+			<TR><TD VALIGN="TOP" WIDTH=100><B>引数</B></TD>
+				<TD>InputType : 振動を停止するパッドの識別子<BR>
+					　　　　　　　　DX_INPUT_PAD1　　　　: パッド１<BR>
+					　　　　　　　　DX_INPUT_PAD2　　　　: パッド２<BR>
+					　　　　　　　　DX_INPUT_PAD3　　　　: パッド３<BR>
+					　　　　　　　　DX_INPUT_PAD4　　　　: パッド４<BR>
+			</TR>
+			<TR><TD VALIGN="TOP" WIDTH=100><B>戻り値</B></TD><TD>　０：成功</TD></TR>
+			<TR><TD WIDTH=100>　</TD><TD>－１：エラー発生<BR><BR></TD></TR>
+			<TR>
+				<TD VALIGN="TOP" WIDTH=100><B>解説</B></TD>
+				<TD>　<A HREF="#R5N30"><B>StartJoypadVibration</B></A>関数で開始した振動を停止します。<BR>
+				　ただ、StartJoypadVibration 関数でも時間指定で自動的に振動を止めることは出来るので、
+				主に StartJoypadVibration 関数の時間指定で -1 を指定した場合に使用します。<BR>
+				</TD>
+			</TR>
+		</TABLE></TD></TR>
+
+		<TR><TD>
+			<B>サンプル</B><BR><BR>
+
+				　ありません
+			<BR><BR><BR><BR>
+		</TD></TR>
+
+
+
+		<TR><TD COLSPAN=2>
+			<FONT SIZE="3" COLOR="#752400"><B>　　マウス入力関連関数</B><BR><BR></FONT>
+		</TD></TR>
+
+		<TR><TD><TABLE ALIGN="CENTER" WIDTH=650  CELLSPACING=0 CELLPADDING=0>
+			<TR><TD VALIGN="TOP" WIDTH=100><B><A NAME="R5N5">宣言</TD><TD><FONT COLOR="#000088"><B>int	SetMouseDispFlag( int DispFlag );</B></FONT><BR><BR></TD></TR>
+			<TR><TD VALIGN="TOP" WIDTH=100><B>概略</B></TD><TD>マウスカーソルの表示設定フラグのセット<BR><BR></TD></TR>
+			<TR><TD VALIGN="TOP" WIDTH=100><B>引数</B></TD>
+				<TD>DispFlag : 　マウスの表示の有無を示すフラグ、TRUEで表示し、<BR>
+					　　　　　　　FALSEで表示をしない。</TD>
+			</TR>
+			<TR><TD VALIGN="TOP" WIDTH=100><B>戻り値</B></TD><TD>　０：成功</TD></TR>
+			<TR><TD WIDTH=100>　</TD><TD>－１：エラー発生<BR><BR></TD></TR>
+			<TR>
+				<TD VALIGN="TOP" WIDTH=100><B>解説</B></TD>
+				<TD>　マウスカーソルの表示の有無を設定します。TRUEで表示し、
+					FALSEで表示しません（デフォルトではFALSE）。<BR>
+					　マウスを使用したプログラムを作成する場合マウスカーソルが
+					見えなくては話にならないのでこの関数で見えるようにします。<BR><BR>
+				</TD>
+			</TR>
+		</TABLE></TD></TR>
+
+		<TR><TD>
+			<B>サンプル</B><BR><BR>
+
+				　マウスカーソルを表示状態にする<BR>
+			<HR>
+<PRE>
+#include "DxLib.h"
+
+int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,
+		 LPSTR lpCmdLine, int nCmdShow )
+{
+	if( DxLib_Init() == -1 )	// ＤＸライブラリ初期化処理
+	{
+		 return -1;	// エラーが起きたら直ちに終了
+	}
+
+	// マウスを表示状態にする
+	SetMouseDispFlag( TRUE ) ;
+
+	// キー入力を待つ(『WaitKey』を使用)
+	WaitKey() ;
+
+	DxLib_End() ;		// ＤＸライブラリ使用の終了処理
+
+	return 0 ;		// ソフトの終了
+}
+</PRE>
+			<HR>
+			<BR><BR>
+		</TD></TR>
+
+		<TR><TD><TABLE ALIGN="CENTER" WIDTH=650  CELLSPACING=0 CELLPADDING=0>
+			<TR><TD VALIGN="TOP" WIDTH=100><B><A NAME="R5N6">宣言</TD><TD><FONT COLOR="#000088"><B>int	GetMousePoint( int *XBuf, int *YBuf );</B></FONT><BR><BR></TD></TR>
+			<TR><TD VALIGN="TOP" WIDTH=100><B>概略</B></TD><TD>マウスカーソルの位置を取得する<BR><BR></TD></TR>
+			<TR><TD VALIGN="TOP" WIDTH=100><B>引数</B></TD>
+				<TD>XBuf ,YBuf :　マウスカーソル現在地のX座標とY座標を保存する<BR>
+					　　　　　　int型変数のポインタ</TD>
+			</TR>
+			<TR><TD VALIGN="TOP" WIDTH=100><B>戻り値</B></TD><TD>　０：成功</TD></TR>
+			<TR><TD WIDTH=100>　</TD><TD>－１：エラー発生<BR><BR></TD></TR>
+			<TR>
+				<TD VALIGN="TOP" WIDTH=100><B>解説</B></TD>
+				<TD>　マウスカーソルの画面上での座標をXBufとYBufの示すint型変数
+					に格納します。ボタンを押した瞬間マウスがどこにいたか、等を
+					得るのに使用します。<BR><BR>
+				</TD>
+			</TR>
+		</TABLE></TD></TR>
+
+		<TR><TD>
+			<B>サンプル</B><BR><BR>
+
+				　マウスの座標を画面に表示する<BR>
+			<HR>
+<PRE>
+#include "DxLib.h"
+#include &lt;stdlib.h&gt;
+
+int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,
+		 LPSTR lpCmdLine, int nCmdShow )
+{
+	char StrBuf[ 128 ] , StrBuf2[ 32 ];
+	int MouseX , MouseY ;
+	int StringCr , BoxCr ;
+
+	if( DxLib_Init() == -1 )	// ＤＸライブラリ初期化処理
+	{
+		 return -1;	// エラーが起きたら直ちに終了
+	}
+
+	// マウスを表示状態にする
+	SetMouseDispFlag( TRUE ) ;
+
+	// 白色の値を取得
+	StringCr = GetColor( 255 , 255 , 255 ) ;
+
+	// 黒の値を取得
+	BoxCr = GetColor( 0 , 0 , 0 ) ;
+
+	// キーが押されるまでループ
+	while( CheckHitKeyAll() == 0 )
+	{
+		// マウスの位置を取得
+		GetMousePoint( &MouseX , &MouseY ) ;
+
+		// 表示する文字列を作成
+		{
+			lstrcpy( StrBuf , "座標 Ｘ" ) ; // 文字列"座標 Ｘ"をStrBufにコピー	
+			itoa( MouseX , StrBuf2 , 10 ) ; // MouseXの値を文字列にしてStrBuf2に格納
+			lstrcat( StrBuf , StrBuf2 ) ; // StrBufの内容にStrBuf2の内容を付け足す
+			lstrcat( StrBuf , "　Ｙ " ) ; // StrBufの内容に文字列"　Ｙ "を付け足す
+			itoa( MouseY , StrBuf2 , 10 ) ; // MouseYの値を文字列にしてStrBuf2に格納
+			lstrcat( StrBuf , StrBuf2 ) ; // StrBufの内容にStrBuf2の内容を付け足す
+		}
+
+		// 画面左上の領域に黒い四角を描き前に描いてあった
+		// 文字列を消す
+		DrawBox( 0 , 0 , 200 , 32 , BoxCr , TRUE ) ;
+
+		// 座標文字列を描く
+		DrawString( 0 , 0 , StrBuf , StringCr ) ;
+				
+		// メッセージ処理
+		if( ProcessMessage() == -1 )
+		{
+			break ;	// エラーが起きたらループを抜ける
+		}
+
+		// 一定時間待つ
+		WaitTimer( 100 ) ;
+	}
+
+	DxLib_End() ;		// ＤＸライブラリ使用の終了処理
+
+	return 0 ;		// ソフトの終了
+}
+</PRE>
+			<HR>
+			<BR><BR>
+		</TD></TR>
+
+		<TR><TD><TABLE ALIGN="CENTER" WIDTH=650  CELLSPACING=0 CELLPADDING=0>
+			<TR><TD VALIGN="TOP" WIDTH=100><B><A NAME="R5N7">宣言</TD><TD><FONT COLOR="#000088"><B>int	SetMousePoint( int PointX , int PointY );</B></FONT><BR><BR></TD></TR>
+			<TR><TD VALIGN="TOP" WIDTH=100><B>概略</B></TD><TD>マウスカーソルの位置をセットする<BR><BR></TD></TR>
+			<TR><TD VALIGN="TOP" WIDTH=100><B>引数</B></TD><TD>PointX , PointY : 新しいマウスカーソルの位置</TD></TR>
+			<TR><TD VALIGN="TOP" WIDTH=100><B>戻り値</B></TD><TD>　０：成功</TD></TR>
+			<TR><TD WIDTH=100>　</TD><TD>－１：エラー発生<BR><BR></TD></TR>
+			<TR>
+				<TD VALIGN="TOP" WIDTH=100><B>解説</B></TD>
+				<TD>　マウスカーソルの位置を( PointX , PointY )の示す座標に
+					移動します、この関数を使うとマウスカーソルは強制的に
+					指定の座標の移動する事になります。<BR><BR>
+				</TD>
+			</TR>
+		</TABLE></TD></TR>
+
+		<TR><TD>
+			<B>サンプル</B><BR><BR>
+
+				　１秒経つごとにマウスカーソルが指定の座標に戻されてしまうプログラム<BR>
+			<HR>
+<PRE>
+#include "DxLib.h"
+#include &lt;stdlib.h&gt;
+
+int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,
+			 LPSTR lpCmdLine, int nCmdShow )
+{
+	int Count ;
+
+	if( DxLib_Init() == -1 )	// ＤＸライブラリ初期化処理
+	{
+		 return -1;	// エラーが起きたら直ちに終了
+	}
+
+	// マウスを表示状態にする
+	SetMouseDispFlag( TRUE ) ;
+
+	// 現在のカウンタ値を得る『GetNowCount』関数使用
+	Count = GetNowCount() ;
+
+	// キーが押されるまでループ
+	while( CheckHitKeyAll() == 0 )
+	{
+		// 前回のカウンタ参照から１秒たっているか判定
+		if( GetNowCount() - Count > 1000 )
+		{
+			// 経っていたらマウスの位置を画面左上に移動
+
+			// マウスの位置をセット
+			SetMousePoint( 0 , 0 ) ;
+
+			// 現在のカウンタ値を得る
+			Count = GetNowCount() ;
+		}
+
+		// メッセージ処理
+		if( ProcessMessage() == -1 )
+		{
+			break ;	// エラーが起きたらループを抜ける
+		}
+	}
+
+	DxLib_End() ;		// ＤＸライブラリ使用の終了処理
+
+	return 0 ;		// ソフトの終了
+}
+</PRE>
+			<HR>
+			<BR><BR>
+		</TD></TR>
+
+		<TR><TD><TABLE ALIGN="CENTER" WIDTH=650  CELLSPACING=0 CELLPADDING=0>
+			<TR><TD VALIGN="TOP" WIDTH=100><B><A NAME="R5N8">宣言</TD><TD><FONT COLOR="#000088"><B>int	GetMouseInput( void ) ;</B></FONT><BR><BR></TD></TR>
+			<TR><TD VALIGN="TOP" WIDTH=100><B>概略</B></TD><TD>マウスカーソルのボタンの状態を得る<BR><BR></TD></TR>
+			<TR><TD VALIGN="TOP" WIDTH=100><B>引数</B></TD><TD>なし</TD></TR>
+			<TR><TD VALIGN="TOP" WIDTH=100><B>戻り値</B></TD><TD>マウスの入力状態値<BR><BR></TD></TR>
+			<TR>
+				<TD VALIGN="TOP" WIDTH=100><B>解説</B></TD>
+				<TD>　マウスの入力状態値を得ます。<BR>
+					　戻り値を以下に示す定義値とＡＮＤ演算し、結果が０で
+					なければそのボタンが押されている事になります。<BR><BR>
+
+					MOUSE_INPUT_LEFT　　： マウス左ボタン<BR>
+					MOUSE_INPUT_RIGHT　 ： マウス右ボタン<BR>
+					MOUSE_INPUT_MIDDLE　： マウス中央ボタン<BR><BR>
+
+					<B>例</B><BR>
+					　　左ボタンが押されているか調べる<BR><BR>
+
+<PRE>	
+	if( ( GetMouseInput() & MOUSE_INPUT_LEFT ) != 0 )
+	{
+		// 押されている
+	}
+	else
+	{
+		// 押されていない
+	}
+</PRE>
+<BR><BR>
+					　尚、マウスのボタンが４ボタン以上ある場合は、以下の定義値とＡＮＤ演算することで
+					４ボタン以上のボタンの押下状態を得ることが出来ます。<BR><BR>
+
+					MOUSE_INPUT_4　： マウス４ボタン<BR>
+					MOUSE_INPUT_5　： マウス５ボタン<BR>
+					MOUSE_INPUT_6　： マウス６ボタン<BR>
+					MOUSE_INPUT_7　： マウス７ボタン<BR>
+					MOUSE_INPUT_8　： マウス８ボタン<BR><BR>
+
+				</TD>
+			</TR>
+		</TABLE></TD></TR>
+
+		<TR><TD>
+			<B>サンプル</B><BR><BR>
+
+				　マウス右ボタンが押されるまで待つ<BR>
+			<HR>
+<PRE>
+#include "DxLib.h"
+
+int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,
+		 LPSTR lpCmdLine, int nCmdShow )
+{
+	int MouseInput ;
+
+	if( DxLib_Init() == -1 )	// ＤＸライブラリ初期化処理
+	{
+		 return -1;	// エラーが起きたら直ちに終了
+	}
+
+	// マウスを表示状態にする
+	SetMouseDispFlag( TRUE ) ;
+
+	// マウスの入力を待つ
+	MouseInput = GetMouseInput() ;
+	while( ( MouseInput & MOUSE_INPUT_RIGHT ) == 0 )
+	{
+		// メッセージ処理
+		if( ProcessMessage() == -1 )
+		{
+			break ;	// エラーが起きたらループから抜ける
+		}
+
+		// マウスの入力を得る
+		MouseInput = GetMouseInput() ;
+	}
+
+	DxLib_End() ;		// ＤＸライブラリ使用の終了処理
+
+	return 0 ;		// ソフトの終了
+}
+</PRE>
+			<HR>
+			<BR><BR>
+		</TD></TR>
+
+		<TR><TD><TABLE ALIGN="CENTER" WIDTH=650  CELLSPACING=0 CELLPADDING=0>
+			<TR><TD VALIGN="TOP" WIDTH=100><B><A NAME="R5N32">宣言</TD><TD><FONT COLOR="#000088"><B>int	GetMouseWheelRotVol( void ) ;</B></FONT><BR><BR></TD></TR>
+			<TR><TD VALIGN="TOP" WIDTH=100><B>概略</B></TD><TD>マウスホイールの回転量を得る<BR><BR></TD></TR>
+			<TR><TD VALIGN="TOP" WIDTH=100><B>引数</B></TD><TD>なし</TD></TR>
+			<TR><TD VALIGN="TOP" WIDTH=100><B>戻り値</B></TD><TD>マウスの入力状態値<BR><BR></TD></TR>
+			<TR>
+				<TD VALIGN="TOP" WIDTH=100><B>解説</B></TD>
+				<TD>　前回この関数が呼ばれてから今回この関数が呼ばれるまでにマウスホイールが回転した量を得ます。<BR>
+					　手前に回した分はマイナスの値として、奥に回した分はプラスの値として返ってきます。<BR>
+				</TD>
+			</TR>
+		</TABLE></TD></TR>
+
+		<TR><TD>
+			<B>サンプル</B><BR><BR>
+
+				　何かキーが押されるまで回転量の合計を画面に表示し続けます。<BR>
+			<HR>
+<PRE>
+#include "DxLib.h"
+
+int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,
+		 LPSTR lpCmdLine, int nCmdShow )
+{
+	int Rot ;
+
+	if( DxLib_Init() == -1 )	// ＤＸライブラリ初期化処理
+		 return -1;	// エラーが起きたら直ちに終了
+
+	// 裏画面を使用
+	SetDrawScreen( DX_SCREEN_BACK ) ;
+
+	// 合計値を初期化
+	Rot = 0 ;
+
+	// 何かキーが押されるまでループ
+	while( CheckHitKeyAll() == 0 )
+	{
+		// メッセージ処理
+		if( ProcessMessage() == -1 ) break ;	// エラーが起きたらループから抜ける
+
+		// 前回 GetMouseWheelRotVol が呼ばれてから今回までの回転量を足す
+		Rot += GetMouseWheelRotVol() ;
+
+		// 画面を初期化
+		ClearDrawScreen() ;
+
+		// 画面に回転量を描画
+		DrawFormatString( 0, 0, GetColor( 255,255,255 ), "%d", Rot ) ;
+
+		// 裏画面の内容を表画面に表示
+		ScreenFlip() ;
+	}
+
+	DxLib_End() ;		// ＤＸライブラリ使用の終了処理
+
+	return 0 ;		// ソフトの終了
+}
+</PRE>
+			<HR>
+			<BR><BR><BR>
+		</TD></TR>
+
+		<TR><TD COLSPAN=2>
+			<FONT SIZE="3" COLOR="#752400"><B>　　キーボード入力関連関数</B><BR><BR></FONT>
+		</TD></TR>
+
+
+		<TR><TD><TABLE ALIGN="CENTER" WIDTH=650  CELLSPACING=0 CELLPADDING=0>
+			<TR><TD VALIGN="TOP" WIDTH=100><B><A NAME="R5N1">宣言</TD><TD><FONT COLOR="#000088"><B>int CheckHitKeyAll( void ) ;</B></FONT><BR><BR></TD></TR>
+			<TR><TD VALIGN="TOP" WIDTH=100><B>概略</B></TD><TD>すべてのキーの押下状態を取得する（キーの特定はできない）<BR><BR></TD></TR>
+			<TR><TD VALIGN="TOP" WIDTH=100><B>引数</B></TD><TD>なし</TD></TR>
+			<TR><TD VALIGN="TOP" WIDTH=100><B>戻り値</B></TD><TD>　０：成功</TD></TR>
+			<TR><TD WIDTH=100>　</TD><TD>－１：エラー発生<BR><BR></TD></TR>
+			<TR>
+				<TD VALIGN="TOP" WIDTH=100><B>解説</B></TD>
+				<TD>　すべてのキーのどれかが押されているか判定し、結果を返します<BR>
+					　この関数で特定のキーを判定する事は出来ません。特定のキー入力を
+					判定するには次のCheckHitKey関数を使用してください。<BR><BR>
+				</TD>
+			</TR>
+		</TABLE></TD></TR>
+
+		<TR><TD>
+			<B>サンプル</B><BR><BR>
+
+			　キー入力があるまで待つ<BR>
+			<HR>
+<PRE>
+#include "DxLib.h"
+
+int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,
+		 LPSTR lpCmdLine, int nCmdShow )
+{
+	int Cr ;
+
+	if( DxLib_Init() == -1 )	// ＤＸライブラリ初期化処理
+	{
+		 return -1;	// エラーが起きたら直ちに終了
+	}
+
+	// 白色の値を取得
+	Cr = GetColor( 255 , 255 , 255 ) ;
+
+	// 文字列の描画
+	DrawString( 200 , 240 - 32 , "キーを押してください" , Cr );
+
+	// キーの入力待ち
+	while( CheckHitKeyAll() == 0 )
+	{
+		// メッセージ処理
+		if( ProcessMessage() == -1 )
+		{
+			 break ;	// エラーが発生したらループを抜ける
+		}
+	}
+
+	DxLib_End() ;		// ＤＸライブラリ使用の終了処理
+
+	return 0 ;		// ソフトの終了
+}
+</PRE>
+			<HR>
+			<BR><BR>
+		</TD></TR>
+
+		<TR><TD><TABLE ALIGN="CENTER" WIDTH=650  CELLSPACING=0 CELLPADDING=0>
+			<TR><TD VALIGN="TOP" WIDTH=100><B><A NAME="R5N2">宣言</TD><TD><FONT COLOR="#000088"><B>int	CheckHitKey( int KeyCode ) ;</B></FONT><BR><BR></TD></TR>
+			<TR><TD VALIGN="TOP" WIDTH=100><B>概略</B></TD><TD>特定キーの入力状態を得る<BR><BR></TD></TR>
+			<TR><TD VALIGN="TOP" WIDTH=100><B>引数</B></TD><TD>KeyCode　:　入力状態を取得するキーコード</TD></TR>
+			<TR><TD VALIGN="TOP" WIDTH=100><B>戻り値</B></TD><TD>１：押されている</TD></TR>
+			<TR><TD WIDTH=100>　</TD><TD>０：押されていない<BR><BR></TD></TR>
+			<TR>
+				<TD VALIGN="TOP" WIDTH=100><B>解説</B></TD>
+				<TD>　特定のキーの入力状態を得ます。例えば『Ｉ』キーの入力状態を
+					調べたい場合は『CheckHitKey( KEY_INPUT_I )』として関数を呼び
+					ます。<BR>
+					　この『KEY_INPUT_I』はマクロを使用して定義したもので、すべての
+					キーに対してこのような選別子が定義されています。<BR>
+					　それを以下に記します。多いです<BR><BR>
+					<TABLE ALIGN="CENTER" CELLSPACING=0 CELLPADDING=0>
+						<TR><TD>KEY_INPUT_BACK </TD><TD>// バックスペースキー</TD></TR>
+						<TR><TD>KEY_INPUT_TAB </TD><TD>// タブキー</TD></TR>
+						<TR><TD>KEY_INPUT_RETURN </TD><TD>// エンターキー<BR><BR></TD></TR>
+
+						<TR><TD>KEY_INPUT_LSHIFT </TD><TD>// 左シフトキー</TD></TR>
+						<TR><TD>KEY_INPUT_RSHIFT </TD><TD>// 右シフトキー</TD></TR>
+						<TR><TD>KEY_INPUT_LCONTROL </TD><TD>// 左コントロールキー</TD></TR>
+						<TR><TD>KEY_INPUT_RCONTROL </TD><TD>// 右コントロールキー</TD></TR>
+						<TR><TD>KEY_INPUT_ESCAPE </TD><TD>// エスケープキー</TD></TR>
+						<TR><TD>KEY_INPUT_SPACE </TD><TD>// スペースキー</TD></TR>
+						<TR><TD>KEY_INPUT_PGUP </TD><TD>// ＰａｇｅＵＰキー</TD></TR>
+						<TR><TD>KEY_INPUT_PGDN </TD><TD>// ＰａｇｅＤｏｗｎキー</TD></TR>
+						<TR><TD>KEY_INPUT_END </TD><TD>// エンドキー</TD></TR>
+						<TR><TD>KEY_INPUT_HOME </TD><TD>// ホームキー</TD></TR>
+						<TR><TD>KEY_INPUT_LEFT </TD><TD>// 左キー</TD></TR>
+						<TR><TD>KEY_INPUT_UP </TD><TD>// 上キー</TD></TR>
+						<TR><TD>KEY_INPUT_RIGHT </TD><TD>// 右キー</TD></TR>
+						<TR><TD>KEY_INPUT_DOWN </TD><TD>// 下キー</TD></TR>
+						<TR><TD>KEY_INPUT_INSERT </TD><TD>// インサートキー</TD></TR>
+						<TR><TD>KEY_INPUT_DELETE </TD><TD>// デリートキー<BR><BR></TD></TR>
+
+						<TR><TD>KEY_INPUT_MINUS </TD><TD>// －キー</TD></TR>
+						<TR><TD>KEY_INPUT_YEN </TD><TD>// ￥キー</TD></TR>
+						<TR><TD>KEY_INPUT_PREVTRACK </TD><TD>// ＾キー</TD></TR>
+						<TR><TD>KEY_INPUT_PERIOD </TD><TD>// ．キー</TD></TR>
+						<TR><TD>KEY_INPUT_SLASH </TD><TD>// ／キー</TD></TR>
+						<TR><TD>KEY_INPUT_LALT </TD><TD>// 左ＡＬＴキー</TD></TR>
+						<TR><TD>KEY_INPUT_RALT </TD><TD>// 右ＡＬＴキー</TD></TR>
+						<TR><TD>KEY_INPUT_SCROLL </TD><TD>// ScrollLockキー</TD></TR>
+						<TR><TD>KEY_INPUT_SEMICOLON </TD><TD>// ；キー</TD></TR>
+						<TR><TD>KEY_INPUT_COLON </TD><TD>// ：キー</TD></TR>
+						<TR><TD>KEY_INPUT_LBRACKET </TD><TD>// ［キー</TD></TR>
+						<TR><TD>KEY_INPUT_RBRACKET </TD><TD>// ］キー</TD></TR>
+						<TR><TD>KEY_INPUT_AT </TD><TD>// ＠キー</TD></TR>
+						<TR><TD>KEY_INPUT_BACKSLASH </TD><TD>// ＼キー</TD></TR>
+						<TR><TD>KEY_INPUT_COMMA </TD><TD>// ，キー</TD></TR>
+						<TR><TD>KEY_INPUT_CAPSLOCK </TD><TD>// CaspLockキー</TD></TR>
+						<TR><TD>KEY_INPUT_PAUSE </TD><TD>// PauseBreakキー<BR><BR></TD></TR>
+
+						<TR><TD>KEY_INPUT_NUMPAD0 </TD><TD>// テンキー０</TD></TR>
+						<TR><TD>KEY_INPUT_NUMPAD1 </TD><TD>// テンキー１</TD></TR>
+						<TR><TD>KEY_INPUT_NUMPAD2 </TD><TD>// テンキー２</TD></TR>
+						<TR><TD>KEY_INPUT_NUMPAD3 </TD><TD>// テンキー３</TD></TR>
+						<TR><TD>KEY_INPUT_NUMPAD4 </TD><TD>// テンキー４</TD></TR>
+						<TR><TD>KEY_INPUT_NUMPAD5 </TD><TD>// テンキー５</TD></TR>
+						<TR><TD>KEY_INPUT_NUMPAD6 </TD><TD>// テンキー６</TD></TR>
+						<TR><TD>KEY_INPUT_NUMPAD7 </TD><TD>// テンキー７</TD></TR>
+						<TR><TD>KEY_INPUT_NUMPAD8 </TD><TD>// テンキー８</TD></TR>
+						<TR><TD>KEY_INPUT_NUMPAD9 </TD><TD>// テンキー９</TD></TR>
+						<TR><TD>KEY_INPUT_MULTIPLY </TD><TD>// テンキー＊キー</TD></TR>
+						<TR><TD>KEY_INPUT_ADD </TD><TD>// テンキー＋キー</TD></TR>
+						<TR><TD>KEY_INPUT_SUBTRACT </TD><TD>// テンキー－キー</TD></TR>
+						<TR><TD>KEY_INPUT_DECIMAL </TD><TD>// テンキー．キー</TD></TR>
+						<TR><TD>KEY_INPUT_DIVIDE </TD><TD>// テンキー／キー</TD></TR>
+						<TR><TD>KEY_INPUT_NUMPADENTER </TD><TD>// テンキーのエンターキー<BR><BR></TD></TR>
+
+						<TR><TD>KEY_INPUT_F1 </TD><TD>// Ｆ１キー</TD></TR>
+						<TR><TD>KEY_INPUT_F2 </TD><TD>// Ｆ２キー</TD></TR>
+						<TR><TD>KEY_INPUT_F3 </TD><TD>// Ｆ３キー</TD></TR>
+						<TR><TD>KEY_INPUT_F4 </TD><TD>// Ｆ４キー</TD></TR>
+						<TR><TD>KEY_INPUT_F5 </TD><TD>// Ｆ５キー</TD></TR>
+						<TR><TD>KEY_INPUT_F6 </TD><TD>// Ｆ６キー</TD></TR>
+						<TR><TD>KEY_INPUT_F7 </TD><TD>// Ｆ７キー</TD></TR>
+						<TR><TD>KEY_INPUT_F8 </TD><TD>// Ｆ８キー</TD></TR>
+						<TR><TD>KEY_INPUT_F9 </TD><TD>// Ｆ９キー</TD></TR>
+						<TR><TD>KEY_INPUT_F10 </TD><TD>// Ｆ１０キー</TD></TR>
+						<TR><TD>KEY_INPUT_F11 </TD><TD>// Ｆ１１キー</TD></TR>
+						<TR><TD>KEY_INPUT_F12 </TD><TD>// Ｆ１２キー<BR><BR></TD></TR>
+
+						<TR><TD>KEY_INPUT_A </TD><TD>// Ａキー</TD></TR>
+						<TR><TD>KEY_INPUT_B </TD><TD>// Ｂキー</TD></TR>
+						<TR><TD>KEY_INPUT_C </TD><TD>// Ｃキー</TD></TR>
+						<TR><TD>KEY_INPUT_D </TD><TD>// Ｄキー</TD></TR>
+						<TR><TD>KEY_INPUT_E </TD><TD>// Ｅキー</TD></TR>
+						<TR><TD>KEY_INPUT_F </TD><TD>// Ｆキー</TD></TR>
+						<TR><TD>KEY_INPUT_G </TD><TD>// Ｇキー</TD></TR>
+						<TR><TD>KEY_INPUT_H </TD><TD>// Ｈキー</TD></TR>
+						<TR><TD>KEY_INPUT_I </TD><TD>// Ｉキー</TD></TR>
+						<TR><TD>KEY_INPUT_J </TD><TD>// Ｊキー</TD></TR>
+						<TR><TD>KEY_INPUT_K </TD><TD>// Ｋキー</TD></TR>
+						<TR><TD>KEY_INPUT_L </TD><TD>// Ｌキー</TD></TR>
+						<TR><TD>KEY_INPUT_M </TD><TD>// Ｍキー</TD></TR>
+						<TR><TD>KEY_INPUT_N </TD><TD>// Ｎキー</TD></TR>
+						<TR><TD>KEY_INPUT_O </TD><TD>// Ｏキー</TD></TR>
+						<TR><TD>KEY_INPUT_P </TD><TD>// Ｐキー</TD></TR>
+						<TR><TD>KEY_INPUT_Q </TD><TD>// Ｑキー</TD></TR>
+						<TR><TD>KEY_INPUT_R </TD><TD>// Ｒキー</TD></TR>
+						<TR><TD>KEY_INPUT_S </TD><TD>// Ｓキー</TD></TR>
+						<TR><TD>KEY_INPUT_T </TD><TD>// Ｔキー</TD></TR>
+						<TR><TD>KEY_INPUT_U </TD><TD>// Ｕキー</TD></TR>
+						<TR><TD>KEY_INPUT_V </TD><TD>// Ｖキー</TD></TR>
+						<TR><TD>KEY_INPUT_W </TD><TD>// Ｗキー</TD></TR>
+						<TR><TD>KEY_INPUT_X </TD><TD>// Ｘキー</TD></TR>
+						<TR><TD>KEY_INPUT_Y </TD><TD>// Ｙキー</TD></TR>
+						<TR><TD>KEY_INPUT_Z </TD><TD>// Ｚキー</TD></TR>
+
+						<TR><TD>KEY_INPUT_0 </TD><TD>// ０キー</TD></TR>
+						<TR><TD>KEY_INPUT_1 </TD><TD>// １キー</TD></TR>
+						<TR><TD>KEY_INPUT_2 </TD><TD>// ２キー</TD></TR>
+						<TR><TD>KEY_INPUT_3 </TD><TD>// ３キー</TD></TR>
+						<TR><TD>KEY_INPUT_4 </TD><TD>// ４キー</TD></TR>
+						<TR><TD>KEY_INPUT_5 </TD><TD>// ５キー</TD></TR>
+						<TR><TD>KEY_INPUT_6 </TD><TD>// ６キー</TD></TR>
+						<TR><TD>KEY_INPUT_7 </TD><TD>// ７キー</TD></TR>
+						<TR><TD>KEY_INPUT_8 </TD><TD>// ８キー</TD></TR>
+						<TR><TD>KEY_INPUT_9 </TD><TD>// ９キー</TD></TR>
+					</TABLE>
+
+					<BR><BR>
+					<B>例</B>　ＥＳＣキーが押されているか調べる<BR><BR>
+
+<PRE>
+	if( CheckHitKey( KEY_INPUT_ESCAPE ) == 0 )
+	{
+		// 押されていない
+	}
+	else
+	{
+		// 押されている
+	}
+</PRE>
+					<BR><BR>
+				</TD>
+			</TR>
+		</TABLE></TD></TR>
+
+		<TR><TD>
+			<B>サンプル</B><BR><BR>
+
+				　Ｚキーが押されるまで待つ<BR>
+			<HR>
+<PRE>
+#include "DxLib.h"
+
+int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,
+		 LPSTR lpCmdLine, int nCmdShow )
+{
+	int Cr ;
+
+	if( DxLib_Init() == -1 )	// ＤＸライブラリ初期化処理
+	{
+		 return -1;	// エラーが起きたら直ちに終了
+	}
+
+	// 白色の値を取得
+	Cr = GetColor( 255 , 255 , 255 ) ;
+
+	// 文字列の描画
+	DrawString( 230 , 240 - 32 , "Ｚキーを押してください" , Cr );
+
+	// Ｚキーの入力待ち
+	while( CheckHitKey( KEY_INPUT_Z ) == 0 )
+	{
+		// メッセージ処理
+		if( ProcessMessage() == -1 )
+		{
+			 break ;	// エラーが発生したらループを抜ける
+		}
+	}
+
+	DxLib_End() ;		// ＤＸライブラリ使用の終了処理
+
+	return 0 ;		// ソフトの終了
+}
+</PRE>
+			<HR>
+			<BR><BR>
+		</TD></TR>
+
+
+		<TR><TD><TABLE ALIGN="CENTER" WIDTH=650  CELLSPACING=0 CELLPADDING=0>
+			<TR><TD VALIGN="TOP" WIDTH=100><B><A NAME="R5N28">宣言</TD><TD><FONT COLOR="#000088"><B>int GetHitKeyStateAll( char *KeyStateBuf ) ;</B></FONT><BR><BR></TD></TR>
+			<TR><TD VALIGN="TOP" WIDTH=100><B>概略</B></TD><TD>キーボードのすべてのキーの押下状態を取得する<BR><BR></TD></TR>
+			<TR><TD VALIGN="TOP" WIDTH=100><B>引数</B></TD><TD>char *KeyStateBuf : すべてのキーの押下状態を格納するバッファのポインタ</TD></TR>
+			<TR><TD VALIGN="TOP" WIDTH=100><B>戻り値</B></TD><TD>　０：成功</TD></TR>
+			<TR><TD WIDTH=100>　</TD><TD>－１：エラー発生<BR><BR></TD></TR>
+			<TR>
+				<TD VALIGN="TOP" WIDTH=100><B>解説</B></TD>
+				<TD>　CheckHitKey 関数はキーボードのキーの押下状態を取得するため
+					の関数です。<BR>
+					　沢山のキーの状態を CheckHitKey 関数で調べる場合は当たり前
+					ですが沢山 CheckHitKey 関数を使わなければなりません。<BR>
+					　ですが、実は CheckHitKey 関数はとても無駄の多い関数です。<BR>
+					理由は聞かないで下さい。とにかく無駄が多い関数なのです。<BR>
+					　ですから複数のキーの状態を一度に知りたい場合は、 CheckHitKey 関数
+					よりこの GetHitKeyStateAll 関数を使ってください。この関数は
+					すべてのキーについて CheckHitKey 関数を使った場合と同じものを
+					一度に配列に格納してくれます。<BR><BR>
+
+					例　Z キーの状態を知りたい場合<BR>
+
+<pre>
+char Buf[ 256 ] ;
+
+GetHitKeyStateAll( Buf ) ;
+
+if( Buf[ KEY_INPUT_Z ] == 1 )
+{
+	// Ｚキーが押されている
+}
+else
+{
+	// Ｚキーは押されていない
+}
+</pre>
+
+					　使うにはまず char 型変数 256 個の配列を宣言します。必ず
+					 char 型で、数は 256 個でないといけません。<BR>
+					　そしてその配列のポインタをおもむろに GetHitKeyStateAll 関数
+					に渡します。そうすると GetHitKeyStateAll 関数は char 型配列に
+					すべてのキーの押下状態を格納してくれます。<BR>
+					　あとは CheckHitKey 関数で知りたいキーを識別するために使って
+					いた KEY_INPUT_Y や KEY_INPUT_ESCAPE 等を関数に渡した配列の
+					要素番号にして、その要素が１かそれ意外か判断するだけです。
+					１なら押されていて、０だと押されていません。これだけです。<BR>
+					　何が便利か、といわれますと、CheckHitKey より手続きが面倒に
+					なったので何も便利になっているわけではないのですが、とりあえず
+					処理速度の効率を気にされる場合は是非使ってください。(^^;<BR><BR>
+
+					　なお、キーの識別値一覧はすぐ上の <A HREF="#R5N2">CheckHitKey</A> 関数の解説に
+					載っています。<BR><BR>
+				</TD>
+			</TR>
+		</TABLE></TD></TR>
+
+		<TR><TD>
+			<B>サンプル</B><BR><BR>
+
+				　ＣとＫとＹのキーを一度に押すまで終了しないプログラムです。当然
+				CheckHitKey 関数でも同じことは出来ます。<BR>
+			<HR>
+<PRE>
+#include "DxLib.h"
+
+#define PI	3.1415926535897932384626433832795f
+
+int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,
+									 LPSTR lpCmdLine, int nCmdShow )
+{
+	char KeyBuf[ 256 ] ;
+
+	// ＤＸライブラリ初期化処理
+	if( DxLib_Init() == -1 ) return -1;
+
+	// メッセージの表示
+	DrawString( 0 , 0 , " C と K と Y のキーを同時に押したら終了します ", GetColor( 255 , 255 , 255 ) ) ;
+
+	// 無限ループ
+	while( 1 )
+	{
+		// すべてのキーの状態を得る
+		GetHitKeyStateAll( KeyBuf ) ;
+
+		// ＣとＫとＹのキーが押されていたらループから抜ける
+		if( KeyBuf[ KEY_INPUT_C ] == 1 &&
+			KeyBuf[ KEY_INPUT_K ] == 1 &&
+			KeyBuf[ KEY_INPUT_Y ] == 1 )
+		{
+			break ;
+		}
+
+		// Windows 依存のメッセージ処理を行う
+		if( ProcessMessage() == -1 ) break ;
+	}
+
+	// ＤＸライブラリ使用の終了処理
+	DxLib_End() ;
+
+	// ソフトの終了
+	return 0 ;
+}
+</PRE>
+			<HR>
+			<BR><BR>
+		</TD></TR>
+
+
+
+		<TR><TD COLSPAN=2>
+			<FONT SIZE="3" COLOR="#752400"><B>　　半角文字入力関連関数</B><BR><BR></FONT>
+		</TD></TR>
+
+
+		<TR><TD><TABLE ALIGN="CENTER" WIDTH=650  CELLSPACING=0 CELLPADDING=0>
+			<TR><TD VALIGN="TOP" WIDTH=100><B><A NAME="R5N25">宣言</TD><TD><FONT COLOR="#000088">
+				<B>char GetInputChar( int DeleteFlag ) ;</B></FONT><BR><BR></TD></TR>
+			<TR><TD VALIGN="TOP" WIDTH=100><B>概略</B></TD><TD>文字入力バッファに溜まった文字データから１文字取得する<BR><BR></TD></TR>
+			<TR><TD VALIGN="TOP" WIDTH=100><B>引数</B></TD>
+				<TD>int DeleteFlag : 取得した文字をバッファから削除するか、フラグ<BR>
+					　　　　　　　　　　　　　　( TRUE: 削除　　FALSE : 削除しない ) 
+				</TD></TR>
+			<TR><TD VALIGN="TOP" WIDTH=100><B>戻り値</B></TD><TD>０　：文字入力バッファには何もデータがない</TD></TR>
+			<TR><TD WIDTH=100></TD><TD>	それ以外：文字コード又は操作コード<BR><BR>
+
+						　　　　操作コード<BR>
+						　　　　CTRL_CODE_BS	: バックスペース<BR>
+						　　　　　　　　CTRL_CODE_TAB	: タブ<BR>
+						　　　　　　　　CTRL_CODE_CR	: 改行<BR>
+						　　　　　　　　CTRL_CODE_DEL	: ＤＥＬキー<BR><BR>
+
+						　　　　　　　　CTRL_CODE_LEFT	: ←キー<BR>
+						　　　　　　　　CTRL_CODE_RIGHT	: →キー<BR>
+						　　　　　　　　CTRL_CODE_UP	: ↑キー<BR>
+						　　　　　　　　CTRL_CODE_DOWN	: ↓キー<BR>
+
+						　　　　　　　　CTRL_CODE_ESC	: ＥＳＣキー<BR>
+
+						　　　　　　　　CTRL_CODE_CMP	: 操作コード敷居値<BR><BR></TD></TR>
+			<TR>
+				<TD VALIGN="TOP" WIDTH=100><B>解説</B></TD>
+				<TD>　キーボードの押下状態は <A HREF="#R5N2"><B>CheckHitKey</B></A> 関数で調べることが出来
+					ます、ですが CheckHitKey 関数は『今このキーが押されているか』
+					という情報を知りたい場合には便利ですが、『なんの文字が入力され
+					たか』という情報を取得したい場合には大変不都合です。<BR>
+					　そこで登場するのがこの関数です。<BR><BR>
+
+					　ＤＸライブラリは内部で CheckHitKey 関数などによるキーボードの
+					直接的な押下状態の取得以外に、『なんの文字が入力されたか』と
+					いう情報を随時保存しています。<BR>
+					　保存された入力データは、この GetInputChar 関数などで明示的に
+					利用者がデータを取得されない限り保持されつづけます(限界は
+					ありますが…) このデータを保存する領域を 文字入力バッファ
+					と呼びます。<BR><BR>
+
+					　この関数はその文字入力バッファに溜まったデータの内のもっとも
+					古い入力文字１文字を返します、DeleteFlag は取得した文字を
+					文字入力バッファから削除するかどうかを指定するフラグで、TRUE の場合
+					削除され、FALSE の場合は削除されません、削除されない場合は次に
+					この関数が呼ばれた時も前回と同じ文字データが返されます。
+					　何故こんなフラグが存在するのか、というのは意外と使って行く内に
+					欲しくなってくると思ったからです。<BR><BR>
+
+					　なお文字入力バッファには文字データだけが保存されるわけでは
+					ありません、一部の操作コードも保存されます。そのコードは上記の通り、
+					#define により宣言された数値です。<BR>
+					　戻り値が操作コードなのか、文字コードなのかを判断するには戻り値が
+					CTRL_CODE_CMP の値との大小で判断することが出来ます。<BR><BR>
+
+					　戻り値 >=　CTRL_CODE_CMP　:　文字コード<BR>
+					　戻り値 <　　CTRL_CODE_CMP　:　操作コード<BR>
+					　戻り値 == 0　　　　　　　　:　入力データ無し<BR><BR>
+
+					　ちなみに、なにも文字が入力されず、文字入力バッファになにも
+					文字がない場合は０が返されます。<BR><BR>
+				</TD>
+			</TR>
+		</TABLE></TD></TR>
+
+		<TR><TD>
+			<B>サンプル</B><BR><BR>
+
+				画面中央に入力された文字を随時表示します
+			<HR>
+<PRE>
+#include "DxLib.h"
+
+int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,
+			LPSTR lpCmdLine, int nCmdShow )
+{
+	char String[ 2 ] ;
+	char InputChar ;
+
+	// 画面モードの設定
+	SetGraphMode( 640 , 480 , 16 ) ;
+
+	// ＤＸライブラリ初期化処理
+	if( DxLib_Init() == -1 )
+	{
+		// エラーが起きたら直ちに終了
+		return -1;
+	}
+	
+	// 入力される文字を随時画面中央に描画します
+	{
+		String[ 1 ] = 0 ;
+
+		// ＥＳＣキーが押されるか、何らかの内部エラーが発生するまでループする
+		while( !ProcessMessage() && ( CheckHitKey( KEY_INPUT_ESCAPE ) == 0 ) )
+		{
+			// 文字入力バッファから文字を取得する
+			InputChar = GetInputChar( TRUE ) ;
+
+			// 操作コード以外の文字入力があった場合のみ表示処理を行う
+			if( InputChar != 0 && InputChar >= CTRL_CODE_CMP )
+			{
+				// 画面の消去
+				ClearDrawScreen() ;
+
+				// 文字の保存
+				String[ 0 ] = InputChar ;
+
+				// 描画
+				DrawString( 312 , 232 , String , GetColor( 255 , 255 , 255 )  ) ;
+			}
+		}
+	}
+
+	// ＤＸライブラリ使用の終了処理
+	DxLib_End() ;
+
+	// ソフトの終了
+	return 0 ;
+}
+</PRE>
+			<HR>
+			<BR><BR>
+		</TD></TR>
+
+
+		<TR><TD><TABLE ALIGN="CENTER" WIDTH=650  CELLSPACING=0 CELLPADDING=0>
+			<TR><TD VALIGN="TOP" WIDTH=100><B><A NAME="R5N26">宣言</TD><TD><FONT COLOR="#000088">
+				<B>char GetInputCharWait( int DeleteFlag ) ;</B></FONT><BR><BR></TD></TR>
+			<TR><TD VALIGN="TOP" WIDTH=100><B>概略</B></TD>
+			<TD>　文字入力バッファに溜まった文字データから１文字取得する、
+					バッファになにも文字コードがない場合はキーが押されるまで待つ<BR><BR></TD></TR>
+			<TR><TD VALIGN="TOP" WIDTH=100><B>引数</B></TD>
+				<TD>int DeleteFlag : 取得した文字をバッファから削除するか、フラグ<BR>
+					　　　　　　　　　　　　　　( TRUE: 削除　　FALSE : 削除しない ) 
+				</TD></TR>
+			<TR><TD VALIGN="TOP" WIDTH=100><B>戻り値</B></TD><TD>０　：文字入力バッファには何もデータがない</TD></TR>
+			<TR><TD WIDTH=100></TD><TD>	それ以外：文字コード又は操作コード<BR><BR>
+
+						　　　　操作コード<BR>
+						　　　　CTRL_CODE_BS	: バックスペース<BR>
+						　　　　　　　　CTRL_CODE_TAB	: タブ<BR>
+						　　　　　　　　CTRL_CODE_CR	: 改行<BR>
+						　　　　　　　　CTRL_CODE_DEL	: ＤＥＬキー<BR><BR>
+
+						　　　　　　　　CTRL_CODE_LEFT	: ←キー<BR>
+						　　　　　　　　CTRL_CODE_RIGHT	: →キー<BR>
+						　　　　　　　　CTRL_CODE_UP	: ↑キー<BR>
+						　　　　　　　　CTRL_CODE_DOWN	: ↓キー<BR>
+
+						　　　　　　　　CTRL_CODE_ESC	: ＥＳＣキー<BR>
+
+						　　　　　　　　CTRL_CODE_CMP	: 操作コード敷居値<BR><BR></TD></TR>
+			<TR>
+				<TD VALIGN="TOP" WIDTH=100><B>解説</B></TD>
+				<TD>　<A HREF="#R5N25"><B>GetInputChar</B></A> 関数の文字が入力されるまで待つ、バージョン
+					です。それ以外は GetInputChar 関数と全く同じなので GetInputChar 関数の
+					解説を参照して下さい。<BR><BR>
+				</TD>
+			</TR>
+		</TABLE></TD></TR>
+
+		<TR><TD>
+			<B>サンプル</B><BR><BR>
+
+				ありません
+			<BR><BR><BR><BR>
+		</TD></TR>
+
+
+		<TR><TD><TABLE ALIGN="CENTER" WIDTH=650  CELLSPACING=0 CELLPADDING=0>
+			<TR><TD VALIGN="TOP" WIDTH=100><B><A NAME="R5N27">宣言</TD><TD><FONT COLOR="#000088">
+				<B>int	ClearInputCharBuf( void ) ;</B></FONT><BR><BR></TD></TR>
+			<TR><TD VALIGN="TOP" WIDTH=100><B>概略</B></TD>
+			<TD>　文字入力バッファをクリアする<BR><BR></TD></TR>
+			<TR><TD VALIGN="TOP" WIDTH=100><B>引数</B></TD>	<TD>なし</TD></TR>
+			<TR><TD VALIGN="TOP" WIDTH=100><B>戻り値</B></TD><TD>０　：成功</TD></TR>
+			<TR><TD WIDTH=100></TD><TD>－１：エラー発生<BR><BR></TD></TR>
+			<TR>
+				<TD VALIGN="TOP" WIDTH=100><B>解説</B></TD>
+				<TD>　<A HREF="#R5N25"><B>GetInputChar</B></A> 関数で取得できる文字入力バッファのデータを初期化します。<BR>
+					　この関数は、例としてアクションゲームのネームエントリーに GetInputChar 関数を
+					利用しようとした場合、ゲームプレイ中も滅茶苦茶にテンキーやショットキーを押すので
+					文字入力バッファは滅茶苦茶な文字のデータが溢れています。<BR>
+					　この状態で GetInputChar 関数で入力文字を取得した場合、ゲーム中に操作のために
+					押していたキーの文字データが延々と吐き出されるわけです。<BR>
+					　これではこまるのでネームエントリー処理前にこの関数で文字入力バッファを初期化
+					するわけです。<BR><BR>
+				</TD>
+			</TR>
+		</TABLE></TD></TR>
+
+		<TR><TD>
+			<B>サンプル</B><BR><BR>
+
+				ありません
+			<BR><BR><BR><BR>
+		</TD></TR>
+
+
+
+		<TR><TD COLSPAN=2>
+			<FONT SIZE="3" COLOR="#752400"><B>　　日本語入力関連関数</B><BR><BR></FONT>
+		</TD></TR>
+
+		<TR><TD><TABLE ALIGN="CENTER" WIDTH=650  CELLSPACING=0 CELLPADDING=0>
+			<TR><TD VALIGN="TOP" WIDTH=100><B><A NAME="R5N9">宣言</TD><TD><FONT COLOR="#000088">
+				<B>int KeyInputString( int x , int y ,<BR>
+					　　　　　　　　　　　　int CharMaxLength , char *StrBuffer ,<BR>
+					　　　　　　　　　　　　int CancelValidFlag ) ; </B></FONT><BR><BR></TD></TR>
+			<TR><TD VALIGN="TOP" WIDTH=100><B>概略</B></TD><TD>キーボードによる文字列入力<BR><BR></TD></TR>
+			<TR><TD VALIGN="TOP" WIDTH=100><B>引数</B></TD>
+				<TD>int x , y　　　　　　　　: 入力中の文字列を描画する領域の左上座標<BR>
+					int CharMaxLength　: 入力できる最大文字数(全角文字は2文字とする)<BR>
+					char *StrBuffer 　　: 入力した文字列を保存するバッファへのアドレス<BR>
+					int CancelValidFlag : 　入力中のＥＳＣキーによるキャンセルが可能か<BR>
+					　　　　　　　　　　　　　否か(TRUE:可能 FALSE:不可能)
+				</TD></TR>
+			<TR><TD VALIGN="TOP" WIDTH=100><B>戻り値</B></TD><TD>１　：問題なく入力を終了</TD></TR>
+			<TR><TD WIDTH=100></TD><TD>２　：入力はキャンセルされた	</TD></TR>
+			<TR><TD WIDTH=100></TD><TD>－１：エラー発生	<BR><BR></TD></TR>
+			<TR>
+				<TD VALIGN="TOP" WIDTH=100><B>解説</B></TD>
+				<TD>　キーボードによる文字列の入力を行います。引数 x , y を起点に入力中の文字列が
+					表示されます。<BR>
+					　エンターキーを押すと入力が終了したとみなされ入力された文字列は StrBuffer の
+					示すアドレスに格納されます。なお入力できる最大文字数は CharMaxLength で指定し
+					ます。バッファ領域には CharMaxLength の分の文字が入る領域を確保しておかなけれ
+					ばなりません。<BR>
+					　CancelValidFlag はキャンセルを有効にするかどうかというもので、これを TRUE に
+					すると有効になり、FALSE にするとキャンセルは出来なくなります。キャンセル
+					が有効な場合は ESC キーを押すと関数から出てきます。その場合は戻り値が２になります。<BR><BR>
+				</TD>
+			</TR>
+		</TABLE></TD></TR>
+
+		<TR><TD>
+			<B>サンプル</B><BR><BR>
+
+				名前を聞いてくるので名前を入力します。その後それを表示するだけのプログラムです。
+			<HR>
+<PRE>
+#include "DxLib.h"
+
+int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,
+		 LPSTR lpCmdLine, int nCmdShow )
+{
+	char Name[ 31 ] ;
+
+	// ＤＸライブラリの初期化
+	if( DxLib_Init() == -1 ) return -1 ;
+
+	// 名前入力指示文字列の描画
+	DrawString( 0 , 0 , "名前を入力してください" , GetColor( 255 , 255 , 255 ) ) ;
+
+	// 名前の入力
+	KeyInputString( 0 , 16 , 30 , Name , FALSE ) ;
+
+	// 画面の初期化
+	ClearDrawScreen() ;
+
+	// 名前の表示
+	DrawString( 0 , 0 , "あなたの名前は" , GetColor( 255 , 255 , 255 ) ) ;
+	DrawString( 0 , 16 , Name ,  GetColor( 255 , 255 , 255 ) ) ;
+		
+	// キー入力待ち	
+	WaitKey() ;
+
+	// ＤＸライブラリの使用終了
+	DxLib_End() ;
+
+	// 終了
+	return 0 ;
+}
+</PRE>
+			<HR>
+			<BR><BR>
+		</TD></TR>
+
+
+
+
+		<TR><TD><TABLE ALIGN="CENTER" WIDTH=650  CELLSPACING=0 CELLPADDING=0>
+			<TR><TD VALIGN="TOP" WIDTH=100><B><A NAME="R5N10">宣言</TD><TD><FONT COLOR="#000088">
+				<B>int KeyInputSingleCharString( int x , int y , int CharMaxLength ,<BR>
+				　　　　　　　　　　　　　　　　　 char *StrBuffer , int CancelValidFlag ) ;</B></FONT><BR><BR></TD></TR>
+			<TR><TD VALIGN="TOP" WIDTH=100><B>概略</B></TD><TD>キーボードによる半角文字列のみの入力<BR><BR></TD></TR>
+			<TR><TD VALIGN="TOP" WIDTH=100><B>引数</B></TD>
+				<TD>int x , y		: 入力中の文字列を描画する領域の左上座標<BR>
+					int CharMaxLength : 入力できる最大文字数(全角文字は2文字とする)<BR>
+					char *StrBuffer : 入力した文字列を保存するバッファへのアドレス<BR>
+					int CancelValidFlag : 入力中のＥＳＣキーによるキャンセルが可能か否か(TRUE:可能 FALSE:不可能)</TD></TR>
+			<TR><TD VALIGN="TOP" WIDTH=100><B>戻り値</B></TD><TD>１　：問題なく入力を終了</TD></TR>
+			<TR><TD WIDTH=100>　</TD><TD>２　：入力はキャンセルされた</TD></TR>
+			<TR><TD WIDTH=100>　</TD><TD>－１：エラー発生<BR><BR></TD></TR>
+			<TR>
+				<TD VALIGN="TOP" WIDTH=100><B>解説</B></TD>
+				<TD>　<A HREF="#R5N9"><B>KeyInpurString</B></A> の半角文字列のみを入力できるようにしたものです。
+					漢字やひらがななどの２バイト文字は入力することが出来ません。<BR>
+					その他の動作は <A HREF="#R5N9"><B> KeyInputString </B></A>と同じものです。<BR><BR>
+				</TD>
+			</TR>
+		</TABLE></TD></TR>
+
+		<TR><TD>
+			<B>サンプル</B><BR><BR>
+
+				名前を英字で入力するよう聞いてきます。入力後、それを画面に表示します。
+			<HR>
+<PRE>
+#include "DxLib.h"
+
+int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,
+			LPSTR lpCmdLine, int nCmdShow )
+{
+	char Name[ 31 ] ;
+
+	// ＤＸライブラリの初期化
+	if( DxLib_Init() == -1 ) return -1 ;
+		
+	// 名前入力指示文字列の描画
+	DrawString( 0 , 0 , "名前を英字で入力してください" , GetColor( 255 , 255 , 255 ) ) ;
+
+	// 名前の入力
+	KeyInputSingleCharString( 0 , 16 , 30 , Name , FALSE ) ;
+
+	// 画面の初期化
+	ClearDrawScreen() ;
+
+	// 名前の表示
+	DrawString( 0 , 0 , "あなたの名前は" , GetColor( 255 , 255 , 255 ) ) ;
+	DrawString( 0 , 16 , Name ,  GetColor( 255 , 255 , 255 ) ) ;
+
+	// キー入力待ち
+	WaitKey() ;
+
+	// ＤＸライブラリの使用終了
+	DxLib_End() ;
+
+	// 終了
+	return 0 ;
+}
+</PRE>
+			<HR>
+			<BR><BR>
+		</TD></TR>
+
+
+		<TR><TD><TABLE ALIGN="CENTER" WIDTH=650  CELLSPACING=0 CELLPADDING=0>
+			<TR><TD VALIGN="TOP" WIDTH=100><B><A NAME="R5N11">宣言</TD><TD><FONT COLOR="#000088">
+				<B>int KeyInputNumber( int x , int y , int MaxNum , int MinNum ,<BR>
+				　　　　　　　　　　　　　 int CancelValidFlag ) ;</B></FONT><BR><BR></TD></TR>
+			<TR><TD VALIGN="TOP" WIDTH=100><B>概略</B></TD><TD>キーボードによる数値の入力<BR><BR></TD></TR>
+			<TR><TD VALIGN="TOP" WIDTH=100><B>引数</B></TD>
+				<TD>int x , y : 入力中の文字列を描画する領域の左上座標<BR>
+					int MaxNum , MinNum : 入力する数値の最大値と最小値<BR>
+					int CancelValidFlag : 入力中のＥＳＣキーによるキャンセルが可能か<BR>
+					　　　　　　　　　　　　　　　否か(TRUE:可能 FALSE:不可能)
+					</TD></TR>
+			<TR><TD VALIGN="TOP" WIDTH=100><B>戻り値</B></TD><TD>MaxNum + 1 の値 : 処理はキャンセルされた</TD></TR>
+			<TR><TD WIDTH=100>　</TD><TD>MinNum - 1 の値 : エラー発生</TD></TR>
+			<TR><TD WIDTH=100>　</TD><TD>上記以外の値 : 正常に入力して得た数値<BR><BR></TD></TR>
+			<TR>
+				<TD VALIGN="TOP" WIDTH=100><B>解説</B></TD>
+				<TD>　キーボードによる数値入力を行います。入力中の文字列は x , y を
+					起点とした領域に描画されます。<BR>
+					　この関数のみ入力した数値が直接返ってきます。　<BR><BR>
+				</TD>
+			</TR>
+		</TABLE></TD></TR>
+
+		<TR><TD>
+			<B>サンプル</B><BR><BR>
+
+				描画する線の長さを入力し、その後その長さの線を描画します。
+			<HR>
+<PRE>
+#include "DxLib.h"
+
+int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,
+		LPSTR lpCmdLine, int nCmdShow )
+{
+	int LineLength ;
+
+	// ＤＸライブラリの初期化
+	if( DxLib_Init() == -1 ) return -1 ;
+
+	// 線の長さ入力指示文字列の描画
+	DrawString( 0 , 0 , "線の長さを入力してください(０～６４０)" , GetColor( 255 , 255 , 255 ) ) ;
+
+	// 線の長さ入力
+	LineLength = KeyInputNumber( 0 , 16 , 640 , 0 , FALSE ) ;
+
+	// 画面の初期化
+	ClearDrawScreen() ;
+
+	// 線の描画
+	DrawLine( 0 , 100 , LineLength , 100 , GetColor( 255 , 255 , 255 ) ) ;
+
+	// キー入力待ち
+	WaitKey() ;
+
+	// ＤＸライブラリの使用終了
+	DxLib_End() ;
+
+	// 終了
+	return 0 ;
+}
+</PRE>
+			<HR>
+			<BR><BR>
+		</TD></TR>
+
+
+		<TR><TD><TABLE ALIGN="CENTER" WIDTH=650  CELLSPACING=0 CELLPADDING=0>
+			<TR><TD VALIGN="TOP" WIDTH=100><B><A NAME="R5N12">宣言</TD><TD><FONT COLOR="#000088">
+				<B>int	SetKeyInputStringColor( int NmlStr , int NmlCur ,<BR>
+				　　　　　　　　　　　　　　　　　　　int IMEStr , int IMECur ,<BR>
+				　　　　　　　　　　　　　　　　　　　int IMELine , int IMESelectStr ,<BR>
+				　　　　　　　　　　　　　　　　　　　int IMEModeStr , int NmlStrE ,<BR>
+				　　　　　　　　　　　　　　　　　　　int IMESelectStrE , int IMEModeStrE ,<BR>
+				　　　　　　　　　　　　　　　　　　　int IMESelectWinE , int IMESelectWinF ) ;</B></FONT><BR><BR></TD></TR>
+			<TR><TD VALIGN="TOP" WIDTH=100><B>概略</B></TD><TD>KeyInputString系 関数使用時の文字の各色を変更する<BR><BR></TD></TR>
+			<TR><TD VALIGN="TOP" WIDTH=100><B>引数</B></TD>
+				<TD>int NmlStr : 入力文字列の色<BR>
+					int NmlCur : ＩＭＥ非使用時のカーソルの色<BR>
+					int IMEStr : ＩＭＥ使用時の入力文字列の色<BR>
+					int IMECur : ＩＭＥ使用時のカーソルの色<BR>
+					int IMELine : ＩＭＥ使用時の変換文字列の下線<BR>
+					int IMESelectStr : ＩＭＥ使用時の選択対象の変換候補文字列の色<BR>
+					int IMEModeStr : ＩＭＥ使用時の入力モード文字列の色(『全角ひらがな』等)<BR>
+					int NmlStrE : 入力文字列の縁の色<BR>
+					int IMESelectStrE : ＩＭＥ使用時の選択対象の変換候補文字列の縁の色<BR>
+					int IMEModeStrE : ＩＭＥ使用時の入力モード文字列の縁の色<BR>
+					int IMESelectWinE : ＩＭＥ使用時の変換候補ウインドウの縁の色<BR>
+					int IMESelectWinF : ＩＭＥ使用時の変換候補ウインドウの下地の色</TD></TR>
+			<TR><TD VALIGN="TOP" WIDTH=100><B>戻り値</B></TD><TD>　０：成功</TD></TR>
+			<TR><TD WIDTH=100>　</TD><TD>－１：エラー発生<BR><BR></TD></TR>
+			<TR>
+				<TD VALIGN="TOP" WIDTH=100><B>解説</B></TD>
+				<TD>　<A HREF="#R5N9"><B>KeyInputString </B></A>, <A HREF="#R5N10"><B>KeyInputSingleCharString </B></A>等の
+					キーボードデータ入力関数中で表示される文字その他の色を変更します。
+					設定する色については GetColor 関数で取得できる色コードを
+					使用します。<BR>
+					　格引数については上記の説明文を参考にして下さい。<BR><BR>
+				</TD>
+			</TR>
+		</TABLE></TD></TR>
+
+		<TR><TD>
+			<B>サンプル</B><BR><BR>
+
+				　ありません
+			<BR><BR><BR><BR>
+		</TD></TR>
+
+
+		<TR><TD><TABLE ALIGN="CENTER" WIDTH=650  CELLSPACING=0 CELLPADDING=0>
+			<TR><TD VALIGN="TOP" WIDTH=100><B><A NAME="R5N13">宣言</TD><TD><FONT COLOR="#000088">
+					<B>int	MakeKeyInput( int MaxStrLength , int CancelValidFlag ,<BR>
+						　　　　　　　　　　　int SingleCharOnlyFlag , int NumCharOnlyFlag ) ;</B></FONT><BR><BR></TD></TR>
+			<TR><TD VALIGN="TOP" WIDTH=100><B>概略</B></TD><TD>新しいキー入力データの作成<BR><BR></TD></TR>
+			<TR><TD VALIGN="TOP" WIDTH=100><B>引数</B></TD>
+				<TD>int MaxStrLength : 入力できる最大文字数(半角文字単位)<BR>
+					int CancelValidFlag : ESCキーによるキャンセル機能の有無(TRUE:有 FALSE:無)<BR>
+					int SingleCharOnlyFlag : 半角文字のみの入力か否か(TRUE:半角文字のみ<BR>
+					　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　FALSE:フラグ無効)<BR>
+					int NumCharOnlyFlag : 数値文字のみの入力か否か(TRUE:数字文字のみ<BR>
+					　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　FALSE:フラグ無効)</TD></TR>
+			<TR><TD VALIGN="TOP" WIDTH=100><B>戻り値</B></TD><TD>－１　　　　　　　　　：エラー発生</TD></TR>
+			<TR><TD WIDTH=100>　</TD><TD>それ以外の数値　：キー入力ハンドル(識別番号)<BR><BR></TD></TR>
+			<TR>
+				<TD VALIGN="TOP" WIDTH=100><B>解説</B></TD>
+				<TD>　この関数から以下のすべての関数は上記の直接的な文字列入力関数
+					とは違い、すべてこの関数で得られる『キー入力ハンドル』という
+					識別番号を使用してキー入力を行うための関数となります。<BR>
+					　そもそもＤＸライブラリを使用したソフトでチャットソフトを作成する
+					となると、キー入力を常に受けつけながら相手から送信されたメッセージ
+					をいつでも受け取れるようにしなくてはならないので、そのようなキー入力
+					では上記の <A HREF="#R5N9"><B>KeyInputString </B></A>等のキー入力が終了するまで関数から処理が
+					抜けないタイプの関数では対応できません。<BR>
+					　そこでキー入力は勝手にやらせておいて、それとは別に相手からメッセ
+					ージが来た場合はすぐに画面に表示するような処理をするためにキー入力
+					ハンドルというものを使用したキー入力手段を用意しました。<BR><BR>
+
+					　その方法を以下に示します。<BR><BR>
+
+					<FONT COLOR="#005500">
+					１．MakeKeyInput で目的に合ったキー入力ハンドルを作成<BR><BR>
+					２．<A HREF="#R5N16"><B>SetActiveKeyInput </B></A>作成したキー入力ハンドルをアクティブにする、
+						以降キーの入力はアクティブにしたキー入力ハンドルが受け持つデータ
+						領域に流れます。<BR><BR>
+					３．<A HREF="#R5N17"><B>CheckKeyInput</B></A> でキー入力が終了したか調べる、終っていないうちは
+						<A HREF="#R5N18"><B>DrawKeyInputString</B></A> でキー入力の途中経過を画面の好きなところに
+						描画する。<BR>
+						　必要であれば現在の入力モードを <A HREF="#R5N19"><B>DrawKeyInputModeString</B></A> を使用
+						して描画する。<BR><BR>
+					４．キー入力が終っていたら <A HREF="#R5N22"><B>GetKeyInputString</B></A> 又は <A HREF="#R5N23"><B>GetKeyInput
+						Number</B></A> で入力結果の文字列(又は数値)を得る<BR><BR>
+					５．<A HREF="#R5N14"><B>DeleteKeyInput</B></A> で作成したキー入力ハンドルを削除する<BR><BR>
+					</FONT>
+
+					　ここでは最初の MakeKeyInput 関数について、この関数では作成した
+					キー入力ハンドルで入力できる文字の数をまず MaxStrLength で指定します、
+					単位は半角文字単位で日本語のひらがな・漢字などは半角でいう２文字にな
+					りますので注意してください。<BR>
+					　次に CancelValidFlag は入力にキャンセルを有効にするかどうか、です。
+					有効にした場合は ＥＳＣ キーを押すことによって入力はキャンセルされます。
+					キャンセルされたのか、正常に入寮が終了したのかは (6-19)CheckKeyInput 関数に
+					よって知ることが出来ます。なお有効にする場合は TRUE , しない場合は FALSE
+					をセットします。<BR>
+					　次に SingleCharOnlyFlag ですがこれは日本語文字などのいわゆる２バイト
+					文字(全角文字)の入力を出来ないようにするか、否かのパラメータです。これを
+					有効( TRUE )にすると日本語の入力をしようとしてもはじかれます。有効にしな
+					い場合は FALSE にします。<BR>
+					　最後に NumCharOnlyFlag は半角の数字文字のみを入力できるようにするか、
+					を指定するパラメータです。これを TRUE にすることによって半角の 0 から 9 
+					までの文字しか入力できなくなります。１６進数でいえば a から f もあるの
+					ですがＤＸライブラリでは１６進数は対応していません。無効にする場合は FALSE
+					です。<BR>
+					　このように指定して関数を呼ぶとキー入力ハンドルの作成に成功すれば戻り値
+					としてハンドルとなる int 型の数値が得られます。以降この数値はキー入力
+					終了時まで必要となるので保存しておきます。<BR><BR>
+				</TD>
+			</TR>
+		</TABLE></TD></TR>
+
+		<TR><TD>
+			<B>サンプル</B><BR><BR>
+
+				<A HREF="#R5N9"><B>KeyInputString</B></A> と同じことをキー入力ハンドルを使用して実現します。
+			<HR>
+<PRE>
+#include "DxLib.h"
+
+int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,
+		LPSTR lpCmdLine, int nCmdShow )
+{
+	char String[ 256 ] ;
+	int InputHandle ;
+
+	// ＤＸライブラリの初期化
+	if( DxLib_Init() == -1 ) return -1 ;
+
+	// 描画先を裏にする
+	SetDrawScreen( DX_SCREEN_BACK ) ;
+
+	// キー入力ハンドルを作る(キャンセルなし全角文字有り数値入力じゃなし)
+	InputHandle = MakeKeyInput( 50 , FALSE , FALSE , FALSE ) ;
+
+	// 作成したキー入力ハンドルをアクティブにする
+	SetActiveKeyInput( InputHandle ) ;
+
+	// キー入力終了待ちループ
+	// (ProcessMessageをループごとに行う)
+	while( !ProcessMessage() )
+	{
+		// 入力が終了している場合は終了
+		if( CheckKeyInput( InputHandle ) != 0 ) break ;
+
+		// 画面の初期化
+		ClearDrawScreen() ;
+
+		// 入力モードを描画
+		DrawKeyInputModeString( 640 , 480 ) ; 
+
+		// 入力途中の文字列を描画
+		DrawKeyInputString( 0 , 0 , InputHandle ) ;
+
+		// 裏画面の内容を表画面に反映させる
+		ScreenFlip() ;
+	}
+
+	// 入力された文字列を取得
+	GetKeyInputString( String , InputHandle ) ;
+
+	// 用済みのインプットハンドルを削除する
+	DeleteKeyInput( InputHandle ) ;
+
+	// 画面の初期化
+	ClearDrawScreen() ;
+
+	// 入力された文字列を画面に表示する
+	DrawString( 0 , 0 , "あなたが入力した文字列は" , GetColor( 255 , 255 , 255 ) ) ;
+	DrawString( 0 , 16 , String , GetColor( 255 , 255 , 255 ) ) ;
+
+	// 裏画面の内容を表画面に反映させる
+	ScreenFlip() ;
+
+	// キー入力待ち
+	WaitKey() ;
+
+	// ＤＸライブラリの使用終了
+	DxLib_End() ;
+
+	// 終了
+	return 0 ;
+}
+</PRE>
+			<HR>
+			<BR><BR>
+		</TD></TR>
+
+
+
+
+		<TR><TD><TABLE ALIGN="CENTER" WIDTH=650  CELLSPACING=0 CELLPADDING=0>
+			<TR><TD VALIGN="TOP" WIDTH=100><B><A NAME="R5N14">宣言</TD><TD><FONT COLOR="#000088"><B>int	DeleteKeyInput( int InputHandle ) ;</B></FONT><BR><BR></TD></TR>
+			<TR><TD VALIGN="TOP" WIDTH=100><B>概略</B></TD><TD>キー入力データの削除<BR><BR></TD></TR>
+			<TR><TD VALIGN="TOP" WIDTH=100><B>引数</B></TD><TD>int InputHandle : 削除するキー入力ハンドル</TD></TR>
+			<TR><TD VALIGN="TOP" WIDTH=100><B>戻り値</B></TD><TD>　０：成功</TD></TR>
+			<TR><TD WIDTH=100>　</TD><TD>－１：エラー発生<BR><BR></TD></TR>
+			<TR>
+				<TD VALIGN="TOP" WIDTH=100><B>解説</B></TD>
+				<TD>　<A HREF="#R5N13"><B>MakeKeyInput</B></A> 関数で作成したキー入力ハンドルを削除します。<BR>
+					　以降削除したキー入力ハンドルは無効となります。<BR><BR>
+				</TD>
+			</TR>
+		</TABLE></TD></TR>
+
+		<TR><TD>
+			<B>サンプル</B><BR><BR>
+
+				<A HREF="#R5N13"><B>MakeKeyInput</B></A> 関数のサンプルを参考にして下さい
+			<BR><BR><BR><BR>
+		</TD></TR>
+
+
+		<TR><TD><TABLE ALIGN="CENTER" WIDTH=650  CELLSPACING=0 CELLPADDING=0>
+			<TR><TD VALIGN="TOP" WIDTH=100><B><A NAME="R5N15">宣言</TD><TD><FONT COLOR="#000088"><B>int	InitKeyInput( void ) ;</B></FONT><BR><BR></TD></TR>
+			<TR><TD VALIGN="TOP" WIDTH=100><B>概略</B></TD><TD>すべてのキー入力データの削除<BR><BR></TD></TR>
+			<TR><TD VALIGN="TOP" WIDTH=100><B>引数</B></TD><TD>なし</TD></TR>
+			<TR><TD VALIGN="TOP" WIDTH=100><B>戻り値</B></TD><TD>　０：成功</TD></TR>
+			<TR><TD WIDTH=100>　</TD><TD>－１：エラー発生<BR><BR></TD></TR>
+			<TR>
+				<TD VALIGN="TOP" WIDTH=100><B>解説</B></TD>
+				<TD>　<A HREF="#R5N13"><B>MakeKeyInput</B></A> 関数で作成したキー入力ハンドルをすべて削除します。<BR><BR>
+				</TD>
+			</TR>
+		</TABLE></TD></TR>
+
+		<TR><TD>
+			<B>サンプル</B><BR><BR>
+
+				　ありません。
+			<BR><BR><BR><BR>
+		</TD></TR>
+
+		<TR><TD><TABLE ALIGN="CENTER" WIDTH=650  CELLSPACING=0 CELLPADDING=0>
+			<TR><TD VALIGN="TOP" WIDTH=100><B><A NAME="R5N16">宣言</TD><TD><FONT COLOR="#000088"><B>int	SetActiveKeyInput( int InputHandle ) ;</B></FONT><BR><BR></TD></TR>
+			<TR><TD VALIGN="TOP" WIDTH=100><B>概略</B></TD><TD>指定のキー入力をアクティブにする<BR><BR></TD></TR>
+			<TR><TD VALIGN="TOP" WIDTH=100><B>引数</B></TD><TD>int InputHandle : アクティブにするキー入力ハンドル</TD></TR>
+			<TR><TD VALIGN="TOP" WIDTH=100><B>戻り値</B></TD><TD>　０：成功</TD></TR>
+			<TR><TD WIDTH=100>　</TD><TD>－１：エラー発生<BR><BR></TD></TR>
+			<TR>
+				<TD VALIGN="TOP" WIDTH=100><B>解説</B></TD>
+				<TD>　指定した <A HREF="#R5N13"><B>MakeKeyInput</B></A> で作成したキー入力ハンドルをアクティブ
+					にします。アクティブになったキー入力ハンドルは以降キーボードの
+					入力データを受けることになります。<BR>
+					　アクティブにすることの出来るキー入力ハンドルは常に一つで、指定の
+					キー入力ハンドルをアクティブにする以前にアクティブになっていたキー
+					入力ハンドルは非アクティブになります。<BR>
+					　これは当然ですが一度に複数のキー入力先に入力が出来ても意味がないか
+					らです。<BR><BR>
+
+					　なお、キー入力が終了しているキー入力ハンドルを指定すると終了状態が
+					初期化され、再び入力出来るようにすることが出来ます。<BR><BR>
+				</TD>
+			</TR>
+		</TABLE></TD></TR>
+
+		<TR><TD>
+			<B>サンプル</B><BR><BR>
+
+				<A HREF="#R5N13"><B>MakeKeyInput</B></A> 関数のサンプルを参照して下さい。
+			<BR><BR><BR><BR>
+		</TD></TR>
+
+
+		<TR><TD><TABLE ALIGN="CENTER" WIDTH=650  CELLSPACING=0 CELLPADDING=0>
+			<TR><TD VALIGN="TOP" WIDTH=100><B><A NAME="R5N17">宣言</TD><TD><FONT COLOR="#000088"><B>int	CheckKeyInput( int InputHandle ) ;</B></FONT><BR><BR></TD></TR>
+			<TR><TD VALIGN="TOP" WIDTH=100><B>概略</B></TD><TD>入力が終了しているか取得する<BR><BR></TD></TR>
+			<TR><TD VALIGN="TOP" WIDTH=100><B>引数</B></TD><TD>int InputHandle : キー入力ハンドル</TD></TR>
+			<TR><TD VALIGN="TOP" WIDTH=100><B>戻り値</B></TD><TD>０　：キー入力はまだ完了もキャンセルもされていない</TD></TR>
+			<TR><TD WIDTH=100>　</TD><TD>１　：キー入力は正常に終了した</TD></TR>
+			<TR><TD WIDTH=100>　</TD><TD>２　：キー入力はキャンセルされた</TD></TR>
+			<TR><TD WIDTH=100>　</TD><TD>－１：エラー発生<BR><BR></TD></TR>
+			<TR>
+				<TD VALIGN="TOP" WIDTH=100><B>解説</B></TD>
+				<TD>　<A HREF="#R5N13"><B>MakeKeyInput</B></A> で作成したキー入力が終了したか、キャンセルされたか
+					まだ入力中か、の情報を得ます。戻り値による状態は上記の通りです。<BR><BR>
+				</TD>
+			</TR>
+		</TABLE></TD></TR>
+
+		<TR><TD>
+			<B>サンプル</B><BR><BR>
+
+				<A HREF="#R5N13"><B>MakeKeyInput</B></A> 関数のサンプルを参照して下さい
+			<BR><BR><BR><BR>
+		</TD></TR>
+
+
+		<TR><TD><TABLE ALIGN="CENTER" WIDTH=650  CELLSPACING=0 CELLPADDING=0>
+			<TR><TD VALIGN="TOP" WIDTH=100><B><A NAME="R5N18">宣言</TD><TD><FONT COLOR="#000088"><B>int	DrawKeyInputString( int x , int y , int InputHandle ) ;</B></FONT><BR><BR></TD></TR>
+			<TR><TD VALIGN="TOP" WIDTH=100><B>概略</B></TD><TD>キー入力中データの描画<BR><BR></TD></TR>
+			<TR><TD VALIGN="TOP" WIDTH=100><B>引数</B></TD>
+				<TD>int x , y : 入力中の文字列を描画する座標<BR>
+					int InputHandle : 入力中文字列を描画したいキー入力のハンドル</TD></TR>
+			<TR><TD VALIGN="TOP" WIDTH=100><B>戻り値</B></TD><TD>　０：成功</TD></TR>
+			<TR><TD WIDTH=100>　</TD><TD>－１：エラー発生<BR><BR></TD></TR>
+			<TR>
+				<TD VALIGN="TOP" WIDTH=100><B>解説</B></TD>
+				<TD>　<A HREF="#R5N13"><B>MakeKeyInput</B></A> で作成したキー入力の途中経過を画面に描画する
+					際に使用します。この関数は描画する文字列が画面端までいって
+					しまった場合自動的に改行されますので、<A HREF="dxfunc_graph.html#R4N3"><B>SetDrawArea</B></A> 関数で
+					描画可能領域を変更することによって好きな領域に文字列を収める
+					ことが出来ます。<BR><BR>
+				</TD>
+			</TR>
+		</TABLE></TD></TR>
+
+		<TR><TD>
+			<B>サンプル</B><BR><BR>
+
+				<A HREF="#R5N13"><B>MakeKeyInput</B></A> 関数のサンプルを参照して下さい<BR><BR><BR><BR>
+		</TD></TR>
+
+		<TR><TD><TABLE ALIGN="CENTER" WIDTH=650  CELLSPACING=0 CELLPADDING=0>
+			<TR><TD VALIGN="TOP" WIDTH=100><B><A NAME="R5N19">宣言</TD><TD><FONT COLOR="#000088"><B>int DrawKeyInputModeString( int x , int y ) ;</B></FONT><BR><BR></TD></TR>
+			<TR><TD VALIGN="TOP" WIDTH=100><B>概略</B></TD><TD>入力モード文字列を描画する<BR><BR></TD></TR>
+			<TR><TD VALIGN="TOP" WIDTH=100><B>引数</B></TD><TD>int x , y : 入力モードを描画する座標</TD></TR>
+			<TR><TD VALIGN="TOP" WIDTH=100><B>戻り値</B></TD><TD>　０：成功</TD></TR>
+			<TR><TD WIDTH=100>　</TD><TD>－１：エラー発生<BR><BR></TD></TR>
+			<TR>
+				<TD VALIGN="TOP" WIDTH=100><B>解説</B></TD>
+				<TD>　キーボード入力の入力モード文字列を描画します。入力モード文字列とは
+					『ひらがな』や『全角英数』とうです。ＩＭＥを使用していない場合は
+					なにも描画されません。<BR><BR>
+				</TD>
+			</TR>
+		</TABLE></TD></TR>
+
+		<TR><TD>
+			<B>サンプル</B><BR><BR>
+
+				　<A HREF="#R5N13"><B>MakeKeyInput</B></A> 関数のサンプルを参考にして下さい<BR><BR><BR><BR>
+		</TD></TR>
+
+
+		<TR><TD><TABLE ALIGN="CENTER" WIDTH=650  CELLSPACING=0 CELLPADDING=0>
+			<TR><TD VALIGN="TOP" WIDTH=100><B><A NAME="R5N20">宣言</TD><TD><FONT COLOR="#000088"><B>int SetKeyInputString( char *String , int InputHandle ) ;</B></FONT><BR><BR></TD></TR>
+			<TR><TD VALIGN="TOP" WIDTH=100><B>概略</B></TD><TD>キー入力データに指定の文字列をセットする<BR><BR></TD></TR>
+			<TR><TD VALIGN="TOP" WIDTH=100><B>引数</B></TD>
+				<TD>char *String : セットする文字列があるアドレス<BR>
+					int InputHandle : セットするキー入力のハンドル</TD></TR>
+			<TR><TD VALIGN="TOP" WIDTH=100><B>戻り値</B></TD><TD>　０：成功</TD></TR>
+			<TR><TD WIDTH=100>　</TD><TD>－１：エラー発生<BR><BR></TD></TR>
+			<TR>
+				<TD VALIGN="TOP" WIDTH=100><B>解説</B></TD>
+				<TD>　<A HREF="#R5N13"><B>MakeKeyInput</B></A> 関数で作成したキー入力の入力中文字列を
+					 String で指定するアドレスにある文字列に置き換えます。<BR>
+					試しに <A HREF="#R5N13"><B>MakeKeyInput</B></A> 関数のサンプル<BR><BR>
+
+<PRE>
+	// 作成したキー入力ハンドルをアクティブにする
+	SetActiveKeyInput( InputHandle ) ;
+
+	// キー入力終了待ちループ
+	// (ProcessMessageをループごとに行う)
+	while( !ProcessMessage() )
+</PRE>
+<BR>
+					 の部分を<BR><BR>
+<PRE>
+	// 作成したキー入力ハンドルをアクティブにする
+	SetActiveKeyInput( InputHandle ) ;
+
+	SetKeyInputString( "ここに文章を入力してください" , InputHandle ) ;
+
+	// キー入力終了待ちループ
+	// (ProcessMessageをループごとに行う)
+	while( !ProcessMessage() )
+</PRE>
+<BR>
+					に変更してみてください<BR><BR>
+				</TD>
+			</TR>
+		</TABLE></TD></TR>
+
+		<TR><TD>
+			<B>サンプル</B><BR><BR>
+
+				　特に有りません<BR><BR><BR><BR>
+		</TD></TR>
+
+		<TR><TD><TABLE ALIGN="CENTER" WIDTH=650  CELLSPACING=0 CELLPADDING=0>
+			<TR><TD VALIGN="TOP" WIDTH=100><B><A NAME="R5N21">宣言</TD><TD><FONT COLOR="#000088"><B>int SetKeyInputNumber( int Number , int InputHandle ) ;</B></FONT><BR><BR></TD></TR>
+			<TR><TD VALIGN="TOP" WIDTH=100><B>概略</B></TD><TD>キー入力データに指定の数値を文字に置き換えてセットする<BR><BR></TD></TR>
+			<TR><TD VALIGN="TOP" WIDTH=100><B>引数</B></TD>
+				<TD>int Number : セットする数字となる数値<BR>
+					int InputHandle : 数字をセットするキー入力のハンドル</TD></TR>
+			<TR><TD VALIGN="TOP" WIDTH=100><B>戻り値</B></TD><TD>　０：成功</TD></TR>
+			<TR><TD WIDTH=100>　</TD><TD>－１：エラー発生<BR><BR></TD></TR>
+			<TR>
+				<TD VALIGN="TOP" WIDTH=100><B>解説</B></TD>
+				<TD>　<A HREF="#R5N20"><B>SetKeyInputString</B></A> の数字バージョンです。 Number に
+					希望の数値を入れると、自動的に文字に変換され入力中の文字列と
+					置き替わります。<BR>
+					試しに <A HREF="#R5N13"><B>MakeKeyInput</B></A> 関数のサンプル<BR><BR>
+
+<PRE>
+	// 作成したキー入力ハンドルをアクティブにする
+	SetActiveKeyInput( InputHandle ) ;
+
+	// キー入力終了待ちループ
+	// (ProcessMessageをループごとに行う)
+	while( !ProcessMessage() )
+</PRE>
+<BR>
+					 の部分を<BR><BR>
+
+<PRE>
+	// 作成したキー入力ハンドルをアクティブにする
+	SetActiveKeyInput( InputHandle ) ;
+
+	SetKeyInputNumber( 1234568 ,InputHandle ) ;
+
+	// キー入力終了待ちループ
+	// (ProcessMessageをループごとに行う)
+	while( !ProcessMessage() )
+</PRE>
+<BR>
+					に変更してみてください<BR><BR>
+				</TD>
+			</TR>
+		</TABLE></TD></TR>
+
+		<TR><TD>
+			<B>サンプル</B><BR><BR>
+
+				　特に有りません<BR><BR><BR><BR>
+		</TD></TR>
+
+		<TR><TD><TABLE ALIGN="CENTER" WIDTH=650  CELLSPACING=0 CELLPADDING=0>
+			<TR><TD VALIGN="TOP" WIDTH=100><B><A NAME="R5N22">宣言</TD><TD><FONT COLOR="#000088"><B>int GetKeyInputString( char *StrBuffer , int InputHandle ) ;</B></FONT><BR><BR></TD></TR>
+			<TR><TD VALIGN="TOP" WIDTH=100><B>概略</B></TD><TD>入力データの文字列を取得する<BR><BR></TD></TR>
+			<TR><TD VALIGN="TOP" WIDTH=100><B>引数</B></TD>
+				<TD>char *StrBuffer : 文字列を格納するバッファのアドレス<BR>
+					int InputHandle : 入力データ文字列が欲しいキー入力のハンドル</TD></TR>
+			<TR><TD VALIGN="TOP" WIDTH=100><B>戻り値</B></TD><TD>　０：成功</TD></TR>
+			<TR><TD WIDTH=100>　</TD><TD>－１：エラー発生<BR><BR></TD></TR>
+			<TR>
+				<TD VALIGN="TOP" WIDTH=100><B>解説</B></TD>
+				<TD>　キー入力中、又は終了したキー入力文字列を取得するための関数です。<BR>
+					　キー入力がされた結果はこの関数を持って得ることが出来ます。<BR><BR>
+				</TD>
+			</TR>
+		</TABLE></TD></TR>
+
+		<TR><TD>
+			<B>サンプル</B><BR><BR>
+
+				　MakeKeyInput のサンプルを参考にして下さい<BR><BR><BR><BR>
+		</TD></TR>
+
+
+		<TR><TD><TABLE ALIGN="CENTER" WIDTH=650  CELLSPACING=0 CELLPADDING=0>
+			<TR><TD VALIGN="TOP" WIDTH=100><B><A NAME="R5N23">宣言</TD><TD><FONT COLOR="#000088"><B>int GetKeyInputNumber( int InputHandle ) ;</B></FONT><BR><BR></TD></TR>
+			<TR><TD VALIGN="TOP" WIDTH=100><B>概略</B></TD><TD>入力データの文字列を数値として取得する<BR><BR></TD></TR>
+			<TR><TD VALIGN="TOP" WIDTH=100><B>引数</B></TD><TD>int InputHandle : 数値を得たいキー入力のハンドル</TD></TR>
+			<TR><TD VALIGN="TOP" WIDTH=100><B>戻り値</B></TD><TD>　入力された文字列を数値に変換したもの。</TD></TR>
+			<TR><TD WIDTH=100>　</TD><TD>(故にエラーが発生したかどうかを判断する術はありません)<BR><BR></TD></TR>
+			<TR>
+				<TD VALIGN="TOP" WIDTH=100><B>解説</B></TD>
+				<TD>　入力中、または入力が終了したキー入力文字列を数値に変換して
+					得ます。入力された文字列の中に数字以外のものが含まれていると
+					必ず０が返されます。<BR>
+					　のでこの関数を使用するキー入力は <A HREF="#R5N13"><B>MakeKeyInput</B></A> でキー入力
+					ハンドルを作成する再に NumCharOnlyFlag を TRUE にして有効に
+					しておくことを推奨します。<BR><BR>
+				</TD>
+			</TR>
+		</TABLE></TD></TR>
+
+		<TR><TD>
+			<B>サンプル</B><BR><BR>
+
+				　特に有りません<BR><BR><BR><BR><BR>
+		</TD></TR>
+
+		<TR><TD COLSPAN=2><FONT SIZE="3"><B>
+			<HR>
+			<A HREF="../dxfunc.html">戻る</A>
+		</B></FONT></TD></TR>
+	</TABLE>
+	</BODY>
+</HTML>

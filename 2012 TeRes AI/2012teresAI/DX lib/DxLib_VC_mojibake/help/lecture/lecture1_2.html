@@ -1,0 +1,183 @@
+<title>シューティングゲームプログラム</title>
+<html>
+	<head>
+		<meta name="keyword" content="講座 シューティングプログラム シューティング">
+	</head>
+	<body bgcolor="#ffffff" text="#000000" link="#0033cc" vlink="#800040">
+
+		<font size="2">ゲーム制作講座１－２<br><br></font>
+		<font size="6"><b>２．自機を操作できるようにしよう</b></font>
+		<hr><br><br>
+
+		<font size="3"><B>
+		　さて、前回はキャラクターを複数同時に動かす方法を得ました。<BR>
+		　今回は前回登場した２つのキャラクター、『ボール君』と『四角君』をそれぞれ自機と<BR>
+		敵に見たてて、ボール君をプレイヤーが操作できるように、四角君は画面外に出ないように<BR>
+		したいと思います。<BR><BR>
+
+		　とりあえずそんなこんなで完成したプログラムは以下の通りです。<BR><BR>
+
+<font color="#000066">
+<PRE>
+#include "DxLib.h"
+
+// WinMain関数
+int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,
+					 LPSTR lpCmdLine, int nCmdShow )
+{
+	int BallX , BallY , BallGraph ;
+	int SikakuX , SikakuY , SikakuMuki , SikakuGraph ;
+
+	// 画面モードの設定
+	SetGraphMode( 640 , 480 , 16 ) ;
+
+	// ＤＸライブラリ初期化処理
+	if( DxLib_Init() == -1 ) return -1;
+
+	// グラフィックの描画先を裏画面にセット
+	SetDrawScreen( DX_SCREEN_BACK ) ;
+
+	// ボール君のグラフィックをメモリにロード＆表示座標をセット
+	BallGraph = LoadGraph( "Ball.png" ) ;
+	BallX = 288 ; BallY = 400 ;
+
+	// 四角君のグラフィックをメモリにロード＆表示座標をセット
+	SikakuGraph = LoadGraph( "Sikaku.png" ) ;
+	SikakuX = 0 ; SikakuY = 50 ;
+
+	// 四角君の移動方向をセット
+	SikakuMuki = 1 ;
+
+	// 移動ルーチン
+	while( 1 )
+	{
+		// 画面を初期化(真っ黒にする)
+		ClearDrawScreen() ;
+
+		// ボール君の操作ルーチン
+		{
+			// ↑キーを押していたらボール君を上に移動させる
+			if( CheckHitKey( KEY_INPUT_UP ) == 1 ) BallY -= 3 ;
+
+			// ↓キーを押していたらボール君を下に移動させる
+			if( CheckHitKey( KEY_INPUT_DOWN ) == 1 ) BallY += 3 ;
+
+			// ←キーを押していたらボール君を左に移動させる
+			if( CheckHitKey( KEY_INPUT_LEFT ) == 1 ) BallX -= 3 ;
+
+			// →キーを押していたらボール君を右に移動させる
+			if( CheckHitKey( KEY_INPUT_RIGHT ) == 1 ) BallX += 3 ;
+
+			// ボール君が画面左端からはみ出そうになっていたら画面内の座標に戻してあげる
+			if( BallX < 0 ) BallX = 0 ;
+
+			// ボール君が画面右端からはみ出そうになっていたら画面内の座標に戻してあげる
+			if( BallX > 640 - 64 ) BallX = 640 - 64  ;
+
+			// ボール君が画面上端からはみ出そうになっていたら画面内の座標に戻してあげる
+			if( BallY < 0 ) BallY = 0 ;
+
+			// ボール君が画面下端からはみ出そうになっていたら画面内の座標に戻してあげる
+			if( BallY > 480 - 64 ) BallY = 480 - 64 ;
+
+			// ボール君を描画
+			DrawGraph( BallX , BallY , BallGraph , FALSE ) ;
+		}
+
+
+		// 四角君の移動ルーチン
+		{
+			// 四角君の座標を移動している方向に移動する
+			if( SikakuMuki == 1 ) SikakuX += 3 ;
+			if( SikakuMuki == 0 ) SikakuX -= 3 ;
+
+			// 四角君が画面右端からでそうになっていたら画面内の座標に戻してあげ、移動する方向も反転する
+			if( SikakuX > 576 )
+			{
+				SikakuX = 576 ;
+				SikakuMuki = 0 ;
+			}
+
+			// 四角君が画面左端からでそうになっていたら画面内の座標に戻してあげ、移動する方向も反転する
+			if( SikakuX < 0 )
+			{
+				SikakuX = 0 ;
+				SikakuMuki = 1 ;
+			}
+
+			// 四角君を描画
+			DrawGraph( SikakuX , SikakuY , SikakuGraph , FALSE ) ;
+		}
+
+		// 裏画面の内容を表画面にコピーする
+		ScreenFlip() ;
+
+
+		// Windows 特有の面倒な処理をＤＸライブラリにやらせる
+		// -1 が返ってきたらループを抜ける
+		if( ProcessMessage() < 0 ) break ;
+
+		// もしＥＳＣキーが押されていたらループから抜ける
+		if( CheckHitKey( KEY_INPUT_ESCAPE ) ) break ;
+	}
+
+	DxLib_End() ;				// ＤＸライブラリ使用の終了処理
+
+	return 0 ;					// ソフトの終了
+}
+</pre>
+</font>
+<BR>
+		<font color="#008800"><実行図></font><BR>
+		<IMG SRC="image/i1_2.jpg" WIDTH="256" HEIGHT="192" HSPACE="20" VSPACE="20"><BR>
+
+		<a href="Data/Ball.png">ボール君の絵</a>　　<a href="Data/Sikaku.png">四角君の絵</a><BR><BR>
+
+		　実行してみてキーボードのカーソルキーを押してみてください、ボール君を自由自在に<BR>
+		動かせるはずです。そして四角君が画面上部を左右行ったり来たりしているはずです。<BR><BR>
+
+		　まずボール君を操作するためのプログラム部分ですが、見た目の量のわりにやっている事は<BR>
+		<A HREF="lecture4.html">基礎編第４回『キーボードで絵を動かそう』</A>と同じです。→キーが押されたらボール君のＸ座標<BR>
+		を増やし、↑キーが押されたらボール君のＹ座標を減らす、といった具合です。<BR>
+		　ただ一つ違いがあります。それはボール君が画面外にでそうになっていたら座標を補正して<BR>
+		画面の中に戻してあげている事です。<BR>
+		　処理は単純です、ボール君は <font color="#770000">BallX , BallY</font> をボール君の絵を表示する起点となっているので<BR>
+		<font color="#770000">BallX</font> が <font color="#770000">0</font> より値が小さくなるか、<font color="#770000">( 画面の幅(640) - ボール君の絵の幅(64) )</font> よりも値が大きく<BR>
+		なるか、 <font color="#770000">BallY</font> が <font color="#770000">0</font> より値が小さくなるか、<font color="#770000">( 画面の高さ(480) - ボール君の絵の高さ )</font> より<BR>
+		も値が大きくなったら画面からはみ出る事になります。<BR>
+		　ですので単純に <font color="#770000">BallX</font> が <font color="#770000">0</font> より小さくなった場合は <font color="#770000">BallX</font> を <font color="#770000">0</font> に、<font color="#770000">BallX</font> が <font color="#770000">( 640 - 64 )</font><BR>
+		よりも大きくなった場合は <font color="#770000">BallX</font> を <font color="#770000">( 640 - 64 )</font> にしてやっています。<font color="#770000">BallY</font> も同様です。<BR><BR>
+
+		　次に四角君ですが、こちらは一つ変数が増えています。四角君の<font color="#770000">移動方向を決定する変数<BR>
+		SikakuMuki</font> です。四角君は今度は画面上部を左右行ったり来たりしなくてはならなくなった<BR>
+		ので、『<font color="#770000">四角君が現在どっちに移動しているか</font>』を記憶しておかなくてはならなくなりました。<BR>
+		　そんなわけで <font color="#770000">SikakuMuki</font> を追加したわけです。<BR>
+		　四角君は <font color="#770000">SikakuMuki</font> が <font color="#770000">1 の時は右</font>に移動、<font color="#770000">0 の時は左</font>に移動していると定義します、はい<BR>
+		私が勝手に定義します、自分でこの変数を使うのですから勝手に決めていいのです。(^^;<BR>
+		　そして四角君の移動ルーチンでおもむろに <font color="#770000">SikakuMuki</font> の値が <font color="#770000">1</font> か <font color="#770000">0</font> か調べ、<font color="#770000">1</font> の時は<BR>
+		四角君のＸ座標を増やし、<font color="#770000">0</font> の時は減らします。これで <font color="#770000">SikakuMuki</font> の値によって四角君の<BR>
+		移動方向を変更するプログラムは完成です。<BR>
+		　さてそうとなれば次は<font color="#770000">画面端にぶつかったら移動方向を反転</font>してあげなければなりません、<BR>
+		これも簡単、<font color="#770000">SikakuX</font> が <font color="#770000">0</font> 以下になっていたら四角君は<font color="#770000">画面左端</font>にぶつかっていることに<BR>
+		なりますので、とりあえず <font color="#770000">SikakuX</font> を <font color="#770000">0</font> に、そして <font color="#770000">SikakuMuki</font> は<font color="#770000">右方向を示す 1</font> を代入<BR>
+		してやります。<font color="#770000">画面右端</font>である <font color="#770000">( 640 - 四角君の幅(64) )</font> よりも <font color="#770000">SikakuX</font> の値が大きく<BR>
+		なってしまった場合は四角君は<font color="#770000">画面右端にぶつかった事になります</font>ので、<font color="#770000">SikakuX</font> を<font color="#770000">( 640 - 64 )</font>に、<BR>
+		<font color="#770000">SikakuMuki</font> は<font color="#770000">左方向を示す 0</font> を代入してあげます。<BR>
+		　これで四角君が画面上部を左右行ったり来たりするプログラムは完成です。あとは裏画面に<BR>
+		描画した内容を ScreenFlip でプレイヤーに見せてあげるだけです。<BR><BR>
+
+		　忘れていましたが今回はプレイヤーが終らせようという意志が働くまでソフトを実行<BR>
+		しつづけなければならないので、ループは while( 1 ) で無限ループに、そして ＥＳＣキー<BR>
+		が押されたらループから抜けるようになっていることに気を付けてください。(この事に付いても <BR>
+		<A HREF="lecture4.html">基礎編第４回『キーボードで絵を動かそう』</A>と同じですので詳しくはこちらをご覧下さい。<BR><BR>
+
+		　さて、なんとか『自機と敵』的な構成が出来ました。次は自機が弾を撃てるようにしたいと<BR>
+		思います。<BR><BR>
+
+		<hr>
+
+		<A href="../dxlecture_main.html">戻る</a>
+
+		</b></font>
+	</body>
+</html>

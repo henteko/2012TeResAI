@@ -2,17 +2,21 @@
 
 #include "Data.h"
 
+	
+
 void draw(int stage[WIDTH][HEIGHT],AI_T ai[AI_NUM],Tagger tagger){
 
 
 	//数列stageにしたがってマップの描画
+	int stageGraph = LoadGraph("Stage_image\\kabe0.png"); //壁の画像読み込み
 	for(int i=0;i<WIDTH;i++){
 		for(int j=0;j<HEIGHT;j++){
 			if(i==WIDTH/2 || j==HEIGHT/2){//7/27 zero: 十字回廊を描いてちょっとお洒落に
 				DrawBox(20*i,20*j,20*(i+1),20*(j+1),GetColor(100,100,250),0);
 			}
-			if(stage[i][j]==1){//壁を仮に白い正方形としています。
-				DrawBox(20*i,20*j,20*(i+1),20*(j+1),GetColor(255,255,255),1);
+			if(stage[i][j]==1){//壁を仮に白い正方形としています。//土の壁にしました。
+//				DrawBox(20*i,20*j,20*(i+1),20*(j+1),GetColor(255,255,255),1);//四角の描写
+				DrawRotaGraph((20*i)+10,(20*j)+10,1.0,0.0,stageGraph,FALSE,FALSE);//読み込んだ壁画像表示
 			}
 		}
 	}
