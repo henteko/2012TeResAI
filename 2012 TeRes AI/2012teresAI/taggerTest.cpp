@@ -22,6 +22,7 @@ Action taggerTest(int tagger_x,int tagger_y,int Stage[WIDTH][HEIGHT],AI_T ai[])
 	int r;
 	int cx=tagger_x,cy=tagger_y;
 	int target_x,target_y,target_d,dist,dx,dy;
+	static Action back=STOP;
 
 	double disx[AI_NUM],disy[AI_NUM];//‹S‚ÆŠeAI‚ÌŠex,y¬•ª‚Ì‹——£
 	double distance[AI_NUM];//‹S‚ÆŠeAI‚Ì‹——£
@@ -57,30 +58,115 @@ Action taggerTest(int tagger_x,int tagger_y,int Stage[WIDTH][HEIGHT],AI_T ai[])
 		if(dy<0)dy*=-1;
 		if(dx>=dy){
 			if(cx<target_x){
-				if(Stage[cx+1][cy]==1){
-					if(cy<=target_y)return S;
-					else return N;
-				}else return E;
+				if(Stage[cx+1][cy]!=1 && back!=W){
+					back=STOP;
+					return E;
+				}
+				else{
+					if(cy<=target_y){
+						if(Stage[cx][cy+1]==1){
+							back=W;
+							return W;
+						}
+						else{
+							back=STOP;
+							return S;
+						}
+					}
+					else{
+						if(Stage[cx][cy-1]==1){
+							back=W;
+							return W;
+						}
+						else{
+							back=STOP;
+							return N;
+						}
+					}
+				}
 			}
 			else{
-				if(Stage[cx-1][cy]==1){
-					if(cy<target_y)return S;
-					else return N;
-				}else return W;
+				if(Stage[cx-1][cy]!=1 && back!=E){
+					back=STOP;
+					return W;
+				}else{
+					if(cy<target_y){
+						if(Stage[cx][cy+1]==1){
+							back=E;
+							return E;
+						}
+						else{
+							back=STOP;
+							return S;
+						}
+					}
+					else{
+						if(Stage[cx][cy-1]==1){
+							back=E;
+							return E;
+						}
+						else{
+							back=STOP;
+							return N;
+						}
+					}
+				}
 			}
 		}
 		else{
 			if(cy<=target_y){
-				if(Stage[cx][cy+1]==1){
-					if(cx<=target_x)return E;
-					else return W;
-				}else return S;
+				if(Stage[cx][cy+1]!=1 && back!=N){
+					back=STOP;
+					return S;
+				}else{
+					if(cx<=target_x){
+						if(Stage[cx+1][cy]==1){
+							back=N;
+							return N;
+						}
+						else{
+							back=STOP;
+							return E;
+						}
+					}
+					else{
+						if(Stage[cx-1][cy]==1){
+							back=N;
+							return N;
+						}
+						else{
+							back=STOP;
+							return W;
+						}
+					}
+				}
 			}
 			else{
-				if(Stage[cx][cy-1]==1){
-					if(cx<target_x)return E;
-					else return W;
-				}else return N;
+				if(Stage[cx][cy-1]!=1 && back!=S){
+					back=STOP;
+					return N;
+				}else{
+					if(cx<target_x){
+						if(Stage[cx+1][cy]==1){
+							back=S;
+							return S;
+						}
+						else{
+							back=STOP;
+							return E;
+						}
+					}
+					else{
+						if(Stage[cx-1][cy]==1){
+							back=S;
+							return S;
+						}
+						else{
+							back=STOP;
+							return W;
+						}
+					}
+				}
 			}
 		} //matu‚³‚ñ‚Ì‹SAII‚í‚è
 

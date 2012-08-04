@@ -2,20 +2,20 @@
 #include "Data.h"
 
 void update_Tagger(Tagger *tagger,int Stage[WIDTH][HEIGHT]){
-
-	tagger->step+=4;
+	//8/3 zero追記:鬼の移動速度をTAGGER_SPEEDで定義した
+	tagger->step+=TAGGER_SPEED;
 	switch(tagger->act){
 	case N:
-		tagger->s_y-=4;
+		tagger->s_y-=TAGGER_SPEED;
 		break;
 	case E:
-		tagger->s_x+=4;
+		tagger->s_x+=TAGGER_SPEED;
 		break;
 	case S:
-		tagger->s_y+=4;
+		tagger->s_y+=TAGGER_SPEED;
 		break;
 	case W:
-		tagger->s_x-=4;
+		tagger->s_x-=TAGGER_SPEED;
 		break;
 	case STOP:
 		tagger->act=STOP; //	toshi : AIに止まるという選択肢がなかったので追加

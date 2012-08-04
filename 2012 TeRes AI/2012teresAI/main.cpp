@@ -23,6 +23,7 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
 	int STAGE[WIDTH][HEIGHT]={0};
 	int round=0;
 	int end=0;
+	int time;
 
 	while(ProcessMessage()!=-1){
 		switch(gamemode){
@@ -39,11 +40,12 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
 			//}
 
 			round++;
+			time=TIME_LIMIT*60;
 			gamemode=RUNNING;
 
 			break;
 		case RUNNING:
-			
+			time--;
 			if(tagger[tagger_num].step==0){
 				//tagger[tagger_num].act=next_Tagger(tagger[tagger_num],STAGE,ai);
 				tagger[tagger_num].act=tagger[tagger_num].moveFunc(tagger[tagger_num].x,tagger[tagger_num].y,STAGE,ai); //AIと一緒で、moveFunc使う
@@ -65,14 +67,13 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
 			ClearDrawScreen();
 			draw(STAGE,ai,tagger[tagger_num]);
 			DrawFormatString(30,30,GetColor(0,255,255),"ROUND%d",round);
-
+			DrawFormatString(500,15,GetColor(0,255,0),"TIME %d",time);
 			
 			if(tagger[tagger_num].step==0){
 				for(int i=0;i<AI_NUM;i++){
 					if(death_Ai(ai[i],tagger[tagger_num])==1){
 						death[i]++;
-						const char* str = strcat(ai[i].name , "がつかまりました"); //文字列連結
-						DrawString(100,240,str,GetColor(255,0,0));
+						DrawFormatString(100,240,GetColor(255,0,0),"%sがつかまりました",ai[i].name);// 8/3 zero追記:AI捕獲の宣言をまとめた。
 						WaitTimer(3000);
 						if(round>=ROUND_MAX){
 							gamemode=ENDING;
@@ -83,6 +84,18 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
 						break;
 					}
 				}
+			}
+			if(time<=0){// 8/3 zero追記:タイムアップを設定
+				round--;
+				DrawString(100,240,"時間切れです",GetColor(255,0,0));
+				WaitTimer(3000);
+				if(round>=ROUND_MAX){
+					gamemode=ENDING;
+				}
+				else{
+					gamemode=SETTING;
+				}
+				break;
 			}
 			if(CheckHitKey(KEY_INPUT_R)==1){
 				gamemode=SETTING;

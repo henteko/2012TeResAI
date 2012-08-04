@@ -33,20 +33,19 @@ void ranking(AI_T ai[],int deth[]){
 			j--;
 		}
 	}
-	
 	for(int i = 0;i<AI_NUM;i++){
 
 		for(int k=0;k<AI_NUM;k++){
 
-		if(ai[k].life==deth[i]){
-			Cr = colswitch(i+1);
+			if(ai[k].life==deth[i]){
+				Cr = colswitch(i+1);
+			
+				DrawFormatString(50,200+i*20,Cr,"%d ˆÊ %d ‰ñ",i+1,deth[i]);
 
-			DrawFormatString(50,200+i*20,Cr,"%d ˆÊ %d ‰ñ",i+1,deth[i]);
-
-			DrawString(130,200+i*20,ai[k].name,GetColor(255,0,0));
-
-			DrawGraph(170,200+i*20,ai[k].Graph,TRUE);
-		}
+				DrawString(130,200+i*20,ai[k].name,GetColor(255,0,0));
+			
+				DrawGraph(200,200+i*20,ai[k].Graph,TRUE);
+			}
 		}
 	}
 

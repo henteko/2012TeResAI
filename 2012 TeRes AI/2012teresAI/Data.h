@@ -8,16 +8,19 @@ using namespace std;
 
 #define AI_NUM 2
 #define TAGGER_NUM 2
-#define ROUND_MAX 100
+#define ROUND_MAX 1000
+#define TIME_LIMIT 30
 //ステージの規模
 #define WIDTH 32
 #define HEIGHT 24
 //1マスの大きさ
 #define BOX (640/WIDTH)
-
 //AIの視界
 #define VISIBLE 3
-
+//AIの移動速度
+#define AI_SPEED 2
+//鬼の移動速度
+#define TAGGER_SPEED 4
 typedef enum{
 	OPENING,
 	SETTING,

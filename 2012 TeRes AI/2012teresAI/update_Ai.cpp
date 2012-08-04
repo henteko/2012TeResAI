@@ -2,20 +2,20 @@
 #include "Data.h"
 
 void update_Ai(AI_T *ai,int Stage[WIDTH][HEIGHT]){
-
-	ai->step+=2;
+	//8/3 zero’Ç‹L:AI‚ÌˆÚ“®‘¬“x‚ðAI_SPEED‚Å’è‹`‚µ‚½
+	ai->step+=AI_SPEED;
 	switch(ai->act){
 	case N:
-		ai->s_y-=2;
+		ai->s_y-=AI_SPEED;
 		break;
 	case E:
-		ai->s_x+=2;
+		ai->s_x+=AI_SPEED;
 		break;
 	case S:
-		ai->s_y+=2;
+		ai->s_y+=AI_SPEED;
 		break;
 	case W:
-		ai->s_x-=2;
+		ai->s_x-=AI_SPEED;
 		break;
 	default:
 		break;
