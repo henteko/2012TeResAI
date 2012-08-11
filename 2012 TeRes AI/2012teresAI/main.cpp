@@ -13,7 +13,7 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
 	AllocConsole();
 	freopen("CONOUT$","w",stdout);
 	freopen("CONIN$","r",stdin);
-
+	
 
 	Mode gamemode=OPENING;
 	AI_T ai[AI_NUM];
@@ -23,7 +23,7 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
 	int STAGE[WIDTH][HEIGHT]={0};
 	int round=0;
 	int end=0;
-	int time;
+	int StartTime,TimeLimit;
 
 	while(ProcessMessage()!=-1){
 		switch(gamemode){
@@ -40,12 +40,13 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
 			//}
 
 			round++;
-			time=TIME_LIMIT*60;
+			StartTime=GetNowCount();//ゲーム開始時の時刻に合わせる
 			gamemode=RUNNING;
 
 			break;
 		case RUNNING:
-			time--;
+			TimeLimit=TIME_LIMIT*1000-(GetNowCount()-StartTime);
+			if(TimeLimit<0)TimeLimit=0;
 			if(tagger[tagger_num].step==0){
 				//tagger[tagger_num].act=next_Tagger(tagger[tagger_num],STAGE,ai);
 				tagger[tagger_num].act=tagger[tagger_num].moveFunc(tagger[tagger_num].x,tagger[tagger_num].y,STAGE,ai); //AIと一緒で、moveFunc使う
@@ -67,12 +68,15 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
 			ClearDrawScreen();
 			draw(STAGE,ai,tagger[tagger_num]);
 			DrawFormatString(30,30,GetColor(0,255,255),"ROUND%d",round);
-			DrawFormatString(500,15,GetColor(0,255,0),"TIME %d",time);
+			
+			DrawFormatString(500,15,GetColor(0,255,0),"TIME %d",TimeLimit);
 			
 			if(tagger[tagger_num].step==0){
 				for(int i=0;i<AI_NUM;i++){
 					if(death_Ai(ai[i],tagger[tagger_num])==1){
 						death[i]++;
+						DrawBox(0,230,640,260,GetColor(0,0,0),1);
+						DrawBox(-1,230,642,260,GetColor(255,0,0),0);
 						DrawFormatString(100,240,GetColor(255,0,0),"%sがつかまりました",ai[i].name);// 8/3 zero追記:AI捕獲の宣言をまとめた。
 						WaitTimer(3000);
 						if(round>=ROUND_MAX){
@@ -85,7 +89,7 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
 					}
 				}
 			}
-			if(time<=0){// 8/3 zero追記:タイムアップを設定
+			if(TimeLimit<=0){// 8/3 zero追記:タイムアップを設定
 				round--;
 				DrawString(100,240,"時間切れです",GetColor(255,0,0));
 				WaitTimer(3000);

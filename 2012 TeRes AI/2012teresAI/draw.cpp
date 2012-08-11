@@ -6,7 +6,6 @@
 
 void draw(int stage[WIDTH][HEIGHT],AI_T ai[AI_NUM],Tagger tagger){
 
-
 	//数列stageにしたがってマップの描画
 	int stageGraph = LoadGraph("Stage_image\\kabe0.png"); //壁の画像読み込み
 	for(int i=0;i<WIDTH;i++){
@@ -32,6 +31,17 @@ void draw(int stage[WIDTH][HEIGHT],AI_T ai[AI_NUM],Tagger tagger){
 	//DrawRotaGraph(tagger.s_x,tagger.s_y,1,0,tagger.Graph,TRUE,FALSE);//読み込んだ画像表示 //今は青鬼が出てきて怖いからコメントアウト
 	DrawCircle(tagger.s_x,tagger.s_y,10,GetColor(0,0,255),1);
 	DrawBox(BOX*tagger.x,BOX*tagger.y,BOX*(tagger.x+1),BOX*(tagger.y+1),GetColor(255,0,0),0);
+	
+	//AI名の描画
+
+	for(int i=0;i<AI_NUM;i++){
+		static int flash=0;
+		int cr;
+		flash++;
+		cr=GetColor(255,255*(flash%3),255*(flash%4));
+		DrawFormatString(ai[i].s_x,ai[i].s_y,cr,ai[i].name);
+	}
+	
 	/*マップデータ表示
 	for(int i=0;i<WIDTH;i++){
 		for(int j=0;j<HEIGHT;j++){

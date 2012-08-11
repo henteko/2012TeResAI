@@ -9,7 +9,7 @@ using namespace std;
 #define AI_NUM 2
 #define TAGGER_NUM 2
 #define ROUND_MAX 1000
-#define TIME_LIMIT 30
+#define TIME_LIMIT 20
 //ステージの規模
 #define WIDTH 32
 #define HEIGHT 24
