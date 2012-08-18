@@ -1,14 +1,10 @@
-﻿2012/08/12 0:23:39 にビルドを開始しました。
+﻿2012/08/19 0:30:29 にビルドを開始しました。
      1>ノード 2 上のプロジェクト "C:\Users\zero\Documents\GitHub\2012TeResAI\2012 TeRes AI\2012teresAI\2012teresAI.vcxproj" (build ターゲット)。
      1>InitializeBuildStatus:
          "AlwaysCreate" が指定されたため "Debug\2012teresAI.unsuccessfulbuild" を作成しています。
        ClCompile:
-         c:\Program Files\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I"C:\Users\zero\Documents\GitHub\2012TeResAI\2012 TeRes AI\2012teresAI\DX lib\DxLib_VC\プロジェクトに追加すべきファイル_VC用" /I"C:\Users\mainuser\Documents\GitHub\2012TeResAI\2012 TeRes AI\2012teresAI\DX lib\DxLib_VC\プロジェクトに追加すべきファイル_VC用" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _MBCS /Gm /EHsc /RTC1 /MTd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt main.cpp
-         main.cpp
-     1>c:\users\zero\documents\github\2012teresai\2012 teres ai\2012teresai\main.cpp(14): warning C4996: 'freopen': This function or variable may be unsafe. Consider using freopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files\microsoft visual studio 10.0\vc\include\stdio.h(249) : 'freopen' の宣言を確認してください。
-     1>c:\users\zero\documents\github\2012teresai\2012 teres ai\2012teresai\main.cpp(15): warning C4996: 'freopen': This function or variable may be unsafe. Consider using freopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files\microsoft visual studio 10.0\vc\include\stdio.h(249) : 'freopen' の宣言を確認してください。
+         c:\Program Files\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I"C:\Users\zero\Documents\GitHub\2012TeResAI\2012 TeRes AI\2012teresAI\DX lib\DxLib_VC\プロジェクトに追加すべきファイル_VC用" /I"C:\Users\mainuser\Documents\GitHub\2012TeResAI\2012 TeRes AI\2012teresAI\DX lib\DxLib_VC\プロジェクトに追加すべきファイル_VC用" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _MBCS /Gm /EHsc /RTC1 /MTd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt Ranking.cpp
+         Ranking.cpp
        ManifestResourceCompile:
          すべての出力が最新のものです。
        Link:
@@ -45,4 +41,4 @@
 
 ビルドに成功しました。
 
-経過時間 00:00:05.52
+経過時間 00:00:04.62

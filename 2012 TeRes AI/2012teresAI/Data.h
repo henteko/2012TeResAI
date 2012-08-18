@@ -8,7 +8,7 @@ using namespace std;
 
 #define AI_NUM 2
 #define TAGGER_NUM 2
-#define ROUND_MAX 1000
+#define ROUND_MAX 10
 #define TIME_LIMIT 20
 //ステージの規模
 #define WIDTH 32
@@ -16,7 +16,7 @@ using namespace std;
 //1マスの大きさ
 #define BOX (640/WIDTH)
 //AIの視界
-#define VISIBLE 3
+#define VISIBLE 5
 //AIの移動速度
 #define AI_SPEED 2
 //鬼の移動速度

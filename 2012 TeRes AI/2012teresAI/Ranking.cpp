@@ -21,6 +21,8 @@ int colswitch(int c){
 void ranking(AI_T ai[],int deth[]){
 	int hoge,Cr;
 	int j ;
+	int space=0;
+	int drawX=500;
 	for(int i=0;i<AI_NUM;i++){
 
 		ai[i].life = deth[i];
@@ -33,20 +35,25 @@ void ranking(AI_T ai[],int deth[]){
 			j--;
 		}
 	}
-	for(int i = 0;i<AI_NUM;i++){
+	while(drawX>0){
+		space=1;
+		ClearDrawScreen();
+		for(int i = 0;i<AI_NUM;i++){
+			for(int k=0;k<AI_NUM;k++){
+				if(ai[k].life==deth[i]){
+					Cr = colswitch(i+1);
+				
+					DrawFormatString(50+drawX*space,200+space*20,Cr,"%d ˆÊ %d ‰ñ",i+1,deth[i]);
 
-		for(int k=0;k<AI_NUM;k++){
-
-			if(ai[k].life==deth[i]){
-				Cr = colswitch(i+1);
+					DrawString(130+drawX*space,200+space*20,ai[k].name,GetColor(255,0,0));
 			
-				DrawFormatString(50,200+i*20,Cr,"%d ˆÊ %d ‰ñ",i+1,deth[i]);
+					DrawGraph(200+drawX*space,200+space*20,ai[k].Graph,TRUE);
 
-				DrawString(130,200+i*20,ai[k].name,GetColor(255,0,0));
-			
-				DrawGraph(200,200+i*20,ai[k].Graph,TRUE);
+					space++;
+				}
 			}
 		}
+		drawX-=10;
+		WaitTimer(1000/60);
 	}
-
 }

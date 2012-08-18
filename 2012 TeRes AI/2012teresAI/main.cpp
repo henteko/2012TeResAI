@@ -3,6 +3,7 @@
 int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow )
 {
 	ChangeWindowMode(TRUE);
+	SetScreenMemToVramFlag( FALSE );
 	SetDrawScreen( DX_SCREEN_BACK);
 	if(DxLib_Init()==-1)		// ‚c‚wƒ‰ƒCƒuƒ‰ƒŠ‰Šú‰»ˆ—
 	{
@@ -14,6 +15,7 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
 	freopen("CONOUT$","w",stdout);
 	freopen("CONIN$","r",stdin);
 	
+	SetBasicBlendFlag(TRUE);
 
 	Mode gamemode=OPENING;
 	AI_T ai[AI_NUM];
