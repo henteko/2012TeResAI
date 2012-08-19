@@ -4,6 +4,7 @@
 #include "Data.h"
 
 void intro(){
+
 	int gametitle;
 	gametitle = LoadGraph("media\\test.bmp");
 
@@ -17,10 +18,10 @@ void intro(){
 	//test デモ
 	DrawString(200,290,"AI_name",GetColor(0,255,205),0);
 	DrawCircle(300,300,5,GetColor(255,0,0),1);
-	//本当は下のほうでエントリーを表示する予定*/
-	/*for(int i=0;i<AI_NUM;i++){
-	DrawString(200,240,ai[i].name,GetColor(0,255,255),0);
-	DrawGraph( 300 , 290+i*10 , ai[i].Graph , FALSE ) ;
+	/*//本当は下のほうでエントリーを表示する予定AI_T ai[]
+	for(int i= 0; i < AI_NUM ;i++, ai++){
+	DrawString(200,240,ai->name,GetColor(0,255,255),0);
+	DrawGraph( 300 , 290+i*10 , ai->Graph , FALSE ) ;
 	}*/
 	
 	
