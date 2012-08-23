@@ -30,7 +30,7 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
 	while(ProcessMessage()!=-1){
 		switch(gamemode){
 		case OPENING:
-			intro();
+			intro(ai);
 			gamemode=SETTING;
 			break;
 		case SETTING:

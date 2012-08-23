@@ -63,7 +63,7 @@ typedef struct{
 } Tagger;
 
 
-void intro();
+void intro(AI_T *ai);
 void make_Stage(int Stage[WIDTH][HEIGHT]);
 int init_Tagger(Tagger *tagger,int Stage[WIDTH][HEIGHT]);
 void init_Ai(AI_T *ai,int Stage[WIDTH][HEIGHT]);
