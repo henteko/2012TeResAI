@@ -41,13 +41,18 @@ void ranking(AI_T ai[],int deth[]){
 		for(int i = 0;i<AI_NUM;i++){
 			for(int k=0;k<AI_NUM;k++){
 				if(ai[k].life==deth[i]){
+					if(i>0 && deth[i-1]==deth[i])continue;
+
 					Cr = colswitch(i+1);
+
 				
 					DrawFormatString(50+drawX*space,200+space*20,Cr,"%d ˆÊ %d ‰ñ",i+1,deth[i]);
 
 					DrawString(130+drawX*space,200+space*20,ai[k].name,GetColor(255,0,0));
 			
 					DrawGraph(200+drawX*space,200+space*20,ai[k].Graph,TRUE);
+
+					
 
 					space++;
 				}
