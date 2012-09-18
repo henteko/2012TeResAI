@@ -26,6 +26,7 @@ Action aiTest(int view[2*VISIBLE+1][2*VISIBLE+1])//8/25:zero:追記
 	double direct;
 	double  PI=3.141592;
 	int tx,ty;
+	static Action go;
 
 	for(int i=0;i<2*VISIBLE+1;i++){
 		for(int j=0;j<2*VISIBLE+1;j++){
@@ -83,10 +84,12 @@ Action aiTest(int view[2*VISIBLE+1][2*VISIBLE+1])//8/25:zero:追記
 				if(view[cx-1][cy]!=1){
 					return W;
 				}
-				else{
+				else if(view[cx+1][cy]!=1){
 					return E;
+				}else{
+					return S;
 				}
-			}	
+			}
 		}
 		else if(direct<45){
 			if(view[cx-1][cy]!=1)
@@ -95,8 +98,10 @@ Action aiTest(int view[2*VISIBLE+1][2*VISIBLE+1])//8/25:zero:追記
 				if(view[cx][cy-1]!=1){
 					return N;
 				}
-				else{
+				else if(view[cx][cy+1]!=1){
 					return S;
+				}else{
+					return W;
 				}
 			}
 		}
@@ -107,8 +112,10 @@ Action aiTest(int view[2*VISIBLE+1][2*VISIBLE+1])//8/25:zero:追記
 				if(view[cx+1][cy]!=1){
 					return E;
 				}
-				else{
+				else if(view[cx-1][cy]!=1){
 					return W;
+				}else{
+					return N;
 				}
 			}
 		}
@@ -119,8 +126,10 @@ Action aiTest(int view[2*VISIBLE+1][2*VISIBLE+1])//8/25:zero:追記
 				if(view[cx][cy+1]!=1){
 					return S;
 				}
-				else{
+				else if(view[cx][cy-1]!=1){
 					return N;
+				}else{
+					return E;
 				}
 			}
 		}
@@ -131,8 +140,10 @@ Action aiTest(int view[2*VISIBLE+1][2*VISIBLE+1])//8/25:zero:追記
 				if(view[cx-1][cy]!=1){
 					return W;
 				}
-				else{
+				else if(view[cx+1][cy]!=1){
 					return E;
+				}else{
+					return S;
 				}
 			}
 		}

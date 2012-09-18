@@ -57,7 +57,7 @@ Action taggerTest(int tagger_x,int tagger_y,int Stage[WIDTH][HEIGHT],AI_T ai[])
 		dy=cy-target_y;
 		if(dy<0)dy*=-1;
 		if(dx>=dy){
-			if(cx<target_x){
+			if(cx<=target_x){
 				if(Stage[cx+1][cy]!=1 && back!=W){
 					back=STOP;
 					return E;
@@ -114,7 +114,7 @@ Action taggerTest(int tagger_x,int tagger_y,int Stage[WIDTH][HEIGHT],AI_T ai[])
 			}
 		}
 		else{
-			if(cy<=target_y){
+			if(cy<target_y){
 				if(Stage[cx][cy+1]!=1 && back!=N){
 					back=STOP;
 					return S;

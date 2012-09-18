@@ -52,13 +52,18 @@ void draw(int stage[WIDTH][HEIGHT],AI_T ai[AI_NUM],Tagger tagger){
 		DrawFormatString(ai[i].s_x,ai[i].s_y,cr,ai[i].name);
 	}
 	
-	/*マップデータ表示
-	for(int i=0;i<WIDTH;i++){
-		for(int j=0;j<HEIGHT;j++){
-			DrawFormatString(i*20,j*20,GetColor(0,255,0),"%d",stage[i][j]);
+	//マップデータ表示
+	while(CheckHitKey(KEY_INPUT_P)){
+		for(int i=0;i<WIDTH;i++){
+			for(int j=0;j<HEIGHT;j++){
+				int cr=GetColor(100,255,100);
+				DrawFormatString(i*20+5,j*20+5,cr,"%d",stage[i][j]);
+				DrawBox(20*i,20*j,20*(i+1),20*(j+1),cr,0);
+			}
 		}
+		WaitTimer(100);
 	}
-	*/
+	
 	//鬼が手動か自動か表示
     char Buf[ 256 ] ;
 	GetHitKeyStateAll( Buf ) ;
