@@ -1,15 +1,43 @@
-﻿2012/09/18 21:23:03 にビルドを開始しました。
+﻿2012/10/02 12:44:35 にビルドを開始しました。
      1>ノード 2 上のプロジェクト "C:\Users\zero\Documents\GitHub\2012TeResAI\2012 TeRes AI\2012teresAI\2012teresAI.vcxproj" (build ターゲット)。
      1>InitializeBuildStatus:
          "AlwaysCreate" が指定されたため "Debug\2012teresAI.unsuccessfulbuild" を作成しています。
        ClCompile:
-         すべての出力が最新のものです。
+         c:\Program Files\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I"C:\Users\zero\Documents\GitHub\2012TeResAI\2012 TeRes AI\2012teresAI\DX lib\DxLib_VC\プロジェクトに追加すべきファイル_VC用" /I"C:\Users\tao\Documents\GitHub\2012TeResAI\2012 TeRes AI\2012teresAI\DX lib\DxLib_VC\プロジェクトに追加すべきファイル_VC用" /I"C:\Users\mainuser\Documents\GitHub\2012TeResAI\2012 TeRes AI\2012teresAI\DX lib\DxLib_VC\プロジェクトに追加すべきファイル_VC用" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _MBCS /Gm /EHsc /RTC1 /MTd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt draw.cpp
+         draw.cpp
+     1>c:\users\zero\documents\github\2012teresai\2012 teres ai\2012teresai\draw.cpp(96): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files\microsoft visual studio 10.0\vc\include\string.h(110) : 'strcat' の宣言を確認してください。
+     1>c:\users\zero\documents\github\2012teresai\2012 teres ai\2012teresai\draw.cpp(99): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files\microsoft visual studio 10.0\vc\include\string.h(110) : 'strcat' の宣言を確認してください。
        ManifestResourceCompile:
          すべての出力が最新のものです。
        Link:
-         すべての出力が最新のものです。
+         c:\Program Files\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\zero\Documents\GitHub\2012TeResAI\2012 TeRes AI\2012teresAI\Debug\2012teresAI.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Users\zero\Documents\GitHub\2012TeResAI\2012 TeRes AI\2012teresAI\DX lib\DxLib_VC\プロジェクトに追加すべきファイル_VC用" /LIBPATH:"C:\Users\tao\Documents\GitHub\2012TeResAI\2012 TeRes AI\2012teresAI\DX lib\DxLib_VC\プロジェクトに追加すべきファイル_VC用" /LIBPATH:"C:\Users\mainuser\Documents\GitHub\2012TeResAI\2012 TeRes AI\2012teresAI\DX lib\DxLib_VC\プロジェクトに追加すべきファイル_VC用" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Debug\2012teresAI.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:\Users\zero\Documents\GitHub\2012TeResAI\2012 TeRes AI\2012teresAI\Debug\2012teresAI.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\zero\Documents\GitHub\2012TeResAI\2012 TeRes AI\2012teresAI\Debug\2012teresAI.lib" /MACHINE:X86 Debug\2012teresAI.exe.embed.manifest.res
+         Debug\aiSample.obj
+         Debug\aiTest.obj
+         Debug\death_Ai.obj
+         Debug\draw.obj
+         Debug\Init_Ai.obj
+         Debug\Init_Tagger.obj
+         Debug\Intro.obj
+         Debug\main.obj
+         Debug\make_Stage.obj
+         Debug\next_Ai.obj
+         Debug\next_Tagger.obj
+         Debug\Ranking.obj
+         Debug\result.obj
+         Debug\setview_Ai.obj
+         Debug\taggerSample.obj
+         Debug\taggerTest.obj
+         Debug\update_Ai.obj
+         Debug\update_stage.obj
+         Debug\update_Tagger.obj
        Manifest:
+         C:\Program Files\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /out:"Debug\2012teresAI.exe.embed.manifest" /manifest Debug\2012teresAI.exe.intermediate.manifest
          すべての出力が最新のものです。
+       LinkEmbedManifest:
+         すべての出力が最新のものです。
+         2012teresAI.vcxproj -> C:\Users\zero\Documents\GitHub\2012TeResAI\2012 TeRes AI\2012teresAI\Debug\2012teresAI.exe
        FinalizeBuildStatus:
          ファイル "Debug\2012teresAI.unsuccessfulbuild" を削除しています。
          "Debug\2012teresAI.lastbuildstate" のタッチ タスクを実行しています。
@@ -17,4 +45,4 @@
 
 ビルドに成功しました。
 
-経過時間 00:00:00.65
+経過時間 00:00:08.02
