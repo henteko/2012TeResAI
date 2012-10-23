@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DxLib_VC2008用", "DxLib_VC2008用.vcproj", "{3BB28AC6-D2EB-4199-85E6-DC3477852E06}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3BB28AC6-D2EB-4199-85E6-DC3477852E06}.Debug|Win32.ActiveCfg = Debug|Win32
+		{3BB28AC6-D2EB-4199-85E6-DC3477852E06}.Debug|Win32.Build.0 = Debug|Win32
+		{3BB28AC6-D2EB-4199-85E6-DC3477852E06}.Release|Win32.ActiveCfg = Release|Win32
+		{3BB28AC6-D2EB-4199-85E6-DC3477852E06}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

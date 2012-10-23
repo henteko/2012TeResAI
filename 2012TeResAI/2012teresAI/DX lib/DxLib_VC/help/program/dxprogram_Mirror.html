@@ -1,0 +1,504 @@
+<TITLE>ＤＸライブラリ置き場　鏡面効果基本</TITLE>
+<HTML>
+	<HEAD>
+	</HEAD>
+	<BODY BGCOLOR="#ffffff" TEXT="#000000" LINK="#003388" VLINK="#800040">
+		<FONT SIZE="6" COLOR="#000000"><B>
+		<CENTER>
+			サンプルプログラム　鏡面効果基本
+		</CENTER>
+		</FONT>
+		<HR>
+		<IMG SRC="../Image/Mirror.jpg" HSPACE="0" VSPACE="0" ALT="鏡面効果基本">
+		<FONT SIZE="3" COLOR="#000000"><B>
+			<BR>
+			　３Ｄ空間上に平面の鏡を描画するプログラムです。<BR>
+			　このサンプルプログラムでは壁と床で鏡面効果を行っています。<BR><BR>
+
+			　鏡面効果の処理については私自身詳細に解説できるほど理解できているとは言えないので、簡単に流れをご説明しますと<BR><BR><BR>
+
+			１．鏡に映る映像を保存するスクリーンを作成する<BR><BR>
+
+			２．鏡自体を描画する前に鏡に映る映像を１で作成したスクリーンに描画する<BR><BR>
+
+			３．鏡自体を描画する際に２で得られた結果を鏡のテクスチャとして使用する<BR><BR><BR>
+
+
+			　という感じです。<BR>
+			　鏡に映る映像は、鏡が映っているカメラの座標と方向を鏡の面のまるっきり反対側に移動した場合の映像です。<BR><BR>
+
+			　解説ができないので、一応鏡面効果だけを利用する場合はサンプルプログラム中の頭に Mirror_ と付いている<BR>
+			以下の関数をそのまま鏡面効果を行いたいプログラムに持っていき、サンプルプログラム中の「// 鏡に映る映像を描画」と<BR>
+			コメントされている値を参考にカメラに映る映像の描画を行うことで、少し難しい関数 Mirror_SetupCamera や<BR>
+			Mirror_Render の中身を理解しなくても使うことができるようになっています。<BR><BR><BR>
+
+
+			// 鏡面効果処理の初期化( 鏡に映る映像を保存するスクリーンの作成 )<BR>
+			void Mirror_Initialize( void ) ;<BR><BR>
+
+			// 鏡に映る映像を描画するためのカメラの設定を行う、引数にカメラの座標と注視点を指定する<BR>
+			void Mirror_SetupCamera( int MirrorNo, VECTOR CameraEyePos, VECTOR CameraTargetPos ) ;<BR><BR>
+
+			// 鏡自体の描画<BR>
+			void Mirror_Render( int MirrorNo ) ;<BR><BR>
+
+			// 鏡のデバッグ描画<BR>
+			void Mirror_DebugRender( int MirrorNo, int DrawX, int DrawY ) ;<BR><BR><BR>
+
+
+			　また、このサンプルプログラムでは Mirror_SetupCamera と Mirror_Render の中で幾つかのＤＸライブラリの非公開関数を使用しています。<BR>
+			　今回のサンプルプログラムの為に公開関数にする程でもないのでここで簡単に解説します。<BR><BR><BR>
+
+
+			// 構造体 FLOAT4 のメンバ変数 x, y, z, w すべてに対して Scale を掛けた結果を返します<BR>
+			FLOAT4 F4Scale( FLOAT4 In, float Scale ) ;<BR><BR>
+
+			// 構造体 FLOAT4 のメンバ変数 x, y, z, w 同士の引き算を行います<BR>
+			FLOAT4 F4Sub( FLOAT4 In1, FLOAT4 In2 ) ;<BR><BR>
+
+			// 平面上の一点( 第一引数 )と平面の方向( 第二引数 )で表される平面と一点( 第三引数 )との最短距離を計算します<BR>
+			float Plane_Point_MinLength( VECTOR PlanePos, VECTOR PlaneNormal, VECTOR PointPos ) ;<BR><BR>
+
+			// ワールド座標をスクリーン座標に変換します、ただ、戻り値は ConvWoldPosToScreenPos と違い、x, y, z の他に w も含まれる<BR>
+			// 同次座標です、この w で x, y, z を割ると、ConvWoldPosToScreenPos で得られる x, y, z の値( スクリーン座標 )になります<BR>
+			FLOAT4 ConvWorldPosToScreenPosPlusW( VECTOR WorldPos ) ;<BR><BR><BR>
+
+
+			　尚、プログラムで使用しているモデルファイル ColTestStage.mqo と DxChara.x は Ver3.06c 以降の<BR>
+			ＤＸライブラリパッケージの中にある『サンプルプログラム実行用フォルダ』に入っています。<BR><BR><BR>
+
+<PRE>
+// 鏡面効果基本
+
+#include "DxLib.h"
+#include &lt;math.h&gt;
+
+
+#define SCREEN_W		640		// 画面の横幅
+#define SCREEN_H		480		// 画面の縦幅
+
+#define MIRROR_SCREEN_W		640		// 鏡に映る映像の取得に使用するスクリーンの横解像度
+#define MIRROR_SCREEN_H		480		// 鏡に映る映像の取得に使用するスクリーンの縦解像度
+#define MIRROR_POINTNUM		64		// 鏡の描画に使用する面の頂点分割数
+#define MIRROR_NUM		2		// 鏡の数
+#define MIRROR_DEBUG_SCALE	4		// 鏡のデバッグ表示時に元の何分の１にするかのサイズ
+
+#define CAMERA_SPEED		32.0f		// カメラの速度
+
+
+int CharaModel ;		// キャラクターモデル
+int StageModel ;		// ステージモデル
+
+int MirrorHandle[ MIRROR_NUM ] ;		// 鏡に映る映像の取得に使用するスクリーン
+FLOAT4 MirrorScreenPosW[ MIRROR_NUM ][ 4 ] ;	// 鏡に映る映像の取得に使用するクリーンの中の鏡の四隅の座標( 同次座標 )
+
+// 鏡のワールド座標
+VECTOR MirrorWorldPos[ MIRROR_NUM ][ 4 ] =
+{
+	{
+		{  2000.0f, 2000.0f, -4498.0f },
+		{ -2000.0f, 2000.0f, -4498.0f },
+		{  2000.0f,    0.0f, -4498.0f },
+		{ -2000.0f,    0.0f, -4498.0f },
+	},
+
+	{
+		{ -4000.0f, 10.0f,  4500.0f },
+		{  4000.0f, 10.0f,  4500.0f },
+		{ -4000.0f, 10.0f, -4500.0f },
+		{  4000.0f, 10.0f, -4500.0f },
+	}
+} ;
+
+// 鏡の Ambient Color
+COLOR_F MirrorAmbientColor[ MIRROR_NUM ] =
+{
+	{ 1.0f, 1.0f, 1.0f, 1.0f },
+	{ 0.0f, 0.0f, 0.0f, 0.0f },
+} ;
+
+// 鏡の Diffuse Color
+int MirrorDiffuseColor[ MIRROR_NUM ][ 4 ] =
+{
+	{ 255, 255, 255, 255 },
+	{   0, 255, 255, 255 },
+} ;
+
+// 鏡のブレンドモードとパラメータ
+int MirrorBlendParam[ MIRROR_NUM ][ 2 ] =
+{
+	{ DX_BLENDMODE_NOBLEND, 255 },
+	{ DX_BLENDMODE_ALPHA,   128 },
+} ;
+
+
+void Mirror_Initialize( void ) ;								// 鏡の初期化
+void Mirror_SetupCamera( int MirrorNo, VECTOR CameraEyePos, VECTOR CameraTargetPos ) ;		// 鏡に映る映像を描画するためのカメラの設定を行う
+void Mirror_Render( int MirrorNo ) ;								// 鏡の描画
+void Mirror_DebugRender( int MirrorNo, int DrawX, int DrawY ) ;					// 鏡のデバッグ描画
+
+void World_RenderProcess() ;									// ３Ｄ空間の描画
+
+
+// 鏡の初期化
+void Mirror_Initialize( void )
+{
+	int i ;
+
+	// 鏡に映る映像の取得に使用するスクリーンの作成
+	for( i = 0 ; i < MIRROR_NUM ; i ++ )
+	{
+		MirrorHandle[ i ] = MakeScreen( MIRROR_SCREEN_W, MIRROR_SCREEN_H, FALSE ) ;
+	}
+}
+
+// 鏡に映る映像を描画するためのカメラの設定を行う
+void Mirror_SetupCamera( int MirrorNo, VECTOR CameraEyePos, VECTOR CameraTargetPos )
+{
+	int i ;
+	float EyeLength, TargetLength ;
+	VECTOR MirrorNormal ;
+	VECTOR *MirrorWorldPosP ;
+	VECTOR MirrorCameraEyePos, MirrorCameraTargetPos ;
+
+	MirrorWorldPosP = MirrorWorldPos[ MirrorNo ] ;
+
+	// 鏡の面の法線を算出
+	MirrorNormal = VNorm( VCross( VSub( MirrorWorldPosP[ 1 ], MirrorWorldPosP[ 0 ] ), VSub( MirrorWorldPosP[ 2 ], MirrorWorldPosP[ 0 ] ) ) ) ;
+
+	// 鏡の面からカメラの座標までの最短距離、鏡の面からカメラの注視点までの最短距離を算出
+	EyeLength    = Plane_Point_MinLength( MirrorWorldPosP[ 0 ], MirrorNormal, CameraEyePos    ) ;
+	TargetLength = Plane_Point_MinLength( MirrorWorldPosP[ 0 ], MirrorNormal, CameraTargetPos ) ;
+
+	// 鏡に映る映像を描画する際に使用するカメラの座標とカメラの注視点を算出
+	MirrorCameraEyePos    = VAdd( CameraEyePos,    VScale( MirrorNormal, -EyeLength    * 2.0f ) ) ;
+	MirrorCameraTargetPos = VAdd( CameraTargetPos, VScale( MirrorNormal, -TargetLength * 2.0f ) ) ;
+
+	// 計算で得られたカメラの座標とカメラの注視点の座標をカメラの設定する
+	SetCameraPositionAndTarget_UpVecY( MirrorCameraEyePos, MirrorCameraTargetPos ) ;
+
+	// 鏡に映る映像の中での鏡の四隅の座標を算出( 同次座標 )
+	for( i = 0 ; i < 4 ; i ++ )
+	{
+		MirrorScreenPosW[ MirrorNo ][ i ] = ConvWorldPosToScreenPosPlusW( MirrorWorldPosP[ i ] ) ;
+	}
+}
+
+// 鏡の描画
+void Mirror_Render( int MirrorNo )
+{
+	int i ;
+	int j ;
+	int k ;
+	VERTEX3D Vert[ MIRROR_POINTNUM * MIRROR_POINTNUM ] ;
+	unsigned short Index[ ( MIRROR_POINTNUM - 1 ) * ( MIRROR_POINTNUM - 1 ) * 6 ] ;
+	MATERIALPARAM Material ;
+	VECTOR HUnitPos ;
+	VECTOR VUnitPos[ 2 ] ;
+	VECTOR HPos ;
+	VECTOR VPos[ 2 ] ;
+	FLOAT4 HUnitUV ;
+	FLOAT4 VUnitUV[ 2 ] ;
+	FLOAT4 HUV ;
+	FLOAT4 VUV[ 2 ] ;
+	VECTOR MirrorNormal ;
+	COLOR_U8 DiffuseColor ;
+	COLOR_U8 SpecularColor ;
+	int TextureW, TextureH ;
+	VECTOR *MirrorWorldPosP ;
+
+	MirrorWorldPosP = MirrorWorldPos[ MirrorNo ] ;
+
+	// 鏡の描画に使用するマテリアルのセットアップ
+	Material.Ambient  = MirrorAmbientColor[ MirrorNo ] ;
+	Material.Diffuse  = GetColorF( 0.0f, 0.0f, 0.0f, 0.0f ) ;
+	Material.Emissive = GetColorF( 0.0f, 0.0f, 0.0f, 0.0f ) ;
+	Material.Specular = GetColorF( 0.0f, 0.0f, 0.0f, 0.0f ) ;
+	Material.Power = 1.0f ;
+	SetMaterialParam( Material ) ;
+
+	// 鏡の面の法線を算出
+	MirrorNormal = VNorm( VCross( VSub( MirrorWorldPosP[ 1 ], MirrorWorldPosP[ 0 ] ), VSub( MirrorWorldPosP[ 2 ], MirrorWorldPosP[ 0 ] ) ) ) ;
+
+	// 鏡に映る映像を書き込んだ画像のテクスチャのサイズを取得
+	GetGraphTextureSize( MirrorHandle[ MirrorNo ], &TextureW, &TextureH ) ;
+
+	// 鏡の描画に使用する頂点のセットアップ
+	VUnitPos[ 0 ] =  VScale(  VSub( MirrorWorldPosP[ 2 ],   MirrorWorldPosP[ 0 ] ), 1.0f / ( MIRROR_POINTNUM - 1 ) ) ;
+	VUnitPos[ 1 ] =  VScale(  VSub( MirrorWorldPosP[ 3 ],   MirrorWorldPosP[ 1 ] ), 1.0f / ( MIRROR_POINTNUM - 1 ) ) ;
+	VUnitUV[ 0 ]  = F4Scale( F4Sub( MirrorScreenPosW[ MirrorNo ][ 2 ], MirrorScreenPosW[ MirrorNo ][ 0 ] ), 1.0f / ( MIRROR_POINTNUM - 1 ) ) ;
+	VUnitUV[ 1 ]  = F4Scale( F4Sub( MirrorScreenPosW[ MirrorNo ][ 3 ], MirrorScreenPosW[ MirrorNo ][ 1 ] ), 1.0f / ( MIRROR_POINTNUM - 1 ) ) ;
+	DiffuseColor  = GetColorU8( MirrorDiffuseColor[ MirrorNo ][ 0 ], MirrorDiffuseColor[ MirrorNo ][ 1 ], MirrorDiffuseColor[ MirrorNo ][ 2 ], MirrorDiffuseColor[ MirrorNo ][ 3 ] ) ;
+	SpecularColor = GetColorU8( 0, 0, 0, 0 ) ;
+	VPos[ 0 ]     = MirrorWorldPosP[ 0 ] ;
+	VPos[ 1 ]     = MirrorWorldPosP[ 1 ] ;
+	VUV[ 0 ]      = MirrorScreenPosW[ MirrorNo ][ 0 ] ;
+	VUV[ 1 ]      = MirrorScreenPosW[ MirrorNo ][ 1 ] ;
+	k = 0 ;
+	for( i = 0 ; i < MIRROR_POINTNUM ; i ++ )
+	{
+		HUnitPos = VScale(   VSub( VPos[ 1 ], VPos[ 0 ] ), 1.0f / ( MIRROR_POINTNUM - 1 ) ) ;
+		HPos     = VPos[ 0 ] ;
+		HUnitUV  = F4Scale( F4Sub(  VUV[ 1 ],  VUV[ 0 ] ), 1.0f / ( MIRROR_POINTNUM - 1 ) ) ;
+		HUV = VUV[ 0 ] ;
+		for( j = 0 ; j < MIRROR_POINTNUM ; j ++ )
+		{
+			Vert[ k ].pos  = HPos ;
+			Vert[ k ].norm = MirrorNormal ;
+			Vert[ k ].dif  = DiffuseColor ;
+			Vert[ k ].spc  = SpecularColor ;
+			Vert[ k ].u    = HUV.x / ( HUV.w * TextureW ) ;
+			Vert[ k ].v    = HUV.y / ( HUV.w * TextureH ) ;
+			Vert[ k ].su   = 0.0f ;
+			Vert[ k ].sv   = 0.0f ;
+			HUV  = F4Add( HUV,  HUnitUV  ) ;
+			HPos =  VAdd( HPos, HUnitPos ) ;
+			k ++ ;
+		}
+		VUV[ 0 ]  = F4Add(  VUV[ 0 ], VUnitUV[ 0 ]  ) ;
+		VUV[ 1 ]  = F4Add(  VUV[ 1 ], VUnitUV[ 1 ]  ) ;
+		VPos[ 0 ] =  VAdd( VPos[ 0 ], VUnitPos[ 0 ] ) ;
+		VPos[ 1 ] =  VAdd( VPos[ 1 ], VUnitPos[ 1 ] ) ;
+	}
+
+	// 鏡の描画に使用する頂点インデックスをセットアップ
+	k = 0 ;
+	for( i = 0 ; i < MIRROR_POINTNUM - 1 ; i ++ )
+	{
+		for( j = 0 ; j < MIRROR_POINTNUM - 1 ; j ++ )
+		{
+			Index[ k + 0 ] = ( i + 0 ) * MIRROR_POINTNUM + j + 0 ;
+			Index[ k + 1 ] = ( i + 0 ) * MIRROR_POINTNUM + j + 1 ;
+			Index[ k + 2 ] = ( i + 1 ) * MIRROR_POINTNUM + j + 0 ;
+			Index[ k + 3 ] = ( i + 1 ) * MIRROR_POINTNUM + j + 1 ;
+			Index[ k + 4 ] = Index[ k + 2 ] ;
+			Index[ k + 5 ] = Index[ k + 1 ] ;
+			k += 6 ;
+		}
+	}
+
+	// 描画モードをバイリニアフィルタリングに設定
+	SetDrawMode( DX_DRAWMODE_BILINEAR ) ;
+
+	// 描画ブレンドモードを変更
+	SetDrawBlendMode( MirrorBlendParam[ MirrorNo ][ 0 ], MirrorBlendParam[ MirrorNo ][ 1 ] ) ;
+
+	// 描画にＺバッファを使用する
+	SetUseZBuffer3D( TRUE ) ;
+
+	// Ｚバッファに書き込みを行う
+	SetWriteZBuffer3D( TRUE ) ;
+
+	// 鏡を描画
+	DrawPolygonIndexed3D( Vert, MIRROR_POINTNUM * MIRROR_POINTNUM, Index, ( MIRROR_POINTNUM - 1 ) * ( MIRROR_POINTNUM - 1 ) * 2, MirrorHandle[ MirrorNo ], FALSE ) ;
+
+	// Ｚバッファに書き込みを行う設定を元に戻す
+	SetWriteZBuffer3D( FALSE ) ;
+
+	// Ｚバッファを使用する設定を元に戻す
+	SetUseZBuffer3D( FALSE ) ;
+
+	// 描画ブレンドモードを元に戻す
+	SetDrawBlendMode( DX_BLENDMODE_NOBLEND, 255 ) ;
+
+	// 描画モードを元に戻す
+	SetDrawMode( DX_DRAWMODE_NEAREST ) ;
+}
+
+// 鏡のデバッグ描画
+void Mirror_DebugRender( int MirrorNo, int DrawX, int DrawY )
+{
+	int i ;
+	int j ;
+	FLOAT4 HUnitUV ;
+	FLOAT4 VUnitUV[ 2 ] ;
+	FLOAT4 HUV ;
+	FLOAT4 VUV[ 2 ] ;
+	int x ;
+	int y ;
+
+	// 指定の座標に鏡の映像の取得に使用したスクリーンを描画
+	DrawExtendGraph( DrawX, DrawY, DrawX + MIRROR_SCREEN_W / MIRROR_DEBUG_SCALE, DrawY + MIRROR_SCREEN_H / MIRROR_DEBUG_SCALE, MirrorHandle[ MirrorNo ], FALSE ) ;
+
+	// 鏡の映像の取得に使用したスクリーンの中の鏡の部分に点を描画
+	VUnitUV[ 0 ]  = F4Scale( F4Sub( MirrorScreenPosW[ MirrorNo ][ 2 ], MirrorScreenPosW[ MirrorNo ][ 0 ] ), 1.0f / ( MIRROR_POINTNUM - 1 ) ) ;
+	VUnitUV[ 1 ]  = F4Scale( F4Sub( MirrorScreenPosW[ MirrorNo ][ 3 ], MirrorScreenPosW[ MirrorNo ][ 1 ] ), 1.0f / ( MIRROR_POINTNUM - 1 ) ) ;
+	VUV[ 0 ]      = MirrorScreenPosW[ MirrorNo ][ 0 ] ;
+	VUV[ 1 ]      = MirrorScreenPosW[ MirrorNo ][ 1 ] ;
+	for( i = 0 ; i < MIRROR_POINTNUM ; i ++ )
+	{
+		HUnitUV  = F4Scale( F4Sub(  VUV[ 1 ],  VUV[ 0 ] ), 1.0f / ( MIRROR_POINTNUM - 1 ) ) ;
+		HUV = VUV[ 0 ] ;
+		for( j = 0 ; j < MIRROR_POINTNUM ; j ++ )
+		{
+			x = ( int )( HUV.x / HUV.w / MIRROR_DEBUG_SCALE ) ;
+			y = ( int )( HUV.y / HUV.w / MIRROR_DEBUG_SCALE ) ;
+
+			if( x > 0 && x < MIRROR_SCREEN_W / MIRROR_DEBUG_SCALE &&
+			    y > 0 && y < MIRROR_SCREEN_H / MIRROR_DEBUG_SCALE )
+			{
+				DrawPixel( DrawX + x, DrawY + y, GetColor( 0, 255, 0 ) ) ;
+			}
+
+			HUV  = F4Add( HUV,  HUnitUV  ) ;
+		}
+		VUV[ 0 ]  = F4Add(  VUV[ 0 ], VUnitUV[ 0 ]  ) ;
+		VUV[ 1 ]  = F4Add(  VUV[ 1 ], VUnitUV[ 1 ]  ) ;
+	}
+}
+
+// ３Ｄ空間の描画
+void World_RenderProcess()
+{
+	// ステージモデルの描画
+	MV1DrawModel( StageModel ) ;
+
+	// キャラクターモデルの描画
+	MV1DrawModel( CharaModel ) ;
+}
+
+
+// WinMain関数
+int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow )
+{
+	int CameraAngle ;		// カメラの水平角度
+	VECTOR CameraEyePosition ;	// カメラの座標
+	VECTOR CameraDirection ;	// カメラの向いている方向
+	VECTOR CameraTargetPosition ;	// カメラの注視点
+	int i ;
+
+	// ウインドウモードで起動
+	ChangeWindowMode( TRUE );
+
+	// 画面の解像度と色ビット深度を設定
+	SetGraphMode( SCREEN_W, SCREEN_H, 32 ) ;
+
+	// ＤＸライブラリの初期化
+	if( DxLib_Init() < 0 )
+		return -1 ;
+
+	// 鏡処理の初期化
+	Mirror_Initialize() ;
+
+	// キャラクターモデルの読み込み
+	CharaModel = MV1LoadModel( "DxChara.x" ) ;
+
+	// ステージモデルの読み込み
+	StageModel = MV1LoadModel( "ColTestStage.mqo" ) ;
+
+	// キャラクターモデルの設置
+	MV1SetPosition( CharaModel, VGet( 0.0f, 0.0f, -3500.0f ) ) ;
+	MV1SetRotationXYZ( CharaModel, VGet( 0.0f, 3.14159f / 2.0f, 0.0f ) ) ;
+	MV1AttachAnim( CharaModel, 7 ) ;
+
+	// カメラの角度を初期化
+	CameraAngle = 325 ;
+
+	// カメラの座標をセット
+	CameraEyePosition = VGet( -2605.0f, 670.0f, -2561.0f ) ;
+
+	// ライトの向きをセット
+	SetLightDirection( VGet( 1.0f, -1.0f, -1.0f ) ) ;
+
+	// メインループ(何かキーが押されたらループを抜ける)
+	while( ProcessMessage() == 0 )
+	{
+		// 左右キーが押されたらカメラを回転する
+		if( CheckHitKey( KEY_INPUT_LEFT  ) )
+		{
+			CameraAngle += 3 ;
+			if( CameraAngle > 360 )
+			{
+				CameraAngle -= 360 ;
+			}
+		}
+		if( CheckHitKey( KEY_INPUT_RIGHT ) )
+		{
+			CameraAngle -= 3 ;
+			if( CameraAngle < 0 )
+			{
+				CameraAngle += 360 ;
+			}
+		}
+
+		// カメラの向いている方向を算出
+		CameraDirection.x = cos( CameraAngle * 3.14159f / 180.0f ) ;
+		CameraDirection.y = 0.0f ;
+		CameraDirection.z = sin( CameraAngle * 3.14159f / 180.0f ) ;
+
+		// 上下キーが押されたらカメラを前進・後進させる
+		if( CheckHitKey( KEY_INPUT_UP ) )
+		{
+			CameraEyePosition = VAdd( CameraEyePosition, VScale( CameraDirection, CAMERA_SPEED ) ) ;
+		}
+		if( CheckHitKey( KEY_INPUT_DOWN ) )
+		{
+			CameraEyePosition = VSub( CameraEyePosition, VScale( CameraDirection, CAMERA_SPEED ) ) ;
+		}
+
+		// カメラの注視点座標を算出
+		CameraTargetPosition = VAdd( CameraEyePosition, CameraDirection ) ;
+
+
+		// 鏡に映る映像を描画
+		for( i = 0 ; i < MIRROR_NUM ; i ++ )
+		{
+			// 描画先を鏡に映る映像の取得に使用する画像を描画するスクリーンにする
+			SetDrawScreen( MirrorHandle[ i ] ) ;
+
+			// 画面を初期化する
+			ClearDrawScreen() ;
+
+			// 鏡に映る映像を描画する際に使用するカメラの設定を行う
+			Mirror_SetupCamera( i, CameraEyePosition, CameraTargetPosition ) ;
+
+			// ３Ｄ空間の描画
+			World_RenderProcess() ;
+		}
+
+
+		// 裏画面を描画対象にする
+		SetDrawScreen( DX_SCREEN_BACK ) ;
+
+		// 画面をクリア
+		ClearDrawScreen() ;
+
+		// カメラの設定を行う
+		SetCameraPositionAndTarget_UpVecY( CameraEyePosition, CameraTargetPosition ) ;
+
+		// ３Ｄ空間の描画
+		World_RenderProcess() ;
+
+		// 鏡の描画
+		for( i = 0 ; i < MIRROR_NUM ; i ++ )
+		{
+			Mirror_Render( i ) ;
+		}
+
+
+		// 画面左上に鏡のデバッグ表示
+		for( i = 0 ; i < MIRROR_NUM ; i ++ )
+		{
+			Mirror_DebugRender( i, 20 + 180 * i, 0 ) ;
+		}
+
+
+		// 裏画面の内容を表画面に反映
+		ScreenFlip();
+	}
+
+	// ＤＸライブラリの後始末
+	DxLib_End();
+
+	// ソフトの終了
+	return 0;
+}
+
+
+</PRE>
+
+			<HR>
+			<A HREF="../index.html">戻る</A><BR><BR>
+		</B></FONT>
+	</BODY>
+</HTML>

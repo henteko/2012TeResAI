@@ -1,0 +1,327 @@
+<title>シューティングゲームプログラム</title>
+<html>
+	<head>
+		<meta name="keyword" content="講座 シューティングプログラム シューティング">
+	</head>
+	<body bgcolor="#ffffff" text="#000000" link="#0033cc" vlink="#800040">
+
+		<font size="2">ゲーム制作講座１－６<br><br></font>
+		<font size="6"><b>６．敵の当たり判定をつけよう</b></font>
+		<hr><br><br>
+
+		<font size="3"><B>
+
+		　前回までに自機が移動、攻撃の一通りの動作が出来るようになりました。<BR>
+		　今回は折角自機が攻撃できるようになったので、敵に弾が当たるようにしたいと思います。<BR><BR>
+
+		　さて、敵に弾が当たったかを調べるにはどうすればいいでしょうか？<BR>
+		　現在取得できる情報は敵の存在する領域の左上座標、弾の存在する領域の左上座標、あと<BR>
+		敵と弾それぞれのグラフィックサイズです。なんとかこの情報だけで弾と敵が接触しているか<BR>
+		判定してみましょう。<BR><BR>
+
+		　まず以下の定義をします。<BR><BR>
+
+<FONT COLOR="#770000">
+<pre>
+	int ShotX ShotY ShotW ShotH     SikakuX SikakuY SikakuW SikakuH 
+
+	ShotX , ShotY : 弾の存在矩形左上頂点座標のＸ成分とＹ成分
+	ShotW , ShotH : 弾のグラフィックの幅と高さ
+
+	SikakuX , SikakuY : 敵の存在矩形左上頂点座標のＸ成分とＹ成分
+	SikakuW , SikakuH : 敵のグラフィックの幅と高さ
+</pre>
+</font>
+
+		<IMG SRC="image/i1_6_1.gif" WIDTH="300" HEIGHT="301" HSPACE="20" VSPACE="20"><BR>
+
+		　上記の定義のもとに弾と敵が重なるとき成り立つ条件式は以下のものになります。<BR>
+		複雑な概念はありませんので御託を並べるより、式を見て考えた方が理解し易いと思います。<BR><BR>
+
+<FONT COLOR="#770000">
+<pre>
+	if( ( ( ShotX > SikakuX && ShotX < SikakuX + SikakuW ) ||
+		( SikakuX > ShotX && SikakuX < ShotX + ShotW ) ) &&
+		( ( ShotY > SikakuY && ShotY < SikakuY + SikakuH ) ||
+		( SikakuY > ShotY && SikakuY < ShotY + ShotH ) ) )
+	{
+		// 接触している
+	}
+	else
+	{
+		// 接触していない
+	}
+</pre>
+</font>
+<BR>
+		　ごちゃごちゃしていますね…やはり少し解説します。<BR>
+		　まず重なっている条件として、<FONT COLOR="#770000">Ｘ成分だけで見てもＹ成分だけで見てもお互いの存在領域が<BR>
+		重なっている</font>必要があります。<BR>
+		
+		<IMG SRC="image/i1_6_2.gif" WIDTH="300" HEIGHT="345" HSPACE="20" VSPACE="20"><BR>
+
+		　そして、先程の式の<BR><BR>
+
+<FONT COLOR="#770000">
+<pre>
+	( ( ShotX > SikakuX && ShotX < SikakuX + SikakuW ) ||
+	( SikakuX > ShotX && SikakuX < ShotX + ShotW ) )
+</pre>
+</font>
+<BR>
+
+		　がＸ成分の存在領域が重なっているかを判定している式で、<BR><BR>
+
+<FONT COLOR="#770000">
+<pre>
+	( ( ShotY > SikakuY && ShotY < SikakuY + SikakuH ) ||
+	( SikakuY > ShotY && SikakuY < ShotY + ShotH ) ) 
+</pre>
+</font>
+<BR>
+
+		　がＹ成分の存在領域が重なっているかを判定している式です。<BR>
+		　どちらの式も成り立たなければならないので、Ｘ成分、Ｙ成分の２つの判定式の繋ぎ目には<BR>
+		『<FONT COLOR="#770000">&&</font>』演算子があります。<BR>
+		　各成分ごとに重なっているかを判定している式は、どういう仕組みか考えてみてください。<BR>
+		大小比較だけでこれといった演算はしていないので落ちついて考えれば容易にイメージできる<BR>
+		と思います。<BR><BR><BR>
+
+
+		　さて、これで当たり判定自体の処理は出来るようになりました。<BR>
+		　とりあえずこの条件式を使って敵に弾が当たるようにしたいと思います。<BR><BR>
+
+		　で、出来たのが次のプログラムです。<BR>
+		　弾の数だけ当たり判定をしなくてはいけないことに注意してください。<BR><BR>
+		　
+
+<font color="#000066">
+<PRE>
+#include "DxLib.h"
+
+#define SHOT 20
+
+// WinMain関数
+int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,
+					 LPSTR lpCmdLine, int nCmdShow )
+{
+	int BallX , BallY , BallGraph ;
+	int SikakuX , SikakuY , SikakuMuki , SikakuGraph ;
+	int ShotX[SHOT] , ShotY[SHOT] , ShotFlag[SHOT] , ShotGraph ;
+<font color="#880000">	int SikakuW , SikakuH , ShotW , ShotH ;</font>
+	int ShotBFlag ;
+	int i ;
+
+	// 画面モードの設定
+	SetGraphMode( 640 , 480 , 16 ) ;
+
+	// ＤＸライブラリ初期化処理
+	if( DxLib_Init() == -1 ) return -1;
+
+	// グラフィックの描画先を裏画面にセット
+	SetDrawScreen( DX_SCREEN_BACK ) ;
+
+	// ボール君のグラフィックをメモリにロード＆表示座標をセット
+	BallGraph = LoadGraph( "Ball.png" ) ;
+	BallX = 288 ; BallY = 400 ;
+
+	// 四角君のグラフィックをメモリにロード＆表示座標をセット
+	SikakuGraph = LoadGraph( "Sikaku.png" ) ;
+	SikakuX = 0 ; SikakuY = 50 ;
+
+	// 弾のグラフィックをメモリにロード
+	ShotGraph = LoadGraph( "Shot.png" ) ;
+
+	// 弾が画面上に存在しているか保持する変数に『存在していない』を意味する０を代入しておく
+	for( i = 0 ; i < SHOT ; i ++ )
+	{
+		ShotFlag[i] = 0 ;
+	}
+
+	// ショットボタンが前のフレームで押されたかどうかを保存する変数に０(押されいない)を代入
+	ShotBFlag = 0 ;
+
+	// 四角君の移動方向をセット
+	SikakuMuki = 1 ;
+
+<font color="#880000">	// 弾のグラフィックのサイズをえる
+	GetGraphSize( ShotGraph , &ShotW , &ShotH ) ;
+
+	// 四角君のグラフィックのサイズを得る
+	GetGraphSize( SikakuGraph , &SikakuW , &SikakuH ) ;
+</font>
+	// 移動ルーチン
+	while( 1 )
+	{
+		// 画面を初期化(真っ黒にする)
+		ClearDrawScreen() ;
+
+		// ボール君の操作ルーチン
+		{
+			// ↑キーを押していたらボール君を上に移動させる
+			if( CheckHitKey( KEY_INPUT_UP ) == 1 ) BallY -= 3 ;
+
+			// ↓キーを押していたらボール君を下に移動させる
+			if( CheckHitKey( KEY_INPUT_DOWN ) == 1 ) BallY += 3 ;
+
+			// ←キーを押していたらボール君を左に移動させる
+			if( CheckHitKey( KEY_INPUT_LEFT ) == 1 ) BallX -= 3 ;
+
+			// →キーを押していたらボール君を右に移動させる
+			if( CheckHitKey( KEY_INPUT_RIGHT ) == 1 ) BallX += 3 ;
+
+			// スペースキーを押した場合は処理を分岐
+			if( CheckHitKey( KEY_INPUT_SPACE ) )
+			{
+				// 前フレームでショットボタンを押したかが保存されている変数が０だったら弾を発射
+				if( ShotBFlag == 0 )
+				{
+					// 画面上にでていない弾があるか、弾の数だけ繰り返して調べる
+					for( i = 0 ; i < SHOT ; i ++ )
+					{
+						// 弾iが画面上にでていない場合はその弾を画面に出す
+						if( ShotFlag[i] == 0 )
+						{
+							int Bw, Bh, Sw, Sh ;
+
+							// ボール君と弾の画像のサイズを得る
+							GetGraphSize( BallGraph , &Bw , &Bh ) ;
+							GetGraphSize( ShotGraph , &Sw , &Sh ) ;
+
+							// 弾iの位置をセット、位置はボール君の中心にする
+							ShotX[i] = ( Bw - Sw ) / 2 + BallX ;
+							ShotY[i] = ( Bh - Sh ) / 2 + BallY ;
+
+							// 弾iは現時点を持って存在するので、存在状態を保持する変数に１を代入する
+							ShotFlag[i] = 1 ;
+
+							// 一つ弾を出したので弾を出すループから抜けます
+							break ;
+						}
+					}
+				}
+
+				// 前フレームでショットボタンを押されていたかを保存する変数に１(おされていた)を代入
+				ShotBFlag = 1 ;
+			}
+			else
+			{
+				// ショットボタンが押されていなかった場合は
+				// 前フレームでショットボタンが押されていたかを保存する変数に０(おされていない)を代入
+				ShotBFlag = 0 ;
+			}
+
+			// ボール君が画面左端からはみ出そうになっていたら画面内の座標に戻してあげる
+			if( BallX < 0 ) BallX = 0 ;
+
+			// ボール君が画面右端からはみ出そうになっていたら画面内の座標に戻してあげる
+			if( BallX > 640 - 64 ) BallX = 640 - 64  ;
+
+			// ボール君が画面上端からはみ出そうになっていたら画面内の座標に戻してあげる
+			if( BallY < 0 ) BallY = 0 ;
+
+			// ボール君が画面下端からはみ出そうになっていたら画面内の座標に戻してあげる
+			if( BallY > 480 - 64 ) BallY = 480 - 64 ;
+
+			// ボール君を描画
+			DrawGraph( BallX , BallY , BallGraph , FALSE ) ;
+		}
+
+		// 弾の数だけ弾を動かす処理を繰り返す
+		for( i = 0 ; i < SHOT ; i ++ )
+		{
+			// 自機の弾iの移動ルーチン( 存在状態を保持している変数の内容が１(存在する)の場合のみ行う )
+			if( ShotFlag[ i ] == 1 )
+			{
+				// 弾iを１６ドット上に移動させる
+				ShotY[ i ] -= 16 ;
+
+				// 画面外に出てしまった場合は存在状態を保持している変数に０(存在しない)を代入する
+				if( ShotY[ i ] < -80 )
+				{
+					ShotFlag[ i ] = 0 ;
+				}
+
+				// 画面に弾iを描画する
+				DrawGraph( ShotX[ i ] , ShotY[ i ] , ShotGraph , FALSE ) ;
+			}
+		}
+
+		// 四角君の移動ルーチン
+		{
+			// 四角君の座標を移動している方向に移動する
+			if( SikakuMuki == 1 ) SikakuX += 3 ;
+			if( SikakuMuki == 0 ) SikakuX -= 3 ;
+
+			// 四角君が画面右端からでそうになっていたら画面内の座標に戻してあげ、移動する方向も反転する
+			if( SikakuX > 576 )
+			{
+				SikakuX = 576 ;
+				SikakuMuki = 0 ;
+			}
+
+			// 四角君が画面左端からでそうになっていたら画面内の座標に戻してあげ、移動する方向も反転する
+			if( SikakuX < 0 )
+			{
+				SikakuX = 0 ;
+				SikakuMuki = 1 ;
+			}
+
+			// 四角君を描画
+			DrawGraph( SikakuX , SikakuY , SikakuGraph , FALSE ) ;
+		}
+
+<font color="#880000">		// 弾と敵の当たり判定、弾の数だけ繰り返す
+		for( i = 0 ; i < SHOT ; i ++ )
+		{
+			// 弾iが存在している場合のみ次の処理に映る
+			if( ShotFlag[ i ] == 1 )
+			{
+				// 四角君との当たり判定
+				if( ( ( ShotX[i] > SikakuX && ShotX[i] < SikakuX + SikakuW ) ||
+					( SikakuX > ShotX[i] && SikakuX < ShotX[i] + ShotW ) ) &&
+					( ( ShotY[i] > SikakuY && ShotY[i] < SikakuY + SikakuH ) ||
+					( SikakuY > ShotY[i] && SikakuY < ShotY[i] + ShotH ) ) )
+				{
+					// 接触している場合は当たった弾の存在を消す
+					ShotFlag[ i ] = 0 ;
+				}
+			}
+		}
+</font>
+		// 裏画面の内容を表画面にコピーする
+		ScreenFlip() ;
+
+		// Windows 特有の面倒な処理をＤＸライブラリにやらせる
+		// -1 が返ってきたらループを抜ける
+		if( ProcessMessage() < 0 ) break ;
+
+		// もしＥＳＣキーが押されていたらループから抜ける
+		if( CheckHitKey( KEY_INPUT_ESCAPE ) ) break ;
+	}
+
+	// ＤＸライブラリ使用の終了処理
+	DxLib_End() ;
+
+	// ソフトの終了
+	return 0 ;
+}
+</pre>
+</font>
+<BR>
+		<font color="#008800"><実行図></font><BR>
+		<IMG SRC="image/i1_6_3.gif" WIDTH="256" HEIGHT="192" HSPACE="20" VSPACE="20"><BR>
+
+		　グラフィックのサイズの取得には <A HREF="../dxfunc.html#R3N13">GetGraphSize</A> 関数を使っています。<BR>
+		　実行してみて弾を四角君に当てると確かに弾が消え、きちんと弾の当たり判定が<BR>
+		行われていることが確認できると思います。<BR><BR>
+
+		　さて、今回はとりあえず弾があたるようになっただけですので、次は四角君に弾が<BR>
+		当たった時のリアクションをつけてみたいと思います。<BR>
+		<hr>
+
+		<A href="../dxlecture_main.html">戻る</a>
+
+		</b></font>
+	</body>
+</html>

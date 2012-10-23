@@ -1,0 +1,118 @@
+<title>ゲームプログラムの基礎知識</title>
+<html>
+	<head>
+		<meta name="keyword" content="講座 シューティングプログラム シューティング">
+	</head>
+	<body bgcolor="#ffffff" text="#000000" link="#0033cc" vlink="#800040">
+
+		<font size="2">ゲーム制作講座５<br><br></font>
+		<font size="6"><b>５．高速グラフィック描画<BR>(ディスクアクセスとメモリアクセス)</b></font>
+		<hr><br><br>
+
+		<font size="3"><B>
+		　今回は今までのグラフィック描画速度を何倍も高速にする方法を解説したいと思います。<BR><BR>
+
+		　突然ですが<font color="#770000">ディスクアクセス(ファイルをセーブしたりロードしたりする作業)</font>と<font color="#770000">メモリアクセス(ロードしたファイル<BR>
+		データなどを参照したり書き換えたりする作業)</font>はどちらが速いでしょうか？<BR><BR>
+
+		　…いうまでもなく<font color="#770000">メモリアクセス</font>です。あまりにも当たり前なので特に説明はしません。<BR><BR>
+		
+		　そして今まで絵を表示するために使ってきた <a href="../dxfunc.html#R3N1">LoadGraphScreen</a> 関数はグラフィックのデータをその都度<BR>
+		<font color="#770000">ディスク上</font>のファイルから読みこんでいます。そうです<font color="#770000">ディスクアクセス</font>です。つまりとてつもなく今までの処理形態は<BR>
+		<font color="#770000">遅い</font>のです。<BR><BR>
+
+		　普通ゲームなどに限らず<font color="#770000">多用するグラフィックや音のデータ</font>は<font color="#770000">パソコンのメモリ上にあらかじめロード</font>しておき、<BR>
+		<font color="#770000">メモリアクセスで高速に画面に絵を描画したり瞬時に音を鳴らしたり</font>します。<BR><BR>
+
+		　特にゲームでは高速なグラフィックの描画を行わなければならないので、メモリへグラフィックデータを読み<BR>
+		込むと言う方法は必要不可欠です。そんな重要なメモリへのロードですが、ＤＸライブラリは <a href="../dxfunc.html#R3N2">LoadGraph</a> という<BR>
+		関数を使うことでそれを実現する事が出来ます。<BR><BR>
+
+		　では早速ですが<font color="#770000">メモリへグラフィックデータをロード</FONT>する機能を使って、画面左上に<font color="#770000">『test1.bmp』</font>という<BR>
+		画像ファイルを表示するというだけのプログラムを見てみてください。<BR>
+
+
+<font color="#000066"><pre>
+#include "DxLib.h"
+
+// WinMain関数
+int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,
+					 LPSTR lpCmdLine, int nCmdShow )
+{
+	int GraphHandle ;
+
+	// ＤＸライブラリ初期化処理
+	if( DxLib_Init() == -1 ) return -1;
+
+<font color="#550000">	// グラフィック『test1.bmp』をメモリにロード
+	GraphHandle = LoadGraph( "test1.bmp" ) ;
+
+	// 0,0 座標にメモリに読みこんだグラフィックを描画
+	DrawGraph( 0 , 0 , GraphHandle , FALSE ) ;</font>
+
+	// キー入力を待つ
+	WaitKey() ;
+
+	// ＤＸライブラリ使用の終了処理
+	DxLib_End() ;
+
+	// ソフトの終了
+	return 0 ;
+}
+</font></pre>
+
+		　上記のプログラムを <font color="#770000">LoadGraphScreen</font> を使った場合は以下の示すプログラムになります。<BR>
+
+<font color="#000066"><pre>
+#include "DxLib.h"
+
+// WinMain関数
+int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,
+					 LPSTR lpCmdLine, int nCmdShow )
+{
+	// ＤＸライブラリ初期化処理
+	if( DxLib_Init() == -1 ) return -1;
+
+<font color="#550000">	// 0,0 座標にグラフィック『test1.bmp』を描画
+	LoadGraphScreen( 0 , 0 , "test1.bmp" , FALSE ) ;</font>
+
+	// キー入力を待つ
+	WaitKey() ;
+
+	// ＤＸライブラリ使用の終了処理
+	DxLib_End() ;
+
+	// ソフトの終了
+	return 0 ;
+}
+</font></pre>
+		<font color="#008800"><実行例></font><BR>
+		<IMG SRC="image/i1.jpg" WIDTH="256" HEIGHT="192" HSPACE="20" VSPACE="20"><BR>
+
+		　さて<font color="#770000">メモリにグラフィックデータをロード</font>する <font color="#770000">LoadGraph 関数</font>は引数として<font color="#770000">ファイル名</font>を取り、戻り値に <font color="#770000">int</font> 型の、<BR>
+		<font color="#770000">メモリに保存したグラフィックデータの識別番号</font>を返します。この<font color="#770000">識別番号</font>は<font color="#770000">ロードしたグラフィックを描画したり<BR>
+		メモリ上からグラフィックデータを削除したりする場合に必要</font>となりますので<font color="#770000">必ず変数に保存しておく必要</font>があります。<BR>
+		(上記のプログラムでは <font color="#770000">GraphHandle</font> という変数に保存しています)<BR>
+		　なお<font color="#770000">グラフィックデータの識別番号</font>の事をグラフィックデータを間接的に示している番号である事から<font color="#770000">『グラフィック<BR>
+		ハンドル』</font>とＤＸライブラリの関数リファレンスでは呼んでいますので注意してください。<BR><BR>
+
+		　そしてメモリにロードしたグラフィックデータを使って画像を描画する場合は、<font color="#770000">LoadGraphScreen</font> とは別に、ロードした<BR>
+		グラフィックデータを画面に描画する専用の <a href="../dxfunc.html#R3N7">DrawGraph</a> 関数を使う必要があります。この関数は <font color="#770000">LoadGraphScreen</font> と違い、<BR>
+		<font color="#770000">LoadGraphScreen</font> で	<font color="#770000">グラフィックファイル名</font>を入れていた引数部に <font color="#770000">LoadGraph 関数を使ってグラフィックをロードした時<BR>
+		に戻ってきたグラフィックデータの識別番号</font>を指定してやる必要があります。違いはそれだけです。上記のサンプルでは <BR>
+		<font color="#770000">LoadGraph</font> 関数使用時に<font color="#770000">識別番号を保存した GraphHandle</font> という変数をここに入れています。<BR><BR>
+
+		　今回はこれで終りです。これだけで描画速度が<font color="#770000">１００～２００倍</font>になります。(^^<BR>
+		　短かったですがこれからはグラフィックの<font color="#770000">識別番号(グラフィックハンドル)</font>を使ってグラフィックを描画しますので<BR>
+		この事はよく理解しておいてください。<BR><BR>
+
+		　さて次は基礎部分から少し抜けてシューティングゲームらしくなって行きます。<BR>
+		　そうですシューティングです。最初はシューティングから作れるようになりましょう！<BR>
+
+		<hr>
+
+		<A href="../dxlecture_main.html">戻る</a>
+
+		</b></font>
+	</body>
+</html>

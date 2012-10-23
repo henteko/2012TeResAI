@@ -1,0 +1,392 @@
+<TITLE>ＤＸライブラリ置き場　使い方説明</TITLE>
+<HTML>
+	<HEAD>
+	</HEAD>
+	<BODY BGCOLOR="#ffffff" TEXT="#000000" LINK="#0033CC" VLINK="#800040">
+	<TABLE ALIGN="CENTER" WIDTH=650  CELLSPACING=0 CELLPADDING=0 >
+		<TR>
+		<TD ALIGN="CENTER">
+		<FONT SIZE="6" COLOR="#000000"><B>
+			ＢｏｒｌａｎｄＣ＋＋　Ｃｏｍｐｉｌｅｒ　５．５<BR>　によるＤＸライブラリの使い方
+		</FONT>
+		</TD></TR>
+		<TR><TD>
+		<HR>
+		<FONT SIZE="3" COLOR="#000000"><B>
+		<BR>
+
+		　BorlandC++ Compiler 5.5 を使用してＤＸライブラリを使ったソフトを制作するには以下のような手順を踏みます。<BR><BR>
+
+		<A HREF="#R1">1.BorlandC++ Compiler 5.5 によるプログラム開発に必要なものを揃える<BR><BR></A>
+		<A HREF="#R2">2.ＤＸライブラリを使うために必要なものを揃える<BR><BR></A>
+		<A HREF="#R3">3.BorlandC++ Compiler 5.5 のセッティングをする<BR><BR></A>
+		<A HREF="#R4">4.プロジェクトの作成<BR><BR></A>
+		<A HREF="#R5">5.プロジェクトへＤＸライブラリファイルを追加<BR><BR></A>
+		<A HREF="#R6">6.プロジェクトへ新規プログラムファイルを作成・追加<BR><BR></A>
+		<A HREF="#R7">7.プログラムを組む<BR><BR></A>
+		<A HREF="#R8">8.プロジェクトのビルド、実行<BR><BR><BR><BR></A>
+
+
+		<A NAME="R1">
+		<FONT COLOR="#008800">
+		1.BorlandC++ Compiler 5.5 によるプログラム開発に必要なものを揃える<BR><BR>
+		</FONT>
+		</A>
+
+		　<FONT COLOR="#990033">BorlandC++ Compiler 5.5</FONT> を使用して快適にプログラム開発が出来る
+		ようにするには以下のものが必要です。<BR><BR>
+
+		<FONT COLOR="#990033">
+		　　BorlandC++ Compiler 5.5<BR>
+		　　ＢＣＣ　Ｄｅｖｅｌｏｐｅｒ<BR><BR>
+		</FONT>
+
+		　まず一つ目の <FONT COLOR="#990033">BorlandC++ Compiler 5.5</FONT> はプログラムをコンパイル
+		して実行可能なソフトを作成するのに無くてはならない代物です。<BR>
+		　なんとこちらはボーランドのＷＥＢページにて無料で配布されていますので、有り難くダウンロードさせて頂きましょう。<BR><BR>
+
+			ボーランドの <FONT COLOR="#990033">BorlandC++ Compiler 5.5</FONT> 無料ダウンロードサービスページ<BR>
+			<A HREF="http://www.codegear.com/jp/downloads/free/cppbuilder"><B>http://www.codegear.com/jp/downloads/free/cppbuilder</B></A><BR><BR>
+
+		　ダウンロードが完了したら、ここでとりあえずインストールしましょう。<BR>
+		　インストール先はデフォルトである <FONT COLOR="#990033">c:\borland\bcc55</FONT> にして下さい。
+		というのもこれから <FONT COLOR="#990033">BorlandC++ Compiler 5.5</FONT> のインストール先は全て
+		<FONT COLOR="#990033">c:\borland\bcc55</FONT> を前提として説明をするからです。<BR><BR><BR>
+
+
+		　二つ目の <FONT COLOR="#990033">ＢＣＣ　Ｄｅｖｅｌｏｐｅｒ</FONT> は <FONT COLOR="#990033">BorlandC++ Compiler</FONT> 用の
+		開発環境ソフトです。<BR>
+		　<FONT COLOR="#990033">BorlandC++ Compiler 5.5</FONT> だけでもプログラムのコンパイルは可能ですが
+		あまり初心者向けでは無い、というか、取っ付き難いので、とりあえずこちら
+		をダウンロードして下さい。<BR><BR>
+		
+		　　　　Ｊｍ　ＨｏｍｅＰａｇｅ<BR>
+		　　　　<A HREF="http://www.hi-ho.ne.jp/jun_miura/"><B>http://www.hi-ho.ne.jp/jun_miura/</B></A><BR><BR>
+		
+		　ちなみにダウンロード出来るファイルは <FONT COLOR="#990033">lzh</FONT> という形式のデータ圧縮が
+		施されてされています。解凍(元に戻す事)をして元の形に戻さないと使うことが
+		出来ませんので、もし解凍ソフトが無い方はこちらから解凍ソフトをダウンロード
+		して下さい。<BR><BR>
+		
+		　　　　Ｌｈａｓａ３２ (ベクターダウンロードページ)<BR>
+		　　　　<A HREF="http://www.vector.co.jp/soft/win95/util/se026842.html"><B>http://www.vector.co.jp/soft/win95/util/se026842.html</B></A><BR><BR>
+		
+		　こちらのソフトの使い方はＬｈａｓａ３２に付属のドキュメントをご覧下さい。<BR><BR>
+		
+		　<FONT COLOR="#990033">ＢＣＣ　Ｄｅｖｅｌｏｐｅｒ</FONT> を無事解凍することが出来たら、とりあえず実行して
+		下さい。(bccdev$$$$ フォルダ内の <FONT COLOR="#990033">BccDev.exe</FONT> をダブルクリック($$$$=バージョン番号))<BR>
+		　初回起動の場合は『<FONT COLOR="#990033">環境設定</FONT>』ウインドウが開かれるはずです。<BR>
+		　まず『<FONT COLOR="#990033">コンパイラ設定</FONT>』タブが選択されていて、『<FONT COLOR="#990033">コンパイラ</FONT>』の項目でカーソルが
+		点滅していると思いますが、ここに先程インストールした <FONT COLOR="#990033">BorlandC++ Compiler 5.5</FONT>
+		のフォルダ中の <FONT COLOR="#990033">BCC32.exe</FONT> のパスを入力してください。<BR><BR>
+		
+		　因みに先程の説明通り <FONT COLOR="#990033">BorlandC++ Compiler 5.5</FONT> を <FONT COLOR="#990033">c:\borland\bcc55</FONT> に
+		インストールした場合は<BR><BR>
+		
+		　　　　<FONT COLOR="#990033">c:\borland\bcc55\Bin\bcc32.exe</FONT><BR><BR>
+		
+		　となります。<BR><BR>
+		
+		　必要最低限の設定はこれだけです。<BR>
+		　後は見て分かる範囲で好みの設定をして、それが終わったら『<FONT COLOR="#990033">環境設定</FONT>』
+		ウインドウの下のほうにあるボタン『<FONT COLOR="#990033">設定</FONT>』を押して、ウインドウを閉じて
+		下さい。<BR>
+		　<FONT COLOR="#990033">ＢＣＣ　Ｄｅｖｅｌｏｐｅｒ</FONT> の設定は以上です。<BR>
+		　とりあえず『<FONT COLOR="#990033">×</FONT>』ボタンを押すなりしてソフトを終了しましょう。<BR><BR><BR><BR>
+
+
+
+		<A NAME="R2">
+		<FONT COLOR="#008800">
+		2.ＤＸライブラリを使うために必要なものを揃える<BR><BR>
+		</FONT>
+		</A>
+
+		　<FONT COLOR="#990033">BorlandC++ Compiler 5.5</FONT> を使用して<FONT COLOR="#990033">ＤＸライブラリ</FONT>を使うには
+		コンパイラと<FONT COLOR="#990033">ＤＸライブラリ</FONT>のパッケージが必要です。<BR>
+		　<FONT COLOR="#990033">BorlandC++ Compiler 5.5 用のＤＸライブラリ</FONT>をまだダウンロードされていない場合は、
+		本サイトの<A HREF="dxdload.html">ダウンロードページ</A>にありますので、ダウンロードしておいて下さい。<BR><BR><BR><BR>
+
+
+
+		<A NAME="R3">
+		<FONT COLOR="#008800">
+		3.BorlandC++ Compiler 5.5 のセッティングをする<BR><BR>
+		</FONT>
+		</A>
+
+		　さて、<FONT COLOR="#990033">BorlandC++ Compiler 5.5</FONT> でプログラムをする為のアイテムは
+		全て揃いました。(因みに<FONT COLOR="#990033">ＤＸライブラリ</FONT>は間違いなく
+		<FONT COLOR="#990033">Borland C++ Compiler 5.5</FONT> 用のパッケージをダウンロードして下さいね)<BR><BR>
+
+		　最後に C の標準ライブラリの位置を <FONT COLOR="#990033">Borland C++ Compiler 5.5</FONT> が
+		分かるようにする必要があります。<BR><BR>
+
+		　まずは <FONT COLOR="#990033">Borland C++ Compiler 5.5</FONT> の <FONT COLOR="#990033">bin</FONT> フォルダを開いてください。<BR>
+		(説明通りにして頂いていれば  <FONT COLOR="#990033">c:\borland\bcc55\bin</FONT>  となります)<BR><BR>
+
+		　そして徐にウインドウズの標準ソフト『メモ帳(Note Pad)』を開いてください。<BR><BR>
+		
+		　何故メモ帳なのかといいますと、位置を知らせるための手段は設定ファイルを作るしか無く、そしてその設定ファイルはテキストファイルだからです。<BR><BR>
+
+		　ともあれ、まずは何も書いていない状態で『<FONT COLOR="#990033">ファイル</FONT>』→『<FONT COLOR="#990033">名前をつけて保存</FONT>』をして下さい。<BR>
+		　<FONT COLOR="#990033">c:\borland\bcc55\bin</FONT> の位置までフォルダを移動し、ファイル名は
+		『<FONT COLOR="#990033">"bcc32.cfg"</FONT>』 とします。注意することは必ずファイル名を『<FONT COLOR="#990033">"</FONT>』で囲ってやる必要が
+		あることです。囲わないと『<FONT COLOR="#990033">bcc32.cfg.txt</FONT>』というファイル名で保存されてしまいます。<BR><BR>
+
+		　次に設定ファイルの中身を記述します。<BR>
+		　まず、<BR><BR>
+		
+		<FONT SIZE=-1 COLOR="#990033">-I"</FONT><BR><BR>
+		
+		　と書いて下さい。<BR>
+		　そしてその後ろに <FONT COLOR="#990033">BorlandC++ Compiler 5.5</FONT> がインストールされたフォルダの中にある
+		『<FONT COLOR="#990033">Include</FONT>』というフォルダのパスを記述します。<BR>
+		　説明どおりに <FONT COLOR="#990033">BorlandC++ Compiler 5.5</FONT> をインストールされている場合は
+		<FONT COLOR="#990033">c:\borland\bcc55\Include</FONT> になると思いますので<BR><BR>
+
+		<FONT SIZE=-1 COLOR="#990033">-I"c:\borland\bcc55\Include</FONT><BR><BR>
+
+		　となります。<BR>
+		　この行はこれだけです。終端に『<FONT COLOR="#990033">"</FONT>』を入れて<BR><BR>
+
+		<FONT SIZE=-1 COLOR="#990033">-I"c:\borland\bcc55\Include"</FONT><BR><BR>
+		
+		　この行は完成です。<BR>
+		　次の行はまず<BR><BR>
+		
+		<FONT COLOR="#990033">-L"</FONT><BR><BR>
+		
+		　と書いて下さい。(全部半角です)<BR>
+		　次に <FONT COLOR="#990033">Borland C++ Compiler 5.5</FONT> がインストールされたフォルダに存在する
+		『<FONT COLOR="#990033">Lib</FONT>』フォルダのパスを記述します。<BR>
+		　説明どおりに <FONT COLOR="#990033">BorlandC++ Compiler 5.5</FONT> をインストールされている場合は
+		<FONT COLOR="#990033">c:\borland\bcc55\Lib</FONT> になると思いますので<BR><BR>
+		これを先ほどの『<FONT COLOR="#990033">-L"</FONT>』に加えて<BR><BR>
+		
+		<FONT SIZE=-1 COLOR="#990033">-L"c:\borland\bcc55\Lib</FONT><BR><BR>
+		
+		　となります。<BR>
+		　次に今追加した <FONT COLOR="#990033">Borland C++ Compiler 5.5</FONT> の『<FONT COLOR="#990033">Lib</FONT>』フォルダの中にある『<FONT COLOR="#990033">PSDK</FONT>』という名前のフォルダのパスを
+		『<FONT COLOR="#990033">;</FONT>』で区切って記述します。前述どおり『<FONT COLOR="#990033">Lib</FONT>』フォルダの位置が
+		<FONT COLOR="#990033">c:\borland\bcc55\Lib</FONT> だとすると、<FONT COLOR="#990033">c:\borland\bcc55\Lib\PSDK</FONT> となるので、<BR><BR>
+
+		<FONT SIZE=-1 COLOR="#990033">-L"c:\borland\bcc55\Lib;c:\borland\bcc55\Lib\PSDK</FONT><BR><BR>
+		
+		　となります。<BR>
+		　最後に『<FONT COLOR="#990033">"</FONT>』を付け足して<BR><BR>
+		
+		<FONT SIZE=-1 COLOR="#990033">-L"c:\borland\bcc55\Lib;c:\borland\bcc55\Lib\PSDK"</FONT><BR><BR>
+		
+		　完成です。<BR>
+		　と同時に、これで <FONT COLOR="#990033">bcc32.cfg</FONT> ファイルの完成です<BR><BR>
+
+		完成例<BR><BR>
+
+<FONT SIZE=-1 COLOR="#990033">
+		-I"c:\borland\bcc55\Include"<BR>
+		-L"c:\borland\bcc55\Lib;c:\borland\bcc55\Lib\PSDK"<BR><BR>
+</FONT>
+
+		　この状態で保存してください。(しつこいですが、文字数が多すぎて１行目が２行になってしまっていますが、『-L』の部分から２行目なのでその前までは一行目です(汗))<BR>
+		　因みにまだメモ帳は閉じないで下さい。<BR><BR><BR>
+
+
+
+		　次にもう一つの設定ファイルである、<FONT COLOR="#990033">ilink32.cfg</FONT> を作る必要があります。<BR>
+		　これは簡単に作れます。何故なら先程作成した <FONT COLOR="#990033">bcc32.cfg</FONT> の２行目部分だけを
+		抜き出したものが、<FONT COLOR="#990033">ilink32.cfg</FONT> に必要なものだからです。<BR><BR>
+		
+		　では作りましょう。<BR>
+		　まず徐に<BR><BR>
+
+		例：<BR>
+<FONT SIZE=-1 COLOR="#990033">
+		-I"c:\borland\bcc55\Include"<BR>
+		-L"c:\borland\bcc55\Lib;c:\borland\bcc55\Lib\PSDK"<BR><BR>
+</FONT>			
+		　の一行目を削除<BR><BR>
+
+		例：<BR>
+<FONT SIZE=-1 COLOR="#990033">
+		-L"c:\borland\bcc55\Lib;c:\borland\bcc55\Lib\PSDK"<BR><BR>
+</FONT>			
+		　しましょう。<BR>
+		　そして、『<FONT COLOR="#990033">ファイル</FONT>』→『<FONT COLOR="#990033">名前を付けて保存</FONT>』で、<FONT COLOR="#990033">bcc32.cfg</FONT> があるフォルダと同じフォルダに
+		『<FONT COLOR="#990033">"ilink32.cfg"</FONT>』 という名前で保存してください。これも <FONT COLOR="#990033">bcc32.cfg</FONT> と同じく
+		必ず『<FONT COLOR="#990033">"</FONT>』で囲うことに注意してください。そうしないと『<FONT COLOR="#990033">ilink32.cfg.txt</FONT>』という
+		ファイル名で保存されてしまいます。<BR><BR>
+
+		　二つの設定ファイルが出来上がったら、とりあえずパソコンを再起動して下さい。<BR>
+		　何故なら、再起動しないと設定が反映されないからです。<BR><BR>
+
+		　長かったですが、これで <FONT COLOR="#990033">BorlandC++ Compiler 5.5</FONT> で<FONT COLOR="#990033">ＤＸライブラリ</FONT>を使う為の準備は整いました。<BR><BR><BR><BR>
+
+		<A NAME="R4">
+		<FONT COLOR="#008800">
+		4.プロジェクトの作成<BR><BR>
+		</FONT>
+		</A>
+
+		　さてライブラリを使うための準備はこれで整ったわけですが、実際に<FONT COLOR="#990033">ＤＸライブラリ</FONT>を使ったソフトウェアを作成する方法を知らないことには何も出来ません。<BR>
+		　そこでここでは一つのサンプルプログラムを動かすところまでを記したいと思います。
+		そのサンプルでやる事はただ一つ、『<FONT COLOR="#990033">画面の中心に点を打つ</FONT>』これだけです。<BR><BR>
+		
+		　<FONT COLOR="#990033">BorlandC++ Compiler 5.5</FONT> と <FONT COLOR="#990033">BCC Developer</FONT> でソフトを作るにはまず
+		『<FONT COLOR="#990033">プロジェクト</FONT>』を作成する必要があるので以下にその方法を示します。<BR><BR>
+
+		<FONT COLOR="#550088">
+		　①　BCC Developer を起動します。<BR><BR>
+
+		　②　BCC Developer のメニューの［ファイル］→［新規作成］<BR>
+		　　　　　　　　　　　　　　　　　　　　　　　　　　　　　を選びます。<BR><BR>
+
+		　③　新規作成ウインドウの『プロジェクト』タグを選びます<BR><BR>
+
+		　④　次にプロジェクトを保存するフォルダパスを『ディレクトリ名』で設定します。<BR>
+		　　(お好きなフォルダをどうぞ)<BR><BR>
+
+		　⑤　次にプロジェクトの名前を『プロジェクト名』に入力します。<BR>
+		　　　　　　　　　　　　　　　　　　　　　　　ここでは仮に『test』とします。<BR><BR>
+
+		　⑥　『ＯＫ』を押します。<BR><BR>
+
+		　⑦　次にメニューの［プロジェクト］→［プロジェクト設定］を選びます。<BR><BR>
+		
+		　⑧　『プロジェクト設定』ウインドウの『アプリケーション』タグを選択し、<BR>
+		　　その中の『ターゲット』で囲まれている中の『Windowsアプリケーション	』<BR>
+		　　を選択します。<BR><BR>
+			
+		　⑨　『プロジェクト設定』ウインドウ下部の『設定』ボタンを押します。<BR>
+		　　　これでプロジェクトの新規作成は完了です。<BR><BR><BR><BR>
+		</FONT>
+
+		<A NAME="R5">
+		<FONT COLOR="#008800">
+		5.プロジェクトへＤＸライブラリファイルを追加<BR><BR>
+		</FONT>
+		</A>
+
+		　これでプロジェクトは生成されました。<BR>
+		　次に行うべき作業は新しく生成されたプロジェクトのフォルダに<FONT COLOR="#990033">ＤＸライブラリ</FONT>を使うために必要なファイルをコピーすることです。<BR><BR>
+
+		　作業は１工程のみです。<BR>
+		　プロジェクトを作成する時に指定したフォルダに<FONT COLOR="#990033">ＤＸライブラリ</FONT>を解凍したフォルダの中にある
+		『<FONT COLOR="#990033">プロジェクトに追加すべきファイル_BCC用</FONT>』という長いフォルダ名のフォルダの中のファイルを全てコピーします。<BR><BR><BR><BR>
+
+		<A NAME="R6">
+		<FONT COLOR="#008800">
+		6.プロジェクトへ新規プログラムファイルを作成・追加<BR><BR>
+		</FONT>
+		</A>
+
+		　　工程4までで <FONT COLOR="#990033">ＤＸライブラリ</FONT>を使ったプログラムを組むための準備が
+		すべて整いました。あとはプログラム本体を作成し、実行するだけです。<BR>
+		　次に新規のプログラムファイルを一つ作成しプロジェクトに追加します。<BR><BR>
+
+		<FONT COLOR="#550088">
+		　　①　BCC Developer の『ファイル』メニューから『新規作成』を選びます。<BR><BR>
+
+		　　②　新規作成ウインドウの『ファイル』タグを選択します。<BR><BR>
+
+		　　③　『ファイル名』に適当な名前を入力します（半角英数のみ）、ここでは仮に<BR>
+		　　　『DrawPixel.cpp』とします。<BR><BR>
+
+		　　④　その他のところを変更せずに『ＯＫ』ボタンを押します。これで新たに<BR>
+		　　　『DrewPixel.cpp』が作成されます。<BR><BR>
+		</FONT>
+
+		　新たに作成されたプログラムファイルは何も書かれていないので次に示すプログラムを
+		入力します。<BR><BR><BR><BR>
+
+		<A NAME="R7">
+		<FONT COLOR="#008800">
+		7.プログラムを組む<BR><BR>
+		</FONT>
+		</A>
+
+		　後はプログラムを組むだけです。<BR>
+		今回サンプルとして実行するプログラムは次のようになります。<BR>
+
+	<HR>
+<PRE>
+#include "DxLib.h"
+
+// プログラムは WinMain から始まります
+int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,
+						LPSTR lpCmdLine, int nCmdShow )
+{
+	if( DxLib_Init() == -1 )		// ＤＸライブラリ初期化処理
+	{
+		return -1 ;			// エラーが起きたら直ちに終了
+	}
+
+	DrawPixel( 320 , 240 , 0xffff ) ;	// 点を打つ
+
+	WaitKey() ;				// キー入力待ち
+
+	DxLib_End() ;				// ＤＸライブラリ使用の終了処理
+
+	return 0 ;				// ソフトの終了 
+}
+</PRE>
+	<HR><BR><BR>
+
+		　プログラムはこれだけです、どの部分が何をしているのか簡単に説明します。
+		まず最初の１行は<FONT COLOR="#990033">ＤＸライブラリ</FONT>を使用するために必要なファイルをインクルードしています。<BR>
+		　次の<FONT COLOR="#880022">『int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,
+		LPSTR lpCmdLine, int nCmdShow )』</FONT>はウインドウズのプログラムのスタート地点となる
+		関数の宣言です。それぞれの単語が何を意味しているかは特に考える必要はありません。
+		ウインドウ環境のスタート関数はすべてこの形の宣言をとります。<BR>
+		　中括弧関数最初の文<FONT COLOR="#880022">『if( !DxLib_Init() ) return -1;』</FONT>は<FONT COLOR="#990033">ＤＸライブラリ</FONT>を
+		初期化して使える状態にするために必要な関数<FONT COLOR="#880022">『DxLib_Init』</FONT>を呼んでいます。
+		この関数は<FONT COLOR="#990033">ＤＸライブラリ</FONT>を使うプログラムを組む際には例外を除いてまず
+		最初に呼び出す必要があります。因みに『if(...』と書かれているのは初期化に
+		失敗したらその時点でソフトを終了させるという処理を行うための物です。<BR>
+		　<FONT COLOR="#880022">『DrawPixel』</FONT>はそのまま点を描画するための関数です。<BR>
+		　その次の<FONT COLOR="#880022">『WaitKey』</FONT>はキーが押されるまで処理を止める関数です。<BR>
+		　最後の<FONT COLOR="#880022">『DxLib_End() ;』</FONT>は注釈にも書いてある通り<FONT COLOR="#990033">ＤＸライブラリ</FONT>の使用を
+		終了する処理を行う関数を読んでいる文です。<FONT COLOR="#990033">ＤＸライブラリ</FONT>を使用している
+		プログラムは最後に必ずこの関数を呼ばなくてはなりません。これを呼ばないで終ると
+		大変な事になりますので注意してください。<BR><BR><BR><BR>
+
+
+
+		<A NAME="R8">
+		<FONT COLOR="#008800">
+		8.プロジェクトのビルド、実行<BR><BR>
+		</FONT>
+		</A>
+
+		　入力が終ったら実行してみましょう。<BR><BR>
+
+		<FONT COLOR="#550088">
+		　　①　BCC Developer のメニューから［プロジェクト］→［メイク］を選択。<BR>
+		　　　　エラーが起きなければ実行するためのソフトがこれで作成されます。<BR>
+		　　　　エラーがあった場合は画面下のウインドウにエラー内容が出てきます<BR>
+		　　　　ので指示にしたがって修正してください。<BR><BR>
+
+		　　②　次に［実行］→［実行］を選択してソフトを起動します。<BR><BR>
+		</FONT>
+
+		　さて画面中心に点がうたれたでしょうか？<BR>
+		　実行するまでにかなり長かったような気がしますがその殆どがＶｉｓｕａｌＣ＋＋．ｎｅｔでの
+		ソフトウエア制作に必ず必要な作業ですので幾つかプログラムを組んでいけばすぐに慣れて
+		しまう筈です。<BR><BR><BR>
+
+		　さて出来あがった実行可能ファイルですが、それはプロジェクトのフォルダの中の『Debug』
+		フォルダか『Release』フォルダの中に作成されます。これがこれまでの作業の成果となります。<BR>
+		　これで<FONT COLOR="#990033">ＤＸライブラリ</FONT>を使ってのソフト制作の方法はわかりました。後は好きに
+		プログラムを組んでゲームを作るだけです。ですがまだ<FONT COLOR="#990033">ＤＸライブラリ</FONT>の機能は
+		初期化と終了とドットを描画する関数しかわかっていません。
+		　この他の関数は<A HREF=dxfunc.html>ＤＸライブラリ関数リファレンスのページ</A>で解説されていますのでそちらを
+		参照して下さい。<BR><BR><BR><BR><BR>
+
+		<HR>
+		<A HREF=dxuse.html>戻る</A>
+
+		</B></FONT>
+		</TD></TR>
+	</TABLE>
+	</BODY>
+</HTML>

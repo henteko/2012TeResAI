@@ -1,0 +1,305 @@
+<title>シューティングゲームプログラム</title>
+<html>
+	<head>
+		<meta name="keyword" content="講座 シューティングプログラム シューティング">
+	</head>
+	<body bgcolor="#ffffff" text="#000000" link="#0033cc" vlink="#800040">
+
+		<font size="2">ゲーム制作講座１－７<br><br></font>
+		<font size="6"><b>７．敵のダメージ時にリアクションをつけよう</b></font>
+		<hr><br><br>
+
+		<font size="3"><B>
+
+		　前回は敵に弾が当たるようにしました。ですが今の状態では敵に弾が当たるだけで敵は<BR>
+		何の反応も見せてくれません。ですので今回は敵にリアクションをつけようと思います。<BR>
+		　リアクションといっても沢山あります。爆発する、返し弾を撃ってくる、別のキャラクター<BR>
+		に変身する…などなど。<BR><BR>
+		
+		　ですが今回は最初なのであまり凝ったリアクションには手を出さずに簡単なところから<BR>
+		いきたいと思います、とりあえず弾が当たったらいたそうな顔をしてもらいましょう。<BR><BR>
+
+		<IMG SRC="Data/SikakuDam.png" WIDTH="64" HEIGHT="64" HSPACE="20" VSPACE="20"><BR>
+
+		　弾が当てられたら３０フレームくらい止まったままこんな顔をしてもらいましょう。<BR><BR>
+		
+		　さて、上記の処理を具体的にはどうやって実現するかこれから記載したいと思います。<BR>
+		　まず３０フレームの間顔を歪めてもらうのですから、<FONT COLOR="#770000">顔を歪め始めてから何フレーム<BR>
+		経過したかをカウントするための変数</font>が必要となります。<BR>
+		　さらに<FONT COLOR="#770000">今顔を歪めているのかどうかの状態を保持するフラグ変数</font>が必要です。顔を歪めて<BR>
+		入る時は <FONT COLOR="#770000">１</font> が代入されていて、歪めていないときは <FONT COLOR="#770000">０</font> が代入されている、とでもしま<BR>
+		しょう。<BR>
+		　データが揃ったところで次は処理です。<BR>
+		　まず敵(四角君)に<FONT COLOR="#770000">弾が当たったら</font>顔を歪めているかを保持する変数に『<FONT COLOR="#770000">歪めている</font>』を<BR>
+		表す <FONT COLOR="#770000">１</font> を代入し、さらに<FONT COLOR="#770000">３０フレームをカウントするための変数に ０ を代入</font>し初期化します。<BR>
+		　次に<FONT COLOR="#770000">四角君を動かす処理</font>で顔を歪めているかどうかを <FONT COLOR="#770000">１</font> か <FONT COLOR="#770000">０</font> かで判断し、<BR>
+		処理を<FONT COLOR="#770000">分岐</font>させます。<BR>
+		　顔が歪んでいた場合は画面には歪んだ顔の四角君を描画し、３０フレームカウントする<BR>
+		ための変数に１を足します。足したあと、もしカウンタ変数の値が３０になっていたら<BR>
+		顔を歪めた状態から元に戻してあげます。具体的には<FONT COLOR="#770000">顔歪めフラグ変数に ０ を代入</font>します。<BR>
+		　顔が歪んでいない場合は今まで通りの処理を行います。<BR><BR>
+
+		　とりあえずそんなこんなで出来たプログラムが以下のものになります。<BR>
+
+
+<font color="#000066">
+<PRE>
+#include "DxLib.h"
+
+#define SHOT 20
+
+// WinMain関数
+int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,
+					 LPSTR lpCmdLine, int nCmdShow )
+{
+	int BallX , BallY , BallGraph ;
+	int SikakuX , SikakuY , SikakuMuki , SikakuGraph ;
+<font color="#880000">	int SikakuDamageFlag , SikakuDamageCounter , SikakuDamageGraph ;</font>
+	int ShotX[SHOT] , ShotY[SHOT] , ShotFlag[SHOT] , ShotGraph ;
+	int SikakuW , SikakuH , ShotW , ShotH ;
+	int ShotBFlag ;
+	int i ;
+
+	// 画面モードの設定
+	SetGraphMode( 640 , 480 , 16 ) ;
+
+	// ＤＸライブラリ初期化処理
+	if( DxLib_Init() == -1 ) return -1;
+
+	// グラフィックの描画先を裏画面にセット
+	SetDrawScreen( DX_SCREEN_BACK ) ;
+
+	// ボール君のグラフィックをメモリにロード＆表示座標をセット
+	BallGraph = LoadGraph( "Ball.png" ) ;
+	BallX = 288 ; BallY = 400 ;
+
+	// 四角君のグラフィックをメモリにロード＆表示座標をセット
+	SikakuGraph = LoadGraph( "Sikaku.png" ) ;
+	SikakuX = 0 ; SikakuY = 50 ;
+
+<font color="#880000">	// 四角君のダメージ時のグラフィックをメモリにロード
+	SikakuDamageGraph = LoadGraph( "SikakuDam.png" ) ;
+
+	// 四角君が顔を歪めているかどうかの変数に『歪めていない』を表す０を代入
+	SikakuDamageFlag = 0 ;
+</font>
+	// 弾のグラフィックをメモリにロード
+	ShotGraph = LoadGraph( "Shot.png" ) ;
+
+	// 弾が画面上に存在しているか保持する変数に『存在していない』を意味する０を代入しておく
+	for( i = 0 ; i < SHOT ; i ++ )
+	{
+		ShotFlag[i] = 0 ;
+	}
+
+	// ショットボタンが前のフレームで押されたかどうかを保存する変数に０(押されいない)を代入
+	ShotBFlag = 0 ;
+
+	// 四角君の移動方向をセット
+	SikakuMuki = 1 ;
+
+	// 弾のグラフィックのサイズをえる
+	GetGraphSize( ShotGraph , &ShotW , &ShotH ) ;
+
+	// 四角君のグラフィックのサイズを得る
+	GetGraphSize( SikakuGraph , &SikakuW , &SikakuH ) ;
+
+	// 移動ルーチン
+	while( 1 )
+	{
+		// 画面を初期化(真っ黒にする)
+		ClearDrawScreen() ;
+
+		// ボール君の操作ルーチン
+		{
+			// ↑キーを押していたらボール君を上に移動させる
+			if( CheckHitKey( KEY_INPUT_UP ) == 1 ) BallY -= 3 ;
+
+			// ↓キーを押していたらボール君を下に移動させる
+			if( CheckHitKey( KEY_INPUT_DOWN ) == 1 ) BallY += 3 ;
+
+			// ←キーを押していたらボール君を左に移動させる
+			if( CheckHitKey( KEY_INPUT_LEFT ) == 1 ) BallX -= 3 ;
+
+			// →キーを押していたらボール君を右に移動させる
+			if( CheckHitKey( KEY_INPUT_RIGHT ) == 1 ) BallX += 3 ;
+
+			// スペースキーを押した場合は処理を分岐
+			if( CheckHitKey( KEY_INPUT_SPACE ) )
+			{
+				// 前フレームでショットボタンを押したかが保存されている変数が０だったら弾を発射
+				if( ShotBFlag == 0 )
+				{
+					// 画面上にでていない弾があるか、弾の数だけ繰り返して調べる
+					for( i = 0 ; i < SHOT ; i ++ )
+					{
+						// 弾iが画面上にでていない場合はその弾を画面に出す
+						if( ShotFlag[i] == 0 )
+						{
+							int Bw, Bh, Sw, Sh ;
+
+							// ボール君と弾の画像のサイズを得る
+							GetGraphSize( BallGraph , &Bw , &Bh ) ;
+							GetGraphSize( ShotGraph , &Sw , &Sh ) ;
+
+							// 弾iの位置をセット、位置はボール君の中心にする
+							ShotX[i] = ( Bw - Sw ) / 2 + BallX ;
+							ShotY[i] = ( Bh - Sh ) / 2 + BallY ;
+
+							// 弾iは現時点を持って存在するので、存在状態を保持する変数に１を代入する
+							ShotFlag[i] = 1 ;
+
+							// 一つ弾を出したので弾を出すループから抜けます
+							break ;
+						}
+					}
+				}
+
+				// 前フレームでショットボタンを押されていたかを保存する変数に１(おされていた)を代入
+				ShotBFlag = 1 ;
+			}
+			else
+			{
+				// ショットボタンが押されていなかった場合は
+				// 前フレームでショットボタンが押されていたかを保存する変数に０(おされていない)を代入
+				ShotBFlag = 0 ;
+			}
+
+			// ボール君が画面左端からはみ出そうになっていたら画面内の座標に戻してあげる
+			if( BallX < 0 ) BallX = 0 ;
+
+			// ボール君が画面右端からはみ出そうになっていたら画面内の座標に戻してあげる
+			if( BallX > 640 - 64 ) BallX = 640 - 64  ;
+
+			// ボール君が画面上端からはみ出そうになっていたら画面内の座標に戻してあげる
+			if( BallY < 0 ) BallY = 0 ;
+
+			// ボール君が画面下端からはみ出そうになっていたら画面内の座標に戻してあげる
+			if( BallY > 480 - 64 ) BallY = 480 - 64 ;
+
+			// ボール君を描画
+			DrawGraph( BallX , BallY , BallGraph , FALSE ) ;
+		}
+
+		// 弾の数だけ弾を動かす処理を繰り返す
+		for( i = 0 ; i < SHOT ; i ++ )
+		{
+			// 自機の弾iの移動ルーチン( 存在状態を保持している変数の内容が１(存在する)の場合のみ行う )
+			if( ShotFlag[ i ] == 1 )
+			{
+				// 弾iを１６ドット上に移動させる
+				ShotY[ i ] -= 16 ;
+
+				// 画面外に出てしまった場合は存在状態を保持している変数に０(存在しない)を代入する
+				if( ShotY[ i ] < -80 )
+				{
+					ShotFlag[ i ] = 0 ;
+				}
+
+				// 画面に弾iを描画する
+				DrawGraph( ShotX[ i ] , ShotY[ i ] , ShotGraph , FALSE ) ;
+			}
+		}
+
+		// 四角君の移動ルーチン
+		{
+<font color="#880000">			// 顔を歪めているかどうかで処理を分岐
+			if( SikakuDamageFlag == 1 )
+			{
+				// 顔を歪めている場合はダメージ時のグラフィックを描画する
+				DrawGraph( SikakuX , SikakuY , SikakuDamageGraph , FALSE ) ;
+
+				// 顔を歪めている時間を測るカウンターに１を加算する
+				SikakuDamageCounter ++ ;
+
+				// もし顔を歪め初めて ３０ フレーム経過していたら顔の歪んだ状態から
+				// 元に戻してあげる
+				if( SikakuDamageCounter == 30 )
+				{
+					// 『歪んでいない』を表す０を代入
+					SikakuDamageFlag = 0 ;
+				}
+			}
+			else
+			{
+</font>				// 歪んでいない場合は今まで通りの処理
+
+				// 四角君の座標を移動している方向に移動する
+				if( SikakuMuki == 1 ) SikakuX += 3 ;
+				if( SikakuMuki == 0 ) SikakuX -= 3 ;
+
+				// 四角君が画面右端からでそうになっていたら画面内の座標に戻してあげ、移動する方向も反転する
+				if( SikakuX > 576 )
+				{
+					SikakuX = 576 ;
+					SikakuMuki = 0 ;
+				}
+
+				// 四角君が画面左端からでそうになっていたら画面内の座標に戻してあげ、移動する方向も反転する
+				if( SikakuX < 0 )
+				{
+					SikakuX = 0 ;
+					SikakuMuki = 1 ;
+				}
+
+				// 四角君を描画
+				DrawGraph( SikakuX , SikakuY , SikakuGraph , FALSE ) ;
+<font color="#880000">			}</font>
+		}
+
+		// 弾と敵の当たり判定、弾の数だけ繰り返す
+		for( i = 0 ; i < SHOT ; i ++ )
+		{
+			// 弾iが存在している場合のみ次の処理に映る
+			if( ShotFlag[ i ] == 1 )
+			{
+				// 四角君との当たり判定
+				if( ( ( ShotX[i] > SikakuX && ShotX[i] < SikakuX + SikakuW ) ||
+					( SikakuX > ShotX[i] && SikakuX < ShotX[i] + ShotW ) ) &&
+					( ( ShotY[i] > SikakuY && ShotY[i] < SikakuY + SikakuH ) ||
+					( SikakuY > ShotY[i] && SikakuY < ShotY[i] + ShotH ) ) )
+				{
+					// 接触している場合は当たった弾の存在を消す
+					ShotFlag[ i ] = 0 ;
+
+<font color="#880000">					// 四角君の顔を歪めているかどうかを保持する変数に『歪めている』を表す１を代入
+					SikakuDamageFlag = 1 ;
+
+					// 四角君の顔を歪めている時間を測るカウンタ変数に０を代入
+					SikakuDamageCounter = 0 ;
+</font>				}
+			}
+		}
+
+		// 裏画面の内容を表画面にコピーする
+		ScreenFlip() ;
+
+		// Windows 特有の面倒な処理をＤＸライブラリにやらせる
+		// -1 が返ってきたらループを抜ける
+		if( ProcessMessage() < 0 ) break ;
+
+		// もしＥＳＣキーが押されていたらループから抜ける
+		if( CheckHitKey( KEY_INPUT_ESCAPE ) ) break ;
+	}
+
+	DxLib_End() ;				// ＤＸライブラリ使用の終了処理
+
+	return 0 ;					// ソフトの終了
+}
+</pre>
+</font>
+<BR>
+		<font color="#008800"><実行図></font><BR>
+		<IMG SRC="image/i1_7.gif" WIDTH="256" HEIGHT="192" HSPACE="20" VSPACE="20"><BR>
+
+		　実行して弾を当ててみると四角君が顔を歪めると思います。<BR><BR>
+
+		　短いですが今回はこれで終りです。<BR>
+		　次は四角君が弾を撃つようにしたいと思います。<BR>
+		<hr>
+
+		<A href="../dxlecture_main.html">戻る</a>
+
+		</b></font>
+	</body>
+</html>

@@ -1,0 +1,205 @@
+<title>ゲームプログラムの基礎知識</title>
+<html>
+	<head>
+		<meta name="keyword" content="講座 シューティングプログラム シューティング">
+	</head>
+	<body bgcolor="#ffffff" text="#000000" link="#0033cc" vlink="#800040">
+
+		<font size="2">ゲーム制作講座２<br><br></font>
+		<font size="6"><b>２．絵を動かそう</b></font>
+		<hr><br><br>
+
+		<font size="3"><B>
+		　絵を動かして見ましょう。とりあえず絵が左から右へ動くプログラムを考えます。<BR>
+		　ここでふと考えてみましょう、<font color="#770000">どうやったら絵が動いているように見えるか！</font><BR>
+		答えは簡単、<font color="#770000">アニメの手法</font>を拝借させていただきましょう。<BR>
+		　アニメの絵は個々がすべて違う紙(セル)に描かれた独立した絵です。でも人はそれを<font color="#770000">短い間隔で<BR>
+		次々と絵をすり替えられるとあたかもその絵が動いているように見えます</font>。<BR>
+		実はＴＶゲームでも同じ様な手法が使われています。ここでも早速やってみましょう。<BR><BR>
+
+		　最初に一番左上に絵を表示します。次に少し右にずれたところに絵を表示します。<BR>
+		次はそこからさらに右にずれたところに絵を表示します。<BR>
+		　要はこれをずっと繰り返せば良いわけです。<BR><BR>
+
+		　あと<font color="#770000">絵と絵を表示する間隔を決めなければ一瞬ですべての絵が表示されてしまい、動いている<BR>
+		ように見えません</font>。とりあえず一枚絵を表示するごとに２０分の１秒待つことにしましょう。<BR><BR>
+
+		そんなこんなで出来たのが次のプログラムです。<BR><br>
+
+		<font color="#330000">
+		(　尚、使っているグラフィックファイルは『test1.bmp』となっていますが、グラフィックはどんな<br>
+		ものでもかまいませんので、実行する際は適当なグラフィックを用意してください。)<br></font>
+
+<font color="#000066"><pre>
+#include "DxLib.h"
+
+int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,
+			 LPSTR lpCmdLine, int nCmdShow )
+{
+	// ＤＸライブラリ初期化処理
+	if( DxLib_Init() == -1 ) return -1 ;
+
+
+	// 一番左上に絵を表示
+	LoadGraphScreen( 0 , 100 , "test1.bmp" , FALSE ) ;
+
+	// ２０分の１秒待つ
+	WaitTimer( 50 ) ;
+
+	// 少し右にずらして絵を表示
+	LoadGraphScreen( 10 , 100 , "test1.bmp" , FALSE ) ;
+
+	// ２０分の１秒待つ
+	WaitTimer( 50 ) ;
+
+	// 以下同文(?)
+	LoadGraphScreen( 20 , 100 , "test1.bmp" , FALSE ) ;
+	WaitTimer( 50 ) ;
+	LoadGraphScreen( 30 , 100 , "test1.bmp" , FALSE ) ;
+	WaitTimer( 50 ) ;
+	LoadGraphScreen( 40 , 100 , "test1.bmp" , FALSE ) ;
+	WaitTimer( 50 ) ;
+	LoadGraphScreen( 50 , 100 , "test1.bmp" , FALSE ) ;
+	WaitTimer( 50 ) ;
+	LoadGraphScreen( 60 , 100 , "test1.bmp" , FALSE ) ;
+	WaitTimer( 50 ) ;
+	LoadGraphScreen( 70 , 100 , "test1.bmp" , FALSE ) ;
+	WaitTimer( 50 ) ;
+	LoadGraphScreen( 80 , 100 , "test1.bmp" , FALSE ) ;
+	WaitTimer( 50 ) ;
+	LoadGraphScreen( 90 , 100 , "test1.bmp" , FALSE ) ;
+	WaitTimer( 50 ) ;
+	LoadGraphScreen( 100 , 100 , "test1.bmp" , FALSE ) ;
+	WaitTimer( 50 ) ;
+	LoadGraphScreen( 110 , 100 , "test1.bmp" , FALSE ) ;
+	WaitTimer( 50 ) ;
+	LoadGraphScreen( 120 , 100 , "test1.bmp" , FALSE ) ;
+	WaitTimer( 50 ) ;
+
+	// キーの入力待ち
+	WaitKey() ;
+
+
+	// ＤＸライブラリ使用の終了処理
+	DxLib_End() ;
+
+	// ソフトの終了
+	return 0 ;
+}
+</font></pre>
+
+		　どうでしょう。なんとか動いているように見えるかと思います。<br>
+		　ここで<font color="#770000">時間を待つために使われている関数</font> <a href="../dxfunc.html#R6N1">WaitTimer</A> は、一つの整数型の数値を引数に取る関数で<br>
+		処理を止める時間を<font color="#770000">ミリ秒(1000分の1秒)単位</font>で指定することが出来ます。上記のプログラムで 50 ミリ秒<br>
+		待つようにセットしてあるのは２０分の１秒が <font color="#770000">1000 / 20 = 50</font> 、つまり５０ミリ秒のことだからです。<br><br>
+		
+		　なお上のプログラムは繰り返し同じようなことをしているので、<font color="#770000">for</font> 文を使って次のように表現することが<br>
+		出来ます。<font color="#770000">for</font> 文を使ったほうが断然プログラムがすっきりします。<br><br>
+
+<font color="#000066"><pre>
+#include "DxLib.h"
+
+int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,
+			 LPSTR lpCmdLine, int nCmdShow )
+{
+	int i ;
+
+	// ＤＸライブラリ初期化処理
+	if( DxLib_Init() == -1 ) return -1 ;
+
+
+	// 一番左上に絵を表示、２０分の１秒待つ、を１３回繰り返す
+	for( i = 0 ; i < 13 ; i ++ )
+	{
+		// 絵を表示、絵を描くＸ座標は i が１増えるごとに１０ドットづつ右にずれてゆく
+		LoadGraphScreen( i * 10 , 100 , "test1.bmp" , FALSE ) ;
+
+		// ２０分の１秒待つ
+		WaitTimer( 50 ) ;
+	}
+
+	// キーの入力待ち
+	WaitKey() ;
+
+
+	// ＤＸライブラリ使用の終了処理
+	DxLib_End() ;
+
+	// ソフトの終了
+	return 0 ;
+}
+</font></pre>
+
+		<font color="#008800"><実行例></font><BR>
+		<IMG SRC="image/i4.jpg" WIDTH="256" HEIGHT="192" HSPACE="20" VSPACE="20"><BR>
+
+		　さて、どうにか動いているように見えるプログラムが組めましたが、上の図を見てもわかるように<br>
+		今のままでは描いた絵の端がすべて残ってしまっているのでとても見苦しくなっています。<br><br>
+
+		　そうです、<font color="#770000">一度画面に何かを描いたらちゃんと消さなければなりません</font>。どうしましょう。<br><br>
+
+		　と、そんな時に登場するのが <a href="../dxfunc.html#R4N3">ClearDrawScreen</a> 関数です。<br>
+		　この関数は<font color="#770000">画面に描いてあるグラフィックを全部消してくれます</font>。とにかく消します。否応無しに<br>
+		消します。そしてただ消すだけの関数です。便利です、使わない手はありません。<br><br>
+
+		　そんなわけで <font color="#770000">ClearDrawScreen</font> 関数で画面をその都度消すようにしたのが次のプログラムです。<br>
+
+<font color="#000066"><pre>
+#include "DxLib.h"
+
+int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,
+			 LPSTR lpCmdLine, int nCmdShow )
+{
+	int i ;
+
+	// ＤＸライブラリ初期化処理
+	if( DxLib_Init() == -1 ) return -1 ;
+
+
+	// 一番左上に絵を表示、２０分の１秒待つ、を１３回繰り返す
+	for( i = 0 ; i < 13 ; i ++ )
+	{
+<font color="#550000">		// 画面に描かれているものを一回全部消す
+		ClearDrawScreen() ;</font>
+
+		// 絵を表示
+		LoadGraphScreen( i * 10 , 100 , "test1.bmp" , FALSE ) ;
+
+		// ２０分の１秒待つ
+		WaitTimer( 50 ) ;
+	}
+
+	// キーの入力待ち
+	WaitKey() ;
+
+
+	// ＤＸライブラリ使用の終了処理
+	DxLib_End() ;
+
+	// ソフトの終了
+	return 0 ;
+}
+</font></pre>
+
+		<font color="#008800"><実行例></font><BR>
+		<IMG SRC="image/i5.jpg" WIDTH="256" HEIGHT="192" HSPACE="20" VSPACE="20"><BR>
+		　さて、毎回画面に描かれたものを消すようにしましたがどうでしょう？<br>
+		　実際に実行してみると分かりますが、ちかちかしてしまいます。ちょっと考えれば当然のことで<br>
+		<font color="#770000">『消す→表示→消す→表示』</font>を繰り返せば当然画面には<font color="#770000">『消す』</font>の状態と<font color="#770000">『表示』</font>が入れ替わり<br>
+		立ち代り切り替わるわけで、結果、表示がちかちかしてしまうのです。<br><br>
+
+		　困りました。どうにかして<font color="#770000">『表示』</font>の状態だけが続くようにしなければなりません。<br><br>
+
+		　実はビデオゲームが作り始められたばかりの頃の人もこのことで悩みました。<br><br>
+
+		　そしてこれに対処する方法が編み出されました、このＤＸライブラリはその中のパソコン界では<BR>
+		一般的な<font color="#770000">『ダブルバッファリング』</font>という手法を使ってこれを回避しています。<br>
+		　次は少し横道にそれてこの<font color="#770000">『ダブルバッファリング』</font>について解説したいと思います。<br><br>
+
+		<hr>
+
+		<A href="../dxlecture_main.html">戻る</a>
+
+		</b></font>
+	</body>
+</html>

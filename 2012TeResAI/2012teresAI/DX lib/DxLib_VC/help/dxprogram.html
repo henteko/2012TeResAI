@@ -1,0 +1,7027 @@
+<TITLE>ＤＸライブラリ置き場　サンプルプログラム</TITLE>
+<HTML>
+	<HEAD>
+	</HEAD>
+	<BODY BGCOLOR="#ffffff" TEXT="#000000" LINK="#003388" VLINK="#800040">
+		<FONT SIZE="6" COLOR="#000000"><B>
+		<CENTER>
+			ＤＸライブラリ　サンプルプログラム
+		</CENTER>
+		</FONT>
+		<HR>
+		<FONT SIZE="3" COLOR="#000000"><B>
+			<BR>
+			　ここではＤＸライブラリを使った単純なサンプルプログラムを掲載しています。<BR><BR><BR><BR><BR>
+
+			　サンプルプログラムはＤＸライブラリのプログラムをコンパイル及びビルドできる<BR>
+			環境があれば実行することができますが。それを用意するのは面倒くさいとも思ったので<BR>
+			以下のファイルを用意しておきます。<BR><BR>
+
+			　<A HREF="http://dxlib.o.oo7.jp/DxLib/DxSample3_06c.exe">サンプルプログラム実行用プロジェクト</A><BR><BR>
+
+			　このファイルを解凍すると、サンプルプログラムを実行するために必要なファイルが<BR>
+			揃ったフォルダが作られますので、VisualC++ 6.0 の場合は VC フォルダ内の Sample.dsw を、<BR>
+			VisualC++.net の場合は VC フォルダ内の Sample.sln を、BorlandC++ の場合は <BR>
+			BCC フォルダ内の Sample.bdp を開いて、プロジェクト内の Sample.cpp にサンプルプログラムを<BR>
+			コピー＆ペーストしてビルドしてください。<BR>
+			そうすれば実行できます。<BR><BR>
+			
+			　なお、とくにソフトの終了処理が入っていないプログラムを終了させる時は Altキー と F4キー を<BR>
+			同時に押してください。ソフトを終了させることが出来ます。<BR><BR><BR><BR><BR><BR>
+			
+
+			　<A HREF="#N1"><B>１．キー入力の基本</B></A><BR><BR>
+			　<A HREF="#N2"><B>２．ジャンプ処理</B></A><BR><BR>
+			　<A HREF="#N3"><B>３．マップ表示基本</B></A><BR><BR>
+			　<A HREF="#N4"><B>４．マップスクロール基本</B></A><BR><BR>
+			　<A HREF="#N5"><B>５．シューティング基本</B></A><BR><BR>
+			　<A HREF="#N6"><B>６．サウンドノベル風文字列描画基本</B></A><BR><BR>
+			　<A HREF="#N7"><B>７．メニュー処理基本</B></A><BR><BR>
+			　<A HREF="#N8"><B>８．関数ポインタ基本</B></A><BR><BR>
+			　<A HREF="#N9"><B>９．フェードイン、フェードアウト</B></A><BR><BR>
+			　<A HREF="#N10"><B>１０．落ちものゲーム基本</B></A><BR><BR>
+			　<A HREF="#N11"><B>１１．基本的な処理、参照一覧</B></A><BR><BR>
+			　<A HREF="#N12"><B>１２．１ラインごとの描画処理</B></A><BR><BR>
+			　<A HREF="#N13"><B>１３．移動速度を一定にする(１)</B></A><BR><BR>
+			　<A HREF="#N14a"><B>１４．移動速度を一定にする(２)</B></A><BR><BR>
+			　<A HREF="#N15"><B>１５．パーティクル基本</B></A><BR><BR>
+			　<A HREF="#N16"><B>１６．残像処理基本</B></A><BR><BR>
+			　<A HREF="#N17"><B>１７．セーブ・ロード基本</B></A><BR><BR>
+			　<A HREF="#N18"><B>１８．格闘ゲームコマンド入力基本</B></A><BR><BR>
+			　<A HREF="#N19"><B>１９．マルチタスク風プログラム基本</B></A><BR><BR>
+			　<A HREF="#N20"><B>２０．サウンドノベル風文字列描画、テキストバッファ使用バージョン</B></A><BR><BR>
+			　<A HREF="#N21"><B>２１．チャットプログラム基本</B></A><BR><BR>
+			　<A HREF="#N22"><B>２２．ワイプ</B></A><BR><BR>
+			　<A HREF="#N23"><B>２３．ホーミングミサイル</B></A><BR><BR>
+			　<A HREF="#N24"><B>２４．ホーミングレーザー</B></A><BR><BR>
+			　<A HREF="#N25"><B>２５．シューティング等のリプレー機能</B></A><BR><BR>
+<!--		　<A HREF="#N26"><B>２６．グラフィックメモリの直接アクセス</B></A><BR><BR> -->
+			　<A HREF="#N27"><B>２６．ベジェ曲線基本</B></A><BR><BR>
+			　<A HREF="#N28"><B>２７．座標の回転基本</B></A><BR><BR>
+			　<A HREF="#N29"><B>２８．シューティングの敵のショットの基本</B></A><BR><BR>
+			　<A HREF="program/ActionSample.cpp"><B>２９．アクションゲームにおけるマップとの当たり判定基本</B></A><BR><BR>
+			　<A HREF="program/HitWall.cpp"><B>３０．回転する壁とオブジェクトとの当たり判定</B></A><BR><BR>
+			　<A HREF="program/dxprogram_3Dmeiro.html"><B>３１．迷路を３Ｄで表示</B></A><BR><BR>
+			　<A HREF="program/dxprogram_3DAction.html"><B>３２．３Ｄアクション基本</B></A><BR><BR>
+			　<A HREF="program/dxprogram_Bloom.html"><B>３３．ブルーム効果基本</B></A><BR><BR>
+			　<A HREF="program/dxprogram_Mirror.html"><B>３４．鏡面効果基本</B></A><BR><BR><BR><BR><BR><BR>
+
+
+
+
+
+			　<FONT COLOR="#007712"><A NAME="N1"><B>１．キー入力の基本</B></A></FONT><BR><BR>
+			
+			　キー入力の基本的なプログラムです。キャラクターのグラフィックをキー入力で上下左右に<BR>
+			移動できるというものです。<BR><BR>
+
+<PRE>
+// キー入力基本
+#include "DxLib.h"
+
+int PlayerX , PlayerY ;
+int PlayerGraph ;
+
+int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,
+						 LPSTR lpCmdLine, int nCmdShow )
+{
+	int Key ;
+
+	// 画面モードのセット
+	SetGraphMode( 640 , 480 , 16 ) ;
+	if( DxLib_Init() == -1 )	// ＤＸライブラリ初期化処理
+	{
+		 return -1;				// エラーが起きたら直ちに終了
+	}
+
+	// 描画先画面を裏画面にセット
+	SetDrawScreen( DX_SCREEN_BACK ) ;
+
+	// グラフィックのロード
+	PlayerGraph = LoadGraph( "Player.bmp" ) ;
+
+	// キャラクターの初期位置をセット
+	PlayerX = 0 ;
+	PlayerY = 0 ;
+
+	// ループ
+	while( ProcessMessage() == 0 && CheckHitKey( KEY_INPUT_ESCAPE ) == 0 )
+	{
+		// キー入力取得
+		Key = GetJoypadInputState( DX_INPUT_KEY_PAD1 ) ;
+
+		// 上を押していたら上に進む
+		if( Key & PAD_INPUT_UP ) PlayerY -= 3 ;
+
+		// 下を押していたら下に進む
+		if( Key & PAD_INPUT_DOWN ) PlayerY += 3 ;
+
+		// 右を押していたら右に進む
+		if( Key & PAD_INPUT_RIGHT ) PlayerX += 3 ;
+		
+		// 左を押していたら左に進む
+		if( Key & PAD_INPUT_LEFT ) PlayerX -= 3 ;
+
+		// 画面を初期化する
+		ClearDrawScreen() ;
+
+		// プレイヤーを描画する
+		DrawGraph( PlayerX , PlayerY , PlayerGraph , TRUE ) ;
+
+		// 裏画面の内容を表画面に反映させる
+		ScreenFlip() ;
+	}
+
+	DxLib_End() ;				// ＤＸライブラリ使用の終了処理
+
+	return 0 ;					// ソフトの終了
+}
+</PRE>
+
+			　<A HREF="http://homepage2.nifty.com/natupaji/DxLib/Image/Player.bmp"><B>キャラクター画像ファイル</B></A><BR><BR><BR><BR><BR><BR><BR>
+
+
+
+
+
+			　<FONT COLOR="#007712"><A NAME="N2"><B>２．ジャンプ処理</B></A></FONT><BR><BR>
+			
+			　ジャンプ処理のプログラムです。ジャンプ処理にはキャラクターにかかっている重力を<BR>
+			加えてやることが必要です。常にキャラクターには重力がかかっていて、ジャンプボタンを<BR>
+			押した時にその重力に逆らう力が現れます。<BR>
+			　しかしジャンプ中も重力はかかっているのでやがて再び地面の方向に引き寄せられます。<BR><BR>
+
+
+<PRE>
+// ジャンプ
+#include "DxLib.h"
+
+int PlayerX , PlayerY ;
+int JumpPower ;
+int PlayerGraph ;
+
+int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,
+						 LPSTR lpCmdLine, int nCmdShow )
+{
+	int Key ;
+
+	SetGraphMode( 640 , 480 , 16 ) ;
+	if( DxLib_Init() == -1 )	// ＤＸライブラリ初期化処理
+	{
+		 return -1;				// エラーが起きたら直ちに終了
+	}
+
+	// 描画先画面を裏画面にセット
+	SetDrawScreen( DX_SCREEN_BACK ) ;
+
+	// グラフィックのロード
+	PlayerGraph = LoadGraph( "Player.bmp" ) ;
+
+	// キャラクターの初期データをセット
+	PlayerX = 0 ;
+	PlayerY = 0 ;
+	JumpPower = 0 ;
+
+	// ループ
+	while( ProcessMessage() == 0 && CheckHitKey( KEY_INPUT_ESCAPE ) == 0 )
+	{
+		// キー入力取得
+		Key = GetJoypadInputState( DX_INPUT_KEY_PAD1 ) ;
+
+		if( Key & PAD_INPUT_UP ) PlayerY -= 3 ;		// 上を押していたら上に進む
+		if( Key & PAD_INPUT_DOWN ) PlayerY += 3 ;	// 下を押していたら下に進む
+		if( Key & PAD_INPUT_RIGHT ) PlayerX += 3 ;	// 右を押していたら右に進む
+		if( Key & PAD_INPUT_LEFT ) PlayerX -= 3 ;	// 左を押していたら左に進む
+
+		// 落下処理
+		PlayerY -= JumpPower ;
+
+		// 落下加速度を加える
+		JumpPower -= 1 ;
+
+		// もし地面についていたら止まる
+		if( PlayerY > 300 )
+		{
+			PlayerY = 300 ;
+			JumpPower = 0 ;
+		}
+
+		// ジャンプボタンを押していて、地面についていたらジャンプ
+		if( ( Key & PAD_INPUT_A ) && PlayerY == 300 ) JumpPower = 20 ;
+ 
+		// 画面を初期化する
+		ClearDrawScreen() ;
+
+		// プレイヤーを描画する
+		DrawGraph( PlayerX , PlayerY , PlayerGraph , TRUE ) ;
+
+		// 裏画面の内容を表画面に反映させる
+		ScreenFlip() ;
+	}
+
+	DxLib_End() ;				// ＤＸライブラリ使用の終了処理
+
+	return 0 ;					// ソフトの終了
+}
+</PRE>
+			　<A HREF="http://homepage2.nifty.com/natupaji/DxLib/Image/Player.bmp"><B>キャラクター画像ファイル</B></A><BR><BR><BR><BR><BR><BR><BR>
+
+
+
+
+
+
+			　<FONT COLOR="#007712"><A NAME="N3"><B>３．マップ表示基本</B></A></FONT><BR><BR>
+
+			　マップデータに応じて赤い四角を描画するプログラムです。<BR>
+			　基本的にマップの表示方法はこのプログラムと同じような方法で行われます。<BR><BR>
+
+<PRE>
+// マップ表示基本
+#include "DxLib.h"
+
+#define MAP_SIZE	64			// マップチップ一つのドットサイズ
+
+#define MAP_WIDTH	10			// マップの幅
+#define MAP_HEIGHT	8			// マップの縦長さ
+
+// マップのデータ
+int MapData[ MAP_HEIGHT ][ MAP_WIDTH ] =
+{
+	{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 } ,
+	{ 0, 1, 0, 0, 0, 0, 0, 0, 0, 0 } ,
+	{ 0, 1, 0, 1, 1, 1, 1, 1, 1, 0 } ,
+	{ 0, 1, 0, 1, 1, 0, 0, 0, 1, 0 } ,
+	{ 0, 1, 1, 1, 1, 0, 0, 0, 1, 0 } ,
+	{ 0, 1, 0, 1, 0, 0, 0, 0, 1, 0 } ,
+	{ 0, 1, 1, 1, 1, 1, 1, 1, 1, 0 } ,
+	{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 } 
+} ;
+
+int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,
+						 LPSTR lpCmdLine, int nCmdShow )
+{
+	int i , j ;
+
+	SetGraphMode( 640 , 480 , 16 ) ;
+	if( DxLib_Init() == -1 )	// ＤＸライブラリ初期化処理
+	{
+		 return -1;		// エラーが起きたら直ちに終了
+	}
+
+	// マップを描く
+	for( i = 0 ; i < MAP_HEIGHT ; i ++ )
+	{
+		for( j = 0 ; j < MAP_WIDTH ; j ++ )
+		{
+			if( MapData[ i ][ j ] == 0 )
+			{
+				DrawBox( j * MAP_SIZE , i * MAP_SIZE ,
+						j * MAP_SIZE + MAP_SIZE , i * MAP_SIZE + MAP_SIZE , 
+							GetColor( 255 , 0 , 0 ) , TRUE ) ;
+			}
+		}
+	}
+
+	// キー入力待ち
+	WaitKey() ;
+
+	DxLib_End() ;		// ＤＸライブラリ使用の終了処理
+
+	return 0 ;		// ソフトの終了
+}
+</PRE>
+			<BR><BR><BR><BR><BR><BR><BR>
+
+
+			　<FONT COLOR="#007712"><A NAME="N4"><B>４．マップスクロール基本</B></A></FONT><BR><BR>
+
+			　マップの表示、及び画面内に入りきらないマップのスクロール処理の基本です。<BR>
+			　いきなり複雑でわけのわからないプログラムだと思うかもしれませんが、一つづつ<BR>
+			紐解いていけば別にたいしたことはしていません。<BR>
+			　プレイヤーである白い四角が常に画面の中心あたりに来るようにしています。<BR><BR>
+			　なお、このプログラムでは１マスづつスクロールしますが、下に滑らかにスクロール<BR>
+			するようにしたプログラムも記載してありますので、基本が理解出来ましたらご覧に<BR>
+			なってみて下さい。<BR>
+
+<PRE>
+// マップスクロール基本
+#include "DxLib.h"
+
+#define MAP_SIZE	64			// マップチップ一つのドットサイズ
+
+#define MAP_WIDTH	20			// マップの幅
+#define MAP_HEIGHT	16			// マップの縦長さ
+
+// マップのデータ
+int MapData[ MAP_HEIGHT ][ MAP_WIDTH ] =
+{
+	{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ,  0, 0, 0, 0, 0, 0, 0, 0, 0, 0 } ,
+	{ 0, 1, 1, 0, 0, 0, 0, 0, 0, 0 ,  1, 1, 1, 1, 1, 1, 1, 1, 1, 0 } ,
+	{ 0, 0, 1, 1, 1, 0, 0, 0, 0, 0 ,  1, 0, 0, 0, 0, 0, 0, 0, 1, 0 } ,
+	{ 0, 0, 1, 0, 1, 0, 0, 0, 0, 0 ,  1, 1, 1, 1, 1, 1, 0, 0, 1, 0 } ,
+	{ 0, 1, 1, 0, 1, 0, 0, 1, 1, 0 ,  0, 0, 0, 0, 0, 1, 0, 0, 1, 0 } ,
+	{ 0, 1, 0, 0, 1, 0, 0, 1, 1, 0 ,  0, 0, 1, 1, 1, 1, 1, 0, 1, 0 } ,
+	{ 0, 1, 0, 0, 1, 0, 0, 1, 1, 0 ,  0, 0, 1, 0, 0, 1, 1, 0, 1, 0 } ,
+	{ 0, 1, 0, 0, 1, 0, 0, 1, 1, 0 ,  0, 0, 1, 0, 0, 1, 1, 0, 1, 0 } ,
+
+	{ 0, 1, 1, 1, 1, 1, 1, 1, 1, 0 ,  0, 1, 1, 0, 0, 1, 1, 0, 1, 0 } ,
+	{ 0, 0, 0, 0, 1, 0, 0, 1, 0, 0 ,  0, 1, 1, 0, 0, 1, 1, 0, 1, 0 } ,
+	{ 0, 0, 0, 0, 1, 0, 0, 1, 0, 0 ,  0, 1, 1, 0, 0, 1, 1, 0, 1, 0 } ,
+	{ 0, 0, 0, 1, 1, 0, 0, 1, 0, 0 ,  0, 1, 1, 0, 0, 1, 1, 0, 1, 0 } ,
+	{ 0, 1, 1, 1, 1, 0, 0, 1, 1, 1 ,  1, 1, 1, 0, 0, 1, 1, 0, 1, 0 } ,
+	{ 0, 1, 1, 1, 1, 0, 0, 0, 0, 0 ,  0, 0, 0, 0, 0, 0, 0, 0, 1, 0 } ,
+	{ 0, 1, 1, 1, 1, 0, 0, 0, 0, 0 ,  0, 0, 0, 0, 0, 0, 0, 0, 1, 0 } ,
+	{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ,  0, 0, 0, 0, 0, 0, 0, 0, 0, 0 } ,
+} ;
+
+// プレイヤーの位置
+int PlayerX , PlayerY ;
+
+// マップとプレイヤーの描画関数
+void GraphDraw( void )
+{
+	int j , i ;
+	int MapDrawPointX , MapDrawPointY ;		// 描画するマップ座標値
+	int DrawMapChipNumX , DrawMapChipNumY ;	// 描画するマップチップの数
+	
+	// 描画するマップチップの数をセット
+	DrawMapChipNumX = 640 / MAP_SIZE + 1 ;
+	DrawMapChipNumY = 480 / MAP_SIZE + 1 ;
+
+	// 画面左上に描画するマップ座標をセット
+	MapDrawPointX = PlayerX - DrawMapChipNumX / 2 ;
+	MapDrawPointY = PlayerY - DrawMapChipNumY / 2 ;
+
+	// マップを描く
+	for( i = 0 ; i < DrawMapChipNumY ; i ++ )
+	{
+		for( j = 0 ; j < DrawMapChipNumX ; j ++ )
+		{
+			// 画面からはみ出た位置なら描画しない
+			if( j + MapDrawPointX < 0 || i + MapDrawPointY < 0 ||
+				j + MapDrawPointX >= MAP_WIDTH || i + MapDrawPointY >= MAP_HEIGHT ) continue ;
+
+			// マップデータが０だったら四角を描画する
+			if( MapData[ i + MapDrawPointY ][ j + MapDrawPointX ] == 0 )
+			{
+				DrawBox( j * MAP_SIZE , i * MAP_SIZE ,
+					j * MAP_SIZE + MAP_SIZE , i * MAP_SIZE + MAP_SIZE ,
+							GetColor( 255 , 0 , 0 ) , TRUE ) ;
+			}
+		}
+	}
+
+	// プレイヤーの描画
+	DrawBox( ( PlayerX - MapDrawPointX ) * MAP_SIZE , ( PlayerY - MapDrawPointY ) * MAP_SIZE ,
+		 ( PlayerX - MapDrawPointX + 1 ) * MAP_SIZE , ( PlayerY - MapDrawPointY + 1 ) * MAP_SIZE ,
+			 GetColor( 255 , 255 , 255 ) , TRUE ) ;
+}
+
+// ＷｉｎＭａｉｎ関数
+int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,
+						 LPSTR lpCmdLine, int nCmdShow )
+{
+	int Key ;
+	int OldX , OldY ;	// 移動する前のプレイヤーの位置を保存する変数
+
+	SetGraphMode( 640 , 480 , 16 ) ;
+	if( DxLib_Init() == -1 )	// ＤＸライブラリ初期化処理
+	{
+		 return -1;				// エラーが起きたら直ちに終了
+	}
+
+	// 描画先画面を裏画面にする
+	SetDrawScreen( DX_SCREEN_BACK ) ;
+
+	// プレイヤーの初期位置をセット
+	PlayerX = 2 ;
+	PlayerY = 2 ;
+
+	// ループ
+	while( ProcessMessage() == 0 && CheckHitKey( KEY_INPUT_ESCAPE ) == 0 )
+	{
+		// 画面を初期化
+		ClearDrawScreen() ;
+
+		// キー入力を得る
+		Key = GetJoypadInputState( DX_INPUT_KEY_PAD1 ) ;
+
+		// 移動する前のプレイヤーの位置を保存
+		OldX = PlayerX ; 
+		OldY = PlayerY ;
+
+		// キー入力に応じてプレイヤーの座標を移動
+		if( Key & PAD_INPUT_LEFT ) PlayerX -= 1 ;
+		if( Key & PAD_INPUT_RIGHT ) PlayerX += 1 ;
+		if( Key & PAD_INPUT_UP ) PlayerY -= 1 ;
+		if( Key & PAD_INPUT_DOWN ) PlayerY += 1 ;
+
+		// 進入不可能なマップだった場合は移動できない
+		if( MapData[ PlayerY ][ PlayerX ] == 0 )
+		{
+			PlayerX = OldX ;
+			PlayerY = OldY ;
+		}
+
+		// マップとプレイヤーを描画
+		GraphDraw() ;
+
+		// 裏画面の内容を表画面に映す
+		ScreenFlip() ;
+
+		// ウエイト
+		WaitTimer( 100 ) ;
+	}
+
+	DxLib_End() ;				// ＤＸライブラリ使用の終了処理
+
+	return 0 ;					// ソフトの終了
+}
+</PRE>
+			<BR><BR><BR>
+			
+			
+			　こちらは上記のプログラムを、スクロールが滑らかになるように手を加えたものです。<BR>
+			　キー入力があってからすぐ１マス分移動するのではなく、次のマスに移動する過程を<BR>
+			表示してからプレイヤーの実際の座標を移動するという作りになっています。<BR><BR>
+
+<PRE>
+// マップスクロール基本
+#include "DxLib.h"
+
+#define MAP_SIZE	64			// マップチップ一つのドットサイズ
+
+#define MAP_WIDTH	20			// マップの幅
+#define MAP_HEIGHT	16			// マップの縦長さ
+
+#define MOVE_FRAME	32			// 移動にかけるフレーム数
+
+// マップのデータ
+int MapData[ MAP_HEIGHT ][ MAP_WIDTH ] =
+{
+	{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ,  0, 0, 0, 0, 0, 0, 0, 0, 0, 0 } ,
+	{ 0, 1, 1, 0, 0, 0, 0, 0, 0, 0 ,  1, 1, 1, 1, 1, 1, 1, 1, 1, 0 } ,
+	{ 0, 0, 1, 1, 1, 0, 0, 0, 0, 0 ,  1, 0, 0, 0, 0, 0, 0, 0, 1, 0 } ,
+	{ 0, 0, 1, 0, 1, 0, 0, 0, 0, 0 ,  1, 1, 1, 1, 1, 1, 0, 0, 1, 0 } ,
+	{ 0, 1, 1, 0, 1, 0, 0, 1, 1, 0 ,  0, 0, 0, 0, 0, 1, 0, 0, 1, 0 } ,
+	{ 0, 1, 0, 0, 1, 0, 0, 1, 1, 0 ,  0, 0, 1, 1, 1, 1, 1, 0, 1, 0 } ,
+	{ 0, 1, 0, 0, 1, 0, 0, 1, 1, 0 ,  0, 0, 1, 0, 0, 1, 1, 0, 1, 0 } ,
+	{ 0, 1, 0, 0, 1, 0, 0, 1, 1, 0 ,  0, 0, 1, 0, 0, 1, 1, 0, 1, 0 } ,
+
+	{ 0, 1, 1, 1, 1, 1, 1, 1, 1, 0 ,  0, 1, 1, 0, 0, 1, 1, 0, 1, 0 } ,
+	{ 0, 0, 0, 0, 1, 0, 0, 1, 0, 0 ,  0, 1, 1, 0, 0, 1, 1, 0, 1, 0 } ,
+	{ 0, 0, 0, 0, 1, 0, 0, 1, 0, 0 ,  0, 1, 1, 0, 0, 1, 1, 0, 1, 0 } ,
+	{ 0, 0, 0, 1, 1, 0, 0, 1, 0, 0 ,  0, 1, 1, 0, 0, 1, 1, 0, 1, 0 } ,
+	{ 0, 1, 1, 1, 1, 0, 0, 1, 1, 1 ,  1, 1, 1, 0, 0, 1, 1, 0, 1, 0 } ,
+	{ 0, 1, 1, 1, 1, 0, 0, 0, 0, 0 ,  0, 0, 0, 0, 0, 0, 0, 0, 1, 0 } ,
+	{ 0, 1, 1, 1, 1, 0, 0, 0, 0, 0 ,  0, 0, 0, 0, 0, 0, 0, 0, 1, 0 } ,
+	{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ,  0, 0, 0, 0, 0, 0, 0, 0, 0, 0 } ,
+} ;
+
+// プレイヤーの位置
+int PlayerX , PlayerY ;
+
+// 移動しているかどうかのフラグ( 0:停止中  1:移動中 )
+int Move ;
+
+// 各方向に移動する量
+int MoveX, MoveY ;
+
+// 移動し始めてから何フレーム経過したかを保持する変数
+int MoveCounter ;
+
+// マップとプレイヤーの描画関数
+void GraphDraw( int ScrollX, int ScrollY )
+{
+	int j , i ;
+	int MapDrawPointX , MapDrawPointY ;		// 描画するマップ座標値
+	int DrawMapChipNumX , DrawMapChipNumY ;	// 描画するマップチップの数
+
+	// 描画するマップチップの数をセット
+	DrawMapChipNumX = 640 / MAP_SIZE + 2 ;
+	DrawMapChipNumY = 480 / MAP_SIZE + 2 ;
+
+	// 画面左上に描画するマップ座標をセット
+	MapDrawPointX = PlayerX - ( DrawMapChipNumX / 2 - 1 ) ;
+	MapDrawPointY = PlayerY - ( DrawMapChipNumY / 2 - 1 ) ;
+
+	// マップを描く
+	for( i = -1 ; i < DrawMapChipNumY ; i ++ )
+	{
+		for( j = -1 ; j < DrawMapChipNumX ; j ++ )
+		{
+			// 画面からはみ出た位置なら描画しない
+			if( j + MapDrawPointX < 0 || i + MapDrawPointY < 0 ||
+				j + MapDrawPointX >= MAP_WIDTH || i + MapDrawPointY >= MAP_HEIGHT ) continue ;
+
+			// マップデータが０だったら四角を描画する
+			if( MapData[ i + MapDrawPointY ][ j + MapDrawPointX ] == 0 )
+			{
+				DrawBox(j * MAP_SIZE + ScrollX,			i * MAP_SIZE + ScrollY,
+					j * MAP_SIZE + MAP_SIZE + ScrollX,	i * MAP_SIZE + MAP_SIZE + ScrollY,
+					GetColor( 255 , 0 , 0 ) , TRUE ) ;
+			}
+		}
+	}
+
+	// プレイヤーの描画
+	DrawBox( ( PlayerX - MapDrawPointX ) * MAP_SIZE , ( PlayerY - MapDrawPointY ) * MAP_SIZE ,
+		 ( PlayerX - MapDrawPointX + 1 ) * MAP_SIZE , ( PlayerY - MapDrawPointY + 1 ) * MAP_SIZE ,
+			 GetColor( 255 , 255 , 255 ) , TRUE ) ;
+}
+
+// ＷｉｎＭａｉｎ関数
+int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,
+						 LPSTR lpCmdLine, int nCmdShow )
+{
+	int Key ;
+	int ScrollX, ScrollY ;
+
+	SetGraphMode( 640 , 480 , 16 ) ;
+	if( DxLib_Init() == -1 )	// ＤＸライブラリ初期化処理
+	{
+		 return -1;				// エラーが起きたら直ちに終了
+	}
+
+	// 描画先画面を裏画面にする
+	SetDrawScreen( DX_SCREEN_BACK ) ;
+
+	// プレイヤーの初期位置をセット
+	PlayerX = 2 ;
+	PlayerY = 2 ;
+
+	// 最初は停止中(0)にしておく
+	Move = 0 ;
+
+	// ループ
+	while( ProcessMessage() == 0 && CheckHitKey( KEY_INPUT_ESCAPE ) == 0 )
+	{
+		// 画面を初期化
+		ClearDrawScreen() ;
+
+		// 移動中ではない場合キー入力を受け付ける
+		if( Move == 0 )
+		{
+			// キー入力を得る
+			Key = GetJoypadInputState( DX_INPUT_KEY_PAD1 ) ;
+
+			// キー入力に応じてプレイヤーの座標を移動
+			if( Key & PAD_INPUT_LEFT )
+			{
+				Move = 1 ;
+				MoveX = -1 ;
+				MoveY = 0 ;
+			}
+			if( Key & PAD_INPUT_RIGHT )
+			{
+				Move = 1 ;
+				MoveX = 1 ;
+				MoveY = 0 ;
+			}
+			if( Key & PAD_INPUT_UP )
+			{
+				Move = 1 ;
+				MoveX = 0 ;
+				MoveY = -1 ;
+			}
+			if( Key & PAD_INPUT_DOWN )
+			{
+				Move = 1 ;
+				MoveX = 0 ;
+				MoveY = 1 ;
+			}
+
+			// 進入不可能なマップだった場合は移動できない
+			if( Move == 1 )
+			{
+				if( MapData[ PlayerY + MoveY ][ PlayerX + MoveX ] == 0 )
+				{
+					Move = 0 ;
+				}
+				else
+				{
+					MoveCounter = 0 ;
+				}
+			}
+
+			// 停止中は画面のスクロールは行わない
+			ScrollX = 0 ;
+			ScrollY = 0 ;
+		}
+
+		// 移動中の場合は移動処理を行う
+		if( Move == 1 )
+		{
+			MoveCounter ++ ;
+
+			// 移動処理が終了したら停止中にする
+			if( MoveCounter == MOVE_FRAME )
+			{
+				Move = 0 ;
+
+				// プレイヤーの位置を変更する
+				PlayerX += MoveX ;
+				PlayerY += MoveY ;
+
+				// 停止中は画面のスクロールは行わない
+				ScrollX = 0 ;
+				ScrollY = 0 ;
+			}
+			else
+			{
+				// 経過時間からスクロール量を算出する
+				ScrollX = -( MoveX * MAP_SIZE * MoveCounter / MOVE_FRAME ) ;
+				ScrollY = -( MoveY * MAP_SIZE * MoveCounter / MOVE_FRAME ) ;
+			}
+		}
+
+		// マップとプレイヤーを描画
+		GraphDraw( ScrollX, ScrollY ) ;
+
+		// 裏画面の内容を表画面に映す
+		ScreenFlip() ;
+	}
+
+	DxLib_End() ;				// ＤＸライブラリ使用の終了処理
+
+	return 0 ;					// ソフトの終了
+}
+</PRE>
+
+			<BR><BR><BR><BR><BR><BR><BR>
+
+
+
+			　<FONT COLOR="#007712"><A NAME="N5"><B>５．シューティング基本</B></A></FONT><BR><BR>
+
+			　シューティングの基本である自機がショットを撃つプログラムです。<BR>
+			　ショットのデータを配列にして、それぞれの配列要素が有効か、という情報を持つのが<BR>
+			一般です。
+
+
+<PRE>
+// シューティング基本
+#include "DxLib.h"
+
+// ショットの最大数
+#define MAX_SHOT	4
+
+int PlayerX , PlayerY ;	// プレイヤーの位置
+
+int ShotValid[ MAX_SHOT ] ;	// ショットが存在するか、フラグ
+int ShotX[ MAX_SHOT ] ,ShotY[ MAX_SHOT ] ;	// ショットの位置
+
+int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,
+						 LPSTR lpCmdLine, int nCmdShow )
+{
+	int Key ;
+	int OldKey ;	// 前のキー入力状態
+	int i , j ;
+
+	SetGraphMode( 640 , 480 , 16 ) ;
+	if( DxLib_Init() == -1 )	// ＤＸライブラリ初期化処理
+	{
+		 return -1;				// エラーが起きたら直ちに終了
+	}
+
+	// 描画先画面を裏画面にセット
+	SetDrawScreen( DX_SCREEN_BACK ) ;
+
+	// プレイヤーの初期位置をセット
+	PlayerX = 320 ;
+	PlayerY = 400 ;
+
+	// ショットの存在を初期化する
+	for( i = 0 ; i < MAX_SHOT ; i ++ )
+		ShotValid[ i ] = 0 ;
+
+	// ループ
+	while( ProcessMessage() == 0 && CheckHitKey( KEY_INPUT_ESCAPE ) == 0 )
+	{
+		// キー入力取得
+		OldKey = Key ;
+		Key = GetJoypadInputState( DX_INPUT_KEY_PAD1 ) ;
+
+		if( Key & PAD_INPUT_RIGHT ) PlayerX += 3 ;	// 右を押していたら右に進む
+		if( Key & PAD_INPUT_LEFT ) PlayerX -= 3 ;	// 左を押していたら左に進む
+
+		// ショットの移動処理
+		for( j = 0 ; j < MAX_SHOT ; j ++ )
+		{
+			// ショットデータが無効だったらスキップ
+			if( ShotValid[ j ] == 0 ) continue ;
+
+			// 位置を上にずらす
+			ShotY[ j ] -= 8 ;
+
+			// 画面外に出ていたらショットデータを無効にする
+			if( ShotY[ j ] < -32 ) ShotValid[ j ] = 0 ;
+		}
+
+		// ショットボタンを押していたらショットを出す
+		// 一つ前のループでショットボタンを押していたらショットは出さない
+		if( ( Key & ~OldKey ) & PAD_INPUT_A )
+		{
+			// 使われていないショットデータを探す
+			for( j = 0 ; j < MAX_SHOT ; j ++ )
+			{
+				if( ShotValid[ j ] == 0 ) break ;
+			}
+		
+			// もし使われていないショットデータがあったらショットを出す
+			if( j != MAX_SHOT )
+			{
+				// ショットの位置を設定
+				ShotX[ j ] = PlayerX + 16 ;
+				ShotY[ j ] = PlayerY ;
+
+				// ショットデータを使用中にセット
+				ShotValid[ j ] = 1 ;
+			}
+		}
+ 
+		// 画面を初期化する
+		ClearDrawScreen() ;
+
+		// プレイヤーを描画する
+		DrawBox( PlayerX , PlayerY ,PlayerX + 48 , PlayerY + 48 , GetColor( 255 , 0 , 0 ) , TRUE ) ;
+
+		// ショットを描画する
+		for( j = 0 ; j < MAX_SHOT ; j ++ )
+		{
+			// ショットデータが有効な時のみ描画
+			if( ShotValid[ j ] == 1 )
+				DrawBox( ShotX[j] , ShotY[j] , ShotX[j] + 16 , ShotY[j] + 16 ,
+						 GetColor( 255 , 255 , 255 ) , TRUE ) ;
+
+		}
+		// 裏画面の内容を表画面に反映させる
+		ScreenFlip() ;
+	}
+
+	DxLib_End() ;				// ＤＸライブラリ使用の終了処理
+
+	return 0 ;					// ソフトの終了
+}
+</PRE>
+			<BR><BR><BR><BR><BR><BR><BR>
+
+
+
+			　<FONT COLOR="#007712"><A NAME="N6"><B>６．サウンドノベル風文字列描画基本</B></A></FONT><BR><BR>
+
+			　文章をサウンドノベルのように１文字づつ描画してゆくプログラムです。<BR>
+			　文章中には機能文字としてB,E,@,C があり、それぞれボタン押し待ち、実行終了、<BR>
+			改行、画面クリアとなっております。<BR><BR>
+
+<PRE>
+// サウンドノベル風文字列描画基本
+#include "DxLib.h"
+
+// 文字のサイズ
+#define MOJI_SIZE 24
+
+int DrawPointX , DrawPointY ;	// 文字列描画の位置
+int SP , CP ;	// 参照する文字列番号と文字列中の文字ポインタ
+
+char String[][ 256 ] =
+{
+	"　ゲームプログラムとは、いやプログラムとは" ,
+	"ある事柄を実現するプログラムの方法を説明されても理解できないことがある。B" ,
+	"@　なぜならそのプログラム技法も何かの基本的な技法の組み合わせで出来ているからだ。B",
+	"@　これはその他の学問も基本がわからないと応用が利かないということと同じ現象で、",
+	"別に特に珍しいことでもない。B" ,
+	"C　しかしゲームプログラムとなると覚えなくてはならない基礎が沢山あり、" ,
+	"さらにある程度クオリティの高いソフトを作ろうとすると色々なプログラム技法を",
+	"習得しなくてはならない。B" ,
+	"@　しかもある程度レベルが高くなると自分で技法を編み出すか、技術レベルの高い",
+	"プログラマーに聞くなどするしか方法がなく大変厄介である。B"
+	"というかそのせいでゲームプログラムの敷居は高くなっているといえる。BE"
+} ;
+
+// 改行関数
+int Kaigyou( void )
+{
+	int TempGraph ;
+
+	// 描画行位置を一つ下げる
+	DrawPointY ++ ;
+
+	// 描画列を最初に戻す
+	DrawPointX = 0 ;
+
+	// もし画面からはみ出るなら画面をスクロールさせる
+	if( DrawPointY * MOJI_SIZE + MOJI_SIZE > 480 )
+	{
+		// テンポラリグラフィックの作成
+		TempGraph = MakeGraph( 640 , 480 ) ;
+
+		// 画面の内容を丸々コピーする
+		GetDrawScreenGraph( 0 , 0 , 640 , 480 , TempGraph ) ;
+
+		// 一行分上に貼り付ける
+		DrawGraph( 0 , -MOJI_SIZE ,TempGraph , FALSE ) ;
+		
+		// 一番下の行の部分を黒で埋める
+		DrawBox( 0 , 480 - MOJI_SIZE , 640 , 480 , 0 , TRUE ) ;
+
+		// 描画行位置を一つあげる
+		DrawPointY -- ;
+
+		// グラフィックを削除する
+		DeleteGraph( TempGraph ) ;
+	}
+
+	// 終了
+	return 0 ;
+}
+
+int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,
+						 LPSTR lpCmdLine, int nCmdShow )
+{
+	int EndFlag ;	// 終了フラグ
+	char OneMojiBuf[ 3 ] ;	// １文字分一時記憶配列
+
+	SetGraphMode( 640 , 480 , 16 ) ;
+	if( DxLib_Init() == -1 )	// ＤＸライブラリ初期化処理
+	{
+		 return -1;				// エラーが起きたら直ちに終了
+	}
+
+	// 描画位置の初期位置セット
+	DrawPointX = 0 ;
+	DrawPointY = 0 ;
+
+	// 参照文字位置をセット
+	SP = 0 ;	// １行目の
+	CP = 0 ;	// ０文字
+
+	// フォントのサイズセット
+	SetFontSize( MOJI_SIZE ) ;
+
+	// 終了フラグを倒す
+	EndFlag = 0 ;
+
+	// ループ
+	while( ProcessMessage() == 0 && CheckHitKey( KEY_INPUT_ESCAPE ) == 0 )
+	{
+		char  Moji ;
+
+		// 文字の描画
+		Moji = String[ SP ][ CP ] ;
+		switch( Moji )
+		{
+		case '@' :	// 改行文字
+
+			// 改行処理および参照文字位置を一つ進める
+			Kaigyou() ;
+			CP ++ ;
+
+			break ;
+
+		case 'B' :	// ボタン押し待ち文字
+
+			// ボタン押し待ちおよび参照文字位置を一つ進める
+			WaitKey() ;
+			CP ++ ;
+
+			break ;
+
+		case 'E' :	// 終了文字
+
+			// 終了フラグを立てるおよび参照文字位置を一つ進める
+			EndFlag = 1 ;
+			CP ++ ;
+
+			break ;
+
+		case 'C' :	// クリア文字
+
+			// 画面を初期化して描画文字位置を初期位置に戻すおよび参照文字位置を一つ進める
+			ClearDrawScreen() ;
+			DrawPointY = 0 ;
+			DrawPointX = 0 ;
+			CP ++ ;
+
+			break ;
+
+		default :	// その他の文字
+
+			// １文字分抜き出す
+			OneMojiBuf[ 0 ] = String[ SP ][ CP ] ;
+			OneMojiBuf[ 1 ] = String[ SP ][ CP + 1 ] ;
+			OneMojiBuf[ 2 ] = '\0' ;
+
+			// １文字描画
+			DrawString( DrawPointX * MOJI_SIZE , DrawPointY * MOJI_SIZE ,
+				OneMojiBuf , GetColor( 255 , 255 , 255 ) ) ;
+
+			// 参照文字位置を２バイト勧める
+			CP += 2 ;
+
+			// カーソルを一文字文進める
+			DrawPointX ++ ;
+
+			// 少し待つ
+			WaitTimer( 10 ) ;
+
+			// 画面からはみ出たら改行する
+			if( DrawPointX * MOJI_SIZE + MOJI_SIZE > 640 ) Kaigyou() ;
+
+			break ;
+		}
+
+		// 終了フラグが１だったら終了する
+		if( EndFlag == 1 ) break ;
+
+		// 参照文字列の終端まで行っていたら参照文字列を進める
+		if( String[ SP ][ CP ] == '\0' )
+		{
+			SP ++ ;
+			CP = 0 ;
+		}
+	}
+
+	DxLib_End() ;				// ＤＸライブラリ使用の終了処理
+
+	return 0 ;					// ソフトの終了
+}
+</PRE>
+			<BR><BR><BR><BR><BR><BR><BR>
+
+
+
+			　<FONT COLOR="#007712"><A NAME="N7"><B>７．メニュー処理基本</B></A></FONT><BR><BR>
+
+			　メニューの処理の基本的なプログラムです。<BR><BR>
+			
+			　と、いいつつ関数のポインタを使用しています。関数のポインタについては次の項目を<BR>
+			参照してください<BR><BR>
+
+<PRE>
+// メニュ－処理基本
+#include "DxLib.h"
+
+int SPoint ;	// 選択カーソルの位置
+
+// 各処理の関数
+void RedBoxDraw( void ) ;	// 赤い箱を描画する関数
+void RandPsetPixel( void ) ;	// ランダムにドットを打つ関数
+void GDraw( void ) ;		// グラデーションを描く関数
+
+
+// 処理ポインタ配列
+void ( *Method[] )( void ) =
+{
+	RedBoxDraw , RandPsetPixel , GDraw 
+} ;
+
+// 選択項目の文字列
+char *String[] =
+{
+	"赤い箱を描画する" ,
+	"ランダムにドットを打つ" ,
+	"グラデーションを描く",
+	NULL
+} ;
+
+
+int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,
+						 LPSTR lpCmdLine, int nCmdShow )
+{
+	int SenntakuNum ;
+
+	SetGraphMode( 640 , 480 , 16 ) ;
+	if( DxLib_Init() == -1 )	// ＤＸライブラリ初期化処理
+	{
+		 return -1;				// エラーが起きたら直ちに終了
+	}
+
+	// 選択ポインタの位置初期化
+	SPoint = 0 ;
+
+	// 選択項目の数を取得＆ついでに項目描画
+	SenntakuNum = 0 ; 
+	while( String[ SenntakuNum ] != NULL )
+	{
+		DrawString( 32 , SenntakuNum * 32 , String[ SenntakuNum ] , GetColor( 255 , 255 , 255 ) ) ;
+		SenntakuNum ++ ;
+	}
+
+	// ループ
+	while( ProcessMessage() == 0 )
+	{
+		// 前のカーソル消去
+		DrawBox( 0 , 0 , 32 , SenntakuNum * 32 , 0 , TRUE ) ;
+
+		// カーソル描画
+		DrawBox( 0 , SPoint * 32 , 16 , SPoint * 32 + 16 , 
+				GetColor( 255 , 255 , 0 ) , TRUE ) ;
+
+		// キー入力
+		{
+			// キー入力待ち
+			while( ProcessMessage() == 0 && CheckHitKeyAll() != 0 ){}
+			while( ProcessMessage() == 0 && CheckHitKeyAll() == 0 ){}
+	
+			// キー入力に応じて処理
+
+			// カーソル移動
+			if( CheckHitKey( KEY_INPUT_UP ) != 0 && SPoint != 0 ) SPoint -- ;
+			if( CheckHitKey( KEY_INPUT_DOWN ) != 0 && SPoint < SenntakuNum - 1 ) SPoint ++ ;
+
+			// 決定キー時処理
+			if( CheckHitKey( KEY_INPUT_Z ) != 0 )
+			{
+				// 項目に応じた処理を行う
+				Method[ SPoint ]() ;
+
+				// キー入力待ち
+				WaitKey() ;
+
+				// ループから抜ける
+				break ;
+			}
+		}
+	}
+
+	DxLib_End() ;				// ＤＸライブラリ使用の終了処理
+
+	return 0 ;					// ソフトの終了
+}
+
+
+// 赤い箱を描画する関数
+void RedBoxDraw( void )
+{
+	DrawBox( 0 , 0 , 640 , 480 , GetColor( 255 , 0 , 0 ) , TRUE ) ;
+}
+
+// ランダムにドットを打つ関数
+void RandPsetPixel( void )
+{
+	int i ;
+
+	for( i = 0 ; i < 1000 ; i ++ )
+	{
+		DrawPixel( GetRand( 639 ) , GetRand( 479 ) ,
+				 GetColor( GetRand( 255 ) , GetRand( 255 ) , GetRand( 255 ) ) ) ;
+	}
+}
+
+// グラデーションを描く関数
+void GDraw( void )
+{
+	int i ;
+
+	for( i = 0 ; i < 480 ; i ++ )
+	{
+		DrawLine( 0 , i , 640 , i + 1 , GetColor( 255 , 255 , 255 * i / 480 ) ) ;
+	}
+}
+</PRE>
+			<BR><BR><BR><BR><BR><BR><BR>
+
+			　<FONT COLOR="#007712"><A NAME="N8"><B>８．関数ポインタ基本</B></A></FONT><BR><BR>
+
+			　ゲームプログラムを深く突き進めてゆくと必ず使用することになる関数のポインタを<BR>
+			扱った基本的なプログラムを以下に示します。<BR>
+			　関数ポインタはあまり参考書にも載っていないですが、プログラムにおいて重要な<BR>
+			役割を果たします。<BR>
+
+
+<PRE>
+// 関数ポインタ
+#include "DxLib.h"
+#include &lt;math.h&gt;
+
+#define PI 3.14159	// 円周率
+
+int MPoint ;	// 使用している関数ナンバー
+
+// 描画処理の関数
+void Draw1( int Pal ) ;	// 描画処理１
+void Draw2( int Pal ) ;	// 描画処理２
+void Draw3( int Pal ) ;	// 描画処理３
+
+
+// 描画処理ポインタ配列
+void ( *Method[] )( int Pal ) =
+{
+	Draw1 , Draw2 , Draw3 , NULL 
+} ;
+
+
+int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,
+						 LPSTR lpCmdLine, int nCmdShow )
+{
+	int MethodNum ;		// 使用している描画処理関数ナンバー
+	int Count ;		// 描画処理用カウンタ
+	int OldKey ;		// 前フレームのキー入力情報
+
+	SetGraphMode( 640 , 480 , 16 ) ;
+	if( DxLib_Init() == -1 )	// ＤＸライブラリ初期化処理
+	{
+		 return -1;		// エラーが起きたら直ちに終了
+	}
+
+	// 使用関数ナンバーを初期化
+	MPoint = 0 ;
+
+	// 描画処理関数の数の取得
+	MethodNum = 0 ; 
+	while( Method[ MethodNum ] != NULL ) MethodNum ++ ;
+
+	// 描画先画面を裏画面にする
+	SetDrawScreen( DX_SCREEN_BACK ) ;
+
+	// カウント初期化
+	Count = 0 ;
+
+	// ループ
+	while( ProcessMessage() == 0 )
+	{
+		// キー入力処理
+		{
+			int Key ;
+
+			// もしＺキーを押していたら処理項目変更
+			Key = GetJoypadInputState( DX_INPUT_KEY_PAD1 ) ;
+
+			if( ( Key & ~OldKey ) & PAD_INPUT_A )
+			{
+				MPoint ++ ;
+				if( MPoint == MethodNum ) MPoint = 0 ;
+			}
+
+			OldKey = Key ;
+		}
+
+		// 画面をクリア
+		ClearDrawScreen() ;
+
+		// 描画関数を使用
+		Method[ MPoint ]( Count ) ;
+
+		// 裏画面の内容を表画面に反映
+		ScreenFlip() ;
+
+		// カウントを増やす
+		Count ++ ;
+	}
+
+	DxLib_End() ;		// ＤＸライブラリ使用の終了処理
+
+	return 0 ;		// ソフトの終了
+}
+
+
+// 描画処理１
+void Draw1( int Pal )
+{
+	int y , x ;
+
+	// 描画位置を算出
+	y = ( int )( sin( PI / 360 * Pal ) * 240 ) + 240 ;  
+	x = Pal % ( 640 + 64 ) - 32 ;  
+
+	DrawBox( x , y , x + 16 , y + 16 , GetColor( 255 , 255 , 0 ) , TRUE ) ;
+}
+
+// 描画処理２
+void Draw2( int Pal )
+{
+	int y , x ;
+
+	// 描画位置を算出
+	y = 240 ;
+	x = Pal % ( 640 + 64 ) - 32 ;  
+
+	DrawBox( x , y , x + 16 , y + 16 , GetColor( 255 , 255 , 0 ) , TRUE ) ;
+}
+
+// 描画処理３
+void Draw3( int Pal )
+{
+	int y , x ;
+
+	// 描画位置を算出
+	y = Pal % ( 480 + 64 ) - 32 ;
+	x = Pal % ( 640 + 64 ) - 32 ;  
+
+	DrawBox( x , y , x + 16 , y + 16 , GetColor( 255 , 255 , 0 ) , TRUE ) ;
+}
+</PRE>
+			<BR><BR><BR><BR><BR><BR><BR>
+
+
+
+			　<FONT COLOR="#007712"><A NAME="N9"><B>９．フェードイン、フェードアウト</B></A></FONT><BR><BR>
+
+			　だんだん出てくる、だんだん消える、の処理です。<BR>
+			　別にたいしたことはしていません。基本中の基本です。<BR>
+
+<PRE>
+// フェードイン・フェードアウト
+#include "DxLib.h"
+
+int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,
+						 LPSTR lpCmdLine, int nCmdShow )
+{
+	int i ;
+	int GraphHandle ;
+
+	SetGraphMode( 640 , 480 , 16 ) ;
+	if( DxLib_Init() == -1 )	// ＤＸライブラリ初期化処理
+	{
+		 return -1;		// エラーが起きたら直ちに終了
+	}
+
+	// test1.bmpを読みこむ
+	GraphHandle = LoadGraph( "test1.bmp" ) ;
+
+	// 描画先を裏画面にセット
+	SetDrawScreen( DX_SCREEN_BACK ) ;
+
+	// 時間待ち
+	WaitTimer( 1000 ) ;
+
+	// フェードイン処理
+	for( i = 0 ; i < 255 ; i ++ )
+	{
+		// 描画輝度をセット
+		SetDrawBright( i , i , i ) ;
+		
+		// グラフィックを描画
+		DrawGraph( 0 , 0 , GraphHandle , FALSE ) ;
+		ScreenFlip() ;
+	}
+
+	// フェードアウト処理
+	for( i = 0 ; i < 255 ; i ++ )
+	{
+		// 描画輝度をセット
+		SetDrawBright( 255 - i , 255 - i , 255 - i ) ;
+		
+		// グラフィックを描画
+		DrawGraph( 0 , 0 , GraphHandle , FALSE ) ;
+		ScreenFlip() ;
+	}
+
+	DxLib_End() ;		// ＤＸライブラリ使用の終了処理
+
+	return 0 ;		// ソフトの終了
+}
+
+</PRE>
+			<BR><BR><BR><BR><BR><BR><BR>
+
+
+			　<FONT COLOR="#007712"><A NAME="N10"><B>１０．落ちものゲーム基本</B></A></FONT><BR><BR>
+
+			　基本、と言っても簡単に作ることが出来ず、見にくく汚いプログラムになってしまいました。<BR>
+			　とりあえずコラムスです。<BR>
+			　きっとこのプログラムを見る方はほとんどいないだろう、と思いつつ折角作ったのでとりあえず載せました<BR>
+
+<PRE>
+// コラムス
+#include "DxLib.h"
+
+#define BLOCKTYPE_NUM	5	// ブロックの種類の数
+
+#define BLOCK_SIZE		24	// ブロックのドットサイズ
+#define WORLD_WIDTH		8	// ステージの幅
+#define WORLD_HEIGHT	16	// ステージの高さ
+
+#define STAGE_X	210	// ステージの左上頂点のＸ座標
+#define STAGE_Y	50	// ステージの左上頂点のＹ座標
+
+#define WAIT	500	// 黙っててブロックが落ちるまでの時間
+
+// ステージデータ
+char Block[ WORLD_WIDTH ][ WORLD_HEIGHT ] ;		// 実際のデータ
+char BufferBlock[ WORLD_WIDTH ][ WORLD_HEIGHT ] ;	// 一時状態保存用ブロックデータ
+
+// アクティブブロックデータ
+int ActiveX , ActiveY ;	// アクティブブロックの一番下のブロックの位置
+char ActiveBlock[ 3 ] ;	// アクティブなブロックのデータ
+
+// カウンター
+int WaitCounter ;	// 下に勝手に落とすまでの時間計測用
+int NowTime ;	// 現在のフレームで経過した時間
+int OldTime ;	// 前のフレームのときにGetNowCount関数で得たタイム
+
+// ブロックの種類ごとの色データ
+int BlockColor[ 5 ][ 3 ] =
+{
+	{ 128 , 128 , 128 } , { 255 , 100 , 100 } ,{ 255 , 255 , 0 } ,
+	{ 255 , 0 , 255 } , { 0 , 255 , 255 } 
+} ;
+
+
+void InitGame( void ) ;				// ゲームの初期化
+void CreateNewActiveBlock( void ) ;		// 新しいブロックの生成
+int KeyInput( void ) ;				// キー入力処理
+int TimeFunc( void ) ;				// 時間関係処理
+int MoveActiveBlock( int MoveX , int MoveY ) ;	// アクティブブロックの移動
+int CheckHitActiveBlock( int x , int y ) ;	// アクティブブロックが画面上のブロックに当たっていないか調べる
+int LockActiveBlock( int x , int y ) ;		// アクティブブロックを固定する及び次のブロックを出すもし次のブロックを出すスペースがなかったらゲームオーバー
+void GameOver( void ) ;				// ゲームオーバー処理
+int CheckEliminatBlock( void ) ;		// 消えるブロックがあるか調べてあったら消す処理をする
+void InitBufferBlock( void ) ;			// 一時使用用ブロックデータの初期化
+int CheckEliminatBlockToOne( int x , int y ) ;	// 特定ブロックが消えるか探索
+int ScreenDraw( void ) ;			// 画面描画処理関数
+
+// ＷｉｎＭａｉｎ関数
+int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,
+		 LPSTR lpCmdLine, int nCmdShow )
+{
+	SetGraphMode( 640 , 480 , 16 ) ;
+	if( DxLib_Init() == -1 )	// ＤＸライブラリ初期化処理
+	{
+		 return -1;				// エラーが起きたら直ちに終了
+	}
+
+	// ゲームを初期化
+	InitGame() ;
+
+	// 描画先画面を裏画面にセット
+	SetDrawScreen( DX_SCREEN_BACK ) ;
+
+	// メインループ
+	while( ProcessMessage() == 0 )
+	{
+		// キー入力処理
+		KeyInput() ;
+
+		// 時間経過処理
+		TimeFunc() ;
+
+		// 画面描画
+		ScreenDraw() ;
+
+		// 裏画面の内容を表画面に反映させる
+		ScreenFlip() ;
+	}
+
+	// ＤＸライブラリの終了
+	DxLib_End() ;
+
+	// 終了
+	return 0 ;
+}
+
+// ゲームの初期化
+void InitGame( void ) 
+{
+	int i , j ;
+
+	// 前回時間をセット
+	OldTime = GetNowCount() ;
+
+	// アクティブブロックの位置をセット
+	ActiveX = WORLD_WIDTH / 2 ;
+	ActiveY = 2 ;
+
+	// アクティブブロックを生成
+	CreateNewActiveBlock() ;
+
+	// マップブロックの初期化
+	for( i = 0 ; i < WORLD_HEIGHT ; i ++ )
+		for( j = 0 ; j < WORLD_WIDTH ; j ++ )
+			Block[ j ][ i ] = 0 ;
+}
+
+// 新しいブロックの生成
+void CreateNewActiveBlock( void )
+{
+	int i ;
+
+	// ランダムに３つブロックをセット
+	for( i = 0 ; i < 3 ; i ++ )
+		ActiveBlock[ i ] = GetRand( BLOCKTYPE_NUM - 1 ) + 1 ;
+}
+
+// キー入力処理
+int KeyInput( void )
+{
+	int Key ;	// 入力されたキー
+	static int OldKey ;	// 前フレームで取得したキー情報
+
+	// キー入力を得る
+	Key = GetJoypadInputState( DX_INPUT_KEY_PAD1 ) ;
+
+	// キー入力に応じて処理をする
+	if( Key & PAD_INPUT_DOWN )		MoveActiveBlock( 0 , 1 ) ;
+	if( ( Key & ~OldKey ) & PAD_INPUT_LEFT && ActiveX > 0 )	MoveActiveBlock( -1 , 0 ) ;
+	if( ( Key & ~OldKey ) & PAD_INPUT_RIGHT && ActiveX < WORLD_WIDTH - 1 )	MoveActiveBlock( 1 , 0 ) ;
+
+	if( ( Key & ~OldKey ) & PAD_INPUT_A )
+	{
+		int TempBlock ;
+
+		// アクティブブロックの配置を変更する
+		TempBlock = ActiveBlock[ 2 ] ; ActiveBlock[ 2 ] = ActiveBlock[ 0 ] ; ActiveBlock[ 0 ] = TempBlock ;
+		TempBlock = ActiveBlock[ 0 ] ; ActiveBlock[ 0 ] = ActiveBlock[ 1 ] ; ActiveBlock[ 1 ] = TempBlock ;
+	}
+	OldKey = Key ;
+
+	// 終了
+	return 0 ;
+}
+
+// 時間関係処理
+int TimeFunc( void )
+{
+	int Time ;
+
+	// 現在の時間を得る
+	Time = GetNowCount() ;
+
+	// 今フレームで経過した時間を得る
+	NowTime = Time - OldTime ;
+
+	// 現在の時間を保存
+	OldTime = Time ; 
+
+	// ウエイトカウンタに経過時間を加算する
+	WaitCounter += NowTime ;
+
+	// 一定時間が経過していたら勝手に下にブロックを落す
+	if( WaitCounter > WAIT )
+	{
+		MoveActiveBlock( 0 , 1 ) ;
+
+		// カウンターを０に戻す
+		WaitCounter = 0 ;
+	}
+
+	// 終了
+	return 0 ;
+}
+
+// アクティブブロックの移動
+int MoveActiveBlock( int MoveX , int MoveY )
+{
+	int NewX , NewY ;
+
+	// 移動後の座標をセットする
+	NewX = MoveX + ActiveX ;
+	NewY = MoveY + ActiveY ;
+
+	// 左右移動の処理
+	if( MoveX != 0 && NewX >= 0 && NewX < WORLD_WIDTH )
+	{
+		// 各３つのブロックが画面上のブロックに当たっていないか調べる
+		if( CheckHitActiveBlock( NewX , NewY ) == - 1 )
+		{
+			// あたっていたら左右移動を無効にする
+			MoveX = 0 ;
+		}
+	}
+
+	// 上下移動の処理
+	if( MoveY != 0 )
+	{
+		// 画面の一番下のブロック位置まで来ていたらブロックを固定させる
+		if( NewY >= WORLD_HEIGHT )
+		{
+			LockActiveBlock( ActiveX , ActiveY ) ;
+
+			// 移動を無効にする
+			MoveY = 0 ;
+		}
+		else
+		// 各３つのブロックが画面上のブロックに当たっていないか調べる
+		if( CheckHitActiveBlock( NewX , NewY ) == - 1 )
+		{
+			// あたっていたらブロックを固定する
+			LockActiveBlock( ActiveX , ActiveY ) ;
+
+			// 移動を無効にする
+			MoveY = 0 ;
+		}
+	}
+
+	// 座標を移動する
+	ActiveX += MoveX ;
+	ActiveY += MoveY ;
+
+	// 終了
+	return 0 ;
+}
+
+// アクティブブロックが画面上のブロックに当たっていないか調べる
+int CheckHitActiveBlock( int x , int y )
+{
+	int i ;
+
+	// ３つあるブロックがそれぞれ画面上のブロックに当たっていないか調べる
+	for( i = 0 ; y - i >= 0 && i < 3 ; i ++ )
+	{
+		// 当たっていたらここで終了
+		if( Block[ x ][ y - i ] != 0 ) return -1 ;
+	}
+
+	// 当たっていない場合だけ０を返す
+	return 0 ;
+}
+
+// アクティブブロックを固定する
+// 及び次のブロックを出す
+// もし次のブロックを出すスペースがなかったらゲームオーバー
+int LockActiveBlock( int x , int y )
+{
+	int i ;
+
+	for( i = 0 ; i < 3 ; i ++ )
+	{
+		// 画面上から外れている場合はセットしない
+		if( y - i < 0 ) continue ;
+
+		// ブロックの固定
+		Block[ x ][ y - i ] = ActiveBlock[ i ] ;
+	}
+
+	// 消せるブロックがある場合は消す
+	CheckEliminatBlock() ;
+
+	// 新しいブロックをセット
+	{
+		// アクティブブロックの位置をセット
+		ActiveX = WORLD_WIDTH / 2 ;
+		ActiveY = 2 ;
+
+		// 新しいアクティブブロックを生成
+		CreateNewActiveBlock() ;
+
+		// 次に出そうとしているスペースがなかったらゲームオーバー処理
+		for( i = 0 ; i < 3 ; i ++ )
+		{
+			if( Block[ ActiveX ][ ActiveY - i ] != 0 ) GameOver() ;
+		}
+	}
+
+	// カウンタリセット
+	WaitCounter = 0 ;
+
+	// 時間待ち
+	WaitTimer( 200 ) ;
+
+	// 終了
+	return 0 ;
+}
+
+// ゲームオーバー処理
+void GameOver( void ) 
+{
+	// 画面中心にゲームオーバーを表示
+	ScreenDraw() ;
+	DrawString( 300 , 220 , "GameOver" , GetColor( 255 , 255 , 255 ) ) ;
+	ScreenFlip() ;
+
+	// キー入力待ち
+	WaitKey() ;
+
+	// ＤＸライブラリ終了
+	DxLib_End() ;
+
+	// ソフト終了
+	exit( -1 ) ;
+}
+
+// 消えるブロックがあるか調べてあったら消す処理をする
+int CheckEliminatBlock( void )
+{
+	int i , j , k;	// 汎用変数
+	int ClsFlag ; // 一つでも消せたブロックがあったか、のフラグ
+
+	do{
+		// 一時使用用ブロックデータを初期化
+		InitBufferBlock() ; 
+
+		// 消せたブロックがあるか、フラグを倒す
+		ClsFlag = FALSE ;
+
+		// 各ブロックが消えるか調べる
+		for( i = 0 ; i < WORLD_HEIGHT ; i ++ )
+		{
+			for( j = 0 ; j < WORLD_WIDTH ; j ++ )
+			{
+				// もしブロックがない場合は次に移る
+				if( Block[ j ][ i ] == 0 ) continue ;
+
+				// ブロックが消えるかどうか調べて調査結果をバッファに保存する
+				BufferBlock[ j ][ i ] = CheckEliminatBlockToOne( j , i ) ;
+			}
+		}
+
+		// 消えると判断されたブロックを消す
+		for( i = 0 ; i < WORLD_HEIGHT ; i ++ )
+		{
+			for( j = 0 ; j < WORLD_WIDTH ; j ++ )
+			{
+				if( BufferBlock[ j ][ i ] == 1 )
+				{
+					ClsFlag = TRUE ;
+					Block[ j ][ i ] = 0 ;
+				}
+			}
+		}
+
+		// 空きを積める
+		for( i = WORLD_HEIGHT - 2 ; i > -1 ; i -- )
+		{
+			for( j = 0 ; j < WORLD_WIDTH ; j ++ )
+			{
+				if( Block[ j ][ i ] != 0 )
+				{
+					for( k = i + 1 ; k < WORLD_HEIGHT && Block[ j ][ k ] == 0 ; k ++ ){}
+					k -- ;
+					
+					if( k != i )
+					{
+						Block[ j ][ k ] = Block[ j ][ i ] ;
+						Block[ j ][ i ] = 0 ;
+					}
+				}
+			}
+		}
+
+	}while( ClsFlag ) ;	// 消せたブロックがあった場合再度チェック
+
+	// 終了
+	return 0 ;
+}
+
+// 一時使用用ブロックデータの初期化
+void InitBufferBlock( void )
+{
+	int i , j ;
+
+	for( i = 0 ; i < WORLD_HEIGHT ; i ++ )
+	{
+		for( j = 0 ; j < WORLD_WIDTH ; j ++ )
+		{
+			BufferBlock[ j ][ i ] = 0 ;
+		}
+	}
+}
+
+// 特定ブロックが消えるか探索
+int CheckEliminatBlockToOne( int x , int y )
+{
+	int CheckBlock ;
+	int i ;
+	int BlockNum ;
+
+	// チェックするブロックの種類を保存
+	CheckBlock = Block[ x ][ y ] ;
+
+
+	// 左右にどれだけつながっているか調べる
+	for( i = 0 ; x + i >= 0 && Block[ x + i ][ y ] == CheckBlock ; i -- ){}
+	i ++ ;
+	for( BlockNum = 0 ; x + i < WORLD_WIDTH && Block[ x + i ][ y ] == CheckBlock ; BlockNum ++ , i ++ ){}
+
+	// ３つ以上つながっていたらここで終了
+	if( BlockNum >= 3 ) return 1 ;
+
+	
+	// 上下にどれだけつながっているか調べる
+	for( i = 0 ; y + i >= 0 && Block[ x ][ y + i ] == CheckBlock ; i -- ){}
+	i ++ ;
+	for( BlockNum = 0 ; y + i < WORLD_HEIGHT && Block[ x ][ y + i ] == CheckBlock ; BlockNum ++ , i ++ ){}
+
+	// ３つ以上つながっていたらここで終了
+	if( BlockNum >= 3 ) return 1 ;
+
+
+	// 左上から右下にかけて繋がっている数を調べる
+	for( i = 0 ; y + i >= 0 && x + i >= 0 && Block[ x + i ][ y + i ] == CheckBlock ; i -- ){}
+	i ++ ;
+	for( BlockNum = 0 ; x + i < WORLD_WIDTH && y + i < WORLD_HEIGHT && Block[ x + i ][ y + i ] == CheckBlock ; BlockNum ++ , i ++ ){}
+
+	// ３つ以上つながっていたらここで終了
+	if( BlockNum >= 3 ) return 1 ;
+
+
+	// 右上から左下にかけて繋がっている数を調べる
+	for( i = 0 ; y + i >= 0 &&  x - i < WORLD_WIDTH && Block[ x - i ][ y + i ] == CheckBlock ; i -- ){}
+	i ++ ;
+	for( BlockNum = 0 ; x - i >= 0 && y + i < WORLD_HEIGHT && Block[ x - i ][ y + i ] == CheckBlock ; BlockNum ++ , i ++ ){}
+
+	// ３つ以上つながっていたらここで終了
+	if( BlockNum >= 3 ) return 1 ;
+
+
+	// ここまで来ていたら消えない
+	return 0 ;
+}
+
+// 画面描画処理関数
+int ScreenDraw( void )
+{
+	int i , j , k ;
+
+	// 画面を初期化
+	ClearDrawScreen() ;
+
+	// 枠を描画
+	DrawBox( STAGE_X - 24 , STAGE_Y , STAGE_X ,
+		STAGE_Y + WORLD_HEIGHT * BLOCK_SIZE ,
+		GetColor( 255 , 0 , 0 ) , TRUE ) ;
+
+	DrawBox( STAGE_X + WORLD_WIDTH * BLOCK_SIZE , STAGE_Y ,
+		STAGE_X + 24 + WORLD_WIDTH * BLOCK_SIZE , STAGE_Y + WORLD_HEIGHT * BLOCK_SIZE ,
+		GetColor( 255 , 0 , 0 ) , TRUE ) ;
+
+	DrawBox( STAGE_X - 24 , STAGE_Y + WORLD_HEIGHT * BLOCK_SIZE ,
+		STAGE_X + 24 + WORLD_WIDTH * BLOCK_SIZE , STAGE_Y + WORLD_HEIGHT * BLOCK_SIZE + 24 ,
+		GetColor( 255 , 0 , 0 ) , TRUE ) ;
+
+	// ブロックを描画
+	for( i = 0 ; i < WORLD_HEIGHT ; i ++ )
+	{
+		for( j = 0 ; j < WORLD_WIDTH ; j ++ )
+		{
+			if( Block[ j ][ i ] != 0 )
+			{
+				k = Block[ j ][ i ] - 1 ;
+				DrawBox( STAGE_X +j * BLOCK_SIZE , STAGE_Y + BLOCK_SIZE * i ,
+					STAGE_X +j * BLOCK_SIZE + BLOCK_SIZE , STAGE_Y + i * BLOCK_SIZE + BLOCK_SIZE ,
+					GetColor( BlockColor[ k ][ 0 ] ,BlockColor[ k ][ 1 ] ,BlockColor[ k ][ 2 ] ) , TRUE ) ;
+			}
+		}
+	}
+
+	// アクティブブロックを描画
+	for( i = 0 ; i + ActiveY >= 0 && i < 3 ; i ++ )
+	{
+		k = ActiveBlock[ i ] - 1 ;
+
+		DrawBox( STAGE_X + ActiveX * BLOCK_SIZE , STAGE_Y + ( ActiveY - i ) * BLOCK_SIZE , 
+				STAGE_X + ActiveX * BLOCK_SIZE + BLOCK_SIZE , STAGE_Y + ( ActiveY - i ) * BLOCK_SIZE + BLOCK_SIZE ,
+				GetColor( BlockColor[ k ][ 0 ] ,BlockColor[ k ][ 1 ] ,BlockColor[ k ][ 2 ] ) , TRUE ) ;
+	}
+
+	// 終了
+	return 0 ;
+}
+</PRE>
+			<BR><BR><BR><BR><BR><BR><BR>
+
+
+			　<FONT COLOR="#007712"><A NAME="N11"><B>１１．基本的な処理、参照一覧</B></A></FONT><BR><BR>
+
+			　考えてみれば基本的な処理はどうすれば実現できるか、というものの一覧がどこにもないのに<BR>
+			気付いたのでここに掲載します。<BR><BR>
+<PRE>
+	グラフィックをロードして画面に表示したい	→	<A HREF="dxfunc.html#R3N2"><B>LoadGraph</B></A> 関数のサンプルを参照して下さい
+	文章を表示したい				→	<A HREF="dxfunc.html#R17N1"><B>DrawString</B></A> 関数のサンプルを参照して下さい
+	起動してすぐ終了するだけのプログラムは？	→	<A HREF="dxfunc.html#R1N1"><B>DxLib_Init</B></A> 関数のサンプルを参照して下さい
+	グラフィックの半透明表示をしたい		→	<A HREF="dxfunc.html#R3N2"><B>SetDrawBlendMode</B></A> 関数のサンプルを参照して下さい
+	現在の日付、時刻を知りたい			→	<A HREF="dxfunc.html#R3N2"><B>GetDateTime</B></A> 関数のサンプルを参照して下さい
+	ウインドウモードで起動するには？		→	<A HREF="dxfunc.html#R3N2"><B>ChangeWindowMode</B></A> 関数のサンプルを参照して下さい
+	裏画面関係				→	<A HREF="dxfunc.html#R3N17"><B>SetDrawScreen</B></A> 関数のサンプルを参照して下さい
+	画面にかかれたものを一気に消す方法		→	<A HREF="dxfunc.html#R4N3"><B>ClearDrawScreen</B></A> 関数を参照して下さい
+	グラフィックを表示できる範囲を決めたい	→	<A HREF="dxfunc.html#R4N2"><B>SetDrawArea</B></A> 関数を参照して下さい
+	ムービーの再生				→	<A HREF="dxfunc.html#R14aN8"><B>PlayMovie</B></A> 関数を参照して下さい
+</PRE>
+
+
+			<BR><BR><BR><BR><BR><BR><BR>
+
+
+			　<FONT COLOR="#007712"><A NAME="N12"><B>１２．１ラインごとの描画処理</B></A></FONT><BR><BR>
+
+			　１ラインごと描画することによって得られる効果です。<BR>
+			　ですが普通に描画するより当然処理負荷は大きいので注意が必要です。<BR><BR>
+
+			　以下の例ではＳｉｎの波を使って描画Ｘ位置をずらしています。<BR><BR>
+
+<PRE>
+// １ラインごとの描画処理
+#include "DxLib.h"
+#include &lt;math.h&gt;
+
+#define BURE	5		// ぶれ度
+#define PAI	3.14159		// 円周率
+
+int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,
+		LPSTR lpCmdLine, int nCmdShow )
+{
+	int	GraphHandle;	// グラフィックハンドル
+	double	Count ;		// フレームカウンタ
+	int	i ;		// 汎用変数
+
+	// ＤＸライブラリの初期化
+	if( DxLib_Init() == -1 ) return -1;
+
+	// グラフィックのロード
+	GraphHandle = LoadGraph( "test1.BMP" );
+
+	// 描画先画面を裏画面にする
+	SetDrawScreen( DX_SCREEN_BACK ) ;
+
+	// フレームカウンタを初期化する
+	Count = 0 ;
+	while( ProcessMessage() == 0 )
+	{
+		// 画面全体を描画可能にする
+		SetDrawArea( 0 , 0 , 640 , 480 ) ;
+
+		// 画面全体を初期化
+		ClearDrawScreen() ;
+
+		// １ライン単位で描画をする処理
+		for( i = 0 ; i < 480 ; i ++ )
+		{
+			// 特定ラインだけを描画可能にする
+			SetDrawArea( 0, i , 640, i + 1 ) ;
+
+			// 画像を描画
+			DrawGraph( ( int )( 200 - sin( PAI / 10.0 * ( Count + i ) ) * BURE ), 0 , GraphHandle , TRUE ) ;
+		}
+
+		// 裏画面の内容を表画面に反映する
+		ScreenFlip() ;
+
+		// フレームカウンタをインクリメントする
+		Count ++ ;
+	}
+
+	// ＤＸライブラリの使用終了
+	DxLib_End() ;
+
+	return 0;
+}
+</PRE>
+		　<A HREF="http://homepage2.nifty.com/natupaji/DxLib/Image/test1.bmp"><B>キャラクター画像ファイル</B></A><BR><BR><BR><BR><BR><BR><BR>
+
+
+			<BR><BR><BR><BR><BR><BR><BR>
+
+
+			　<FONT COLOR="#007712"><A NAME="N13"><B>１３．移動速度を一定にする(１)</B></A></FONT><BR><BR>
+
+			　以下に示すプログラムはリフレッシュレートの値に左右されずにキャラクターの移動速度を一定にしているプログラムです。<BR>
+			　１フレームあたりに経過する時間を用意し、それに応じて四角の描画する位置を移動しています。<BR><BR>
+
+			　一般に画面のリフレッシュレートが変化するとゲームの進行速度が変化してしまうゲームは好まれません。<BR>
+			ですのでこの方法、又は『１４.移動速度を一定にする(２)』で示す方法を用いてゲームの進行速度を一定にします。<BR><BR>
+
+			　見栄えを考えれば(１)の方が良いのですが、キャラクターの座標値の精度も上げなければならないので<BR>
+			方法２よりも扱いが面倒になります。<BR><BR>
+
+			　リフレッシュレートとゲームの進行速度の詳しい説明は<A HREF="dxfaq.html#N5">ミニテクコーナー</A>を参照して下さい<BR><BR>
+
+<PRE>
+// 移動速度を一定にする(１)
+#include "DxLib.h"
+
+int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,
+						 LPSTR lpCmdLine, int nCmdShow )
+{
+	int ScreenFlipCount, StartTime, FrameTime ;
+	int x ;
+
+	SetGraphMode( 640 , 480 , 16 ) ;
+	if( DxLib_Init() == -1 )	// ＤＸライブラリ初期化処理
+	{
+		 return -1;		// エラーが起きたら直ちに終了
+	}
+
+	// 描画先画面を裏画面にセット
+	SetDrawScreen( DX_SCREEN_BACK ) ;
+
+	// 計測中に別のウインドウがアクティブになっても問題が無いように常時実行フラグをセット
+	SetAlwaysRunFlag( TRUE ) ;
+
+	// １フレームにかかる時間を計測
+	ScreenFlip() ;
+	ScreenFlipCount = 0 ;
+	StartTime = GetNowCount() ;
+	for(;;)
+	{
+		// 画面切り替えを行ってＶＹＳＮＣ待ちをする
+		ScreenFlip() ;
+
+		// １秒経過していたらループから抜ける
+		if( GetNowCount() - StartTime >= 1000 )
+			break ;
+
+		// ScreenFlip を行った回数をインクリメント
+		ScreenFlipCount ++ ;
+	}
+
+	// 常時実行フラグを元に戻す
+	SetAlwaysRunFlag( FALSE ) ;
+
+	// 計測時間を ScreenFlip を行った回数で割れば
+	// ScreenFlip 一回辺りの時間が取得できます
+	FrameTime = 1000 / ScreenFlipCount ;
+
+	// 四角の描画位置をセット
+	x = 0 ;
+
+	while( ProcessMessage() == 0 && CheckHitKeyAll() == 0 )
+	{
+		// 画面を消去
+		ClearDrawScreen() ;
+
+		// 四角の描画位置を移動(１秒間で画面を横切る速さに設定
+		x += 6400 * FrameTime / 1000  ;
+		if( x > 640 * 10 ) x = 0 ;
+		
+		// 四角を描画
+		DrawBox( x / 10 , 0 , x / 10 + 32 , 32 , GetColor( 255 , 255 , 255 ) , TRUE ) ;
+		
+		// 裏画面の内容を表画面に反映させる
+		ScreenFlip() ;
+	}
+
+	DxLib_End() ;		// ＤＸライブラリ使用の終了処理
+
+	return 0 ;		// ソフトの終了
+}
+</PRE>
+			<BR><BR><BR><BR><BR><BR><BR>
+
+
+			　<FONT COLOR="#007712"><A NAME="N14a"><B>１４．移動速度を一定にする(２)</B></A></FONT><BR><BR>
+
+			　リフレッシュレートの値に左右されずにキャラクターの移動速度を一定にしているプログラムその２です。<BR>
+			　フレーム開始時の時間を取得し、フレーム終了時に１フレームに要する時間が経過するまで待つという<BR>
+			単純な方法です。<BR><BR>
+			
+			　ですがこの方法は１に比べてグラフィックがぶれがひどくなるという難点があります。<BR><BR>
+<PRE>
+// 移動速度を一定にする(２)
+#include "DxLib.h"
+
+int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,
+						 LPSTR lpCmdLine, int nCmdShow )
+{
+	int Time ;
+
+	int x ;
+
+	SetGraphMode( 640 , 480 , 16 ) ;
+	if( DxLib_Init() == -1 )	// ＤＸライブラリ初期化処理
+	{
+		 return -1;		// エラーが起きたら直ちに終了
+	}
+
+	// 描画先画面を裏画面にセット
+	SetDrawScreen( DX_SCREEN_BACK ) ;
+
+	// 四角の描画位置をセット
+	x = 0 ;
+
+	while( ProcessMessage() == 0 && CheckHitKeyAll() == 0 )
+	{
+		// 現在のカウントを取得する
+		Time = GetNowCount() ;
+
+		// 画面を消去
+		ClearDrawScreen() ;
+
+		// 四角の描画位置を移動
+		x += 8 ;
+		if( x > 640 ) x = 0 ;
+		
+		// 四角を描画
+		DrawBox( x , 0 , x + 32 , 32 , GetColor( 255 , 255 , 255 ) , TRUE ) ;
+		
+		// 裏画面の内容を表画面に反映させる
+		ScreenFlip() ;
+
+		// １７ミリ秒(約秒間６０フレームだった時の１フレームあたりの経過時間)
+		// 経過するまでここで待つ
+		while( GetNowCount() - Time < 17 ){}
+	}
+
+	DxLib_End() ;		// ＤＸライブラリ使用の終了処理
+
+	return 0 ;		// ソフトの終了
+}
+</PRE>
+			<BR><BR><BR><BR><BR><BR><BR>
+
+
+			　<FONT COLOR="#007712"><A NAME="N15"><B>１５．パーティクル基本</B></A></FONT><BR><BR>
+
+			　パーティクルとは最近のシューティングゲームなどにある敵にかすった時などにでる火花<BR>
+			や、敵を破壊した後に飛び散る破片などの当たり判定のない見栄えをよくするための演出<BR>
+			全般のことを示します(多分)<BR>
+
+<PRE>
+// パーティクル基本
+#include "DxLib.h"
+
+// ショットとパーティクルの最大数
+#define MAX_SHOT	4
+#define MAX_SPARK	800
+
+// ショットデータ型
+typedef struct tagSHOT
+{
+	int Valid ;	// このデータが使用中か、フラグ
+	int X ,Y ;	// ショットの位置
+} SHOT ;
+
+// 火花データ型
+typedef struct tagSPARK
+{
+	int Valid ;	// このデータが使用中か、フラグ
+	int X ,Y ;	// 火花の位置
+	int Sx , Sy ;	// 火花の移動力
+	int G ;	// 火花の重さ
+	int Bright ;	// 火花の明るさ
+} SPARK ;
+
+
+int PlayerX , PlayerY ;	// プレイヤーの位置
+SHOT Shot[ MAX_SHOT ] ;	// ショットデータ
+SPARK Spark[ MAX_SPARK ] ;	// 火花データ
+
+
+void CreateSpark( int x , int y  ) ;	// 火花を出す処理
+void MoveSpark( void ) ;	// 火花移動処理
+void CreateShot( void ) ;	// ショットを撃つ処理
+void MoveShot( void ) ;	// ショットの移動処理
+
+
+int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,
+						 LPSTR lpCmdLine, int nCmdShow )
+{
+	int Key = 0 ;
+	int OldKey = 0 ;	// 前のキー入力状態
+	int i , j ;
+
+	SetGraphMode( 640 , 480 , 16 ) ;
+	if( DxLib_Init() == -1 )	// ＤＸライブラリ初期化処理
+	{
+		 return -1;				// エラーが起きたら直ちに終了
+	}
+
+	// 描画先画面を裏画面にセット
+	SetDrawScreen( DX_SCREEN_BACK ) ;
+
+	// プレイヤーの初期位置をセット
+	PlayerX = 320 ;
+	PlayerY = 400 ;
+
+	// ショットの存在を初期化する
+	for( i = 0 ; i < MAX_SHOT ; i ++ )
+		Shot[ i ].Valid = 0 ;
+
+	// 火花の存在を初期化する
+	for( i = 0 ; i < MAX_SPARK ; i ++ )
+		Spark[ i ].Valid = 0 ;
+
+	// ループ
+	while( ProcessMessage() == 0 && CheckHitKey( KEY_INPUT_ESCAPE ) == 0 )
+	{
+		// キー入力取得
+		OldKey = Key ;
+		Key = GetJoypadInputState( DX_INPUT_KEY_PAD1 ) ;
+
+		if( Key & PAD_INPUT_RIGHT ) PlayerX += 3 ;	// 右を押していたら右に進む
+		if( Key & PAD_INPUT_LEFT ) PlayerX -= 3 ;	// 左を押していたら左に進む
+
+		// ショットの移動処理
+		MoveShot() ;
+
+		// 火花の移動処理
+		MoveSpark() ;
+
+		// ショットボタンを押していたらショットを出す
+		if( ( Key & ~OldKey ) & PAD_INPUT_A ) CreateShot() ;
+ 
+		// 画面を初期化する
+		ClearDrawScreen() ;
+
+		// プレイヤーを描画する
+		DrawBox( PlayerX , PlayerY ,PlayerX + 48 , PlayerY + 48 , GetColor( 255 , 0 , 0 ) , TRUE ) ;
+
+		// ショットを描画する
+		for( j = 0 ; j < MAX_SHOT ; j ++ )
+		{
+			// ショットデータが有効な時のみ描画
+			if( Shot[ j ].Valid == 1 )
+				DrawBox( Shot[j].X , Shot[j].Y , Shot[j].X + 16 , Shot[j].Y + 16 ,
+						 GetColor( 255 , 255 , 255 ) , TRUE ) ;
+
+		}
+
+		// 火花を描画する
+		for( j = 0 ; j < MAX_SPARK ; j ++ )
+		{
+			// 火花データが有効な時のみ描画
+			if( Spark[ j ].Valid == 1 )
+				DrawPixel( Spark[j].X / 100 , Spark[j].Y / 100 , 
+					GetColor( Spark[j].Bright , Spark[j].Bright , Spark[j].Bright ) ) ;
+
+		}
+
+		// 裏画面の内容を表画面に反映させる
+		ScreenFlip() ;
+	}
+
+	DxLib_End() ;				// ＤＸライブラリ使用の終了処理
+
+	return 0 ;					// ソフトの終了
+}
+
+// 火花を出す処理
+void CreateSpark( int x , int y  )
+{
+	int i ;
+
+	// 使われていない火花データを探す
+	for( i = 0 ; i < MAX_SPARK ; i ++ )
+	{
+		if( Spark[ i ].Valid == 0 ) break ;
+	}
+
+	// もし使われていない火花データがあったら火花を出す
+	if( i != MAX_SPARK )
+	{
+		// 火花の位置を設定
+		Spark[ i ].X = x * 100 ;
+		Spark[ i ].Y = y * 100 ;
+
+		// 移動力を設定
+		Spark[ i ].Sx = GetRand( 1000 ) - 500 ;
+		Spark[ i ].Sy = -GetRand( 500 )  ; 
+
+		// 火花の重さをセット
+		Spark[ i ].G = GetRand( 10 ) ;
+
+		// 火花の明るさセット
+		Spark[ i ].Bright = 255 ; 
+
+		// 火花データを使用中にセット
+		Spark[ i ].Valid = 1 ;
+	}
+}
+
+// 火花移動処理
+void MoveSpark( void )
+{
+	int i ;
+
+	// 火花の移動処理
+	for( i = 0 ; i < MAX_SPARK ; i ++ )
+	{
+		// 火花データが無効だったらスキップ
+		if( Spark[ i ].Valid == 0 ) continue ;
+
+		// 位置を移動力に応じてずらす
+		Spark[ i ].Y += Spark[ i ].Sy ;
+		Spark[ i ].X += Spark[ i ].Sx ;
+
+		// 移動力を変更
+		Spark[ i ].Sy += Spark[ i ].G ;
+
+		// 火花の明るさを下げる
+		Spark[ i ].Bright -= 2 ;
+
+		// 火花の明るさが０以下になったら火花データを無効にする
+		if( Spark[ i ].Bright < 0 ) Spark[ i ].Valid = 0 ;
+	}
+}
+
+// ショットを撃つ処理
+void CreateShot( void )
+{
+	int i ;
+
+	// 使われていないショットデータを探す
+	for( i = 0 ; i < MAX_SHOT ; i ++ )
+	{
+		if( Shot[ i ].Valid == 0 ) break ;
+	}
+		
+	// もし使われていないショットデータがあったらショットを出す
+	if( i != MAX_SHOT )
+	{
+		// ショットの位置を設定
+		Shot[ i ].X = PlayerX + 16 ;
+		Shot[ i ].Y = PlayerY ;
+
+		// ショットデータを使用中にセット
+		Shot[ i ].Valid = 1 ;
+	}
+}
+
+// ショットの移動処理
+void MoveShot( void )
+{
+	int i , j , R ;
+
+	// ショットの移動処理
+	for( i = 0 ; i < MAX_SHOT ; i ++ )
+	{
+		// ショットデータが無効だったらスキップ
+		if( Shot[ i ].Valid == 0 ) continue ;
+
+		// 位置を上にずらす
+		Shot[ i ].Y -= 8 ;
+
+		// 画面外に出ていたら火花を出したあとショットデータを無効にする
+		if( Shot[ i ].Y < 150 )
+		{
+			// 火花を出す数をセット
+			R = GetRand( 60 ) ; 
+			for( j = 0 ; j < R ; j ++ )
+			{
+				// 火花を生成
+				CreateSpark( Shot[ i ].X + 8 , Shot[ i ].Y + 8 ) ;
+			}
+
+			// ショットデータを無効にする
+			Shot[ i ].Valid = 0 ;
+		}
+	}
+}
+</PRE>
+			<BR><BR><BR><BR><BR><BR><BR>
+
+
+			　<FONT COLOR="#007712"><A NAME="N16"><B>１６．残像処理基本</B></A></FONT><BR><BR>
+
+			　残像とは皆さんも良くご存知の残像です。キャラが動いた後をなぞるように描写される映像です。<BR>
+			　この処理はシューティングのオプションなどにも応用が利きます。処理は基本的に以前のキャラの<BR>
+			座標を保存しておくことで実現しています。<BR><BR>
+
+<PRE>
+// 残像処理基本
+#include "DxLib.h"
+
+// 残像データの数
+#define AFTIMAGENUM	65
+
+int PlayerX[ AFTIMAGENUM ], PlayerY[ AFTIMAGENUM ] ;
+
+int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,
+						 LPSTR lpCmdLine, int nCmdShow )
+{
+	int Key ;
+	int i ;
+
+	// 画面モードのセット
+	SetGraphMode( 640 , 480 , 16 ) ;
+	if( DxLib_Init() == -1 )	// ＤＸライブラリ初期化処理
+	{
+		 return -1;		// エラーが起きたら直ちに終了
+	}
+
+	// 描画先画面を裏画面にセット
+	SetDrawScreen( DX_SCREEN_BACK ) ;
+
+	// キャラクターの初期位置をセット
+	for( i = 0 ; i < AFTIMAGENUM ; i ++ )
+	{
+		PlayerX[ i ] = 0 ;
+		PlayerY[ i ] = 0 ;
+	}
+
+	// ループ
+	while( ProcessMessage() == 0 && CheckHitKey( KEY_INPUT_ESCAPE ) == 0 )
+	{
+		// キー入力取得
+		Key = GetJoypadInputState( DX_INPUT_KEY_PAD1 ) ;
+
+		// 上を押していたら上に進む
+		if( Key & PAD_INPUT_UP ) PlayerY[0] -= 3 ;
+
+		// 下を押していたら下に進む
+		if( Key & PAD_INPUT_DOWN ) PlayerY[0] += 3 ;
+
+		// 右を押していたら右に進む
+		if( Key & PAD_INPUT_RIGHT ) PlayerX[0] += 3 ;
+		
+		// 左を押していたら左に進む
+		if( Key & PAD_INPUT_LEFT ) PlayerX[0] -= 3 ;
+
+		// 画面を初期化する
+		ClearDrawScreen() ;
+
+		// プレイヤーを描画する
+		for( i = AFTIMAGENUM - 1 ; i >= 0 ; i -= 8 )
+			DrawBox( PlayerX[i] , PlayerY[i] , PlayerX[i] + 32 , PlayerY[i] + 32 ,
+						GetColor( 0 , 255 - 255 * i / AFTIMAGENUM , 0 ) , TRUE ) ;
+
+		// 裏画面の内容を表画面に反映させる
+		ScreenFlip() ;
+
+		// 残像データを一つづつずらす
+		for( i = AFTIMAGENUM - 1 ; i > 0 ; i -- )
+		{
+			PlayerX[ i ] = PlayerX[ i - 1 ] ;
+			PlayerY[ i ] = PlayerY[ i - 1 ] ;
+		}
+	}
+
+	DxLib_End() ;		// ＤＸライブラリ使用の終了処理
+
+	return 0 ;		// ソフトの終了
+}
+</PRE>
+			<BR><BR><BR><BR><BR><BR><BR>
+
+
+			　<FONT COLOR="#007712"><A NAME="N17"><B>１７．セーブ・ロード</B></A></FONT><BR><BR>
+
+			　データをディスクへ保存するプログラムの基本的なサンプルです。<BR>
+			　プログラム自体は１０秒間に何回キーをたたけるか回数を測定するものです、ですので<BR>
+			重要なのは HiScoreSave 関数と HiScoreLoad 関数となります。<BR>
+			(ちなみにファイル操作にはＣの標準ライブラリを使用していますが、データのセーブ、ロード<BR>
+			くらいの操作であれば標準ライブラリでもまったく問題はありません。)<BR><BR>
+
+
+<PRE>
+// セーブ・ロード基本
+#include "DxLib.h"
+#include &lt;stdio.h&gt;	// ファイル操作に必要なヘッダファイル
+#include &lt;string.h&gt;	// 文字列操作に必要なヘッダファイル
+
+
+// ボタン押しカウンター
+int Counter ;
+int HiScore ;
+
+
+void DrawNum( int x , int y , int Num ) ;	// 数値を画面に表示する関数
+void Rennsya( void ) ;				// 連射計測関数
+void HiScoreSave( void ) ;			// ハイスコアのセーブ
+void HiScoreLoad( void ) ;			// ハイスコアのロード
+
+
+int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,
+						 LPSTR lpCmdLine, int nCmdShow )
+{
+	// 画面モードのセット
+	SetGraphMode( 640 , 480 , 16 ) ;
+	if( DxLib_Init() == -1 )	// ＤＸライブラリ初期化処理
+	{
+		 return -1;		// エラーが起きたら直ちに終了
+	}
+
+	// ハイスコアをロード
+	HiScoreLoad() ;
+
+	// メインループ
+	while( ProcessMessage() == 0 )
+	{
+		// 連射計測処理
+		Rennsya() ;
+
+		// 時間待ち
+		WaitTimer( 1000 ) ;
+
+		// キー入力待ち
+		WaitKey() ;
+	}
+
+	DxLib_End() ;		// ＤＸライブラリ使用の終了処理
+
+	return 0 ;		// ソフトの終了
+}
+
+// 連射計測関数
+void Rennsya( void )
+{
+	int Color ;	// 文字の色コード
+	int StartTime ;	// 連射スタート時間
+	int OldKey ;	// 前回のキー入力状態
+	int Key ;	// 現在のキー入力状態
+	int OldTime ;	// 前フレームの経過時間
+	int NowTime ;	// 現在の経過時間
+
+	// 白色コードを取得
+	Color = GetColor( 255 , 255 , 255 ) ;
+
+	// 画面構成を創る
+	{
+		// 画面初期化
+		ClearDrawScreen() ;
+
+		// メッセージ表示
+		DrawString( 0 , 0 , "ジョイパッドのＡボタンか、Ｚキーを連射してください" , Color ) ;
+
+		// カウント値表示
+		DrawString( 10 , 120 , "COUNT" , Color ) ;
+		DrawNum( 100 , 120 , 0 ) ;
+
+		// ハイスコア表示
+		DrawString( 100 , 30 , "HI SCORE" , Color ) ;
+		DrawNum( 200 , 30 , HiScore ) ;
+
+		// 残り秒数の表示
+		DrawString( 10 , 80 , "TIME" , Color ) ; 
+		DrawNum( 100 , 80 , 10 ) ;
+	}
+
+	// キー入力待ち
+	WaitKey() ;
+
+	StartTime = GetNowCount() ;	// 連射開始時の時間を保存
+	Counter = 0 ;			// 連射カウンターを初期化
+	OldKey = 0 ;			// 前回のキー入力を初期化
+	NowTime = 0 ;			// 現在の経過時間初期化
+	OldTime = 0 ;			// 前回の経過時間を初期化
+
+	// １０秒経つまで連射計測処理
+	while( ProcessMessage() == 0 && NowTime < 10000 )
+	{
+		// 今回の経過タイムを取得
+		NowTime = GetNowCount() - StartTime ;
+
+		// キー入力を取得
+		Key = GetJoypadInputState( DX_INPUT_KEY_PAD1 ) ;
+
+		// もし前回押していない状態で今回押していたらカウンタをインクリメントする
+		if( ( ( Key & ~OldKey ) & PAD_INPUT_A ) != 0 )
+		{
+			Counter ++ ;
+
+			// カウンタ値を表示
+			DrawNum( 100 , 120 , Counter ) ;
+		}
+
+		// 前回の残り秒数と今回の残り秒数が違った場合は残り秒数を更新
+		if( NowTime / 1000 != OldTime / 1000 )
+		{
+			DrawNum( 100 , 80 , 10 - NowTime / 1000 ) ;
+
+			// 今回のタイムを保存
+			OldTime = NowTime ;
+		}
+
+		// 今回のキー入力状態を保存
+		OldKey = Key ;
+	}
+
+	// もしハイスコア以上の値が出ていたらハイスコア変数にカウント値を代入
+	if( HiScore < Counter )
+	{
+		HiScore = Counter ;
+
+		// ハイスコアのセーブ
+		HiScoreSave() ;
+
+		// ハイスコア表示
+		DrawNum( 200 , 30 , HiScore ) ;
+	}
+
+}
+
+// ハイスコアのセーブ
+void HiScoreSave( void )
+{
+	FILE *fp ;
+
+	// ハイスコアセーブ用ファイルを開く
+	// (２番目の引数の"wb"の'w'は「書きこみ」の意味
+	// 'b'はバイナリの意味(逆はテキスト))
+	fp = fopen( "HiScore.dat" , "wb" ) ;
+
+	// オープンできなかったらここで終了
+	if( fp == NULL ) return ;
+
+	// ハイスコアデータの書き出し
+	fwrite( &HiScore , sizeof( HiScore ) , 1 , fp ) ;
+
+	// ファイルを閉じる
+	fclose( fp ) ;
+}
+
+// ハイスコアのロード
+void HiScoreLoad( void )
+{
+	FILE *fp ;
+
+	// ハイスコアセーブ用ファイルを開く
+	// (２番目の引数の"rb"の'r'は「読み込み」の意味
+	// 'b'はバイナリの意味(逆はテキスト))
+	fp = fopen( "HiScore.dat" , "rb" ) ;
+
+	// オープンできなかったらファイルが無いとみなし
+	// 標準ハイスコアの５０をセット
+	if( fp == NULL )
+	{
+		HiScore = 50 ;
+	}
+	else
+	{
+		// ハイスコアデータの読み込み
+		fread( &HiScore , sizeof( HiScore ) , 1 , fp ) ;
+
+		// ファイルを閉じる
+		fclose( fp ) ;
+	}
+}
+
+// 数値を画面に表示する関数
+void DrawNum( int x , int y , int Num )
+{
+	char StrBuf[ 80 ] ;
+
+	// 数値を１０進数文字列に変換
+	itoa( Num , StrBuf , 10 ) ;
+
+	// 画面に描画
+	DrawBox( x , y , x + strlen( StrBuf ) * 20 , y + 20 , 0 , TRUE ) ;
+	DrawString( x , y , StrBuf , GetColor( 255 , 255 , 255 ) ) ;
+}
+</PRE>
+			<BR><BR><BR><BR><BR><BR><BR>
+
+
+			　<FONT COLOR="#007712"><A NAME="N18"><B>１８．格闘ゲームコマンド入力基本</B></A></FONT><BR><BR>
+
+			　おなじみの移動キーによる技コマンド入力のプログラムです。<BR>
+			　基本的には以前に入力した移動キーを保存して、攻撃ボタンが押されたら発動、という形を取ります。<BR>
+			　因みにサンプルプログラムでは波動拳（下、右下、右＋Ｚキー)と昇竜拳(右、下、右下＋Ｚキー)が<BR>
+			出せるよう登録してあります。(技名が表示されるだけですが…)<BR>
+			　昇竜拳コマンドは発動しやすいように右、右下、下、右下＋Ｚキーでも出るようになっています。<BR>
+			このように標準の発動条件以外にもそれらしいコマンド入力をしても出せるようにしておくことで<BR>
+			技を出しやすくすることが出来ます。<BR><BR>
+
+
+<PRE>
+// 格ゲーコマンド入力基本
+#include "DxLib.h"
+
+
+#define INPUT_MAX_BUF				256		// 入力データの最大記憶数
+#define INPUT_VALID_TIME			100		// 入力データが無効になるまでの時間
+#define INPUT_DOUJI_TIME			10		// 同時押しの範囲となる時間
+#define SKILL_DRAWTIME				1000		// 技名を表示している時間
+
+
+// メインデータ
+int	NowTime ;			// 現在の時間
+
+int	DrawTime ;			// 技名ののこり表示時間
+char	DrawSkillName[ 128 ] ;		// 表示する技名
+
+
+int	OldInputData ;			// ひとつ前のキー入力データ
+int	InputBuf[ INPUT_MAX_BUF ] ;	// 入力データのログ
+int	InputTime ;			// 入力が行われた時間
+int	InputNum ;			// 入力されたコマンドの数
+
+
+
+// 技名データ
+char *SkillName[] =
+{
+	"波動拳",
+	"昇竜拳",
+	"昇竜拳",
+} ;
+
+
+// 技データ
+int SkillCommand[ 256 ][ 256 ] =
+{
+	// 波動拳
+	{ PAD_INPUT_DOWN , PAD_INPUT_RIGHT | PAD_INPUT_DOWN , PAD_INPUT_RIGHT , -1 } ,
+
+	// 昇竜拳
+	{ PAD_INPUT_RIGHT , PAD_INPUT_RIGHT | PAD_INPUT_DOWN , PAD_INPUT_DOWN , PAD_INPUT_RIGHT | PAD_INPUT_DOWN , -1 } ,
+	{ PAD_INPUT_RIGHT , PAD_INPUT_DOWN , PAD_INPUT_RIGHT | PAD_INPUT_DOWN , -1 } ,
+
+	// 技データ終端用－１
+	{ -1 } ,
+} ;
+
+
+
+void	CommandInput( void ) ;	// キー入力処理を行う
+void	InitInputData( void ) ;	// インプットデータを初期化する
+int	SkillCheck( void ) ;	// 入力したコマンドに対応した技を検索する
+
+
+
+int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,
+                    LPSTR lpCmdLine, int nCmdShow )
+{
+	int OldTime ;	// 前フレーム時の時間
+
+	SetGraphMode( 640 , 480 , 16 ) ;	// 画面設定
+	if ( DxLib_Init() == -1 ) return -1;	// ライブラリ初期化
+
+	// 描画先を裏画面に設定
+	SetDrawScreen( DX_SCREEN_BACK ) ;
+
+	// 時間の取得
+	NowTime = GetNowCount() ;
+
+	// メインループ
+	while( ProcessMessage() == 0 && ( GetJoypadInputState( DX_INPUT_KEY_PAD1 ) & PAD_INPUT_START ) == 0 ) 
+	{
+		// コマンド入力処理の実行
+		CommandInput() ;
+
+		// 画面を初期化
+		ClearDrawScreen() ;
+
+		// 技名の表示
+		if( DrawTime > 0 )
+		{
+			DrawString( 200 , 200 , DrawSkillName , 0xffffff ) ;
+
+			// 残り表示時間を減らす
+			DrawTime -= NowTime - OldTime ;	
+		}
+
+		// 裏画面の内容を表画面に反映させる
+		ScreenFlip() ;
+
+		OldTime = NowTime ;		// 前フレームの時間を保存
+		NowTime = GetNowCount() ;	// 現在の時間を取得
+	}
+
+	// ライブラリの終了
+	DxLib_End() ;
+
+	return 0;
+}
+
+
+
+// キー入力処理を行う
+void CommandInput( void )
+{
+	int InputData , OldCursorData , CursorData ;
+
+	// 現在の入力状態を取得
+	InputData = GetJoypadInputState( DX_INPUT_KEY_PAD1 ) ;
+
+	// カーソルキー入力のみのデータにする
+	CursorData = InputData ;
+	CursorData &= PAD_INPUT_LEFT | PAD_INPUT_RIGHT | 
+			PAD_INPUT_UP | PAD_INPUT_DOWN ; 
+
+	// 前回のキー入力からカーソルキー入力のみを抽出
+	OldCursorData = OldInputData ;
+	OldCursorData &= PAD_INPUT_LEFT | PAD_INPUT_RIGHT | 
+			PAD_INPUT_UP | PAD_INPUT_DOWN ; 
+
+	// 前フレームとキー入力に違いがあり、更にカーソルキーを押していた場合のみ記録する
+	if( CursorData != OldCursorData  &&  CursorData != 0 )
+	{
+		// もし以前とのキー入力時間との差が同時押し判定時間内だった場合は以前のキー入力データに加算する
+		if( ( InputNum != 0 ) && ( NowTime - InputTime < INPUT_DOUJI_TIME ) )
+		{
+			InputBuf[ InputNum - 1  ] |= CursorData ;
+		}
+		else
+		{
+			// バッファにキー入力状態を保存する
+			InputBuf[ InputNum ] = CursorData ;
+
+			// 入力時間を残す
+			InputTime = NowTime ;
+
+			// 入力コマンドの数を増やす
+			InputNum ++ ;
+		}
+	}
+
+	// 何もしていない時間が規定以上経過していたら入力データをクリアする
+	if( InputTime != 0  &&  NowTime - InputTime > INPUT_VALID_TIME )
+	{
+		InitInputData() ;
+	}
+
+	// もしＺボタンが押されていたら対応した技を検索する
+	if( ( ( InputData & ~CursorData & ~OldInputData ) & PAD_INPUT_A ) != 0 ) 
+	{
+		int SkillNum ;
+
+		// 対応している技を取得
+		SkillNum = SkillCheck() ;
+		
+		// もし何の技も出していなければなにもしない
+		if( SkillNum != -1 )
+		{
+			// 技の名前をセット
+			strcpy( DrawSkillName , SkillName[ SkillNum ] ) ;
+
+			// 表示時間をセット
+			DrawTime = SKILL_DRAWTIME ;
+		}
+
+		// 入力データを初期化
+		InitInputData() ;
+	}
+
+	// 今フレームのキー入力状態を保存
+	OldInputData = InputData ;
+}
+
+// インプットデータを初期化する
+void InitInputData( void )
+{
+	int i ;
+
+	// キー入力データをクリア
+	for( i = 0 ; i < InputNum ; i ++ )	
+	{
+		InputBuf[ i ] = 0 ; 
+	}
+
+	// 入力時間もクリア
+	InputTime = 0 ;
+
+	// 入力されたコマンドの数を初期化
+	InputNum = 0 ;
+}
+
+
+// 入力したコマンドに対応した技を検索する
+int SkillCheck( void )
+{
+	int Skill , MaxConbo , i , j ;
+
+	// 出す技を探す
+	MaxConbo = 0 ;
+	for( i = 0 ; SkillCommand[ i ][ 0 ] != -1 ; i ++ )
+	{
+		// コマンドデータと入力したデータが等しい数を調べる
+		j = 0 ;
+		while( SkillCommand[ i ][ j ] == InputBuf[ j ] ) j ++ ;
+
+		// コマンドデータの終端まで同じだった場合は
+		// その技のコマンド数と技ナンバーを保存する
+		// なお以前にもっと多くのコマンドを要す技と適合していたら記憶しない
+		if( SkillCommand[ i ][ j ] == -1  &&  MaxConbo < j )
+		{
+			MaxConbo = j ;
+			Skill = i ;
+		}
+	}
+
+	// 合った技が無ければ－１を返す
+	if( MaxConbo == 0 ) return -1 ;
+
+	// 選ばれた技ナンバーを返す
+	return Skill ;
+}
+</PRE>
+			<BR><BR><BR><BR><BR><BR><BR>
+
+
+			　<FONT COLOR="#007712"><A NAME="N19"><B>１９．マルチタスク風プログラム基本</B></A></FONT><BR><BR>
+
+			　最近のゲームではメッセージウインドウにメッセージが流れている時でもキャラクターが移動できたり、<BR>
+			ゲームのネームエントリー中にバックでは綺麗なエフェクトアニメーションが行われていたりします。<BR>
+			　それを実現するためのヒントとしてのプログラムです。<BR>
+			　このプログラムは前項のサウンドノベル風文字列描画処理とマップ移動処理を画面を半分に区切って左右で<BR>
+			独立して同時実行されます。当然前回紹介したのプログラムのままでは出来ないので少し変更してあります。<BR>
+			　基本的には『マップ移動処理を少し実行したら今度はサウンドノベル風文字列描画処理を少し実行』を以下<BR>
+			繰り返すことによって実現しています。<BR><BR>
+
+			　因みにマップ移動処理の方が画面がちらつくと思いますが、これは裏画面を使用していないためです。<BR>
+			　まだサウンドノベル風文字列描画処理の裏画面使用バージョンを解説していないのでマップ移動処理<BR>
+			の方がサウンドノベル風文字列描画処理プログラムのほうに合わせる形となりました。ご了承下さい。<BR><BR><BR>
+
+
+<PRE>
+// マルチタスク風処理基本
+#include "DxLib.h"
+
+int FrameTime ;	// 前回フレームでの経過時間
+
+
+
+// サウンドノベル風文字列描画プログラム用データ群
+
+// 文字のサイズ
+#define MOJI_SIZE 24
+
+int DrawPointX , DrawPointY ;	// 文字列描画の位置
+int SP , CP ;			// 参照する文字列番号と文字列中の文字ポインタ
+int TimeCounter1 ;		// サウンドノベル風文字列描画処理用の時間計測用カウンタ変数
+int EndFlag ;			// 終了フラグ
+int KeyWaitFlag ;		// ボタン押し待ちフラグ
+
+char String[][ 256 ] =
+{
+	"　ゲームプログラムとは、いやプログラムとは" ,
+	"ある事柄を実現するプログラムの方法を説明されても理解できないことがある。B" ,
+	"@　なぜならそのプログラム技法も何かの基本的な技法の組み合わせで出来ているからだ。B",
+	"@　これはその他の学問も基本がわからないと応用が利かないということと同じ現象で、",
+	"別に特に珍しいことでもない。B" ,
+	"C　しかしゲームプログラムとなると覚えなくてはならない基礎が沢山あり、" ,
+	"さらにある程度クオリティの高いソフトを作ろうとすると色々なプログラム技法を",
+	"習得しなくてはならない。B" ,
+	"@　しかもある程度レベルが高くなると自分で技法を編み出すか、技術レベルの高い",
+	"プログラマーに聞くなどするしか方法がなく大変厄介である。B"
+	"というかそのせいでゲームプログラムの敷居は高くなっているといえる。BE"
+} ;
+
+
+
+
+// マップ移動処理プログラム用データ群
+
+#define MAP_SIZE	64			// マップチップ一つのドットサイズ
+
+#define MAP_WIDTH	20			// マップの幅
+#define MAP_HEIGHT	16			// マップの縦長さ
+
+// マップのデータ
+int MapData[ MAP_HEIGHT ][ MAP_WIDTH ] =
+{
+	{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ,  0, 0, 0, 0, 0, 0, 0, 0, 0, 0 } ,
+	{ 0, 1, 1, 0, 0, 0, 0, 0, 0, 0 ,  1, 1, 1, 1, 1, 1, 1, 1, 1, 0 } ,
+	{ 0, 0, 1, 1, 1, 0, 0, 0, 0, 0 ,  1, 0, 0, 0, 0, 0, 0, 0, 1, 0 } ,
+	{ 0, 0, 1, 0, 1, 0, 0, 0, 0, 0 ,  1, 1, 1, 1, 1, 1, 0, 0, 1, 0 } ,
+	{ 0, 1, 1, 0, 1, 0, 0, 1, 1, 0 ,  0, 0, 0, 0, 0, 1, 0, 0, 1, 0 } ,
+	{ 0, 1, 0, 0, 1, 0, 0, 1, 1, 0 ,  0, 0, 1, 1, 1, 1, 1, 0, 1, 0 } ,
+	{ 0, 1, 0, 0, 1, 0, 0, 1, 1, 0 ,  0, 0, 1, 0, 0, 1, 1, 0, 1, 0 } ,
+	{ 0, 1, 0, 0, 1, 0, 0, 1, 1, 0 ,  0, 0, 1, 0, 0, 1, 1, 0, 1, 0 } ,
+
+	{ 0, 1, 1, 1, 1, 1, 1, 1, 1, 0 ,  0, 1, 1, 0, 0, 1, 1, 0, 1, 0 } ,
+	{ 0, 0, 0, 0, 1, 0, 0, 1, 0, 0 ,  0, 1, 1, 0, 0, 1, 1, 0, 1, 0 } ,
+	{ 0, 0, 0, 0, 1, 0, 0, 1, 0, 0 ,  0, 1, 1, 0, 0, 1, 1, 0, 1, 0 } ,
+	{ 0, 0, 0, 1, 1, 0, 0, 1, 0, 0 ,  0, 1, 1, 0, 0, 1, 1, 0, 1, 0 } ,
+	{ 0, 1, 1, 1, 1, 0, 0, 1, 1, 1 ,  1, 1, 1, 0, 0, 1, 1, 0, 1, 0 } ,
+	{ 0, 1, 1, 1, 1, 0, 0, 0, 0, 0 ,  0, 0, 0, 0, 0, 0, 0, 0, 1, 0 } ,
+	{ 0, 1, 1, 1, 1, 0, 0, 0, 0, 0 ,  0, 0, 0, 0, 0, 0, 0, 0, 1, 0 } ,
+	{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ,  0, 0, 0, 0, 0, 0, 0, 0, 0, 0 } ,
+} ;
+
+// プレイヤーの位置
+int PlayerX , PlayerY ;
+
+// マップ移動処理用の時間計測用カウンタ変数
+int TimeCounter2 ;
+
+
+
+void MapShred( void ) ;		// マップ移動プログラムの処理関数
+void StringShred( void ) ;	// サウンドノベル風文字列描画プログラムの処理関数
+void Kaigyou( void ) ;		// サウンドノベル風文字列描画プログラムで使用する改行関数
+
+
+
+int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,
+						 LPSTR lpCmdLine, int nCmdShow )
+{
+	int OldTime , NowTime ;
+
+	SetGraphMode( 640 , 480 , 16 ) ;
+	if( DxLib_Init() == -1 )	// ＤＸライブラリ初期化処理
+	{
+		 return -1;				// エラーが起きたら直ちに終了
+	}
+
+	// マップ移動プログラム関連データの初期化
+	{
+		// マップ移動キャラのプレイヤーの初期位置をセット
+		PlayerX = 2 ;
+		PlayerY = 2 ;
+	}
+
+	// サウンドノベル風文字列描画プログラム関連データの初期化
+	{
+		// 描画位置の初期位置セット
+		DrawPointX = 0 ;
+		DrawPointY = 0 ;
+	
+		// 参照文字位置をセット
+		SP = 0 ;	// １行目の
+		CP = 0 ;	// ０文字
+
+		// フォントのサイズセット
+		SetFontSize( MOJI_SIZE ) ;
+
+		// 終了フラグを倒す
+		EndFlag = 0 ;
+	}
+
+	// 現在時間を初期化
+	NowTime = GetNowCount() ;
+
+	// ループ
+	while( ProcessMessage() == 0 && CheckHitKey( KEY_INPUT_ESCAPE ) == 0 )
+	{
+		// マップ移動処理をする(画面左側のみ描画出来るようにする)
+		SetDrawArea( 0 , 0 , 320 , 480  ) ;
+		MapShred() ;
+
+		// サウンドノベル風文字列描画処理を行う(画面右側のみ描画出きるようにする)
+		SetDrawArea( 320 , 0 , 640 , 480  ) ;
+		StringShred() ;
+
+		// 時間待ち
+		WaitTimer( 17 ) ;
+
+		// 今フレームでの経過時間を計測
+		OldTime = NowTime ;
+		NowTime = GetNowCount() ;
+		FrameTime = NowTime - OldTime ;
+	}
+
+	DxLib_End() ;				// ＤＸライブラリ使用の終了処理
+
+	return 0 ;					// ソフトの終了
+}
+
+
+// マップ移動プログラムの処理関数
+void MapShred( void )
+{
+	int Key ;
+	int OldX , OldY ;	// 移動する前のプレイヤーの位置を保存する変数
+
+	// タイムカウンターを経過時間分だけ減らす
+	TimeCounter2 -= FrameTime ;
+
+	// 時間計測用変数が０以上だった場合はキー入力をしない
+	if( TimeCounter2 < 0 )
+	{
+		// キー入力を得る
+		Key = GetJoypadInputState( DX_INPUT_KEY_PAD1 ) ;
+
+		// 移動する前のプレイヤーの位置を保存
+		OldX = PlayerX ; 
+		OldY = PlayerY ;
+
+		// キー入力に応じてプレイヤーの座標を移動
+		if( Key & PAD_INPUT_LEFT ) PlayerX -= 1 ;
+		if( Key & PAD_INPUT_RIGHT ) PlayerX += 1 ;
+		if( Key & PAD_INPUT_UP ) PlayerY -= 1 ;
+		if( Key & PAD_INPUT_DOWN ) PlayerY += 1 ;
+
+		// 進入不可能なマップだった場合は移動できない
+		if( MapData[ PlayerY ][ PlayerX ] == 0 )
+		{
+			PlayerX = OldX ;
+			PlayerY = OldY ;
+		}
+
+		// マップとプレイヤーの描画
+		{
+			int j , i ;
+			int MapDrawPointX , MapDrawPointY ;		// 描画するマップ座標値
+			int DrawMapChipNumX , DrawMapChipNumY ;	// 描画するマップチップの数
+
+			// 画面を初期化
+			DrawBox( 0 , 0 , 640 , 480 , 0 , TRUE ) ;
+	
+			// 描画するマップチップの数をセット
+			DrawMapChipNumX = 320 / MAP_SIZE ;
+			DrawMapChipNumY = 480 / MAP_SIZE ;
+
+			// 画面左上に描画するマップ座標をセット
+			MapDrawPointX = PlayerX - DrawMapChipNumX / 2 ;
+			MapDrawPointY = PlayerY - DrawMapChipNumY / 2 ;
+
+			// マップを描く
+			for( i = 0 ; i < DrawMapChipNumY ; i ++ )
+			{
+				for( j = 0 ; j < DrawMapChipNumX ; j ++ )
+				{
+					// 画面からはみ出た位置なら描画しない
+					if( j + MapDrawPointX < 0 || i + MapDrawPointY < 0 ||
+						j + MapDrawPointX >= MAP_WIDTH || i + MapDrawPointY >= MAP_HEIGHT ) continue ;	
+
+					// マップデータが０だったら四角を描画する
+					if( MapData[ i + MapDrawPointY ][ j + MapDrawPointX ] == 0 )
+					{
+						DrawBox( j * MAP_SIZE , i * MAP_SIZE ,
+							j * MAP_SIZE + MAP_SIZE , i * MAP_SIZE + MAP_SIZE ,
+									GetColor( 255 , 0 , 0 ) , TRUE ) ;
+					}
+				}
+			}
+
+			// プレイヤーの描画
+			DrawBox( ( PlayerX - MapDrawPointX ) * MAP_SIZE , ( PlayerY - MapDrawPointY ) * MAP_SIZE ,
+				 ( PlayerX - MapDrawPointX + 1 ) * MAP_SIZE , ( PlayerY - MapDrawPointY + 1 ) * MAP_SIZE ,
+					 GetColor( 255 , 255 , 255 ) , TRUE ) ;
+		}
+
+		// 時間計測用変数に待ち時間を代入
+		TimeCounter2 = 100 ;
+	}
+}
+
+// サウンドノベル風文字列描画プログラムの処理関数
+void StringShred( void )
+{
+	char OneMojiBuf[ 3 ] ;	// １文字分一時記憶配列
+
+	// 時間計測用変数の値を１減らす
+	TimeCounter1 -- ;
+
+	// 時間計測用変数が０以上か、終了フラグが１だった場合は処理をしない
+	if( TimeCounter1 < 0 && EndFlag == 0 )
+	{
+		char  Moji ;
+
+		// ボタン押し待ちフラグがたっていた場合はボタンが押されるまでここで終了
+		if( KeyWaitFlag == 1 )
+		{
+			if( CheckHitKeyAll() != 0 ) 
+			{
+				// ボタンが押されていたら解除
+				KeyWaitFlag = 0 ;
+			}
+		}
+		else
+		{
+			// 文字の描画
+			Moji = String[ SP ][ CP ] ;
+			switch( Moji )
+			{
+			case '@' :	// 改行文字
+
+				// 改行処理および参照文字位置を一つ進める
+				Kaigyou() ;
+				CP ++ ;
+
+				break ;
+
+			case 'B' :	// ボタン押し待ち文字
+
+				// ボタン押し待ちフラグをたてる
+				KeyWaitFlag = 1 ;
+				CP ++ ;
+
+				break ;
+
+			case 'E' :	// 終了文字
+
+				// 終了フラグを立てるおよび参照文字位置を一つ進める
+				EndFlag = 1 ;
+				CP ++ ;
+
+				break ;
+
+			case 'C' :	// クリア文字
+
+				// 画面を初期化して描画文字位置を初期位置に戻すおよび参照文字位置を一つ進める
+				DrawBox( 0 , 0 , 640 , 480 , 0 , TRUE ) ;
+				DrawPointY = 0 ;
+				DrawPointX = 0 ;
+				CP ++ ;
+
+				break ;
+
+			default :	// その他の文字
+
+				// １文字分抜き出す
+				OneMojiBuf[ 0 ] = String[ SP ][ CP ] ;
+				OneMojiBuf[ 1 ] = String[ SP ][ CP + 1 ] ;
+				OneMojiBuf[ 2 ] = '\0' ;
+
+				// １文字描画
+				DrawString( 320 + DrawPointX * MOJI_SIZE , DrawPointY * MOJI_SIZE ,
+					OneMojiBuf , GetColor( 255 , 255 , 255 ) ) ;
+
+				// 参照文字位置を２バイト勧める
+				CP += 2 ;
+
+				// カーソルを一文字文進める
+				DrawPointX ++ ;
+
+				// 画面からはみ出たら改行する
+				if( DrawPointX * MOJI_SIZE + MOJI_SIZE > 320 ) Kaigyou() ;
+
+				break ;
+			}
+
+			// 参照文字列の終端まで行っていたら参照文字列を進める
+			if( String[ SP ][ CP ] == '\0' )
+			{
+				SP ++ ;
+				CP = 0 ;
+			}
+		}
+
+		// 時間計測用変数の値をセットする
+		TimeCounter1 = 2 ;
+	}
+}
+
+// 改行関数
+void Kaigyou( void )
+{
+	int TempGraph ;
+
+	// 描画行位置を一つ下げる
+	DrawPointY ++ ;
+
+	// 描画列を最初に戻す
+	DrawPointX = 0 ;
+
+	// もし画面からはみ出るなら画面をスクロールさせる
+	if( DrawPointY * MOJI_SIZE + MOJI_SIZE > 480 )
+	{
+		// テンポラリグラフィックの作成
+		TempGraph = MakeGraph( 320 , 480 ) ;
+
+		// 画面の内容を丸々コピーする
+		GetDrawScreenGraph( 320 , 0 , 640 , 480 , TempGraph ) ;
+
+		// 一行分上に貼り付ける
+		DrawGraph( 320 , -MOJI_SIZE ,TempGraph , FALSE ) ;
+		
+		// 一番下の行の部分を黒で埋める
+		DrawBox( 320 , 480 - MOJI_SIZE , 640 , 480 , 0 , TRUE ) ;
+
+		// 描画行位置を一つあげる
+		DrawPointY -- ;
+
+		// グラフィックを削除する
+		DeleteGraph( TempGraph ) ;
+	}
+}
+</PRE>
+			<BR><BR><BR><BR><BR><BR><BR>
+
+
+			　<FONT COLOR="#007712"><A NAME="N20"><B>２０．サウンドノベル風文字列描画、テキストバッファ使用バージョン</B></A></FONT><BR><BR>
+
+			　前回のサウンドノベル風文字列描画では文字を描画した後はほったらかしで、プログラム側では現在なんの<BR>
+			文字が画面に表示されているか把握することが出来ないために文章のバックで画像のアニメーション等を行う<BR>
+			ことが出来ませんでした。<BR>
+			　今回のバージョンでは出力は仮想のテキスト画面データに行い、毎フレームごとにその内容を画面に描画する<BR>
+			形を取っているので、バックグラウンドでグラフィックアニメーションなどが出きるようになっています。<BR><BR>
+
+<PRE>
+// サウンドノベル風文字列描画、テキストバッファ使用バージョン
+#include "DxLib.h"
+#include &lt;math.h&gt;
+
+// 文字のサイズ
+#define MOJI_SIZE 24
+
+// 仮想テキストバッファの横サイズ縦サイズ
+#define STRBUF_WIDTH	24
+#define STRBUF_HEIGHT	20
+
+char StringBuf[ STRBUF_HEIGHT ][ STRBUF_WIDTH * 2 + 1 ] ;	// 仮想テキストバッファ
+int CursorX , CursorY ;						// 仮想画面上での文字表示カーソルの位置
+int SP , CP ;							// 参照する文字列番号と文字列中の文字ポインタ
+int EndFlag ;							// 終了フラグ
+int KeyWaitFlag ;						// ボタン押し待ちフラグ
+int Count ;							// フレームカウンタ
+
+char String[][ 256 ] =
+{
+	"　ゲームプログラムを習得するための一番の近道はとにかく沢山プログラムを組む",
+	"ことである。B" ,
+	"@　プログラムの参考書にはゲームのプログラムの方法なんて何も書かれていない、B",
+	"変数、B配列、B関数、Bループ、B条件分岐…Bこれらすべての説明はゲームで何に使うか",
+	"なんてどこにも書いていない、Bせいぜい住所録を題材にした例がある程度である。B" ,
+	"C　プログラムは習うより慣れろなのでプログラムを組むに当たって少しでも知識が",
+	"つけば後はそこからは掘り下げ、広げていけば良いわけで、Bプログラムの参考書を",
+	"読んでいて少しでも何か出来るような気がしたらそこでとにかくプログラム",
+	"を打ってみることが大事である。E",
+} ;
+
+void Kaigyou( void ) ;		// テキストバッファの改行処理関数
+
+
+int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,
+						 LPSTR lpCmdLine, int nCmdShow )
+{
+	char OneMojiBuf[ 3 ] ;	// １文字分一時記憶配列
+	int i , j ;
+
+	SetGraphMode( 640 , 480 , 16 ) ;
+	if( DxLib_Init() == -1 )	// ＤＸライブラリ初期化処理
+	{
+		 return -1;				// エラーが起きたら直ちに終了
+	}
+
+	// 描画位置の初期位置セット
+	CursorX = 0 ;
+	CursorY = 0 ;
+	
+	// 参照文字位置をセット
+	SP = 0 ;	// １行目の
+	CP = 0 ;	// ０文字
+
+	// フォントのサイズセット
+	SetFontSize( MOJI_SIZE ) ;
+
+	// 描画先を裏画面にセット
+	SetDrawScreen( DX_SCREEN_BACK ) ;
+
+	// フレームカウンタ初期化
+	Count = 0 ;
+
+	// ループ
+	while( ProcessMessage() == 0 && CheckHitKey( KEY_INPUT_ESCAPE ) == 0 )
+	{
+		// サウンドノベル風文字列描画処理を行う
+		// ただし終了フラグが１だった場合は処理をしない
+		if( EndFlag == 0 )
+		{
+			char  Moji ;
+
+			// ボタン押し待ちフラグがたっていた場合はボタンが押されるまでここで終了
+			if( KeyWaitFlag == 1 )
+			{
+				if( ProcessMessage() == 0 && CheckHitKeyAll() != 0 ) 
+				{
+					// ボタンが押されていたら解除
+					KeyWaitFlag = 0 ;
+				}
+			}
+			else
+			{
+				// 文字の描画
+				Moji = String[ SP ][ CP ] ;
+				switch( Moji )
+				{
+				case '@' :	// 改行文字
+
+					// 改行処理および参照文字位置を一つ進める
+					Kaigyou() ;
+					CP ++ ;
+
+					break ;
+
+				case 'B' :	// ボタン押し待ち文字
+
+					// ボタンが離されるまで待つ
+					while( ProcessMessage() == 0 && CheckHitKeyAll() != 0 ){}
+
+					// ボタン押し待ちフラグをたてる
+					KeyWaitFlag = 1 ;
+					CP ++ ;
+
+					break ;
+
+				case 'E' :	// 終了文字
+
+					// 終了フラグを立てるおよび参照文字位置を一つ進める
+					EndFlag = 1 ;
+					CP ++ ;
+
+					break ;
+
+				case 'C' :	// クリア文字
+
+					// 仮想テキストバッファを初期化して描画文字位置を初期位置に戻すおよび参照文字位置を一つ進める
+					for( i = 0 ; i < STRBUF_HEIGHT ; i ++ )
+					{
+						for( j = 0 ; j < STRBUF_WIDTH * 2 ; j ++ )
+						{
+							StringBuf[ i ][ j ] = 0 ;
+						}
+					}
+
+					CursorY = 0 ;
+					CursorX = 0 ;
+					CP ++ ;
+
+					break ;
+
+				default :	// その他の文字
+
+					// １文字分抜き出す
+					OneMojiBuf[ 0 ] = String[ SP ][ CP ] ;
+					OneMojiBuf[ 1 ] = String[ SP ][ CP + 1 ] ;
+					OneMojiBuf[ 2 ] = '\0' ;
+
+					// １文字テキストバッファに代入
+					StringBuf[ CursorY ][ CursorX * 2 ] = OneMojiBuf[ 0 ] ;
+					StringBuf[ CursorY ][ CursorX * 2 + 1 ] = OneMojiBuf[ 1 ] ;
+
+					// 参照文字位置を２バイト勧める
+					CP += 2 ;
+
+					// カーソルを一文字文進める
+					CursorX ++ ;
+
+					// テキストバッファ横幅からはみ出たら改行する
+					if( CursorX >= STRBUF_WIDTH ) Kaigyou() ;
+
+					break ;
+				}
+
+				// 参照文字列の終端まで行っていたら参照文字列を進める
+				if( String[ SP ][ CP ] == '\0' )
+				{
+					SP ++ ;
+					CP = 0 ;
+				}
+			}
+		}
+
+		// 画面のクリア
+		ClearDrawScreen() ;
+
+		// 背景エフェクトの描画
+		{
+			int Color ;
+
+			Color = ( int )( sin( Count / 100.0 ) * 80.0 + 125.0 ) ;
+			DrawBox( 0 , 0 , 640 , 480 , GetColor( Color , 0 , 0 ) , TRUE ) ;
+			Count ++ ;
+		}
+
+		// テキストバッファの描画
+		for( i = 0 ; i < STRBUF_HEIGHT ; i ++ )
+		{
+			DrawString( 8 , i * MOJI_SIZE , StringBuf[ i ] , GetColor( 255 , 255 , 255 ) ) ;
+		}
+
+		// 裏画面の内容を表画面に反映させる
+		ScreenFlip() ;
+	}
+
+	DxLib_End() ;				// ＤＸライブラリ使用の終了処理
+
+	return 0 ;					// ソフトの終了
+}
+
+
+
+// 改行関数
+void Kaigyou( void )
+{
+	// 描画行位置を一つ下げる
+	CursorY ++ ;
+
+	// 描画列を最初に戻す
+	CursorX = 0 ;
+
+	// もしテキストバッファ縦幅からはみ出るならテキストバッファを縦スクロールさせる
+	if( CursorY >= STRBUF_HEIGHT )
+	{
+		int i , j ;
+
+		for( i = 1 ; i < STRBUF_HEIGHT ; i ++ )
+		{
+			for( j = 0 ; j < STRBUF_WIDTH * 2 ; j ++ )
+			{
+				StringBuf[ i - 1 ][ j ] = StringBuf[ i ][ j ] ;
+			}
+		}
+
+		// 描画行位置を一つあげる
+		CursorY -- ;
+	}
+}
+</PRE>
+			<BR><BR><BR><BR><BR><BR><BR>
+
+			　<FONT COLOR="#007712"><A NAME="N21"><B>２１．チャットプログラム基本</B></A></FONT><BR><BR>
+
+			　ネットワークを使ったチャットプログラムの基本的なものです。<BR>
+			　起動するとまず接続される側に回るかする側に回るかを決定し、その後接続する側<BR>
+			がIPを入力して接続される側に接続します。<BR>
+			　その後はただ入力された文字列を送信し続けるだけです。<BR><BR>
+
+			　名前を常に表示したり、複数人数を受け付けられるようにするには誰もが常に接続<BR>
+			できるようにし、接続されたときに接続した側の情報、された側の情報をチャットを<BR>
+			行っている全員に送信したりする必要があり、プログラムが複雑で長いものになりそう<BR>
+			だったので、このプログラムでは名前は表示せず、ただ文字列のやり取りをします。<BR><BR>
+
+<PRE>
+#include "DxLib.h"
+#include &lt;string.h&gt;
+
+#define CHAT_LINENUM		20	// チャット中の文字列を表示する行数
+#define MAX_STRLENGTH		80	// チャットで1行で入力できる文字数
+#define INPUT_LINE		21	// チャットで入力領域となる画面上の行位置
+#define FONT_SIZE		16	// フォントのサイズ
+
+int InputHandle ;			// 入力ハンドル
+int StringY ;				// 文字列表示領域の次に文字列を表示する時の行位置
+int NetHandle ;				// 接続相手のネットワークハンドル
+
+char ScreenString[ CHAT_LINENUM ][ MAX_STRLENGTH + 1 ] ;	// 画面に表示中のチャット文字列
+
+
+int ScreenStringAdd( char *AddString ) ;	// チャット文字列を追加する
+int ScreenStringDraw( void ) ;			// チャットの現在の状態を画面に表示する
+
+
+int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,
+						LPSTR lpCmdLine, int nCmdShow )
+{
+	char Key ;
+
+	// ＤＸライブラリ初期化
+	if( DxLib_Init() == -1 )
+	{
+		return -1 ;
+	}
+
+	// 入力領域と文字出力領域との境界線を引く
+	DrawLine( 0 , CHAT_LINENUM * FONT_SIZE , 640 , CHAT_LINENUM * FONT_SIZE , GetColor( 255 , 255 , 255 ) ) ;
+
+	// 接続を待つか接続をするか入力してもらう
+	ScreenStringAdd( "接続を待つ場合はＺキーを、接続をする場合はＸキーを押してください" ) ;
+
+	// どちらのキーが押されるか監視する
+	{
+		while( !ProcessMessage() )
+		{
+			if( CheckHitKey( KEY_INPUT_Z ) )
+			{
+				Key = 'Z' ;
+				break ;
+			}
+			if( CheckHitKey( KEY_INPUT_X ) )
+			{
+				Key = 'X' ;
+				break ;
+			}
+		}
+	}
+
+	// 押されたキーによって処理を分岐する
+	switch( Key )
+	{
+	// 接続を待つ場合
+	case 'Z':
+
+		// 接続待ち状態にする
+		PreparationListenNetWork( 9850 ) ;
+
+		// 接続があるまで待つ表示
+		ScreenStringAdd( "接続があるまで待ちます" ) ;
+
+		// 接続があるまでここでループ
+		while( !ProcessMessage() )
+		{
+			// 新しい接続があった場合はそのネットハンドルを保存する
+			NetHandle = GetNewAcceptNetWork() ;
+
+			// 新しい接続があった場合はループを出る
+			if( NetHandle != -1 ) break ;
+		}
+
+		// 接続待ちを解除
+		StopListenNetWork() ;
+
+		break ;
+
+	// こちらから接続をする場合
+	case 'X' :
+		{
+			char StrBuf[ 81 ] , StrBuf2[ 81 ] ;
+			IPDATA IP ;
+			int i , j , k ;
+
+			// 入力を行う
+			while( !ProcessMessage() )
+			{
+				// 接続先のＩＰの入力を促す	
+				ScreenStringAdd( "接続先のＩＰを入力してください" ) ;
+				ScreenStringAdd( "入力は半角で各ＩＰ値は『.』で区切り、隙間は入れないで下さい" ) ;
+
+				// ＩＰの入力を行う
+				KeyInputSingleCharString( 0 , INPUT_LINE * FONT_SIZE + 2 , 80 , StrBuf , FALSE ) ;
+
+				// ピリオドが３つあるか調べる
+				j = 0 ;
+				for( i = 0 ; i < 80 ; i ++ )
+				{
+					if( StrBuf[ i ] == '.' ) j ++ ;
+				}
+				
+				// もし３つピリオドがなかった場合は入力のし直し
+				if( j != 3 )
+				{
+					ScreenStringAdd( "IP値の数が間違っています" ) ;
+					continue ;
+				}
+
+				// 文字列からＩＰを抜き出す
+				j = 0 ;
+				k = 0 ;
+				i = 0 ;
+				while( !ProcessMessage() )
+				{
+					if( StrBuf[ i ] == '.' || StrBuf[ i ] == '\0' )
+					{
+						StrBuf2[ j ] = '\0' ;
+						switch( k )
+						{
+						case 0 :IP.d1 = atoi( StrBuf2 ) ; break ;
+						case 1 :IP.d2 = atoi( StrBuf2 ) ; break ;
+						case 2 :IP.d3 = atoi( StrBuf2 ) ; break ;
+						case 3 :IP.d4 = atoi( StrBuf2 ) ; break ;
+						}
+						k ++ ;
+						if( k == 4 ) break ;
+
+						j = 0 ;
+					}
+					else
+					{
+						StrBuf2[ j ] = StrBuf[ i ] ;
+						j ++ ;
+					}
+					i ++ ;
+				}
+
+				// 接続中表示
+				ScreenStringAdd( "接続中" ) ;
+
+				// 接続を試みる
+				NetHandle = ConnectNetWork( IP, 9850 ) ;
+
+				// 接続に成功したらループから抜ける
+				if( NetHandle != -1 ) break ;
+
+				// 接続失敗表示
+				ScreenStringAdd( "接続は失敗しました" ) ;
+			}
+		}
+		break ;
+	}
+
+	// 接続成功表示
+	ScreenStringAdd( "接続しました" ) ;
+
+	// 文字列入力ハンドルを作成する
+	InputHandle = MakeKeyInput( 80 , FALSE , FALSE , FALSE ) ;
+
+	// 作成した入力ハンドルをアクティブにする
+	SetActiveKeyInput( InputHandle ) ;
+
+	// チャットループ
+	while( !ProcessMessage() )
+	{
+		// 切断確認
+		if( GetLostNetWork() == NetHandle ) break ;
+
+		// 受信した文字列がある場合は受信する
+		if( GetNetWorkDataLength( NetHandle ) > sizeof( int ) )
+		{
+			int StrLength ;
+			char Message[81] ; 
+
+			// 受信した文字列の長さを得る
+			NetWorkRecvToPeek( NetHandle , &StrLength , 4 ) ;
+
+			// 受信するはずの文字列長より受信されている文字数が少ない場合は
+			// 何もせずもどる
+			if( StrLength + 4 <= GetNetWorkDataLength( NetHandle ) )
+			{
+				// 文字列の長さを得る
+				NetWorkRecv( NetHandle , &StrLength , 4 ) ;
+
+				// メッセージを受信
+				NetWorkRecv( NetHandle , Message , StrLength ) ;
+				
+				// 画面に表示
+				ScreenStringAdd( Message ) ;
+			}
+		}
+
+		// 文字列入力
+		{
+			// 文字列の入力が終っている場合は送信する
+			if( CheckKeyInput( InputHandle ) == 1 )
+			{
+				char Message[ 81 ] ;
+				int StrLength ;
+
+				// 入力された文字列を取得する
+				GetKeyInputString( Message , InputHandle ) ;
+
+				// 入力された文字列の長さを送信する
+				// +1 は終端文字('\0')を含めるため
+				StrLength = lstrlen( Message ) + 1 ; 
+				NetWorkSend( NetHandle , &StrLength , sizeof( int ) ) ;
+
+				// 文字列を送信
+				NetWorkSend( NetHandle , Message , StrLength ) ;
+
+				// 自分のとこにも表示する
+				ScreenStringAdd( Message ) ;
+
+				// 入力文字列を初期化する
+				SetKeyInputString( "" , InputHandle ) ;
+
+				// 再度インプットハンドルをアクティブにする
+				SetActiveKeyInput( InputHandle ) ;
+			}
+
+			// 画面に入力中の文字列を描画する
+			DrawBox( 0 , INPUT_LINE * FONT_SIZE + 2 , 640 , 480 , 0 , TRUE ) ;
+			DrawKeyInputString( 0 , INPUT_LINE * FONT_SIZE + 2 , InputHandle ) ;
+			DrawKeyInputModeString( 640 , 480 ) ;
+		}
+
+		// 時間待ち
+		WaitTimer( 32 ) ;
+	}
+
+	// 切断確認処理
+	ScreenStringAdd( "切断しました" ) ;
+
+	// 時間待ち
+	WaitTimer( 3000 ) ;  
+
+	DxLib_End() ;			// ＤＸライブラリ使用の終了処理
+
+	return 0 ;			// ソフトの終了
+}
+
+// チャット文字列を追加する
+int ScreenStringAdd( char *AddString )
+{
+	// 格納する行を一つ進める
+	StringY ++ ;
+
+	// もし表示領域下いっぱいに来ていた場合はスクロールさせる
+	if( StringY == CHAT_LINENUM )
+	{
+		int i ;
+
+		for( i = 1 ; i < CHAT_LINENUM ; i ++ )
+			lstrcpy( ScreenString[ i - 1 ] , ScreenString[ i ] ) ;
+
+		ScreenString[ i - 1 ][ 0 ] = '\0' ;
+
+		StringY -- ;
+	}
+
+	// 文字列を格納する
+	lstrcpy( ScreenString[ StringY ] , AddString ) ;
+
+	// 画面の内容を描画する
+	ScreenStringDraw() ;
+
+	// 終了
+	return 0 ;
+}
+
+// チャットの現在の状態を画面に表示する
+int	ScreenStringDraw( void )
+{
+	int i ;
+
+	// 文字列表示域を黒で塗りつぶす
+	DrawBox( 0 , 0 , 640 , CHAT_LINENUM * FONT_SIZE , 0 , TRUE ) ;
+
+	// すべてのチャット文字列を描画する
+	for( i = 0 ; i < CHAT_LINENUM ; i ++ )
+		DrawString( 0 , i * FONT_SIZE , ScreenString[ i ] , GetColor( 255 , 255 , 255 ) ) ;
+
+	// 終了
+	return 0 ;
+}
+</PRE>
+			<BR><BR><BR><BR><BR><BR><BR>
+
+			　<FONT COLOR="#007712"><A NAME="N22"><B>２２．ワイプ</B></A></FONT><BR><BR>
+
+			　ワイプとはシーンが移る際の画面エフェクトのことを示します。ゲームで基本的なものでは<BR>
+			フェードアウト、フェードインがあります。<BR>
+			　このサンプルでは幾つかのワイプのプログラムを掲載したいと思います。<BR>
+			（このサンプルは ＤＸライブラリ Ver1.65e 以降でない場合正常に動作しません)<BR><BR><BR>
+
+			　なおこのサンプルプログラムで使用されている画像はここから表示、保存して下さい。<BR>
+			特になんの変哲もない画像ファイルなのでお手持ちの６４０×４８０のＪＰＧ画像をそれ<BR>
+			ぞれ『<FONT COLOR="#005500"><B>Scene1.jpg</B></FONT>』『<FONT COLOR="#005500"><B>Scene2.jpg</B></FONT>』とリネームしてご使用されてもなんの問題もありません。<BR><BR>
+
+			<A HREF="http://homepage2.nifty.com/natupaji/DxLib/Image/Scene1.jpg">Scene1.jpg画像</A>,<A HREF="http://homepage2.nifty.com/natupaji/DxLib/Image/Scene2.jpg">Scene2.jpg画像</A><BR><BR><BR>
+
+
+			<FONT COLOR="#ff0000">ワイプ１</FONT><BR><BR>
+
+			　ブラインドが開くような演出のワイプです。<BR><BR>
+
+<PRE>
+#include "DxLib.h"
+
+int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,
+		LPSTR lpCmdLine, int nCmdShow )
+{
+	int i , j , Key ;
+	int GraphHandle1 , GraphHandle2 ;
+
+	SetGraphMode( 640 , 480 , 16 ) ;
+
+	// ＤＸライブラリ初期化処理
+	if( DxLib_Init() == -1 )
+	{
+		// エラーが起きたら直ちに終了
+		return -1;	
+	}
+
+	// グラフィックのロード
+	GraphHandle1 = LoadGraph( "Scene1.jpg" ) ;
+	GraphHandle2 = LoadGraph( "Scene2.jpg" ) ;
+
+	// 描画先を裏画面にします
+	SetDrawScreen( DX_SCREEN_BACK ) ;
+
+	// メインループ、ＥＳＣキーで終了
+	while( !ProcessMessage() && !( CheckHitKey( KEY_INPUT_ESCAPE ) ) )
+	{
+		// ループ
+		for( i = 0 ; i < 17 ; i ++ )
+		{
+			// 画面を初期化
+			ClearDrawScreen() ;
+
+			// グラフィック１を描画します
+			DrawGraph( 0 , 0 , GraphHandle1 , FALSE ) ;
+
+			// グラフィック２を描画します
+			for( j = 0 ; j < 480 / 16 ; j ++ )
+			{
+				// 描画範囲を指定します
+				SetDrawArea( 0 , j * 16 , 640 , j * 16 + i ) ;
+
+				// グラフィック２を描画します
+				DrawGraph( 0 , 0 , GraphHandle2 , FALSE ) ;
+			}
+
+			SetDrawArea( 0 , 0 , 640 , 480 ) ;
+
+			// 裏画面の内容を表画面に反映させます
+			ScreenFlip() ;
+
+			// 時間待ち
+			WaitTimer( 15 ) ;
+		}
+
+		// グラフィックハンドルをとりかえる
+		i = GraphHandle1 ;
+		GraphHandle1 = GraphHandle2 ;
+		GraphHandle2 = i ;
+
+		// キー入力待ち
+		while( !ProcessMessage() && CheckHitKeyAll() ){}
+		while( !ProcessMessage() && !CheckHitKeyAll() ){}
+	}
+
+	// ＤＸライブラリ使用の終了処理
+	DxLib_End() ;
+
+	// ソフトの終了
+	return 0 ;
+}
+
+
+
+
+</PRE>
+
+			<FONT COLOR="#ff0000">ワイプ２</FONT><BR><BR>
+
+			　ブラインドが開くような演出のワイプ２です。<BR><BR>
+<PRE>
+#include "DxLib.h"
+
+int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,
+		LPSTR lpCmdLine, int nCmdShow )
+{
+	int i , j , Mode , k ;
+	int GraphHandle1 , GraphHandle2 ;
+
+	SetGraphMode( 640 , 480 , 16 ) ;
+
+	// ＤＸライブラリ初期化処理
+	if( DxLib_Init() == -1 )
+	{
+		// エラーが起きたら直ちに終了
+		return -1;	
+	}
+
+	// グラフィックのロード
+	GraphHandle1 = LoadGraph( "Scene1.jpg" ) ;
+	GraphHandle2 = LoadGraph( "Scene2.jpg" ) ;
+
+	// 描画先を裏画面にします
+	SetDrawScreen( DX_SCREEN_BACK ) ;
+
+	// 状態推移モードをセット
+	Mode = 0 ;
+
+	// メインループ、ＥＳＣキーで終了
+	while( !ProcessMessage() && !( CheckHitKey( KEY_INPUT_ESCAPE ) ) )
+	{
+		// ループ
+		for( i = 0 ; i < 80 ; i ++ )
+		{
+			// 画面を初期化
+			ClearDrawScreen() ;
+
+			// グラフィック１を描画します
+			DrawGraph( 0 , 0 , GraphHandle1 , FALSE ) ;
+
+			// グラフィック２を描画します
+			for( j = 0 ; j < 640 / 16 ; j ++ )
+			{
+				// 描画可能領域設定用の値セット
+				k = j + i - 40;
+				if( k > 0 )
+				{
+					if( k > 16 ) k = 16 ;
+
+					// 描画可能領域を指定します
+					if( Mode == 0 )
+						SetDrawArea( 624 - j * 16 , 0 ,624 - ( j * 16 - k ) , 480 ) ;
+					else
+						SetDrawArea(  j * 16 , 0 , j * 16 - k , 480 ) ;
+
+					// グラフィック２を描画します
+					DrawGraph( 0 , 0 , GraphHandle2 , FALSE ) ;
+				}
+			}
+
+			// 描画可能領域を元に戻します
+			SetDrawArea( 0 , 0 , 640 , 480 ) ;
+
+			// 裏画面の内容を表画面に反映させます
+			ScreenFlip() ;
+
+			// 時間待ち
+			WaitTimer( 32 ) ;
+		}
+
+		// グラフィックハンドルをとりかえる
+		i = GraphHandle1 ;
+		GraphHandle1 = GraphHandle2 ;
+		GraphHandle2 = i ;
+
+		// 状態推移モードの変更
+		Mode = Mode == 0 ? 1 : 0 ;
+
+		// キー入力待ち
+		while( !ProcessMessage() && CheckHitKeyAll() ){}
+		while( !ProcessMessage() && !CheckHitKeyAll() ){}
+	}
+
+	// ＤＸライブラリ使用の終了処理
+	DxLib_End() ;
+
+	// ソフトの終了
+	return 0 ;
+}
+
+
+
+
+</PRE>
+
+			<FONT COLOR="#ff0000">ワイプ３</FONT><BR><BR>
+
+			　半透明を使って水平方向に徐々にシーンが切り替わります。<BR><BR>
+<PRE>
+#include "DxLib.h"
+
+int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,
+		LPSTR lpCmdLine, int nCmdShow )
+{
+	int i , j , Mode , k ;
+	int GraphHandle1 , GraphHandle2 ;
+
+	SetGraphMode( 640 , 480 , 16 ) ;
+
+	// ＤＸライブラリ初期化処理
+	if( DxLib_Init() == -1 )
+	{
+		// エラーが起きたら直ちに終了
+		return -1;	
+	}
+
+	// グラフィックのロード
+	GraphHandle1 = LoadGraph( "Scene1.jpg" ) ;
+	GraphHandle2 = LoadGraph( "Scene2.jpg" ) ;
+
+	// 描画先を裏画面にします
+	SetDrawScreen( DX_SCREEN_BACK ) ;
+
+	// 状態推移モードをセット
+	Mode = 0 ;
+
+	// メインループ、ＥＳＣキーで終了
+	while( !ProcessMessage() && !( CheckHitKey( KEY_INPUT_ESCAPE ) ) )
+	{
+		// ループ
+		for( i = 0 ; i < 640 + 256 ; i += 8 )
+		{
+			// 画面を初期化
+			ClearDrawScreen() ;
+
+			// グラフィック１を描画します
+			DrawGraph( 0 , 0 , GraphHandle1 , FALSE ) ;
+
+			// グラフィック２を描画します
+			for( j = 0 ; j < 256  ; j ++ )
+			{
+				// 描画可能領域設定用の値セット
+				k = j + i - 256  ;
+
+				// 描画可能領域を指定します
+				if( k >= 0 )
+				{
+					if( Mode == 0 )
+						SetDrawArea( k , 0 , k + 1 , 480 ) ;
+					else
+						SetDrawArea( 640 - k , 0 , 640 - ( k + 1 ) , 480 ) ;
+						
+
+					// アルファブレンド値をセット
+					SetDrawBlendMode( DX_BLENDMODE_ALPHA , 255 - j ) ;
+
+					// グラフィック２を描画します
+					DrawGraph( 0 , 0 , GraphHandle2 , FALSE ) ;
+				}
+			}
+
+			// ブレンドモードを元に戻す
+			SetDrawBlendMode( DX_BLENDMODE_NOBLEND , 0 ) ;
+
+			// グラフィック２のアルファブレンド描画以外の部分の描画
+			{
+				// 描画領域設定用の値をセット
+				k = i - 256  ;
+				if( k > 0 )
+				{
+					if( Mode == 0 )
+						SetDrawArea( 0 , 0 , k , 480 ) ;
+					else
+						SetDrawArea( 640 - k , 0 , 640 , 480 ) ;
+					
+					DrawGraph( 0 , 0 , GraphHandle2 , FALSE ) ;
+				}
+				// 描画領域を元に戻す
+				SetDrawArea( 0 , 0 , 640 , 480 ) ;
+			}
+
+			// 裏画面の内容を表画面に反映させます
+			ScreenFlip() ;
+		}
+
+		// グラフィックハンドルをとりかえる
+		i = GraphHandle1 ;
+		GraphHandle1 = GraphHandle2 ;
+		GraphHandle2 = i ;
+
+		// 状態推移モードの変更
+		Mode = Mode == 0 ? 1 : 0 ;
+
+		// キー入力待ち
+		while( !ProcessMessage() && CheckHitKeyAll() ){}
+		while( !ProcessMessage() && !CheckHitKeyAll() ){}
+	}
+
+	// ＤＸライブラリ使用の終了処理
+	DxLib_End() ;
+
+	// ソフトの終了
+	return 0 ;
+}
+
+
+
+
+</PRE>
+
+			<FONT COLOR="#ff0000">ワイプ４</FONT><BR><BR>
+
+			　円形にフェードアウトしてゆき、その後円形にフェードインします。<BR>
+			少し重い処理です。<BR><BR>
+			　反転円の描画に付いては割愛します。詳しく知りたい方は<A HREF="http://www.people.or.jp/~fussy/">Fussy様のＨＰ</A>に掲載されている<BR>
+			円描画のアルゴリズムを参照して下さい。反転円の描画は円の描画アルゴリズムを応用しています。<BR><BR>
+<PRE>
+#include "DxLib.h"
+
+// 反転円の描画
+int DrawReversalCircle( int x , int y , int r , int Color ) ;
+
+
+int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,
+		LPSTR lpCmdLine, int nCmdShow )
+{
+	int i , Mode ;
+	int GraphHandle1 , GraphHandle2 ;
+
+	SetGraphMode( 640 , 480 , 16 ) ;
+
+	// ＤＸライブラリ初期化処理
+	if( DxLib_Init() == -1 )
+	{
+		// エラーが起きたら直ちに終了
+		return -1;	
+	}
+
+	// グラフィックのロード
+	GraphHandle1 = LoadGraph( "Scene1.jpg" ) ;
+	GraphHandle2 = LoadGraph( "Scene2.jpg" ) ;
+
+	// 描画先を裏画面にします
+	SetDrawScreen( DX_SCREEN_BACK ) ;
+
+	// 状態推移モードをセット
+	Mode = 0 ;
+
+	// メインループ、ＥＳＣキーで終了
+	while( !ProcessMessage() && !( CheckHitKey( KEY_INPUT_ESCAPE ) ) )
+	{
+		// ループ
+		for( i = 0 ; i <= 400 ; i += 4 )
+		{
+			// 画面を初期化
+			ClearDrawScreen() ;
+
+			// グラフィック１を描画します
+			DrawGraph( 0 , 0 , GraphHandle1 , FALSE ) ;
+
+			// 描画したグラフィックの上に反転円を描きます
+			DrawReversalCircle( 320 , 240 , Mode == 0 ? i : 399 - i , 0 ) ;
+
+			// 裏画面の内容を表画面に反映させます
+			ScreenFlip() ;
+		}
+
+		// キー入力待ち
+		while( !ProcessMessage() && CheckHitKeyAll() ){}
+		while( !ProcessMessage() && !CheckHitKeyAll() ){}
+
+		// グラフィックハンドルをとりかえる
+		if( Mode == 1 )
+		{
+			i = GraphHandle1 ;
+			GraphHandle1 = GraphHandle2 ;
+			GraphHandle2 = i ;
+		}
+
+		// 状態推移モードの変更
+		Mode = Mode == 0 ? 1 : 0 ;
+
+	}
+
+	// ＤＸライブラリ使用の終了処理
+	DxLib_End() ;
+
+	// ソフトの終了
+	return 0 ;
+}
+
+// 反転円の描画
+int DrawReversalCircle( int x , int y , int r , int Color )
+{
+	// 円反転描画領域の外側を描画
+	DrawBox( 0 , 0 , 640 , y - r , Color , TRUE ) ;
+	DrawBox( 0 , y - r , x - r , 480 , Color , TRUE ) ;
+	DrawBox( x - r , y + r + 1 , 640 , 480 , Color , TRUE ) ;
+	DrawBox( x + r , y - r , 640 , y + r + 1 , Color , TRUE ) ;
+
+	// 描画処理
+	{
+		int Dx, Dy, F , j ;
+		int x1 , x2 , y1 ;
+
+		// 初期値セット
+		Dx = r ; Dy = 0 ; F = -2 * r + 3 ;
+
+		j = 0 ;
+		// 描画開始
+		{
+			// まず最初に座標データを進める
+			if( F >= 0 )
+			{
+				x2 = Dy + x ; x1 = -Dy + x ; y1 = Dx + y ;
+				DrawLine( 0 , y1 , x1 , y1 , Color ) ;
+				DrawLine( x2 , y1 , 640 , y1 , Color ) ;
+				x2 = Dy + x ; x1 = -Dy + x ; y1 = -Dx + y;
+				DrawLine( 0 , y1 , x1 , y1 , Color ) ;
+				DrawLine( x2 , y1 , 640 , y1 , Color ) ;
+
+				Dx -- ;
+				F -= 4 * Dx ;
+			}	
+
+			Dy ++ ;
+			F += 4 * Dy + 2 ;
+
+			// 描き切るまでループ
+			while( Dx >= Dy )
+			{
+				// ラインを描く
+				x2 = Dx + x ; x1 = -Dx + x ; y1 = Dy + y ;
+				DrawLine( 0 , y1 , x1 , y1 , Color ) ;
+				DrawLine( x2 , y1 , 640 , y1 , Color ) ;
+				x2 = Dx + x ; x1 = -Dx + x ; y1 = -Dy + y;
+				DrawLine( 0 , y1 , x1 , y1 , Color ) ;
+				DrawLine( x2 , y1 , 640 , y1 , Color ) ;
+
+				// 座標データを進める
+				if( F >= 0 )
+				{
+					x2 = Dy + x ; x1 = -Dy + x ; y1 = Dx + y ;
+					DrawLine( 0 , y1 , x1 , y1 , Color ) ;
+					DrawLine( x2 , y1 , 640 , y1 , Color ) ;
+					x2 = Dy + x ; x1 = -Dy + x ; y1 = -Dx + y;
+					DrawLine( 0 , y1 , x1 , y1 , Color ) ;
+					DrawLine( x2 , y1 , 640 , y1 , Color ) ;
+
+					Dx -- ;
+					F -= 4 * Dx ;
+				}
+
+				Dy ++ ;
+				F += 4 * Dy + 2 ;
+			}
+		}
+	}
+
+
+	// 終了
+	return 0 ;
+}
+
+
+
+
+</PRE>
+
+			<FONT COLOR="#ff0000">ワイプ５</FONT><BR><BR>
+
+			　円形にフェードアウトしてゆき、その後円形にフェードインします。<BR>
+			ワイプ４に小細工を加えたものです。<BR><BR>
+<PRE>
+#include "DxLib.h"
+
+// 反転円の描画
+int DrawReversalCircle( int x , int y , int r , int Color ) ;
+
+
+int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,
+		LPSTR lpCmdLine, int nCmdShow )
+{
+	int i ;
+	int GraphHandle1 , GraphHandle2 ;
+
+	SetGraphMode( 640 , 480 , 16 ) ;
+
+	// ＤＸライブラリ初期化処理
+	if( DxLib_Init() == -1 )
+	{
+		// エラーが起きたら直ちに終了
+		return -1;	
+	}
+
+	// グラフィックのロード
+	GraphHandle1 = LoadGraph( "Scene1.jpg" ) ;
+	GraphHandle2 = LoadGraph( "Scene2.jpg" ) ;
+
+	// 描画先を裏画面にします
+	SetDrawScreen( DX_SCREEN_BACK ) ;
+
+	// メインループ、ＥＳＣキーで終了
+	while( !ProcessMessage() && !( CheckHitKey( KEY_INPUT_ESCAPE ) ) )
+	{
+		// ループ
+		for( i = -160 ; i <= 500 ; i += 4 )
+		{
+			// 画面を初期化
+			ClearDrawScreen() ;
+
+			// グラフィック１を描画します
+			DrawGraph( 0 , 0 , GraphHandle1 , FALSE ) ;
+
+			// 描画したグラフィックの上に円を描きます
+			DrawCircle( 320 , 240 , i + 100 , 0 ) ;
+
+			// その上からグラフィック２描きます
+			if( 0 < i  )
+			{
+				// 直後に描いた円の中に描画可能領域をセット
+				SetDrawArea( 320 - i , 240 - i , 320 + i , 240 + i ) ;
+
+				// グラフィック２を描画
+				DrawGraph( 0 , 0 , GraphHandle2 , FALSE ) ;
+
+				// 反転円を描画
+				DrawReversalCircle( 320 , 240 , i  , 0 ) ;
+
+				// 描画可能領域を元に戻す
+				SetDrawArea( 0 , 0 , 640 , 480 ) ;
+			}
+
+			// 裏画面の内容を表画面に反映させます
+			ScreenFlip() ;
+		}
+
+		// キー入力待ち
+		while( !ProcessMessage() && CheckHitKeyAll() ){}
+		while( !ProcessMessage() && !CheckHitKeyAll() ){}
+
+		// グラフィックハンドルをとりかえる
+		i = GraphHandle1 ;
+		GraphHandle1 = GraphHandle2 ;
+		GraphHandle2 = i ;
+	}
+
+	// ＤＸライブラリ使用の終了処理
+	DxLib_End() ;
+
+	// ソフトの終了
+	return 0 ;
+}
+
+// 反転円の描画
+int DrawReversalCircle( int x , int y , int r , int Color )
+{
+	// 円反転描画領域の外側を描画
+	DrawBox( 0 , 0 , 640 , y - r , Color , TRUE ) ;
+	DrawBox( 0 , y - r , x - r , 480 , Color , TRUE ) ;
+	DrawBox( x - r , y + r + 1 , 640 , 480 , Color , TRUE ) ;
+	DrawBox( x + r , y - r , 640 , y + r + 1 , Color , TRUE ) ;
+
+	// 描画処理
+	{
+		int Dx, Dy, F , j ;
+		int x1 , x2 , y1 ;
+
+		// 初期値セット
+		Dx = r ; Dy = 0 ; F = -2 * r + 3 ;
+
+		j = 0 ;
+		// 描画開始
+		{
+			// まず最初に座標データを進める
+			if( F >= 0 )
+			{
+				x2 = Dy + x ; x1 = -Dy + x ; y1 = Dx + y ;
+				DrawLine( 0 , y1 , x1 , y1 , Color ) ;
+				DrawLine( x2 , y1 , 640 , y1 , Color ) ;
+				x2 = Dy + x ; x1 = -Dy + x ; y1 = -Dx + y;
+				DrawLine( 0 , y1 , x1 , y1 , Color ) ;
+				DrawLine( x2 , y1 , 640 , y1 , Color ) ;
+
+				Dx -- ;
+				F -= 4 * Dx ;
+			}	
+
+			Dy ++ ;
+			F += 4 * Dy + 2 ;
+
+			// 描き切るまでループ
+			while( Dx >= Dy )
+			{
+				// ラインを描く
+				x2 = Dx + x ; x1 = -Dx + x ; y1 = Dy + y ;
+				DrawLine( 0 , y1 , x1 , y1 , Color ) ;
+				DrawLine( x2 , y1 , 640 , y1 , Color ) ;
+				x2 = Dx + x ; x1 = -Dx + x ; y1 = -Dy + y;
+				DrawLine( 0 , y1 , x1 , y1 , Color ) ;
+				DrawLine( x2 , y1 , 640 , y1 , Color ) ;
+
+				// 座標データを進める
+				if( F >= 0 )
+				{
+					x2 = Dy + x ; x1 = -Dy + x ; y1 = Dx + y ;
+					DrawLine( 0 , y1 , x1 , y1 , Color ) ;
+					DrawLine( x2 , y1 , 640 , y1 , Color ) ;
+					x2 = Dy + x ; x1 = -Dy + x ; y1 = -Dx + y;
+					DrawLine( 0 , y1 , x1 , y1 , Color ) ;
+					DrawLine( x2 , y1 , 640 , y1 , Color ) ;
+
+					Dx -- ;
+					F -= 4 * Dx ;
+				}
+
+				Dy ++ ;
+				F += 4 * Dy + 2 ;
+			}
+		}
+	}
+
+
+	// 終了
+	return 0 ;
+}
+</PRE>
+
+
+
+			<BR><BR><BR><BR><BR><BR><BR>
+
+			　<FONT COLOR="#007712"><A NAME="N23"><B>２３．ホーミングミサイル</B></A></FONT><BR><BR>
+
+			　主にシューティングゲームで使用される皆さんご存知ホーミングミサイルです。<BR>
+			　原理は簡単、毎フレーム自分の進んでいる方向と本来進むべき方向の差を縮めていけば良いのです。<BR><BR>
+
+			　なおこのプログラムを実行するとカクカクと汚く描画されると思いますが、それは実行速度の簡易<BR>
+			補正を行っているからで、不具合やバグではありません。<BR><BR>
+			
+			　ちなみにこのプログラムには MGraph.png というミサイルのグラフィックが必要ですので、簡単な<BR>
+			もので良ければ下記のリンクからダウンロードして下さい。<BR><BR>
+
+
+			<A HREF="http://homepage2.nifty.com/natupaji/DxLib/Image/MGraph.png">MGraph.png画像</A><BR><BR><BR>
+
+
+			<FONT COLOR="#ff0000">ホーミングミサイル１</FONT><BR><BR>
+
+			　馬鹿正直にとにかく純粋にホーミングします。<BR>
+			基本的な処理のみなのであまり見栄えはしません。<BR><BR>
+
+<PRE>
+#include "DxLib.h"
+#include &lt;math.h&gt;
+
+#define MAX_M	100				// ミサイルの最大数定義
+#define PI		3.14159			// 円周率
+
+// データ定義
+
+int Hx , Hy ;						// 砲台の座標
+int Hm ;						// 砲台の移動方向
+int Hsc ;						// 砲台のショット間隔カウンタ
+int Px , Py ;						// 自機の座標
+int Mg ;						// ミサイルのグラフィック
+int Mx[	MAX_M ] ,My[ MAX_M ] ;				// ミサイルの座標
+int Mv[ MAX_M ] ;					// ミサイルデータの使用状態(1:使用中 0:未使用)
+double Ma[ MAX_M ] ;					// ミサイルの角度
+int Mc[ MAX_M ] ;					// ミサイルの追尾カウンタ							
+
+
+// WinMain関数
+int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,
+					 LPSTR lpCmdLine, int nCmdShow )
+{
+	int Key ;
+	LONGLONG Time ;
+	int i ;
+
+	// 画面モードの設定
+	SetGraphMode( 640 , 480 , 16 ) ;
+
+	// ＤＸライブラリ初期化処理
+	if( DxLib_Init() == -1 )
+	{
+		// エラーが起きたら直ちに終了
+		return -1;
+	}
+
+	// 描画先を裏画面にセット
+	SetDrawScreen( DX_SCREEN_BACK ) ;
+
+	// 初期化処理
+	{
+		// ミサイルのグラフィックロード
+		Mg = LoadGraph( "MGraph.png" ) ;
+
+		// 自機の座標セット
+		Px = 320 ; Py = 200 ;
+
+		// 砲台の座標セット
+		Hx = 320 ; Hy = 30 ;
+
+		// 砲台の移動方向セット
+		Hm = 3 ;
+
+		// 砲台の移動間隔カウンタセット
+		Hsc = 30 ;
+
+		// ミサイルデータの初期化
+		for( i = 0 ; i < MAX_M ; i ++ )
+			Mv[ i ] = 0 ;
+	}
+
+	// ゲームループ
+	Time = GetNowHiPerformanceCount() + 1000000 / 60 ;
+	while( ProcessMessage() == 0 && CheckHitKey( KEY_INPUT_ESCAPE ) == 0 )
+	{
+		// プレイヤーの移動処理
+		{
+			// 入力取得
+			Key = GetJoypadInputState( DX_INPUT_KEY_PAD1 ) ;
+
+			if( Key & PAD_INPUT_RIGHT ) Px += 5 ;	// 右を押していたら右に進む
+			if( Key & PAD_INPUT_LEFT ) Px -= 5 ;	// 左を押していたら左に進む
+
+			if( Key & PAD_INPUT_UP ) Py -= 5 ;	// 上を押していたら上に進む
+			if( Key & PAD_INPUT_DOWN ) Py += 5 ;	// 下を押していたら下に進む
+
+			// 画面外に出ていたら補正
+			if( Px > 640 - 16 ) Px = 640 - 16 ;
+			if( Px < 0 ) Px = 0 ;
+
+			if( Py > 480 - 16 ) Py = 480 - 16 ;
+			if( Py < 0 ) Py = 0 ;
+		}
+
+		// ミサイルの移動処理
+		for( i = 0 ; i < MAX_M ; i ++ )
+		{
+			// ミサイルデータが無効だったらスキップ
+			if( Mv[ i ] == 0 ) continue ;
+
+			// 照準に当たっていたらミサイルデータを無効にする
+			if( ( ( Mx[ i ] > Px && Mx[ i ] < Px + 16 ) || ( Px > Mx[ i ] && Px < Mx[ i ] + 16 ) ) &&
+				( ( My[ i ] > Py && My[ i ] < Py + 16 ) || ( Py > My[ i ] && Py < My[ i ] + 16 ) ) )
+			{
+				Mv[ i ] = 0 ;
+				continue  ;
+			}
+
+			// 追尾カウンタが規定値に来ていなければ追尾処理
+			if( Mc[ i ] < 100 )
+			{
+				double ax , ay , bx , by ;
+
+				// bx,by 自分の進んでいる方向 ax,ay 本来進むべき方向  
+				bx = cos( Ma[ i ] ) ;
+				by = sin( Ma[ i ] ) ;
+				ax = ( Px + 16 ) - Mx[ i ] ;
+				ay = ( Py + 16 ) - My[ i ] ;
+
+				// 外積を利用し向きを照準側に向ける
+				Ma[ i ] += ( ax * by - ay * bx < 0.0 ) ? + PI / 180 * 8 : - PI / 180 * 8 ;
+			}
+
+			// 追尾カウンタ加算
+			Mc[ i ] ++ ;
+
+			// 移動する
+			Mx[ i ] += ( int )( cos( Ma[ i ] ) * 6.0 );
+			My[ i ] += ( int )( sin( Ma[ i ] ) * 6.0 );
+
+			// 画面外に出ていたらミサイルデータを無効にする
+			if( Mx[ i ] < -100 || Mx[ i ] > 740 ||
+				My[ i ] < -100 || My[ i ] > 580 ) Mv[ i ] = 0 ;
+		}
+
+		// 砲台の移動処理
+		{
+			Hx += Hm ;
+
+			// 画面端まで来ていたら反転
+			if( Hx > 640 - 16 || Hx < 0 ) Hm *= -1 ;
+			
+			// ショットカウンタを減らす
+			Hsc -- ;
+
+			// カウンタが０になっていたらミサイル発射
+			if( Hsc == 0 )
+			{
+				// 使われていないミサイルデータを探す
+				for( i = 0 ; i < MAX_M ; i ++ )
+				{
+					if( Mv[ i ] == 0 ) break ;
+				}
+		
+				// もし使われていないミサイルデータがあったらショットを出す
+				if( i != MAX_M )
+				{
+					// ミサイルの位置を設定
+					Mx[ i ] = Hx + 16 ;
+					My[ i ] = Hy + 16 ;
+
+					// 角度をセット
+					Ma[ i ] = PI / 2 ;
+
+					// 追尾カウンタをセット
+					Mc[ i ] = 0 ;
+
+					// ショットデータを使用中にセット
+					Mv[ i ] = 1 ;
+				}
+
+				// 発射間隔カウンタ値をセット
+				Hsc = 30 ;
+			}
+		}
+
+		// 描画処理
+		{
+			// 画面の初期化
+			ClearDrawScreen() ;
+
+			// ミサイルの描画
+			for( i = 0 ; i < MAX_M ; i ++ )
+			{
+				// ミサイルデータが有効でない場合は次に移る
+				if( Mv[ i ] == 0 ) continue ;
+
+				// ミサイルの描画
+				DrawRotaGraph( Mx[ i ], My[ i ], 1.0 , Ma[ i ] , Mg , TRUE ) ;
+			}
+
+			// プレーヤーの描画
+			DrawBox( Px , Py , Px + 32 , Py + 32 , GetColor( 255 , 255 , 255 ) , TRUE ) ;
+
+			// 砲台の描画
+			DrawBox( Hx - 8 , Hy - 8 , Hx + 8 , Hy + 8 , GetColor( 255 , 255 , 0 ) , TRUE ) ;
+
+			// 裏画面の内容を表画面に反映
+			ScreenFlip() ;
+
+			// 時間待ち
+			while( GetNowHiPerformanceCount() < Time ){}
+			Time += 1000000 / 60 ;
+		}
+	}
+
+	DxLib_End() ;				// ＤＸライブラリ使用の終了処理
+
+	return 0 ;				// ソフトの終了
+}
+</PRE>
+
+			<FONT COLOR="#ff0000">ホーミングミサイル２</FONT><BR><BR>
+
+			　速度とホーミングミサイルの向いている方向が１：１でなく、速度を別に用意した<BR>
+			バージョンです、結構使えるホーミングミサイルです<BR><BR>
+
+<PRE>
+#include "DxLib.h"
+#include &lt;math.h&gt;
+
+#define MAX_M	100			// ミサイルの最大数定義
+#define PI		3.14159		// 円周率
+
+// データ定義
+
+int Hx , Hy ;						// 砲台の座標
+int Hm ;						// 砲台の移動方向
+int Hsc ;						// 砲台のショット間隔カウンタ
+int Px , Py ;						// 自機の座標
+int Mg ;						// ミサイルのグラフィック
+int Mx[	MAX_M ] ,My[ MAX_M ] ;				// ミサイルの座標
+int Msx[ MAX_M ] , Msy[ MAX_M ] ;			// ミサイルの速度
+int Mv[ MAX_M ] ;					// ミサイルデータの使用状態(1:使用中 0:未使用)
+double Ma[ MAX_M ] ;					// ミサイルの角度
+int Mc[ MAX_M ] ;					// ミサイルの追尾カウンタ							
+
+// WinMain関数
+int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,
+					 LPSTR lpCmdLine, int nCmdShow )
+{
+	int Key ;
+	LONGLONG Time ;
+	int i ;
+
+	// 画面モードの設定
+	SetGraphMode( 640 , 480 , 16 ) ;
+
+	// ＤＸライブラリ初期化処理
+	if( DxLib_Init() == -1 )
+	{
+		// エラーが起きたら直ちに終了
+		return -1;
+	}
+
+	// 描画先を裏画面にセット
+	SetDrawScreen( DX_SCREEN_BACK ) ;
+
+	// 初期化処理
+	{
+		// ミサイルのグラフィックロード
+		Mg = LoadGraph( "MGraph.png" ) ;
+
+		// 自機の座標セット
+		Px = 320 ; Py = 200 ;
+
+		// 砲台の座標セット
+		Hx = 320 ; Hy = 30 ;
+
+		// 砲台の移動方向セット
+		Hm = 3 ;
+
+		// 砲台の移動間隔カウンタセット
+		Hsc = 30 ;
+
+		// ミサイルデータの初期化
+		for( i = 0 ; i < MAX_M ; i ++ )
+			Mv[ i ] = 0 ;
+	}
+
+	// ゲームループ
+	Time = GetNowHiPerformanceCount() + 1000000 / 60 ;
+	while( ProcessMessage() == 0 && CheckHitKey( KEY_INPUT_ESCAPE ) == 0 )
+	{
+		// プレイヤーの移動処理
+		{
+			// 入力取得
+			Key = GetJoypadInputState( DX_INPUT_KEY_PAD1 ) ;
+
+			if( Key & PAD_INPUT_RIGHT ) Px += 5 ;	// 右を押していたら右に進む
+			if( Key & PAD_INPUT_LEFT ) Px -= 5 ;	// 左を押していたら左に進む
+
+			if( Key & PAD_INPUT_UP ) Py -= 5 ;	// 上を押していたら上に進む
+			if( Key & PAD_INPUT_DOWN ) Py += 5 ;	// 下を押していたら下に進む
+
+			// 画面外に出ていたら補正
+			if( Px > 640 - 16 ) Px = 640 - 16 ;
+			if( Px < 0 ) Px = 0 ;
+
+			if( Py > 480 - 16 ) Py = 480 - 16 ;
+			if( Py < 0 ) Py = 0 ;
+		}
+
+		// ミサイルの移動処理
+		for( i = 0 ; i < MAX_M ; i ++ )
+		{
+			// ミサイルデータが無効だったらスキップ
+			if( Mv[ i ] == 0 ) continue ;
+
+			// 照準に当たっていたらミサイルデータを無効にする
+			if( ( ( Mx[ i ] > Px && Mx[ i ] < Px + 32 ) || ( Px > Mx[ i ] && Px < Mx[ i ] + 16 ) ) &&
+				( ( My[ i ] > Py && My[ i ] < Py + 32 ) || ( Py > My[ i ] && Py < My[ i ] + 16 ) ) )
+			{
+				Mv[ i ] = 0 ;
+				continue  ;
+			}
+
+			// 追尾カウンタが規定値に来ていなければ追尾処理
+			if( Mc[ i ] < 100 )
+			{
+				double ax , ay , bx , by ;
+
+				// bx,by 自分の進んでいる方向 ax,ay 本来進むべき方向  
+				bx = cos( Ma[ i ] ) ;
+				by = sin( Ma[ i ] ) ;
+				ax = ( Px + 16 ) - Mx[ i ] ;
+				ay = ( Py + 16 ) - My[ i ] ;
+
+				// 外積を利用し向きを照準側に向ける
+				Ma[ i ] += ( ax * by - ay * bx < 0.0 ) ? + PI / 180 * 15 : - PI / 180 * 15 ;
+			}
+
+			// 追尾カウンタ加算
+			Mc[ i ] ++ ;
+
+			// 速度変更
+			Msx[ i ] += ( int )( cos( Ma[ i ] ) * 30.0 );
+			Msy[ i ] += ( int )( sin( Ma[ i ] ) * 30.0 );
+
+			// 移動
+			Mx[ i ] = ( Mx[ i ] * 100 + Msx[ i ] ) / 100 ;
+			My[ i ] = ( My[ i ] * 100 + Msy[ i ] ) / 100 ;
+
+			// 画面外に出ていたらミサイルデータを無効にする
+			if( Mx[ i ] < -100 || Mx[ i ] > 740 ||
+				My[ i ] < -100 || My[ i ] > 580 ) Mv[ i ] = 0 ;
+		}
+
+		// 砲台の移動処理
+		{
+			Hx += Hm ;
+
+			// 画面端まで来ていたら反転
+			if( Hx > 640 - 16 || Hx < 0 ) Hm *= -1 ;
+			
+			// ショットカウンタを減らす
+			Hsc -- ;
+
+			// カウンタが０になっていたらミサイル発射
+			if( Hsc == 0 )
+			{
+				// 使われていないミサイルデータを探す
+				for( i = 0 ; i < MAX_M ; i ++ )
+				{
+					if( Mv[ i ] == 0 ) break ;
+				}
+		
+				// もし使われていないミサイルデータがあったらショットを出す
+				if( i != MAX_M )
+				{
+					// ミサイルの位置を設定
+					Mx[ i ] = Hx + 16 ;
+					My[ i ] = Hy + 16 ;
+
+					// 速度セット
+					Msx[ i ] = 0 ;
+					Msy[ i ] = 0 ;
+
+					// 角度をセット
+					Ma[ i ] = PI / 2 ;
+
+					// 追尾カウンタをセット
+					Mc[ i ] = 0 ;
+
+					// ショットデータを使用中にセット
+					Mv[ i ] = 1 ;
+				}
+
+				// 発射間隔カウンタ値をセット
+				Hsc = 30 ;
+			}
+		}
+
+		// 描画処理
+		{
+			// 画面の初期化
+			ClearDrawScreen() ;
+
+			// ミサイルの描画
+			for( i = 0 ; i < MAX_M ; i ++ )
+			{
+				// ミサイルデータが有効でない場合は次に移る
+				if( Mv[ i ] == 0 ) continue ;
+
+				// ミサイルの描画
+				DrawRotaGraph( Mx[ i ], My[ i ], 1.0 , Ma[ i ] , Mg , TRUE ) ;
+			}
+
+			// プレーヤーの描画
+			DrawBox( Px , Py , Px + 32 , Py + 32 , GetColor( 255 , 255 , 255 ) , TRUE ) ;
+
+			// 砲台の描画
+			DrawBox( Hx - 8 , Hy - 8 , Hx + 8 , Hy + 8 , GetColor( 255 , 255 , 0 ) , TRUE ) ;
+
+			// 裏画面の内容を表画面に反映
+			ScreenFlip() ;
+
+			// 時間待ち
+			while( GetNowHiPerformanceCount() < Time ){}
+			Time += 1000000 / 60 ;
+		}
+	}
+
+	DxLib_End() ;				// ＤＸライブラリ使用の終了処理
+
+	return 0 ;				// ソフトの終了
+}
+</PRE>
+
+
+
+			<BR><BR><BR><BR><BR><BR><BR>
+
+			　<FONT COLOR="#007712"><A NAME="N24"><B>２４．ホーミングレーザー</B></A></FONT><BR><BR>
+
+			　ホーミングミサイルの発展バージョンであるホーミングレーザーです。<BR>
+			　ホーミングミサイルとの違いはショットの軌跡を何らかのかたちで描画されるということだけです。<BR><BR>
+
+			　なおホーミングレーザー２で使用しているグラフィックは以下の物をお使い下さい。
+			<A HREF="http://homepage2.nifty.com/natupaji/DxLib/Image/Laser.bmp">Laser.bmp画像</A><BR><BR><BR>
+			<BR><BR>
+
+
+			<FONT COLOR="#ff0000">ホーミングレーザー１</FONT><BR><BR>
+
+			　ホーミングの軌跡を線で結ぶことによりレーザーにしている単純なものです。<BR>
+			線自体のデータは独立しており、レーザー自体とは関係なく一定時間描画され<BR>
+			続けます。<BR><BR>
+
+<PRE>
+#include "DxLib.h"
+#include &lt;math.h&gt;
+
+#define MAX_L	100			// レーザーの最大数定義
+#define PI		3.14159		// 円周率
+
+#define LINE_MAXNUM	3000				// 描画する線の最大数
+
+// データ型宣言
+
+// レーザー構造体型宣言
+typedef struct tugLASER
+{
+	int x , y ;					// 現在の座標
+	int sx , sy ;					// 現在の速度
+
+	int LogNum ;					// 記録した軌跡の数
+	double Angle ;					// 進んでいる角度
+	int Counter ;					// 追尾をはじめてから経過した時間
+
+	int ValidFlag ;					// このデータが使用中かフラグ
+} LASER , *LPLASER ;
+
+// ライン描画用構造体宣言
+typedef struct tugLINE
+{
+	int x1 , y1 , x2 , y2 ;				// 描くラインの座標
+	int Counter ;					// 描くラインの色決定用値
+
+	int ValidFlag ;					// このデータが使用中かフラグ
+} LINE , *LPLINE ;
+
+// データ定義
+
+int Hx , Hy ;						// 砲台の座標
+int Hm ;						// 砲台の移動方向
+int Hsc ;						// 砲台のショット間隔カウンタ
+int Px , Py ;						// 自機の座標
+
+LASER Ld[MAX_L] ;					// ホーミングレーザーのデータ
+LINE Line[LINE_MAXNUM] ;				// ライン描画用データ
+
+
+// WinMain関数
+int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,
+					 LPSTR lpCmdLine, int nCmdShow )
+{
+	int Key ;
+	LONGLONG Time ;
+	int i ;
+
+	// 画面モードの設定
+	SetGraphMode( 640 , 480 , 16 ) ;
+
+	// ＤＸライブラリ初期化処理
+	if( DxLib_Init() == -1 )
+	{
+		// エラーが起きたら直ちに終了
+		return -1;
+	}
+
+	// 描画先を裏画面にセット
+	SetDrawScreen( DX_SCREEN_BACK ) ;
+
+	// 初期化処理
+	{
+		// 自機の座標セット
+		Px = 320 ; Py = 200 ;
+
+		// 砲台の座標セット
+		Hx = 320 ; Hy = 30 ;
+
+		// 砲台の移動方向セット
+		Hm = 3 ;
+
+		// 砲台の移動間隔カウンタセット
+		Hsc = 30 ;
+
+		// レーザーデータの初期化
+		for( i = 0 ; i < MAX_L ; i ++ )
+			Ld[ i ].ValidFlag = 0 ;
+	}
+
+	// ゲームループ
+	Time = GetNowHiPerformanceCount() + 1000000 / 60 ;
+	while( ProcessMessage() == 0 && CheckHitKey( KEY_INPUT_ESCAPE ) == 0 )
+	{
+		// プレイヤーの移動処理
+		{
+			// 入力取得
+			Key = GetJoypadInputState( DX_INPUT_KEY_PAD1 ) ;
+
+			if( Key & PAD_INPUT_RIGHT ) Px += 5 ;	// 右を押していたら右に進む
+			if( Key & PAD_INPUT_LEFT ) Px -= 5 ;	// 左を押していたら左に進む
+
+			if( Key & PAD_INPUT_UP ) Py -= 5 ;	// 上を押していたら上に進む
+			if( Key & PAD_INPUT_DOWN ) Py += 5 ;	// 下を押していたら下に進む
+
+			// 画面外に出ていたら補正
+			if( Px > 640 - 16 ) Px = 640 - 16 ;
+			if( Px < 0 ) Px = 0 ;
+
+			if( Py > 480 - 16 ) Py = 480 - 16 ;
+			if( Py < 0 ) Py = 0 ;
+		}
+
+		// レーザーの移動処理
+		for( i = 0 ; i < MAX_L ; i ++ )
+		{
+			int xb , yb ;
+
+			// レーザーデータが無効だったらスキップ
+			if( Ld[ i ].ValidFlag == 0 ) continue ;
+
+			// 照準に当たっていたらレーザーデータを無効にする
+			if( ( Ld[ i ].x > Px && Ld[ i ].x < Px + 32 ) &&
+				( Ld[ i ].y > Py && Ld[ i ].y < Py + 32 ) )
+			{
+				Ld[ i ].ValidFlag = 0 ;
+				continue  ;
+			}
+
+			// 追尾カウンタが規定値に来ていなければ追尾処理
+			if( Ld[ i ].Counter < 200 )
+			{
+				double ax , ay , bx , by ;
+
+				// bx,by 自分の進んでいる方向 ax,ay 本来進むべき方向  
+				bx = cos( Ld[ i ].Angle ) ;
+				by = sin( Ld[ i ].Angle ) ;
+				ax = Px - Ld[ i ].x + 16 ;
+				ay = Py - Ld[ i ].y + 16 ;
+
+				// 外積を利用し向きを照準側に向ける
+				Ld[ i ].Angle += ( ax * by - ay * bx < 0.0 ) ? + PI / 180 * 15 : - PI / 180 * 15 ;
+			}
+
+			// 追尾カウンタ加算
+			Ld[ i ].Counter ++ ;
+
+			// 速度を変更する
+			Ld[ i ].sx += ( int )( cos( Ld[ i ].Angle ) * 30 );
+			Ld[ i ].sy += ( int )( sin( Ld[ i ].Angle ) * 30 );
+
+			// 移動前のアドレスを保存
+			xb = Ld[ i ].x ;
+			yb = Ld[ i ].y ;
+
+			// 移動する
+			Ld[ i ].x = ( Ld[ i ].x * 100 + Ld[ i ].sx ) / 100 ;
+			Ld[ i ].y = ( Ld[ i ].y * 100 + Ld[ i ].sy ) / 100 ;
+
+			// 現在の状態をラインデータに変換
+			{
+				int j ;
+
+				// 使われていないラインデータを探す
+				for( j = 0 ; j < LINE_MAXNUM ; j ++ )
+				{
+					if( Line[ j ].ValidFlag == 0 ) break ;
+				}
+
+				// もし空のデータがあった場合のみラインデータ追加
+				if( j != LINE_MAXNUM )
+				{
+					// ライン情報をセットする
+
+					// 座標のセット
+					Line[ j ].x1 = xb ; Line[ j ].y1 = yb ;
+					Line[ j ].x2 = Ld[ i ].x ; Line[ j ].y2 = Ld[ i ].y ;
+
+					// 色決定カウンタを初期化
+					Line[ j ].Counter = 0 ;
+
+					// データを使用中にセット
+					Line[ j ].ValidFlag = 1 ;
+				}
+			}
+
+			// 画面外に出ていたらレーザーデータを無効にする
+			if( Ld[ i ].x < -100 || Ld[ i ].x > 740 ||
+				Ld[ i ].y < -100 || Ld[ i ].y > 580 ) Ld[ i ].ValidFlag = 0 ;
+		}
+
+		// 砲台の移動処理
+		{
+			Hx += Hm ;
+
+			// 画面端まで来ていたら反転
+			if( Hx > 640 - 16 || Hx < 0 ) Hm *= -1 ;
+			
+			// ショットカウンタを減らす
+			Hsc -- ;
+
+			// カウンタが０になっていたらレーザー発射
+			if( Hsc == 0 )
+			{
+				// 使われていないレーザーデータを探す
+				for( i = 0 ; i < MAX_L ; i ++ )
+				{
+					if( Ld[ i ].ValidFlag == 0 ) break ;
+				}
+		
+				// もし使われていないレーザーデータがあったらショットを出す
+				if( i != MAX_L )
+				{
+					// レーザーの位置を設定
+					Ld[ i ].x = Hx + 16 ;
+					Ld[ i ].y = Hy + 16 ;
+
+					// レーザーの速度を設定
+					Ld[ i ].sx = 0 ;
+					Ld[ i ].sy = 0 ;
+
+					// 角度をセット
+					Ld[ i ].Angle = PI / 2 ;
+
+					// 追尾カウンタをセット
+					Ld[ i ].Counter = 0 ;
+
+					// レーザーデータを使用中にセット
+					Ld[ i ].ValidFlag = 1 ;
+				}
+
+				// 発射間隔カウンタ値をセット
+				Hsc = 30 ;
+			}
+		}
+
+		// 描画処理
+		{
+			// 画面の初期化
+			ClearDrawScreen() ;
+
+			// 描画ブレンドモードを加算半透明にセット
+			SetDrawBlendMode( DX_BLENDMODE_ADD , 255 ) ;
+
+			// ラインの描画
+			for( i = 0 ; i < LINE_MAXNUM ; i ++ )
+			{
+				// ラインデータが有効でない場合は次に移る
+				if( Line[ i ].ValidFlag == 0 ) continue ;
+
+				// ラインの描画
+				DrawLine( Line[ i ].x1 , Line[ i ].y1 ,
+							Line[ i ].x2 , Line[ i ].y2 ,
+							GetColor( 0 , 255 - Line[ i ].Counter * 4 , 0 ) ) ;
+
+				// カウンタを加算する
+				Line[ i ].Counter ++  ;
+
+				// もし規定値に達していたらラインデータを無効にする
+				if( Line[ i ].Counter == 64 ) Line[ i ].ValidFlag = 0 ;
+			}
+
+			// 描画ブレンドモードを通常描画モードにセット
+			SetDrawBlendMode( DX_BLENDMODE_NOBLEND , 255 ) ;
+
+			// プレーヤーの描画
+			DrawBox( Px , Py , Px + 32 , Py + 32 , GetColor( 255 , 255 , 255 ) , TRUE ) ;
+
+			// 砲台の描画
+			DrawBox( Hx - 8 , Hy - 8 , Hx + 8 , Hy + 8 , GetColor( 255 , 255 , 0 ) , TRUE ) ;
+
+			// 裏画面の内容を表画面に反映
+			ScreenFlip() ;
+
+			// 時間待ち
+			while( GetNowHiPerformanceCount() < Time ){}
+			Time += 1000000 / 60 ;
+		}
+	}
+
+	DxLib_End() ;				// ＤＸライブラリ使用の終了処理
+
+	return 0 ;				// ソフトの終了
+}
+</PRE>
+
+			<FONT COLOR="#ff0000">ホーミングレーザー２</FONT><BR><BR>
+
+			　今度は軌跡をグラフィックで表現しています。<BR>
+			　原理はグラフィックを何個も描画して繋げるという手法を取ります。<BR><BR>
+
+<PRE>
+#include "DxLib.h"
+#include &lt;math.h&gt;
+
+#define MAX_L	20			// レーザーの最大数定義
+#define PI		3.14159		// 円周率
+
+#define LINE_MAXNUM	1000				// 描画する線の最大数
+
+// データ型宣言
+
+// ライン描画用構造体宣言
+typedef struct tugLINE
+{
+	int x , y ;					// 描くラインの座標
+	double Angle ;					// ラインの向き
+	int Counter ;					// 描くラインの色決定用値
+} LINE , *LPLINE ;
+
+// レーザー構造体型宣言
+typedef struct tugLASER
+{
+	int x , y ;					// 現在の座標
+	int sx , sy ;					// 現在の速度
+
+	int LogNum ;					// 記録した軌跡の数
+	double Angle ;					// 進んでいる角度
+	int Counter ;					// 追尾をはじめてから経過した時間
+
+	LINE Line[LINE_MAXNUM] ;			// レーザーのラインデータ
+	int LineNum ;					// 表示されているラインの数
+
+	int ValidFlag ;					// このデータが使用中かフラグ
+} LASER , *LPLASER ;
+
+// データ定義
+
+int Hx , Hy ;						// 砲台の座標
+int Hm ;						// 砲台の移動方向
+int Hsc ;						// 砲台のショット間隔カウンタ
+int Px , Py ;						// 自機の座標
+
+LASER Ls[MAX_L] ;					// ホーミングレーザーのデータ
+int Lg ;						// レーザーのグラフィックハンドル
+
+
+// WinMain関数
+int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,
+					 LPSTR lpCmdLine, int nCmdShow )
+{
+	int Key ;
+	LONGLONG Time ;
+	int i ;
+
+	// 画面モードの設定
+	SetGraphMode( 640 , 480 , 16 ) ;
+
+	// ＤＸライブラリ初期化処理
+	if( DxLib_Init() == -1 )
+	{
+		// エラーが起きたら直ちに終了
+		return -1;
+	}
+
+	// 描画先を裏画面にセット
+	SetDrawScreen( DX_SCREEN_BACK ) ;
+
+	// 初期化処理
+	{
+		// レーザーグラフィックのロード
+		Lg = LoadGraph( "Laser.bmp" ) ;
+
+		// 自機の座標セット
+		Px = 320 ; Py = 200 ;
+
+		// 砲台の座標セット
+		Hx = 320 ; Hy = 30 ;
+
+		// 砲台の移動方向セット
+		Hm = 3 ;
+
+		// 砲台の移動間隔カウンタセット
+		Hsc = 30 ;
+
+		// レーザーデータの初期化
+		for( i = 0 ; i < MAX_L ; i ++ )
+			Ls[ i ].ValidFlag = 0 ;
+	}
+
+	// ゲームループ
+	Time = GetNowHiPerformanceCount() + 1000000 / 60 ;
+	while( ProcessMessage() == 0 && CheckHitKey( KEY_INPUT_ESCAPE ) == 0 )
+	{
+		// プレイヤーの移動処理
+		{
+			// 入力取得
+			Key = GetJoypadInputState( DX_INPUT_KEY_PAD1 ) ;
+
+			if( Key & PAD_INPUT_RIGHT ) Px += 5 ;	// 右を押していたら右に進む
+			if( Key & PAD_INPUT_LEFT ) Px -= 5 ;	// 左を押していたら左に進む
+
+			if( Key & PAD_INPUT_UP ) Py -= 5 ;	// 上を押していたら上に進む
+			if( Key & PAD_INPUT_DOWN ) Py += 5 ;	// 下を押していたら下に進む
+
+			// 画面外に出ていたら補正
+			if( Px > 640 - 16 ) Px = 640 - 16 ;
+			if( Px < 0 ) Px = 0 ;
+
+			if( Py > 480 - 16 ) Py = 480 - 16 ;
+			if( Py < 0 ) Py = 0 ;
+		}
+
+		// レーザーの移動処理
+		for( i = 0 ; i < MAX_L ; i ++ )
+		{
+			int xb , yb ;
+
+			// レーザーデータが無効だったらスキップ
+			if( Ls[ i ].ValidFlag == 0 ) continue ;
+
+			// 照準に当たっていたらレーザーデータを無効にする
+			if( ( Ls[ i ].x > Px && Ls[ i ].x < Px + 32 ) &&
+				( Ls[ i ].y > Py && Ls[ i ].y < Py + 32 ) )
+			{
+				Ls[ i ].ValidFlag = 0 ;
+				continue  ;
+			}
+
+			// 追尾カウンタが規定値に来ていなければ追尾処理
+			if( Ls[ i ].Counter < 100 )
+			{
+				double ax , ay , bx , by ;
+				double ar , br ;
+
+				// bx,by 自分の進んでいる方向 ax,ay 本来進むべき方向  
+				bx = cos( Ls[ i ].Angle ) ;
+				by = sin( Ls[ i ].Angle ) ;
+				ax = Px - Ls[ i ].x + 16 ;
+				ay = Py - Ls[ i ].y + 16 ;
+
+				// ベクトルb と aの絶対値を求める
+				br = sqrt( bx * bx + by * by ) ;
+				ar = sqrt( ax * ax + ay * ay ) ;
+
+				// 外積を利用し向きを照準側に向ける
+				Ls[ i ].Angle += PI / 180 * ( ( bx * ay - by * ax ) / ( br * ar ) ) * 5 ;
+			}
+
+			// 追尾カウンタ加算
+			Ls[ i ].Counter ++ ;
+
+			// 速度を変更する
+			Ls[ i ].sx = ( int )( cos( Ls[ i ].Angle ) * 1000 );
+			Ls[ i ].sy = ( int )( sin( Ls[ i ].Angle ) * 1000 );
+
+			// 移動前のアドレスを保存
+			xb = Ls[ i ].x ;
+			yb = Ls[ i ].y ;
+
+			// 移動する
+			Ls[ i ].x = ( Ls[ i ].x * 100 + Ls[ i ].sx ) / 100 ;
+			Ls[ i ].y = ( Ls[ i ].y * 100 + Ls[ i ].sy ) / 100 ;
+
+			// 現在の状態をラインデータに変換
+			{
+				int j ;
+
+				if( Ls[ i ].LineNum != LINE_MAXNUM )
+				{
+					// ライン情報をセットする
+					j = Ls[ i ].LineNum ;
+
+					// 座標のセット
+					Ls[ i ].Line[ j ].x = xb ; Ls[ i ].Line[ j ].y = yb ;
+
+					// 角度をセット
+					{
+						double r ;
+
+						r = sqrt( (double)( Ls[ i ].sx * Ls[ i ].sx + Ls[ i ].sy * Ls[ i ].sy ) ) ;
+						Ls[ i ].Line[ j ].Angle = atan2( (double)Ls[ i ].sy , (double)Ls[ i ].sx ) ;
+					}
+
+					// 色決定カウンタを初期化
+					Ls[ i ].Line[ j ].Counter = 0 ;
+
+					// ラインの数を増やす
+					Ls[ i ].LineNum ++ ; 
+				}
+			}
+
+			// 画面外に出ていたらレーザーデータを無効にする
+			if( Ls[ i ].x < -100 || Ls[ i ].x > 740 ||
+				Ls[ i ].y < -100 || Ls[ i ].y > 580 ) Ls[ i ].ValidFlag = 0 ;
+		}
+
+		// 砲台の移動処理
+		{
+			Hx += Hm ;
+
+			// 画面端まで来ていたら反転
+			if( Hx > 640 - 16 || Hx < 0 ) Hm *= -1 ;
+			
+			// ショットカウンタを減らす
+			Hsc -- ;
+
+			// カウンタが０になっていたらレーザー発射
+			if( Hsc == 0 )
+			{
+				// 使われていないレーザーデータを探す
+				for( i = 0 ; i < MAX_L ; i ++ )
+				{
+					if( Ls[ i ].ValidFlag == 0 && Ls[ i ].LineNum == 0 ) break ;
+				}
+		
+				// もし使われていないレーザーデータがあったらショットを出す
+				if( i != MAX_L )
+				{
+					// レーザーの位置を設定
+					Ls[ i ].x = Hx + 16 ;
+					Ls[ i ].y = Hy + 16 ;
+
+					// レーザーの速度を設定
+					Ls[ i ].sx = 0 ;
+					Ls[ i ].sy = 0 ;
+
+					// 角度をセット
+					Ls[ i ].Angle = PI / 2 ;
+
+					// 追尾カウンタをセット
+					Ls[ i ].Counter = 0 ;
+
+					// レーザーデータを使用中にセット
+					Ls[ i ].ValidFlag = 1 ;
+				}
+
+				// 発射間隔カウンタ値をセット
+				Hsc = 30 ;
+			}
+		}
+
+		// 描画処理
+		{
+			int j , DeleteNum ;
+
+			// 画面の初期化
+			ClearDrawScreen() ;
+
+			// ラインの描画
+			for( j = 0 ; j < MAX_L ; j ++ )
+			{
+				DeleteNum = 0 ;
+				for( i = 0 ; i < Ls[ j ].LineNum - DeleteNum ; i ++ )
+				{
+					// もしカウンタが規定値に達していたら普段と１８０度回転したグラフィックを
+					// 描画し、その後ラインデータを無効にする
+					if( Ls[ j ].Line[ i ].Counter == 64 )
+					{
+						// ラインの描画
+						DrawRotaGraph( Ls[ j ].Line[ i ].x , Ls[ j ].Line[ i ].y ,
+										1.0 , Ls[ j ].Line[ i ].Angle + PI, Lg , TRUE ) ;
+
+						// 削除するデータの数を一つ増やす
+						DeleteNum ++ ;
+
+						// データを詰める
+						MoveMemory( &Ls[ j ].Line[ 0 ] , &Ls[ j ].Line[ 1 ] ,
+										sizeof( LINE ) * ( Ls[ j ].LineNum - DeleteNum ) ) ;
+
+						// 詰めたので次のデータが今の配列番号 i と同じなる
+						// ので、の処理
+						i -- ;
+
+					}
+					else
+					{
+						// ラインの描画
+						DrawRotaGraph( Ls[ j ].Line[ i ].x , Ls[ j ].Line[ i ].y ,
+										1.0 , Ls[ j ].Line[ i ].Angle , Lg , TRUE ) ;
+
+						// カウンタを加算する
+						Ls[ j ].Line[ i ].Counter ++  ;
+					}
+				}
+				Ls[ j ].LineNum -= DeleteNum ;
+			}
+
+			// 描画輝度をセット
+			SetDrawBright( 255 , 255 , 255 ) ; 
+
+			// プレーヤーの描画
+			DrawBox( Px , Py , Px + 32 , Py + 32 , GetColor( 255 , 255 , 255 ) , TRUE ) ;
+
+			// 砲台の描画
+			DrawBox( Hx - 8 , Hy - 8 , Hx + 8 , Hy + 8 , GetColor( 255 , 255 , 0 ) , TRUE ) ;
+
+			// 裏画面の内容を表画面に反映
+			ScreenFlip() ;
+
+			// 時間待ち
+			while( GetNowHiPerformanceCount() < Time ){}
+			Time += 1000000 / 60 ;
+		}
+	}
+
+	DxLib_End() ;				// ＤＸライブラリ使用の終了処理
+
+	return 0 ;				// ソフトの終了
+}
+</PRE>
+			<BR><BR><BR><BR><BR><BR><BR>
+
+			　<FONT COLOR="#007712"><A NAME="N25"><B>２５．シューティング等のリプレー機能</B></A></FONT><BR><BR>
+
+			　シューティングゲームではよくタイトル画面で黙っていると勝手にデモが始まります。<BR>
+			　そんなデモシーンの自機は一体誰が操っているのでしょうか？<BR>
+			　答えは、あらかじめスタッフの方が操作した情報を保存しておき、そのデータを元にデモ中の<BR>
+			自機を動かしているのです。<BR>
+			　実はデモを行うに当たって必要な特別なデータは自機の操作情報しかありません。<BR>
+			　何故なら自機が全く同じを動きをすれば敵も全く同じ動きをするように作られているからです。<BR>
+			　下のサンプルはその方法が示されています。<BR><BR><BR><BR>
+
+			<FONT COLOR="#ff0000">その１ とりあえず保存</FONT><BR><BR>
+
+			　以下のサンプルは最初に自機の動作を保存するのか、保存した動作情報を再生するのか聞いてきます。<BR>
+			　最初はとりあえず動作情報を作らなければならないので動作の保存を選んで適当に自機を動かして<BR>
+			下さい。２０秒経つと動作の保存は終了です。<BR>
+			　そのあと再生をしてみていただければちゃんと保存されていることがわかると思います。<BR>
+
+
+
+<pre>
+#include "DxLib.h"
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;malloc.h&gt;
+
+#define RECTIME	20		// 動作を保存する最大時間(秒)
+#define SPEED 10		// 自機のスピード
+
+// 動作データ保存用データ構造体
+typedef struct tugRECDATA
+{
+	int InputKey ;
+} RECDATA , *LPRECDATA ;
+
+// 自機の座標
+int x , y ;
+
+// 保存したフレーム数
+int RecFrame ;
+
+// 再生したフレーム数
+int RePlayFrame ;
+
+// 動作データ保存用メモリ領域のポインタ
+LPRECDATA RecData ;
+
+// 処理モード
+int Mode ;
+
+// モードごとのマクロ値を定義
+#define MODE_REC	0
+#define MODE_REPLAY	1
+
+// WinMain関数
+int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,
+					 LPSTR lpCmdLine, int nCmdShow )
+{
+	int Key , Loop;
+	LONGLONG Time ;
+
+	// 画面モードの設定
+	SetGraphMode( 640 , 480 , 16 ) ;
+
+	// ＤＸライブラリ初期化処理
+	if( DxLib_Init() == -1 ) return -1;
+
+	// VSYNC待ちをしない
+	SetWaitVSyncFlag( FALSE ) ;
+
+	// 最初に動作保存か再生処理か選択してもらう
+	{
+		// メッセージの描画
+		DrawString( 0 , 0 , "動作を保存する場合は十字キーの左を、再生する場合は右を押してください" , GetColor( 255 , 255 , 255 ) ) ;
+
+		// 入力があるまで待つ
+		Mode = -1 ;
+		while( ProcessMessage() == 0 && Mode == -1 )
+		{
+			// パッドの状態を得る
+			Key = GetJoypadInputState( DX_INPUT_KEY_PAD1 ) ;
+
+			// 右が押された場合は再生モードにセット
+			if( Key & PAD_INPUT_RIGHT ) Mode = MODE_REPLAY ;
+
+			// 左が押された場合は動作保存モードにセット
+			if( Key & PAD_INPUT_LEFT ) Mode = MODE_REC ;
+		}
+	}
+
+	// 初期化処理、モードごとに処理を分岐
+	{
+		// 共通動作の自機位置のセット処理
+		x = 300 ;
+		y = 220 ;
+
+		switch( Mode )
+		{
+		// 動作保存時の初期化処理
+		case MODE_REC :
+			{
+				// とりあえず秒間６０フレームの計算でデータ領域を確保
+				RecData = ( LPRECDATA )malloc( sizeof( RECDATA ) * 60 * RECTIME ) ;
+
+				// 保存データ数の初期化
+				RecFrame = 0 ;
+			}
+			break ;
+
+		// 動作再生時の初期化処理
+		case MODE_REPLAY :
+			{
+				FILE *fp ;
+
+				// 動作保存データファイルを開く
+				fp = fopen( "MoveRec.dat" , "rb" ) ;
+
+				// もし開けなかったら終了
+				if( fp == NULL )
+				{
+					// メッセージを描画
+					ClearDrawScreen() ;
+					DrawString( 0 , 0 , "動作保存ファイルがありません" , GetColor( 255 , 255 , 255 ) ) ;
+
+					// ＤＸライブラリを終了
+					DxLib_End() ;
+
+					// ソフト終了
+					return 0 ;
+				}
+
+				// 保存したフレーム数読み込む
+				fread( &RecFrame , sizeof( int ) , 1 , fp ) ;
+
+				// 保存されているフレーム数分の動作保存データを読みこめるだけのメモリ領域を確保
+				RecData = ( LPRECDATA )malloc( sizeof( RECDATA ) * RecFrame ) ;
+
+				// 動作保存データを読み込む
+				fread( RecData , sizeof( RECDATA ) , RecFrame , fp ) ;
+
+				// 再生が終ったフレーム数を初期化
+				RePlayFrame = 0 ;
+			}
+			break ;
+		}
+	}
+
+	// 画面の初期化＆描画先を裏画面にセット
+	ClearDrawScreen() ;
+	SetDrawScreen( DX_SCREEN_BACK ) ;
+
+	// 現在のタイムカウントを保存
+	Time = GetNowHiPerformanceCount() ;
+
+	// 動作保存処理開始
+	Loop = 1 ;
+	while( ProcessMessage() == 0 && CheckHitKey( KEY_INPUT_ESCAPE ) == 0 && Loop == 1 )
+	{
+		// 画面の初期化
+		ClearDrawScreen() ;
+
+		// モードによって処理を分岐
+		switch( Mode )
+		{
+		// 動作保存モードの処理
+		case MODE_REC :
+
+			// 普通にキーの入力状態を得る
+			Key = GetJoypadInputState( DX_INPUT_KEY_PAD1 ) ;
+			break ;
+
+		// 動作再生時の処理
+		case MODE_REPLAY :
+
+			// 保存したキー入力状態を代入
+			Key = RecData[ RePlayFrame ].InputKey ;
+			break ;
+		}
+
+		// 自機を移動させる
+		if( Key & PAD_INPUT_LEFT ) x -= SPEED ;
+		if( Key & PAD_INPUT_RIGHT ) x += SPEED ;
+		if( Key & PAD_INPUT_UP ) y -= SPEED ;
+		if( Key & PAD_INPUT_DOWN ) y += SPEED ;
+
+		// 画面外に出た場合の補正
+		if( x > 620 ) x = 620 ;
+		if( x < 0 ) x = 0 ;
+		if( y > 460 ) y = 460 ;
+		if( y < 0 ) y = 0 ;
+
+		// 自機の描画
+		DrawBox( x , y , x + 30 , y + 30 , GetColor( 255 , 255 , 0 ) , TRUE ) ;
+
+		// メッセージの描画
+		switch( Mode )
+		{
+		case MODE_REC :	DrawString( 0 , 0 , "動作を保存中です" , GetColor( 255 , 255 , 255 ) ) ; break ;
+		case MODE_REPLAY :	DrawString( 0 , 0 , "動作を再生中です" , GetColor( 255 , 255 , 255 ) ) ; break ;
+		}
+
+
+		// 裏画面の状態を表画面に反映させる
+		ScreenFlip() ;
+
+		// ６０分の１秒経つまで待つ
+		while( ProcessMessage() == 0 && GetNowHiPerformanceCount() - Time < 1000000 / 60 ){}
+		Time = GetNowHiPerformanceCount() ;
+
+
+		// モードによって処理を分岐
+		switch( Mode )
+		{
+		// 動作保存モードの処理
+		case MODE_REC :
+			{
+				// キーの状態を保存
+				RecData[ RecFrame ].InputKey = Key ;
+
+				// 保存した数を増やす
+				RecFrame ++ ;
+
+				// 保存した数が規定数に達していたら(つまりもう保存できないほど保存したら)
+				// ループから抜ける
+				if( RecFrame == 60 * RECTIME ) Loop = 0 ;
+			}
+			break ;
+
+		// 動作再生時の処理
+		case MODE_REPLAY :
+			{
+				// 再生したフレーム数を増やす
+				RePlayFrame ++ ;
+
+				// もしすべて再生し終わっていたらループから抜ける
+				if( RePlayFrame == RecFrame ) Loop = 0 ;
+			}
+			break ;
+		}
+	}
+
+	// モードによって処理を分岐
+	switch( Mode )
+	{
+	// 動作保存モードの処理
+	case MODE_REC :
+		{
+			// 動作データをディスクに保存する
+			{
+				FILE *fp ;
+
+				// ファイルを開く
+				fp = fopen( "MoveRec.dat" , "wb" ) ;
+
+				// 最初に保存したフレーム数を書き出す
+				fwrite( &RecFrame , sizeof( int ) , 1 , fp ) ;
+
+				// 次に保存した動作データを書き出す
+				fwrite( RecData , sizeof( RECDATA ) , RecFrame , fp ) ;
+
+				// ファイルを閉じる
+				fclose( fp ) ;
+			}
+
+			// 画面に終了メッセージを出す
+			ClearDrawScreen() ;
+			DrawString( 0, 0, "動作の保存が終了しました" , GetColor( 255 , 255 , 255 ) ) ;
+			ScreenFlip() ;
+		}
+		break ;
+
+	// 動作再生時の処理
+	case MODE_REPLAY :
+		{
+			// 画面に終了メッセージを出す
+			ClearDrawScreen() ;
+			DrawString( 0, 0, "動作の再生が終了しました" , GetColor( 255 , 255 , 255 ) ) ;
+			ScreenFlip() ;
+		}
+		break ;
+	}
+
+	// 動作保存データ保存用に確保したメモリ領域を開放する
+	free( RecData ) ;
+
+	// キー入力待ち
+	WaitKey() ;
+
+	// ＤＸライブラリ使用の終了処理
+	DxLib_End() ;
+
+	// ソフトの終了
+	return 0 ;
+}
+</pre>
+<BR><BR>
+			<FONT COLOR="#ff0000">その２ 敵の弾をかわす</FONT><BR><BR>
+
+			　次のサンプルは少しグレードアップして弾が飛んできます。弾の飛ばすタイミングに<BR>
+			乱数を使っていますが、これも事前に乱数の初期化値を保存しておき、再生時に同じ<BR>
+			乱数の初期化値をセットする事で全く同じ動作をさせる事が出来ます。<BR>
+			　なお、前回のサンプルでは <a href="dxfunc.html#R5N4">GetJoypadInputState</a> 関数で得られるすべてのキー入力<BR>
+			情報を保存していますが、それだと１フレームにつき４バイトも消費してしまうので<BR>
+			今回は下位８ビット分である１バイトだけ保存するように変更してあります。<BR>
+			GetJoypadInputState 関数で得られる押下情報は下位８ビットに 十字キーの状態と<BR>
+			パッドの４ボタンまでの情報が入っているので恐らく問題ないと思います。<BR><BR>
+
+<pre>
+#include "DxLib.h"
+#include &lt;math.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;malloc.h&gt;
+
+#define RECTIME	20		// 動作を保存する最大時間(秒)
+#define SPEED 5			// 自機のスピード
+
+#define MAX_SHOT	80	// 弾の最大数
+#define SHOT_SPEED	5	// 弾の速度
+
+
+// 動作データ保存用データ構造体
+typedef struct tugRECDATA
+{
+	unsigned char InputKey ;	// 入力したキーのデータ
+} RECDATA , *LPRECDATA ;
+
+// 弾データ構造体
+typedef struct tugSHOT
+{
+	int x , y ;	// 位置
+	int sx ,sy ;	// 速度
+	int ValidFlag ;	// データ使用中かフラグ
+} SHOT , *LPSHOT ;
+
+
+// 乱数の初期値
+int InitRand ;
+
+// 弾のデータ
+SHOT Shot[ MAX_SHOT ] ;
+
+// 自機の中心座標
+int x , y ;
+
+// 保存したフレーム数 ＆ 再生したフレーム数
+int RecFrame , RePlayFrame ;
+
+// 動作データ保存用メモリ領域のポインタ
+LPRECDATA RecData ;
+
+// 処理モード
+int Mode ;
+
+// モードごとのマクロ値を定義
+#define MODE_REC	0
+#define MODE_REPLAY	1
+
+// WinMain関数
+int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,
+					 LPSTR lpCmdLine, int nCmdShow )
+{
+	int Key , Loop , i ;
+	LONGLONG Time ;
+
+	// 画面モードの設定
+	SetGraphMode( 640 , 480 , 16 ) ;
+
+	// ＤＸライブラリ初期化処理
+	if( DxLib_Init() == -1 ) return -1;
+
+	// VSYNC待ちをしない
+	SetWaitVSyncFlag( FALSE ) ;
+
+	// 最初に動作保存か再生処理か選択してもらう
+	{
+		// メッセージの描画
+		DrawString( 0 , 0 , "動作を保存する場合は十字キーの左を、再生する場合は右を押してください" , GetColor( 255 , 255 , 255 ) ) ;
+
+		// 入力があるまで待つ
+		Mode = -1 ;
+		while( ProcessMessage() == 0 && Mode == -1 )
+		{
+			// パッドの状態を得る
+			Key = GetJoypadInputState( DX_INPUT_KEY_PAD1 ) ;
+
+			// 右が押された場合は再生モードにセット
+			if( Key & PAD_INPUT_RIGHT ) Mode = MODE_REPLAY ;
+
+			// 左が押された場合は動作保存モードにセット
+			if( Key & PAD_INPUT_LEFT ) Mode = MODE_REC ;
+		}
+	}
+
+	// 初期化処理、モードごとに処理を分岐
+	{
+		// 共通動作の自機位置のセット処理
+		x = 320 ;
+		y = 400 ;
+
+		switch( Mode )
+		{
+		// 動作保存時の初期化処理
+		case MODE_REC :
+			{
+				// とりあえず秒間６０フレームの計算でデータ領域を確保
+				RecData = ( LPRECDATA )malloc( sizeof( RECDATA ) * 60 * RECTIME ) ;
+
+				// 保存データ数の初期化
+				RecFrame = 0 ;
+
+				// 乱数の初期化値を現在のタイムカウントから得る
+				InitRand = GetNowCount() ;
+			}
+			break ;
+
+		// 動作再生時の初期化処理
+		case MODE_REPLAY :
+			{
+				FILE *fp ;
+
+				// 動作保存データファイルを開く
+				fp = fopen( "MoveRec2.dat" , "rb" ) ;
+
+				// もし開けなかったら終了
+				if( fp == NULL )
+				{
+					// メッセージを描画
+					ClearDrawScreen() ;
+					DrawString( 0 , 0 , "動作保存ファイルがありません" , GetColor( 255 , 255 , 255 ) ) ;
+
+					// ＤＸライブラリを終了
+					DxLib_End() ;
+
+					// ソフト終了
+					return 0 ;
+				}
+
+				// 乱数の初期化値を読みこむ
+				fread( &InitRand , sizeof( int ) , 1 , fp ) ;
+
+				// 保存したフレーム数読み込む
+				fread( &RecFrame , sizeof( int ) , 1 , fp ) ;
+
+				// 保存されているフレーム数分の動作保存データを読みこめるだけのメモリ領域を確保
+				RecData = ( LPRECDATA )malloc( sizeof( RECDATA ) * RecFrame ) ;
+
+				// 動作保存データを読み込む
+				fread( RecData , sizeof( RECDATA ) , RecFrame , fp ) ;
+
+				// 再生が終ったフレーム数を初期化
+				RePlayFrame = 0 ;
+			}
+			break ;
+		}
+	}
+
+	// 乱数の初期化値をセット
+	SRand( InitRand ) ;
+
+	// 画面の初期化＆描画先を裏画面にセット
+	ClearDrawScreen() ;
+	SetDrawScreen( DX_SCREEN_BACK ) ;
+
+	// 現在のタイムカウントを保存
+	Time = GetNowHiPerformanceCount() ;
+
+	// 動作保存処理開始
+	Loop = 1 ;
+	while( ProcessMessage() == 0 && CheckHitKey( KEY_INPUT_ESCAPE ) == 0 && Loop == 1 )
+	{
+		// 画面の初期化
+		ClearDrawScreen() ;
+
+		// モードによって処理を分岐
+		switch( Mode )
+		{
+		// 動作保存モードの処理
+		case MODE_REC :
+
+			// 普通にキーの入力状態を得る
+			Key = GetJoypadInputState( DX_INPUT_KEY_PAD1 ) ;
+			break ;
+
+		// 動作再生時の処理
+		case MODE_REPLAY :
+
+			// 保存したキー入力状態を代入
+			Key = ( int )RecData[ RePlayFrame ].InputKey ;
+			break ;
+		}
+
+		// 自機を移動させる
+		if( Key & PAD_INPUT_LEFT ) x -= SPEED ;
+		if( Key & PAD_INPUT_RIGHT ) x += SPEED ;
+		if( Key & PAD_INPUT_UP ) y -= SPEED ;
+		if( Key & PAD_INPUT_DOWN ) y += SPEED ;
+
+		// 画面外に出た場合の補正
+		if( x > 625 ) x = 620 ;
+		if( x < 15 ) x = 0 ;
+		if( y > 465 ) y = 460 ;
+		if( y < 15 ) y = 0 ;
+
+		// 自機の描画
+		DrawBox( x - 15 , y - 15 , x + 15 , y + 15 , GetColor( 255 , 255 , 0 ) , TRUE ) ;
+
+		// 弾の移動処理を行う
+		for( i = 0 ; i < MAX_SHOT ; i ++ )
+		{
+			// 使用中フラグが立っている場合処理
+			if( Shot[i].ValidFlag == 1 )
+			{
+				// 弾の移動
+				Shot[i].y += Shot[i].sy / 1000 ; 
+				Shot[i].x += Shot[i].sx / 1000 ;
+
+				// ショットを描画
+				DrawCircle( Shot[i].x , Shot[i].y , 5 , GetColor( 255 , 0 , 0 ) , TRUE ) ;
+
+				// 画面外に出たらショットを無効にする
+				if( Shot[i].y > 500 || Shot[i].y < -30 || 
+					Shot[i].x > 660 || Shot[i].x < -30 ) Shot[i].ValidFlag = 0 ;
+			}
+		}
+
+		// 弾と自機の当たり判定を行う
+		for( i = 0 ; i < MAX_SHOT ; i ++ )
+		{
+			int r , xl , yl ;
+
+			if( Shot[i].ValidFlag == 1 )
+			{
+				// 自機の中心位置と弾の中心位置との距離の２乗を求める
+				// (三平方の定理)
+				xl = Shot[i].x - x ;
+				yl = Shot[i].y - y ;
+				r = xl * xl + yl * yl ;
+
+				// 距離の二乗が１５ドットの二乗より少なかったら当たったと判定
+				if( r < 15 * 15 ) Loop = 0 ;
+			}
+		}
+
+		// 弾の追加処理、ある一定の確率で出現
+		if( GetRand( 5 ) == 0 )
+		{
+			int i ;
+
+			// 空いているデータを探す
+			for( i = 0 ; i < MAX_SHOT ; i ++ )
+			{
+				// 使用中フラグが倒れていたらそれに決定
+				if( Shot[i].ValidFlag == 0 ) break ;
+			}
+
+			// 空いているデータがあった場合のみ弾追加
+			if( i != MAX_SHOT )
+			{
+				// 使用中フラグを立てる
+				Shot[i].ValidFlag = 1 ;
+
+				// 位置をセット
+				Shot[i].x = GetRand( 639 ) ;
+				Shot[i].y = 0 ;
+
+				// 自機に向かっていく弾かただ下に落ちるだけの弾か分岐
+				if( GetRand( 1 ) == 0 )
+				{
+					// ただ下に移動する弾の場合の処理
+
+					// 下向きに速度を与える
+					Shot[i].sx = 0 ;
+					Shot[i].sy = SHOT_SPEED * 1000 ;
+				}
+				else
+				{
+					int xx , yy , r ;
+
+					// 自機に向かっていく弾の場合の処理
+
+					// 弾の位置から自機の中心位置までのＸ軸Ｙ軸ごとの距離を算出
+					xx = x - Shot[i].x ;
+					yy = y - Shot[i].y ;
+
+					// 三平方の定理で直線距離を算出
+					r = ( int )sqrt( (double)( xx * xx + yy * yy ) ) ;
+
+					// 精度を１０００倍にした後算出したＸ軸Ｙ軸ごとの距離を直線距離で割る
+					xx = ( xx * 1000 ) / r ;
+					yy = ( yy * 1000 ) / r ;
+
+					// 割られたＸ軸Ｙ軸ごとの距離に弾のスピードを掛けてやったものを
+					// 弾のスピードにセット
+					Shot[i].sx = xx * SHOT_SPEED ;
+					Shot[i].sy = yy * SHOT_SPEED ;
+				}
+			}
+		}
+
+		// メッセージの描画
+		switch( Mode )
+		{
+		case MODE_REC :	DrawString( 0 , 0 , "動作を保存中です" , GetColor( 255 , 255 , 255 ) ) ; break ;
+		case MODE_REPLAY :	DrawString( 0 , 0 , "動作を再生中です" , GetColor( 255 , 255 , 255 ) ) ; break ;
+		}
+
+		// 裏画面の状態を表画面に反映させる
+		ScreenFlip() ;
+
+		// ６０分の１秒経つまで待つ
+		while( ProcessMessage() == 0 && GetNowHiPerformanceCount() - Time < 1000000 / 60 ){}
+		Time = GetNowHiPerformanceCount() ;
+
+
+		// モードによって処理を分岐
+		switch( Mode )
+		{
+		// 動作保存モードの処理
+		case MODE_REC :
+			{
+				// キーの状態を保存
+				// int 型は 4バイトでもったいないので 使っている下８ビットだけ保存
+				RecData[ RecFrame ].InputKey = ( unsigned char )Key ;
+
+				// 保存した数を増やす
+				RecFrame ++ ;
+
+				// 保存した数が規定数に達していたら(つまりもう保存できないほど保存したら)
+				// ループから抜ける
+				if( RecFrame == 60 * RECTIME ) Loop = 0 ;
+			}
+			break ;
+
+		// 動作再生時の処理
+		case MODE_REPLAY :
+			{
+				// 再生したフレーム数を増やす
+				RePlayFrame ++ ;
+
+				// もしすべて再生し終わっていたらループから抜ける
+				if( RePlayFrame == RecFrame ) Loop = 0 ;
+			}
+			break ;
+		}
+	}
+
+	// モードによって処理を分岐
+	switch( Mode )
+	{
+	// 動作保存モードの処理
+	case MODE_REC :
+		{
+			// 動作データをディスクに保存する
+			{
+				FILE *fp ;
+
+				// ファイルを開く
+				fp = fopen( "MoveRec2.dat" , "wb" ) ;
+
+				// 乱数の初期化値を書き出す
+				fwrite( &InitRand , sizeof( int ) , 1 , fp ) ;
+
+				// 次に保存したフレーム数を書き出す
+				fwrite( &RecFrame , sizeof( int ) , 1 , fp ) ;
+
+				// 次に保存した動作データを書き出す
+				fwrite( RecData , sizeof( RECDATA ) , RecFrame , fp ) ;
+
+				// ファイルを閉じる
+				fclose( fp ) ;
+			}
+
+			// 画面に終了メッセージを出す
+			ClearDrawScreen() ;
+			DrawString( 0, 0, "動作の保存が終了しました" , GetColor( 255 , 255 , 255 ) ) ;
+			ScreenFlip() ;
+		}
+		break ;
+
+	// 動作再生時の処理
+	case MODE_REPLAY :
+		{
+			// 画面に終了メッセージを出す
+			ClearDrawScreen() ;
+			DrawString( 0, 0, "動作の再生が終了しました" , GetColor( 255 , 255 , 255 ) ) ;
+			ScreenFlip() ;
+		}
+		break ;
+	}
+
+	// 動作保存データ保存用に確保したメモリ領域を開放する
+	free( RecData ) ;
+
+	// キー入力待ち
+	WaitKey() ;
+
+	// ＤＸライブラリ使用の終了処理
+	DxLib_End() ;
+
+	// ソフトの終了
+	return 0 ;
+}
+</pre>
+			<BR><BR><BR><BR><BR><BR><BR>
+<!--		<FONT COLOR="#007712"><A NAME="N26"><B>２６．グラフィックメモリの直接アクセス</B></A></FONT><BR><BR> 
+
+
+			　今回のサンプルはあまり知られていないＤＸライブラリのグラフィックメモリ直接アクセス機能<BR>
+			である GraphLock 関数と GraphUnLock 関数を使ったサンプルです。<BR>
+			　まずグラフィックを LoadGraph 関数で読みこみ、そのグラフィックのデータを別に用意した<BR>
+			配列に移します。そしてそのデータを元に波紋のプログラムを実行するのです。当然点の描画に<BR>
+			 DrawPixel 関数を使っていたら遅すぎて洒落にならないので、これも画面自体のデータ領域に<BR>
+			GraphLock を掛けて一気に描画します。<BR><BR>
+			
+			　なお、この波紋のプログラム自体は <A HREF="http://hp.vector.co.jp/authors/VA012735/">ワクワクさん</A> が組まれた作品に多少手を加えたものです。<BR>
+			　そして波紋のアルゴリズム自体は私自身も完全理解はしていないので解説することは出来ません。(^^;<BR>
+			　技術的には、セルオートマトンという技術が使われているので、興味のある方は調べてみてみるのも<BR>
+			良いかもしれません。<BR><BR>
+
+			　(画像ファイルは <A HREF="http://homepage2.nifty.com/natupaji/DxLib/Image/Photo.jpg">Photo.jpg</A> という画像を使用しています)<BR><BR>
+
+<pre>
+#include "DxLib.h"
+#include &lt;math.h&gt;
+#include &lt;malloc.h&gt;
+
+
+int DSX = 0 , DSY = 0 ; 
+const int WSX = 2 , WSY = 2 , ZM = 256 ;
+
+int Width , Height ;
+int *ZValue1 , *ZValue2 , *ZValue3 ;
+WORD *GraphData ;
+int Pow[ WSY * 2 ][ WSX * 2 ] ;
+int MouseP , MousePOld , MousePNew ;
+
+const int weight=2,weighto=weight-4 ;
+
+// 波を作る関数
+void MakeWave( int x , int y , int Size )
+{
+	int j , i ;
+	int r ;
+
+	for( j = -WSY ; j < WSY ; j ++ )
+	{
+		for( i = -WSX ; i < WSX ; i ++ )
+		{
+			if( ( x + i > 0 ) && ( x + i < Width - 1 ) &&
+				( y + j > 0 ) && ( y + j < Height - 1 ) )
+			{
+				r = Pow[ j + WSY ][ i + WSX ] ;
+				ZValue1[ ( y + j ) * Width + x + i ] += Size >> r ;
+			}
+		}
+	}
+}
+
+// WinMain 関数
+int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,
+					LPSTR lpCmdLine, int nCmdShow )
+{
+	int i , j , p ;
+	int mx , my , counter ;
+	int f , dx , dy ;
+	int Pitch ;
+	WORD *DataPoint , *DrawPoint ;
+	int GraphHandle ;
+
+	// ３Ｄアクセラレータは使わない
+	SetUse3DFlag( FALSE ) ;
+
+	// ＶＲＡＭは使わない
+	SetUseVramFlag( FALSE ) ;
+
+	// 画面モードの指定
+	SetGraphMode( 640 , 480 , 16 ) ;
+
+	// ＤＸライブラリの初期化
+	if( DxLib_Init() == -1 ) return -1 ;
+
+	// 画面データはシステムメモリに配置
+	SetScreenMemToVramFlag( FALSE ) ; 
+
+	// グラフィックをメモリ領域に転送する
+	{
+		// グラフィックをメモリに読みこむ
+		GraphHandle = LoadGraph( "Photo.jpg" ) ;
+
+		// グラフィックのサイズを得る
+		GetGraphSize( GraphHandle , &Width , &Height ) ;
+
+		// もしグラフィックが画面よりも大きかった場合の補正
+		if( Width > 640 ) Width = 640 ;
+		if( Height > 480 ) Height = 480 ;
+
+		// グラフィックデータを転送するメモリ領域の確保
+		GraphData = ( WORD * )calloc( sizeof( WORD ) , Width * Height ) ;  
+
+		// メモリに読みこんだグラフィックデータをロックし、グラフィックデータの位置を得る
+		GraphLock( GraphHandle , &Pitch , ( void ** )&DataPoint ) ;
+
+		// グラフィックデータを確保したメモリ領域に転送
+		for( j = 0 ; j < Height ; j ++ )
+		{
+			CopyMemory( ( BYTE * )GraphData + j * Width * 2 , ( BYTE * )DataPoint + Pitch * j , Width * 2 ) ;
+		}
+
+		// グラフィックデータのロックを外す
+		GraphUnLock( GraphHandle ) ;
+
+		// グラフィックデータを削除
+		DeleteGraph( GraphHandle ) ;
+	}
+
+	// 画面の描画開始位置をセット
+	DSX = ( 640 - Width ) / 2 ;
+	DSY = ( 480 - Height ) / 2 ;
+
+	// メモリの確保
+	{
+		ZValue1 = ( int * )calloc( sizeof( int ) , Width * Height ) ;  
+		ZValue2 = ( int * )calloc( sizeof( int ) , Width * Height ) ;  
+		ZValue3 = ( int * )calloc( sizeof( int ) , Width * Height ) ;  
+	}
+
+	// 描画先画面を裏画面にセット
+	SetDrawScreen( DX_SCREEN_BACK ) ;
+
+	// マウスのポインタを見えるようにする
+	SetMouseDispFlag( TRUE ) ;
+
+	// 中心座標からの距離をあらかじめ計算
+	for( j = -WSY ; j < WSY ; j ++ )
+	{
+		for( i = -WSX ; i < WSX ; i ++ )
+		{
+			Pow[ j + WSY ][ i + WSX ] = ( int )sqrt( (double)( j * j + i * i ) ) ;
+		}
+	}
+
+	// 初期値をセット
+	counter = 12 ;
+	GetMousePoint( &mx , &my ) ;
+
+	// ループ
+	while( ProcessMessage() == 0 && CheckHitKey( KEY_INPUT_ESCAPE ) == 0 )
+	{
+		// 画面を初期化
+		ClearDrawScreen() ;
+
+		// 画面をロックし、データの位置を得る
+		GraphLock( DX_SCREEN_BACK , &Pitch , ( void ** )&DataPoint ) ;
+
+		// すべてのドットを処理
+		for( j = 1 ; j < Height - 1 ; j ++ )
+		{
+			// 描画位置の算出
+			DrawPoint = ( WORD * )( ( BYTE * )DataPoint + ( j + DSY ) * Pitch + DSX * 2 ) ;
+
+			for( i = 1 ; i < Width - 1 ; i ++ )
+			{
+				p = j * Width + i ;
+
+				// 伝播処理
+				f = ZValue3[ p ] + (
+						ZValue1[ p ] * weighto +
+						ZValue2[ p - 1 ] +
+						ZValue1[ p + 1 ] + 
+						ZValue1[ p + Width ] +
+						ZValue2[ p - Width ] 
+						 )	/ weight ;
+				f -= f / 16 ;
+
+				ZValue3[ p ] = f - ( ZValue2[ p ] = ZValue1[ p ] ) ;
+				ZValue1[ p ] = f ;
+
+
+				// 奥行きに値によって描画するピクセルを変更
+				dx = ( ZValue1[ p + 1 ] - ZValue1[ p ] ) / ZM ;
+				dy = ( ZValue1[ p + Width ] - ZValue1[ p ] ) / ZM ;
+
+				if( dx > 10 )
+					dx = 10 ;
+				else if( dx < -10 )
+						dx = -10 ;
+
+				if( dy > 10 )
+					dy = 10 ;
+				else if( dy < -10 )
+						dy = -10 ;
+
+				p += dy * Width + dx ;
+
+				// 描画
+				*DrawPoint = ( p < 0 || p >= Width * Height ) ? GraphData[0] : GraphData[p] ;
+
+				// 描画位置をずらす
+				DrawPoint ++ ;
+			}
+		}
+
+		// 画面のロックを解除
+		GraphUnLock( DX_SCREEN_BACK ) ;
+
+		// 裏画面の内容を表画面に転送
+		ScreenFlip() ;
+
+		// 波紋を発生させる処理
+		{
+			int mx2 , my2 ;
+
+			// マウスの位置を取得
+			GetMousePoint( &mx2 , &my2 ) ;
+
+			// マウスの入力を取得
+			MousePNew = GetMouseInput() ;
+			MouseP = MousePNew & ~MousePOld ;
+			MousePOld = MousePNew ;
+
+			mx2 -= DSX ;
+			my2 -= DSY ;
+
+			// マウスポインタの位置が変化していたら波紋を増やす
+			if( ( mx2 != mx || my2 != my ) && 
+				( ( mx2 > 0 && mx2 < Width ) && ( my2 > 0 && my2 < Height ) ) )
+			{
+				MakeWave( mx2 , my2 , -120 * ZM ) ;
+
+				mx = mx2 ;
+				my = my2 ;
+			}
+
+			// マウスがクリックされていたら波紋を増やす
+			if( MouseP & MOUSE_INPUT_LEFT )
+			{
+				MakeWave( mx2 , my2 , -400 * ZM ) ;
+			}
+			if( ( MouseP & MOUSE_INPUT_RIGHT ) &&
+				( my2 > 2 && my2 < Height - 2 ) && ( mx2 > 2 && mx2 < Width - 2 ) )
+			{
+				int i , j ;
+
+				p = my * Width ;
+				j = -64 * ZM ;
+				for( i = 0 ; i < Width ; i ++ )
+				{
+					ZValue1[ p + i ] += j ;
+					ZValue1[ p + i + Width ] += j ;
+					ZValue1[ p + i - Width ] += j ;
+				}
+			}
+
+			// カウンターが０になっていたら波紋を一つ作る
+			counter = counter - 1 ;
+			if( counter <= 0 )
+			{
+				counter = GetRand( 12 ) + 2 ;
+				MakeWave( GetRand( Width ) , GetRand( Height ) , ( GetRand( 600 ) - 300 ) * ZM ) ;
+			}
+		}
+	}
+
+	// 各種メモリの解放
+	free( ZValue1 ) ;
+	free( ZValue2 ) ;
+	free( ZValue3 ) ;
+	free( GraphData ) ;
+
+	// ＤＸライブラリの使用終了
+	DxLib_End() ;
+
+	// 終了
+	return 0 ;
+}
+</pre>
+			<BR><BR><BR><BR><BR><BR><BR> -->
+
+			　<FONT COLOR="#007712"><A NAME="N27"><B>２６．ベジェ曲線基本</B></A></FONT><BR><BR>
+
+			　画像作成ソフトで多用されているベジェ曲線を使ったサンプルです。<BR>
+			　サンプルを実行すると４つの制御点で形成されるベジェ曲線を白い四角がなぞってゆきます。<BR><BR>
+
+			　式は一見複雑ですが、<BR><BR>
+
+			 A = ( 1.0 - u ) * X + u * Y <BR><BR>
+
+			　の式は、u が 1.0 に近づくほど Y の値に近くなり、0.0 に近いほど X の値に近くなる、という<BR>
+			ことをよく頭に入れて式を見ていくと、何か法則が見えてくると思います。<BR>
+			　制御点が増えると、複雑な曲線が描ける分、計算の量が増えます。<BR><BR><BR><BR>
+
+<pre>
+#include "DxLib.h"
+
+// 制御点の座標
+const double P0[2] = { 100 , 300 } ;
+const double P1[2] = { 250 , 100 } ;
+const double P2[2] = { 400 , 400 } ;
+const double P3[2] = { 550 , 100 } ;
+
+const int DivNum = 300 ;
+
+// WinMain関数
+int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,
+					 LPSTR lpCmdLine, int nCmdShow )
+{
+	double u ;
+	double P01[2] , P12[2] , P23[2] ;
+	double P02[2] , P13[2] ;
+	double P03[2] ;
+	int x , y ;
+	int Counter ;
+
+	// 画面モードの設定
+	SetGraphMode( 640 , 480 , 16 ) ;
+
+	// ＤＸライブラリ初期化処理
+	if( DxLib_Init() == -1 ) return -1;
+
+	// グラフィックの描画先を裏画面にセット
+	SetDrawScreen( DX_SCREEN_BACK ) ;
+
+	// カウンターを初期化
+	Counter = 0 ;
+
+	// ＥＳＣキーが押されるまでループ
+	while( CheckHitKey( KEY_INPUT_ESCAPE ) == 0 )
+	{
+		// 画面をクリア
+		ClearDrawScreen() ;
+
+		// 現在の点の位置を算出
+		// ベジェ曲線の計算をしているところです
+		{
+			u = ( 1.0 / DivNum ) * Counter ;
+
+			P01[0] = ( 1.0 - u ) * P0[0] + u * P1[0] ; P01[1] = ( 1.0 - u ) * P0[1] + u * P1[1] ;
+			P12[0] = ( 1.0 - u ) * P1[0] + u * P2[0] ; P12[1] = ( 1.0 - u ) * P1[1] + u * P2[1] ;
+			P23[0] = ( 1.0 - u ) * P2[0] + u * P3[0] ; P23[1] = ( 1.0 - u ) * P2[1] + u * P3[1] ;
+
+			P02[0] = ( 1.0 - u ) * P01[0] + u * P12[0] ; P02[1] = ( 1.0 - u ) * P01[1] + u * P12[1] ;
+			P13[0] = ( 1.0 - u ) * P12[0] + u * P23[0] ; P13[1] = ( 1.0 - u ) * P12[1] + u * P23[1] ;
+
+			P03[0] = ( 1.0 - u ) * P02[0] + u * P13[0] ; P03[1] = ( 1.0 - u ) * P02[1] + u * P13[1] ;
+
+			x = ( int )P03[0] ;
+			y = ( int )P03[1] ;
+		}
+
+		// 制御点を線で繋ぐ
+		DrawLine( (int)P0[0] , (int)P0[1] , (int)P1[0] , (int)P1[1] , GetColor( 0 , 128 , 0 ) ) ;
+		DrawLine( (int)P1[0] , (int)P1[1] , (int)P2[0] , (int)P2[1] , GetColor( 0 , 128 , 0 ) ) ;
+		DrawLine( (int)P2[0] , (int)P2[1] , (int)P3[0] , (int)P3[1] , GetColor( 0 , 128 , 0 ) ) ;
+
+		// 制御点を描画
+		DrawCircle( (int)P0[0] , (int)P0[1] , 2 , GetColor( 255 , 255 , 0 ) , TRUE ) ;
+		DrawCircle( (int)P3[0] , (int)P3[1] , 2 , GetColor( 255 , 255 , 0 ) , TRUE ) ;
+
+		DrawCircle( (int)P1[0] , (int)P1[1] , 2 , GetColor( 255 , 0 , 0 ) , TRUE ) ;
+		DrawCircle( (int)P2[0] , (int)P2[1] , 2 , GetColor( 255 , 0 , 0 ) , TRUE ) ;
+
+
+		// 現在の点の位置に四角を描画
+		DrawBox( x - 2 , y - 2 , x + 2 , y + 2 , GetColor( 255 , 255 , 255 ) , TRUE ) ;
+
+
+		// カウンターをインクリメント
+		Counter ++ ;
+
+		// もしカウンターが分割数に達していたら０に戻す
+		if( Counter == DivNum ) Counter = 0 ;
+
+		// 画面を表示
+		ScreenFlip() ;
+
+		// Windows依存メッセージ処理
+		if( ProcessMessage() != 0 ) break ;
+	}
+
+	// ＤＸライブラリ使用の終了処理
+	DxLib_End() ;
+
+	// ソフトの終了
+	return 0 ;
+}
+</pre>
+			<BR><BR><BR><BR><BR><BR><BR>
+
+			　<FONT COLOR="#007712"><A NAME="N28"><B>２７．座標の回転基本</B></A></FONT><BR><BR>
+
+			　座標の回転のサンプルです。<BR>
+			　円が画面の真中を中心に回転します。回転には有名な回転の公式を使います。<BR>
+			　その公式とはある座標 (x,y) を原点Ｏを中心にθだけ回転した座標 (x',y')を求める事の<BR>
+			出来る公式で、以下のように定義されています。<BR><BR>
+
+			x' = cosθ * x - sinθ * y ;<BR>
+			y' = sinθ * x + cosθ * y ;<BR><BR>
+
+			　『なんでこれで回転させる事が出来るのか？』は、あまり考える必要はありません。回転さえ<BR>
+			できればこっちのものです。(理由がわかるにこしたことはありませんが…)<BR>
+			　今回はこの公式を使って、円を画面の中心を原点Ｏとして回転させるサンプルを載せます。<BR>
+			　なお、この公式は動いている物体Ｘの移動速度 (sx,sy) に使う事によって移動する方向を<BR>
+			回転する事が出来ます。一定の速度で飛ぶホーミングミサイルなどでつかわれたりします。<BR><BR>
+
+<pre>
+#include "DxLib.h"
+#include &lt;math.h&gt;
+
+#define PI 3.14159		// 円周率
+
+// WinMain関数
+int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,
+					 LPSTR lpCmdLine, int nCmdShow )
+{
+	double x, y, xd, yd ;
+
+	// 画面モードの設定
+	SetGraphMode( 640 , 480 , 16 ) ;
+
+	// ＤＸライブラリ初期化処理
+	if( DxLib_Init() == -1 ) return -1;
+
+	// グラフィックの描画先を裏画面にセット
+	SetDrawScreen( DX_SCREEN_BACK ) ;
+
+	// 最初の座標を設定
+	x = 100 ;
+	y = 0 ;
+
+	// ＥＳＣキーが押されるまでループ
+	while( CheckHitKey( KEY_INPUT_ESCAPE ) == 0 )
+	{
+		// 画面をクリア
+		ClearDrawScreen() ;
+
+		// 座標を3度回転してやる
+		xd = x * cos( PI / 180 * 3 ) - y * sin( PI / 180 * 3 ) ;
+		yd = x * sin( PI / 180 * 3 ) + y * cos( PI / 180 * 3 ) ;
+
+		// 回転後の座標を保存
+		x = xd ;
+		y = yd ;
+
+		// 円を描画(画面の原点は画面の一番左上にあるので、無理やり画面の
+		// 中心に原点があるかのように座標を移動させる)
+		DrawCircle( x + 320, y + 240, 16, GetColor( 255, 0, 0 ), TRUE ) ;
+
+		// 画面を表示
+		ScreenFlip() ;
+
+		// Windows依存メッセージ処理
+		if( ProcessMessage() != 0 ) break ;
+	}
+
+	// ＤＸライブラリ使用の終了処理
+	DxLib_End() ;
+
+	// ソフトの終了
+	return 0 ;
+}
+
+</pre>
+
+		<BR><BR><BR><BR><BR><BR><BR>
+		　<FONT COLOR="#007712"><A NAME="N29"><B>２８．シューティングの敵のショットの基本バリエーション</B></A></FONT><BR><BR>
+
+			　シューティングの敵は色々な攻撃をかましてきますが、その内の基本的なものを<BR>
+			集めてみました。このサンプルでは３ＷＡＹショット、全方向ショット、速度違いの<BR>
+			一点集中ショット、微妙に飛ぶ角度の違うばら撒きショット、回転ショットの五種類の<BR>
+			プログラムがあります。<BR><BR>
+
+<pre>
+// インクルード部 ============================================
+#include "DxLib.h"
+#include &lt;math.h&gt;
+
+// マクロ定義部 ==============================================
+
+// 精度を上げるための下駄ビット数
+#define SHFTNUM 15
+
+// 敵のショットの最大数
+#define MAX_ENEMYSHOT 2000
+
+// π
+#define PI 3.14159		// 円周率
+
+// 構造体定義部 ==============================================
+
+// 敵のショットのデータ構造体型
+typedef struct tagENEMYSHOT
+{
+	int x, y ;
+	int sx, sy ;
+	int Size ;
+	int ValidFlag ;
+} ENEMYSHOT ;
+
+// 敵のデータ構造体型
+typedef struct tagENEMY
+{
+	int x, y ;
+	int Counter ;
+	int Counter2 ;
+	double Angle ;
+} ENEMY ;
+
+// プレイヤーのデータ構造体型
+typedef struct tagPLAYER
+{
+	int x, y ;
+} PLAYER ;
+
+// 関数宣言部 =================================================
+
+// 敵のショットの追加関数
+int ShotAdd( int x, int y, int Size, double Angle, double Speed ) ;
+
+int ShotType5( void ) ;	// 敵のショットパターン５関数
+int ShotType4( void ) ;	// 敵のショットパターン４関数
+int ShotType3( void ) ;	// 敵のショットパターン３関数
+int ShotType2( void ) ;	// 敵のショットパターン２関数
+int ShotType1( void ) ;	// 敵のショットパターン１関数
+
+
+// データ宣言部 ===============================================
+
+// 敵のデータ
+ENEMY Enemy ;
+
+// 敵のショットデータ
+ENEMYSHOT EnemyShot[ MAX_ENEMYSHOT ] ;
+
+// 敵のショットの数
+int EnemyShotNum ;
+
+// プレイヤーデータ
+PLAYER Player ;
+
+// 敵のショットパターンナンバー
+int ShotMode ;
+
+// 敵のショット処理関数のポインタ配列
+int (*EnemyShred[])( void ) =
+{
+	ShotType1,
+	ShotType2,
+	ShotType3,
+	ShotType4,
+	ShotType5,
+} ;
+
+// プログラム部 ===============================================
+
+
+// WinMain 関数
+int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,
+			 LPSTR lpCmdLine, int nCmdShow )
+{
+	// ＤＸライブラリの初期化
+	if( DxLib_Init() == -1 ) return -1 ;
+
+	// 裏画面を使用
+	SetDrawScreen( DX_SCREEN_BACK );
+
+	// 弾の数の初期化
+	EnemyShotNum = 0 ;
+
+	// 敵のデータの初期化
+	Enemy.x = 320 << SHFTNUM ;
+	Enemy.y = 80 << SHFTNUM ;
+	Enemy.Counter = 0 ;
+	Enemy.Counter2 = 0 ;
+	Enemy.Angle = 0.0 ;
+
+	// 自機の位置の初期化
+	Player.x = 320 << SHFTNUM ;
+	Player.y = 400 << SHFTNUM ;
+
+	// 敵のショットタイプを初期化
+	ShotMode = 0 ;
+
+	// ゲームループ開始　エスケープキーが押されたら終了する
+	while( ProcessMessage() == 0 && CheckHitKey( KEY_INPUT_ESCAPE ) == 0 )
+	{
+		// 画面の初期化
+		ClearDrawScreen() ;
+
+		// 自機の処理
+		{
+			int Input ;
+
+			// 入力取得
+			Input = GetJoypadInputState( DX_INPUT_KEY_PAD1 ) ;
+
+			// 自機移動
+			if( ( Input & PAD_INPUT_LEFT ) && ( Player.x >> SHFTNUM ) > 10 ) Player.x -= 2 << SHFTNUM ;
+			if( ( Input & PAD_INPUT_RIGHT ) && ( Player.x >> SHFTNUM ) < 630 ) Player.x += 2 << SHFTNUM ;
+			if( ( Input & PAD_INPUT_UP ) && ( Player.y >> SHFTNUM ) > 10 ) Player.y -= 2 << SHFTNUM ;
+			if( ( Input & PAD_INPUT_DOWN ) && ( Player.y >> SHFTNUM ) < 470 ) Player.y += 2 << SHFTNUM ;
+
+			// 自機の描画
+			{
+				int x, y ;
+
+				x = Player.x >> SHFTNUM ;
+				y = Player.y >> SHFTNUM ;
+				DrawBox( x - 5, y - 5, x + 5, y + 5, GetColor( 255,255,0 ), FALSE ) ;
+			}
+		}
+
+		// 弾の処理
+		{
+			int i, Con, Num ;
+
+			// 弾の数だけ移動処理を繰り返す
+			Con = 0 ;
+			Num = EnemyShotNum ;
+			for( i = 0 ; i < MAX_ENEMYSHOT ; i ++ )
+			{
+				// 弾のデータが有効な場合は処理
+				if( EnemyShot[i].ValidFlag == TRUE )
+				{
+					// 移動処理
+					EnemyShot[i].x += EnemyShot[i].sx ;
+					EnemyShot[i].y += EnemyShot[i].sy ;
+
+					// 画面外に出たら弾情報を消去する
+					if( ( ( EnemyShot[i].x >> SHFTNUM ) < -20 ) ||
+						( ( EnemyShot[i].x >> SHFTNUM ) > 660 ) ||
+						( ( EnemyShot[i].y >> SHFTNUM ) < -20 ) ||
+						( ( EnemyShot[i].y >> SHFTNUM ) > 500 ) )
+					{
+						// データの有効フラグを倒す
+						EnemyShot[i].ValidFlag = FALSE ;
+
+						// 弾の数を減らす
+						EnemyShotNum -- ;
+					}
+
+					// 弾の描画
+					{
+						int x, y ;
+
+						x = EnemyShot[i].x >> SHFTNUM ;
+						y = EnemyShot[i].y >> SHFTNUM ;
+
+						DrawCircle( x, y, EnemyShot[i].Size, GetColor( 255, 255, 255 ), FALSE ) ;
+					}
+
+					// 処理した弾の数をインクリメント
+					Con ++ ;
+
+					// 処理した弾の数が、存在している弾の数と同じになった場合はループを抜ける
+					if( Num == Con ) break ;
+				}
+			}
+		}
+
+		// 敵の処理
+		{
+			// 敵のショット処理
+			EnemyShred[ShotMode]() ;
+
+			// 敵の描画
+			{
+				int x, y ;
+
+				x = Enemy.x >> SHFTNUM ;
+				y = Enemy.y >> SHFTNUM ;
+
+				DrawCircle( x, y, 10, GetColor( 255, 255, 255 ) , FALSE ) ;
+			}
+		}
+
+		// 敵のショットの切り替え処理
+		{
+			char C ;
+
+			// 入力された文字を取得
+			C = GetInputChar( TRUE ) ;
+
+			// Ｃキーが押されたら敵のショットモードを変更する
+			if( C == 'C' || C == 'c' )
+			{
+				Enemy.Counter2 = 0 ;
+				Enemy.Counter = 0 ;
+				Enemy.Angle = 0.0 ;
+
+				ShotMode ++ ;
+				if( ShotMode == 5 ) ShotMode = 0 ;
+			}
+		}
+
+		// 画面の更新
+		ScreenFlip() ;
+	}
+
+	// ＤＸライブラリの使用終了
+	DxLib_End() ;
+
+	// ソフトの終了
+	return 0 ;
+}
+
+
+// ショットの追加関数
+int ShotAdd( int x, int y, int Size, double Angle, double Speed )
+{
+	int i ;
+
+	// 使われていないショットを検索
+	for( i = 0 ; i < MAX_ENEMYSHOT ; i ++ )
+		if( EnemyShot[i].ValidFlag== FALSE ) break ;
+	if( i == MAX_ENEMYSHOT ) return -1 ;
+
+	// 新しいショットのデータを初期化
+	{
+		// 座標セット
+		EnemyShot[i].x = x ;
+		EnemyShot[i].y = y ;
+
+		// サイズセット
+		EnemyShot[i].Size = Size ;
+
+		// 飛んで行く方向とスピードから、Ｘ軸方向への移動速度とＹ軸方向への移動速度を得る
+		EnemyShot[i].sx = ( int )( cos( Angle ) * Speed ) ;
+		EnemyShot[i].sy = ( int )( sin( Angle ) * Speed ) ;
+
+		// ショットデータの有効フラグを立てる
+		EnemyShot[i].ValidFlag = TRUE ;
+
+		// ショットの数を増やす
+		EnemyShotNum ++ ;
+	}
+
+	// 終了
+	return 0 ;
+}
+
+
+// 回転ショット
+int ShotType5( void )
+{
+	int i ;
+
+	// カウンタが２になったらショット処理を行う
+	if( Enemy.Counter == 2 )
+	{
+		// ショットの方向を変更
+		Enemy.Angle += 0.2 ;
+
+		// 速度の違う五つのショットを発射
+		for( i = 0 ; i < 5 ; i ++ )
+		{
+			ShotAdd( Enemy.x, Enemy.y, 6, Enemy.Angle, ( 3 << SHFTNUM ) + ( i * 8000 ) ) ;
+		}
+
+		// カウンタを初期化する
+		Enemy.Counter = 0 ;
+	}
+	else
+	{
+		Enemy.Counter ++ ;
+	}
+
+	// 終了
+	return 0 ;
+}
+
+
+// ばら撒きショット
+int ShotType4( void )
+{
+	// カウンタ２の値によって処理を分岐
+	switch( Enemy.Counter2 )
+	{
+	case 0 :
+		// 待ち処理
+
+		// カウンタをインクリメント
+		Enemy.Counter ++ ;
+
+		// カウンタが６０になったらカウンタ２の値を増やして、ショット処理に移る
+		if( Enemy.Counter > 60 )
+		{
+			Enemy.Counter2 ++ ;
+			Enemy.Counter = 0 ;
+
+			// このときの自機への方向を保存
+			Enemy.Angle = atan2( (double)( Player.y - Enemy.y), (double)( Player.x - Enemy.x ) ) ;
+		}
+		break ;
+
+	case 1 :
+		//ショット処理
+
+		// カウンタが２の倍数の時のみショットする
+		if( Enemy.Counter % 2 == 0 )
+		{
+			double Angle ;
+
+			// 飛ばす方向にぶれをつける
+			Angle = Enemy.Angle + ( PI / 3600 * ( GetRand( 800 ) - 400 ) ) ;
+
+			// ショット
+			ShotAdd( Enemy.x, Enemy.y, 5, Angle, 3 << SHFTNUM ) ;
+		}
+
+		// カウンタをインクリメント、カウントが５０になったら待ちに戻る
+		Enemy.Counter ++ ;
+		if( Enemy.Counter == 50 )
+		{
+			Enemy.Counter2 = 0 ;
+			Enemy.Counter = 0 ;
+		}
+		break ;
+	}
+
+	// 終了
+	return 0 ;
+}
+
+
+// 一点手中時間差ショット
+int ShotType3( void )
+{
+	// カウンタ２の値によって処理を分岐
+	switch( Enemy.Counter2 )
+	{
+	case 0 :
+		// 待ち処理
+
+		// カウンタをインクリメント
+		Enemy.Counter ++ ;
+
+		// カウンタが６０になったらカウンタ２の値を増やして、ショット処理に移る
+		if( Enemy.Counter > 60 )
+		{
+			Enemy.Counter2 ++ ;
+			Enemy.Counter = 0 ;
+
+			// このときの自機への方向を保存
+			Enemy.Angle = atan2( (double)( Player.y - Enemy.y ), (double)( Player.x - Enemy.x ) ) ;
+		}
+		break ;
+
+	case 1 :
+		// ショット処理
+
+		// カウンタが５の倍数の時のみショットする
+		if( Enemy.Counter % 5 == 0 )
+		{
+			ShotAdd( Enemy.x, Enemy.y, 4, Enemy.Angle, ( 1 << SHFTNUM ) + ( Enemy.Counter << SHFTNUM ) / 15 ) ;
+		}
+
+		// カウンタをインクリメント、カウントが５０になったら待ちに戻る
+		Enemy.Counter ++ ;
+		if( Enemy.Counter == 50 )
+		{
+			Enemy.Counter2 = 0 ;
+			Enemy.Counter = 0 ;
+		}
+		break ;
+	}
+
+	// 終了
+	return 0 ;
+}
+
+
+// 全方向ショットの関数
+int ShotType2( void )
+{
+	int i ;
+
+	// カウンタが１０になったらショットする
+	if( Enemy.Counter == 10 )
+	{
+		double Angle, d ;
+
+		// 敵から見た自機への方向を取得
+		Angle = atan2( (double)( Player.y - Enemy.y ), (double)( Player.x - Enemy.x ) ) ;  
+
+		// ワイドショット処理、少しずつ角度を変えて一周分ショット
+		d = Angle - PI ;
+		for( i = 0 ; i < 20 ; i ++ )
+		{
+			ShotAdd( Enemy.x , Enemy.y, 4, d , 4 << SHFTNUM ) ;
+			d += 2 * PI / 20 ;
+		}
+
+		// カウンタを初期化
+		Enemy.Counter = 0 ;
+	}
+	else
+	{
+		// カウンタをインクリメント
+		Enemy.Counter ++ ;
+	}
+
+	// 終了
+	return 0 ;
+}
+
+
+// ３ＷＡＹショットの関数
+int ShotType1( void )
+{
+	int i ;
+
+	// カウンタが４０になったらショットする
+	if( Enemy.Counter == 40 )
+	{
+		double Angle, d ;
+
+		// 敵から見た自機への方向を取得
+		Angle = atan2( (double)( Player.y - Enemy.y ), (double)( Player.x - Enemy.x ) ) ;  
+
+		// ３ＷＡＹショット処理
+		d = Angle - ( PI / 3 ) / 2 ;
+		for( i = 0 ; i < 3 ; i ++ )
+		{
+			ShotAdd( Enemy.x , Enemy.y, 4, d , 2 << SHFTNUM ) ;
+			d += ( PI / 3 ) / 2 ;
+		}
+
+		// カウンタを初期化
+		Enemy.Counter = 0 ;
+	}
+	else
+	{
+		// カウンタをインクリメント
+		Enemy.Counter ++ ;
+	}
+
+	// 終了
+	return 0 ;
+}
+</pre>
+		
+			<BR><BR><BR><BR><BR><BR><BR>
+
+			<HR>
+			<A HREF=index.html>戻る</A><BR><BR>
+		</B></FONT>
+	</BODY>
+</HTML>
