@@ -1,4 +1,4 @@
-﻿2012/10/02 12:44:35 にビルドを開始しました。
+﻿2012/10/22 7:59:18 にビルドを開始しました。
      1>ノード 2 上のプロジェクト "C:\Users\zero\Documents\GitHub\2012TeResAI\2012 TeRes AI\2012teresAI\2012teresAI.vcxproj" (build ターゲット)。
      1>InitializeBuildStatus:
          "AlwaysCreate" が指定されたため "Debug\2012teresAI.unsuccessfulbuild" を作成しています。
@@ -45,4 +45,4 @@
 
 ビルドに成功しました。
 
-経過時間 00:00:08.02
+経過時間 00:00:06.61

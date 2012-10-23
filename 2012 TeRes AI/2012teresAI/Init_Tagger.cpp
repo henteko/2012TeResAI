@@ -8,9 +8,10 @@ int init_Tagger(Tagger *tagger,int Stage[WIDTH][HEIGHT]){
 	/***************************************
 	*本番で、誰が鬼をやるかランダムで決定する
 	***************************************/
-	int tagger_num = 0;
+	int tagger_num = 1;
 	do{
-		tagger_num = GetRand(TAGGER_NUM); //本番の鬼の要素番号
+		//tagger_num = GetRand(TAGGER_NUM); //本番の鬼の要素番号
+
 	}while(tagger_num == TAGGER_NUM); //TAGGER_NUMの番号が選ばれないように
 
 	// Taggerを変更するときにいじる場所

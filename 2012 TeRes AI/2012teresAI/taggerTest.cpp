@@ -3,7 +3,6 @@
 **********************************************************/
 
 #include "Data.h"
-
 /**********************************************************
 	初期化時に呼ばれる関数
 **********************************************************/
@@ -13,184 +12,87 @@ void taggerTestInit(Tagger &myTagger)
 	strcpy_s(myTagger.name, "taggerTest");  //自分のAIの名前設定
 }
 
-
+void taggerTestSearch(int x,int y,int step,int *length,int ai_x,int ai_y,int map[WIDTH][HEIGHT],int miss);
+double taggerTestdirect(int x,int y,int ax,int ay);
+int count;
 /**********************************************************
 	AIの行動を返す関数
 **********************************************************/
-Action taggerTest(int tagger_x,int tagger_y,int Stage[WIDTH][HEIGHT],AI_T ai[])
+Action taggerTest(int tx,int ty,int Stage[WIDTH][HEIGHT],AI_T ai[])
 {
-	int r;
-	int cx=tagger_x,cy=tagger_y;
-	int target_x,target_y,target_d,dist,dx,dy;
-	static Action back=STOP;
-
-	double disx[AI_NUM],disy[AI_NUM];//鬼と各AIの各x,y成分の距離
-	double distance[AI_NUM];//鬼と各AIの距離
-
 	//キーが押されているかどうか
 	char Buf[ 256 ] ;
 	GetHitKeyStateAll( Buf ) ;
 
 	if( Buf[ KEY_INPUT_A ] == 0 ){//Aが押されていない
-		//7/27 zero :鬼に追跡プログラム設置
-		target_d=WIDTH+HEIGHT;
+
+		double dist,direct;
+		double  PI=3.141592;
+		int ai_x,ai_y;
+		double target_d=80;
+
+		int map[WIDTH][HEIGHT];
+
+
 		for(int i=0;i<WIDTH;i++){
 			for(int j=0;j<HEIGHT;j++){
+				map[i][j]=Stage[i][j];
 				if(Stage[i][j]==2){
-					
-					dx=cx-i;
-					if(dx<0)dx*=-1;
-					dy=cy-j;
-					if(dy<0)dy*=-1;
-					dist=dx+dy;
-					
+					int dx=tx-i,dy=ty-j;
+					dist=sqrt(1.0*dx*dx+dy*dy);
 					if(dist<target_d){
-						target_x=i;
-						target_y=j;
+						ai_x=i;
+						ai_y=j;
 						target_d=dist;
+						direct=taggerTestdirect(tx,ty,i,j);
 					}
 				}
 			}
 		}
-		dx=cx-target_x;
-		if(dx<0)dx*=-1;
-		dy=cy-target_y;
-		if(dy<0)dy*=-1;
-		if(dx>=dy){
-			if(cx<=target_x){
-				if(Stage[cx+1][cy]!=1 && back!=W){
-					back=STOP;
-					return E;
-				}
-				else{
-					if(cy<=target_y){
-						if(Stage[cx][cy+1]==1){
-							back=W;
-							return W;
-						}
-						else{
-							back=STOP;
-							return S;
-						}
-					}
-					else{
-						if(Stage[cx][cy-1]==1){
-							back=W;
-							return W;
-						}
-						else{
-							back=STOP;
-							return N;
-						}
-					}
-				}
-			}
-			else{
-				if(Stage[cx-1][cy]!=1 && back!=E){
-					back=STOP;
-					return W;
-				}else{
-					if(cy<target_y){
-						if(Stage[cx][cy+1]==1){
-							back=E;
-							return E;
-						}
-						else{
-							back=STOP;
-							return S;
-						}
-					}
-					else{
-						if(Stage[cx][cy-1]==1){
-							back=E;
-							return E;
-						}
-						else{
-							back=STOP;
-							return N;
-						}
-					}
-				}
-			}
-		}
-		else{
-			if(cy<target_y){
-				if(Stage[cx][cy+1]!=1 && back!=N){
-					back=STOP;
-					return S;
-				}else{
-					if(cx<=target_x){
-						if(Stage[cx+1][cy]==1){
-							back=N;
-							return N;
-						}
-						else{
-							back=STOP;
-							return E;
-						}
-					}
-					else{
-						if(Stage[cx-1][cy]==1){
-							back=N;
-							return N;
-						}
-						else{
-							back=STOP;
-							return W;
-						}
-					}
-				}
-			}
-			else{
-				if(Stage[cx][cy-1]!=1 && back!=S){
-					back=STOP;
-					return N;
-				}else{
-					if(cx<target_x){
-						if(Stage[cx+1][cy]==1){
-							back=S;
-							return S;
-						}
-						else{
-							back=STOP;
-							return E;
-						}
-					}
-					else{
-						if(Stage[cx-1][cy]==1){
-							back=S;
-							return S;
-						}
-						else{
-							back=STOP;
-							return W;
-						}
-					}
-				}
-			}
-		} //matuさんの鬼AI終わり
-
 		/*
-		r=GetRand(4);
-		switch(r%4){
-		case 0:
-			if(Stage[cx][cy-1]!=1)
-				return N;
-			break;
-		case 1:
-			if(Stage[cx+1][cy]!=1)
-				return E;
-			break;
-		case 2:
-			if(Stage[cx][cy+1]!=1)
-				return S;
-			break;
-		case 3:
-			if(Stage[cx-1][cy]!=1)
-				return W;
-			break;
+		if(direct<45){
+			search[0]=E;
+			search[1]=S;
+			search[2]=W;
+			search[3]=N;
+		}else if(direct<135){
+			search[0]=S;
+			search[1]=W;
+			search[2]=N;
+			search[3]=E;
+		}else if(direct<225){
+			search[0]=W;
+			search[1]=N;
+			search[2]=E;
+			search[3]=S;
+		}*/
+		int dx[]={0,1,0,-1},dy[]={-1,0,1,0};
+		int step[4]={50,50,50,50};
+		Action search[4]={N,E,S,W};
+		int miss=0;
+		for(int i=0;i<4;i++){
+			count=0;
+			taggerTestSearch(tx+dx[i],ty+dy[i],0,&step[i],ai_x,ai_y,map,miss);
 		}
-		*/
+
+		int min=80;
+		int choice;
+		static Action go;
+		static int loop=0;
+		for(int i=0;i<4;i++){
+			if(step[i]<min){
+				min=step[i];
+				if((i==0 && go==S) || (i==1 && go==W) || (i==2 && go==N) || (i==3 && go==E))loop++;
+				if(loop>5){
+					choice=(i+2)%4;
+					loop=0;
+				}else{
+					choice=i;
+				}
+			}
+		}
+		go=search[choice];
+		return go;
 	}
 	else{//Aが押されている
 		if( Buf[ KEY_INPUT_UP ] == 1 || Buf[ KEY_INPUT_N ] == 1 )//Nか↑が押されている
@@ -206,4 +108,119 @@ Action taggerTest(int tagger_x,int tagger_y,int Stage[WIDTH][HEIGHT],AI_T ai[])
 	}
 	return STOP;
 
+}
+
+double taggerTestdirect(int x,int y,int ax,int ay){
+	double direct,dx,dy;
+	double  PI=3.141592;
+	dx=ax-x;
+	dy=ay-y;
+	if(dx==0){
+		if(dy<0){
+			direct=-90;
+		}else{
+			direct=90;
+		}
+	}
+	else {
+		if(dx>0){
+			direct=atan(dy/dx)*180/PI;
+		}else{
+			direct=atan(dy/dx)*180/PI+180;
+		}
+	}
+	return direct;
+}
+
+void taggerTestSearch(int x,int y,int step,int *length,int ai_x,int ai_y,int map[WIDTH][HEIGHT],int miss){
+	if(map[x][y]==1 || CheckHitKey(KEY_INPUT_Z)==1 || step>*length || *length<50 || count>500){
+		return;
+	}
+	count++;
+	int check[WIDTH][HEIGHT];
+	for(int i=0;i<WIDTH;i++){
+		for(int j=0;j<HEIGHT;j++){
+			check[i][j]=map[i][j];
+		}
+	}
+	check[x][y]=1;
+	step++;
+	static int cr=GetColor(255,255,255);
+
+	if(x==ai_x && y==ai_y){
+		cr=GetColor(GetRand(255),GetRand(255),GetRand(255));
+		*length=step;
+		return;
+	}
+	
+	if(map[x][y-1]==1 && map[x+1][y]==1 && map[x][y+1]==1 && map[x-1][y]==1){
+		return;
+	}
+
+	int dx[4]={0,1,0,-1},dy[4]={-1,0,1,0};
+	double direct=taggerTestdirect(x,y,ai_x,ai_y);
+	if(direct<-45){
+		int xx[4]={0,1,0,-1},yy[4]={-1,0,1,0};
+		for(int i=0;i<4;i++){
+			dx[i]=xx[i];
+			dy[i]=yy[i];
+		}
+	}
+	else if(direct<0){
+		int xx[4]={1,0,0,-1},yy[4]={0,-1,1,0};
+		for(int i=0;i<4;i++){
+			dx[i]=xx[i];
+			dy[i]=yy[i];
+		}
+	}
+	else if(direct<45){
+		int xx[4]={1,0,0,-1},yy[4]={0,1,-1,0};
+		for(int i=0;i<4;i++){
+			dx[i]=xx[i];
+			dy[i]=yy[i];
+		}
+	}
+	else if(direct<90){
+		int xx[4]={0,1,-1,0},yy[4]={1,0,0,-1};
+		for(int i=0;i<4;i++){
+			dx[i]=xx[i];
+			dy[i]=yy[i];
+		}
+	}
+	else if(direct<135){
+		int xx[4]={0,-1,1,0},yy[4]={1,0,0,-1};
+		for(int i=0;i<4;i++){
+			dx[i]=xx[i];
+			dy[i]=yy[i];
+		}
+	}
+	else if(direct<180){
+		int xx[4]={-1,0,0,1},yy[4]={0,1,-1,0};
+		for(int i=0;i<4;i++){
+			dx[i]=xx[i];
+			dy[i]=yy[i];
+		}
+	}
+	else if(direct<225){
+		int xx[4]={-1,0,0,1},yy[4]={0,-1,1,0};
+		for(int i=0;i<4;i++){
+			dx[i]=xx[i];
+			dy[i]=yy[i];
+		}
+	}else{
+		int xx[4]={0,-1,0,1},yy[4]={-1,0,1,0};
+		for(int i=0;i<4;i++){
+			dx[i]=xx[i];
+			dy[i]=yy[i];
+		}
+	}
+	
+	DrawCircle(20*x+10,20*y+10,10,cr,1);
+	DrawCircle(20*ai_x+10,20*ai_y+10,10,GetColor(255,0,0),1);
+	DrawFormatString(20*x+5,20*y+5,GetColor(255,255,0),"%d",count);
+	//WaitTimer(5);
+
+	for(int i=0;i<4;i++){
+		taggerTestSearch(x+dx[i],y+dy[i],step,length,ai_x,ai_y,check,miss);
+	}
 }

@@ -29,7 +29,7 @@ void draw(int stage[WIDTH][HEIGHT],AI_T ai[AI_NUM],Tagger tagger){
 	//AIの描画
 	for(int i=0;i<AI_NUM;i++){
 		SetDrawBright(255,255,255);
-		DrawRotaGraph(ai[i].s_x,ai[i].s_y,0.5,0,ai[i].Graph,TRUE,FALSE);//読み込んだ画像表示
+		DrawRotaGraph(ai[i].s_x,ai[i].s_y,1,0,ai[i].Graph,TRUE,FALSE);//読み込んだ画像表示
 		//DrawCircle(ai[i].s_x,ai[i].s_y,5,GetColor(255,0,0),1);//点表示
 		if(view==1){
 			DrawBox(BOX*ai[i].x,BOX*ai[i].y,BOX*(ai[i].x+1),BOX*(ai[i].y+1),GetColor(255,0,0),0);
@@ -38,8 +38,8 @@ void draw(int stage[WIDTH][HEIGHT],AI_T ai[AI_NUM],Tagger tagger){
 	}
 	//鬼の描画
 	
-	//DrawRotaGraph(tagger.s_x,tagger.s_y,1,0,tagger.Graph,TRUE,FALSE);//読み込んだ画像表示 //今は青鬼が出てきて怖いからコメントアウト
-	DrawCircle(tagger.s_x,tagger.s_y,10,GetColor(0,0,255),1);
+	//DrawRotaGraph(tagger.s_x,tagger.s_y,0.25,0,tagger.Graph,TRUE,FALSE);//読み込んだ画像表示 //今は青鬼が出てきて怖いからコメントアウト
+	DrawCircle(tagger.s_x,tagger.s_y,30,GetColor(0,0,255),1);
 	if(view==1)DrawBox(BOX*tagger.x,BOX*tagger.y,BOX*(tagger.x+1),BOX*(tagger.y+1),GetColor(255,0,0),0);
 	
 	//AI名の描画
@@ -53,7 +53,7 @@ void draw(int stage[WIDTH][HEIGHT],AI_T ai[AI_NUM],Tagger tagger){
 	}
 	
 	//マップデータ表示
-	while(CheckHitKey(KEY_INPUT_P)){
+	while(CheckHitKey(KEY_INPUT_P)==1){
 		int ai_x[AI_NUM],ai_y[AI_NUM],ai_num=0;
 		DrawBox(0,0,640,480,GetColor(0,0,0),1);
 		for(int i=0;i<WIDTH;i++){

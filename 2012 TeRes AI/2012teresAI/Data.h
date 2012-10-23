@@ -17,6 +17,7 @@ using namespace std;
 #define BOX (640/WIDTH)
 //AI‚ÌŽ‹ŠE
 #define VISIBLE 10
+#define CENTER VISIBLE
 //AI‚ÌˆÚ“®‘¬“x
 #define AI_SPEED 4
 //‹S‚ÌˆÚ“®‘¬“x
