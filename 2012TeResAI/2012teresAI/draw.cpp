@@ -39,7 +39,7 @@ void draw(int stage[WIDTH][HEIGHT],AI_T ai[AI_NUM],Tagger tagger){
 	//鬼の描画
 	
 	//DrawRotaGraph(tagger.s_x,tagger.s_y,0.25,0,tagger.Graph,TRUE,FALSE);//読み込んだ画像表示 //今は青鬼が出てきて怖いからコメントアウト
-	DrawCircle(tagger.s_x,tagger.s_y,30,GetColor(0,0,255),1);
+	DrawCircle(tagger.s_x,tagger.s_y,20,GetColor(0,0,255),1);
 	if(view==1)DrawBox(BOX*tagger.x,BOX*tagger.y,BOX*(tagger.x+1),BOX*(tagger.y+1),GetColor(255,0,0),0);
 	
 	//AI名の描画
