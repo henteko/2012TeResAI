@@ -27,7 +27,7 @@ int init_Tagger(Tagger *tagger,int Stage[WIDTH][HEIGHT]){
 	// Tagger0 (taggerSample)
 	extern void taggerSampleInit(Tagger &myTagger);
 	taggerSampleInit(*init_tagger);
-	extern Action taggerSample(int tagger_x,int tagger_y,int Stage[WIDTH][HEIGHT],AI_T ai[]);
+	extern Action taggerSample(int tagger_x,int tagger_y,int Stage[WIDTH][HEIGHT]);
 	init_tagger->moveFunc = taggerSample;
 	// Tagger0
 
@@ -36,7 +36,7 @@ int init_Tagger(Tagger *tagger,int Stage[WIDTH][HEIGHT]){
 	// Tagger1 (taggerTest)
 	extern void taggerTestInit(Tagger &myTagger);
 	taggerTestInit(*init_tagger);
-	extern Action taggerTest(int tagger_x,int tagger_y,int Stage[WIDTH][HEIGHT],AI_T ai[]);
+	extern Action taggerTest(int tagger_x,int tagger_y,int Stage[WIDTH][HEIGHT]);
 	init_tagger->moveFunc = taggerTest;
 	// Tagger1
 

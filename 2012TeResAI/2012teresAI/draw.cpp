@@ -13,7 +13,7 @@ void draw(int stage[WIDTH][HEIGHT],AI_T ai[AI_NUM],Tagger tagger){
 		for(int j=0;j<HEIGHT;j++){
 			if(view==0)SetDrawBright(150,150,150);// 8/19 zero: 薄暗く描写するよう設定
 			for(int k=0;k<AI_NUM;k++){// 8/19 zero: AIの視界のみ明るくなるように
-				if(i>=ai[k].x-VISIBLE && i<=ai[k].x+VISIBLE && j>=ai[k].y-VISIBLE && j<=ai[k].y+VISIBLE){
+				if(i>=ai[k].x-VISIBLE && i<=ai[k].x+VISIBLE && j>=ai[k].y-VISIBLE && j<=ai[k].y+VISIBLE && ai[k].entry==1){
 					SetDrawBright(255,255,255);
 				}
 			}
@@ -28,12 +28,14 @@ void draw(int stage[WIDTH][HEIGHT],AI_T ai[AI_NUM],Tagger tagger){
 	}
 	//AIの描画
 	for(int i=0;i<AI_NUM;i++){
-		SetDrawBright(255,255,255);
-		DrawRotaGraph(ai[i].s_x,ai[i].s_y,1,0,ai[i].Graph,TRUE,FALSE);//読み込んだ画像表示
-		//DrawCircle(ai[i].s_x,ai[i].s_y,5,GetColor(255,0,0),1);//点表示
-		if(view==1){
-			DrawBox(BOX*ai[i].x,BOX*ai[i].y,BOX*(ai[i].x+1),BOX*(ai[i].y+1),GetColor(255,0,0),0);
-			DrawBox(BOX*(ai[i].x-VISIBLE),BOX*(ai[i].y-VISIBLE),BOX*(ai[i].x+VISIBLE+1),BOX*(ai[i].y+VISIBLE+1),GetColor(255,255,255),0);//AIの視界（確認用）
+		if(ai[i].entry==1){
+			SetDrawBright(255,255,255);
+			DrawRotaGraph(ai[i].s_x,ai[i].s_y,1,0,ai[i].Graph,TRUE,FALSE);//読み込んだ画像表示
+			//DrawCircle(ai[i].s_x,ai[i].s_y,5,GetColor(255,0,0),1);//点表示
+			if(view==1){
+				DrawBox(BOX*ai[i].x,BOX*ai[i].y,BOX*(ai[i].x+1),BOX*(ai[i].y+1),GetColor(255,0,0),0);
+				DrawBox(BOX*(ai[i].x-VISIBLE),BOX*(ai[i].y-VISIBLE),BOX*(ai[i].x+VISIBLE+1),BOX*(ai[i].y+VISIBLE+1),GetColor(255,255,255),0);//AIの視界（確認用）
+			}
 		}
 	}
 	//鬼の描画
@@ -45,11 +47,13 @@ void draw(int stage[WIDTH][HEIGHT],AI_T ai[AI_NUM],Tagger tagger){
 	//AI名の描画
 
 	for(int i=0;i<AI_NUM;i++){
-		static int flash=0;
-		int cr;
-		flash++;
-		cr=GetColor(255,255*(flash%3),255*(flash%4));
-		DrawFormatString(ai[i].s_x,ai[i].s_y,cr,ai[i].name);
+		if(ai[i].entry==1){
+			static int flash=0;
+			int cr;
+			flash++;
+			cr=GetColor(255,255*(flash%3),255*(flash%4));
+			DrawFormatString(ai[i].s_x,ai[i].s_y,cr,ai[i].name);
+		}
 	}
 	
 	//マップデータ表示
@@ -86,6 +90,15 @@ void draw(int stage[WIDTH][HEIGHT],AI_T ai[AI_NUM],Tagger tagger){
 		for(int i=0;i<AI_NUM;i++){
 			DrawBox(20*(ai_x[i]-10),20*(ai_y[i]-10),20*(ai_x[i]+10),20*(ai_y[i]+10),GetColor(255,255,0),0);
 		}
+		/*
+		for(int i=0;i<AI_NUM;i++){
+			for(int w=0;w<2*VISIBLE+1;w++){
+				for(int h=0;h<2*VISIBLE+1;h++){
+					int cx=20*ai[i].x+(w-VISIBLE)*20,cy=20*ai[i].y+(h-VISIBLE)*20;
+					DrawFormatString(cx,cy,GetColor(255,255,255),"%d",ai[i].view[w][h]);
+				}
+			}
+		}*/
 		WaitTimer(100);
 	}
 	

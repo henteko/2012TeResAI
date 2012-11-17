@@ -12,140 +12,108 @@ void taggerSampleInit(Tagger &myTagger)
 	myTagger.Graph = LoadGraph("Tagger_image\\aooni.jpg");  //画像の設定
 	strcpy_s(myTagger.name, "taggerSample");  //自分のAIの名前設定
 }
-
-
 /**********************************************************
 	AIの行動を返す関数
 **********************************************************/
-Action taggerSample(int tagger_x,int tagger_y,int Stage[WIDTH][HEIGHT],AI_T ai[])
+Action taggerSample(int tagger_x,int tagger_y,int Stage[WIDTH][HEIGHT])
 {
-
-	int r;
-	int cx=tagger_x,cy=tagger_y;
-	int target_x,target_y,target_d,dist,dx,dy;
-
-	double disx[AI_NUM],disy[AI_NUM];//鬼と各AIの各x,y成分の距離
-	double distance[AI_NUM];//鬼と各AIの距離
 
 	//キーが押されているかどうか
 	char Buf[ 256 ] ;
 	GetHitKeyStateAll( Buf ) ;
 
 	if( Buf[ KEY_INPUT_A ] == 0 ){//Aが押されていない
-		//7/27 zero :鬼に追跡プログラム設置
-		/*
-		target_d=WIDTH+HEIGHT;
+		int stage_cp[WIDTH][HEIGHT];
+		int ai_x[AI_NUM],ai_y[AI_NUM],ai_n=0;
+		int target_x,target_y;
+		
+		static stack *st = (stack*)malloc(sizeof(stack));
+		static int stackInitFlag = 1;
+
+		if(stackInitFlag){
+			stackInitFlag = 0;
+			st->count = 0;
+		}
+
+		// 初期位置にいる ＝ ゲーム開始時（かもしれない）
+		if(tagger_x == WIDTH/2 && tagger_y == HEIGHT/2)
+		{
+			//DrawString( 50, 100, "Center", 0xffffff);
+			//WaitTimer(500);
+			while(st->count > 0) pop(st); // スタックを空にする
+		}
+		if(st->count > 0)return pop(st);
+
+		for(int i=0;i<AI_NUM;i++){
+			ai_x[i]=0;
+			ai_y[i]=0;
+		}
+
 		for(int i=0;i<WIDTH;i++){
 			for(int j=0;j<HEIGHT;j++){
+				if(Stage[i][j]==0){
+					stage_cp[i][j]=0;
+				}
+				if(Stage[i][j]==1){
+					stage_cp[i][j]=-1;
+				}
 				if(Stage[i][j]==2){
-					
-					dx=cx-i;
-					if(dx<0)dx*=-1;
-					dy=cy-j;
-					if(dy<0)dy*=-1;
-					dist=dx+dy;
-					
-					if(dist<target_d){
-						target_x=i;
-						target_y=j;
-						target_d=dist;
+					ai_x[ai_n]=i;
+					ai_y[ai_n]=j;
+					ai_n++;
+					stage_cp[i][j]=0;
+				}
+				if(Stage[i][j]==3){
+					stage_cp[i][j]=1;
+				}
+				
+			}
+		}
+		int step=1;
+		do{
+			for(int i=0;i<WIDTH;i++){
+				for(int j=0;j<HEIGHT;j++){
+					if(stage_cp[i][j]==step){
+						if(stage_cp[i-1][j]==0)stage_cp[i-1][j]=step+1;
+						if(stage_cp[i+1][j]==0)stage_cp[i+1][j]=step+1;
+						if(stage_cp[i][j-1]==0)stage_cp[i][j-1]=step+1;
+						if(stage_cp[i][j+1]==0)stage_cp[i][j+1]=step+1;
 					}
 				}
 			}
-		}
-		dx=cx-target_x;
-		if(dx<0)dx*=-1;
-		dy=cy-target_y;
-		if(dy<0)dy*=-1;
-		if(dx>=dy){
-			if(cx<target_x){
-				if(Stage[cx+1][cy]==1){
-					if(cy<=target_y)return S;
-					else return N;
-				}else return E;
+			int flag=0;
+			for(int i=0;i<AI_NUM;i++){
+				if(stage_cp[ai_x[i]][ai_y[i]]>0){
+					target_x=ai_x[i];
+					target_y=ai_y[i];
+					flag=1;
+				}
 			}
-			else{
-				if(Stage[cx-1][cy]==1){
-					if(cy<target_y)return S;
-					else return N;
-				}else return W;
+			step++;
+			if(flag==1)break;
+		}while(1);
+
+		while(step>1){
+			if(stage_cp[target_x-1][target_y]==step-1){
+				push(st,E);
+				target_x--;
 			}
-		}
-		else{
-			if(cy<=target_y){
-				if(Stage[cx][cy+1]==1){
-					if(cx<=target_x)return E;
-					else return W;
-				}else return S;
+			else if(stage_cp[target_x+1][target_y]==step-1){
+				push(st,W);
+				target_x++;
 			}
-			else{
-				if(Stage[cx][cy-1]==1){
-					if(cx<target_x)return E;
-					else return W;
-				}else return N;
+			else if(stage_cp[target_x][target_y+1]==step-1){
+				push(st,N);
+				target_y++;
 			}
-		}*/ //matuさんの鬼AI終わり
-
-/*****************************************************************
-		toshiも鬼の追跡AIつくってみた。一番近くのAIを捕まえに行くよ。
-		壁のことは考えてないから、あほの子だよ
-******************************************************************/
-
-		for(int i=0;i<AI_NUM;i++){
-			//鬼と各AIの距離を計測
-			disx[i]=abs(tagger_x-ai[i].x);
-			disy[i]=abs(tagger_y-ai[i].y);
-			distance[i] = sqrt((disx[i]*disx[i])+(disy[i]*disy[i]));//そうだねメネラウスだね
+			else if(stage_cp[target_x][target_y-1]==step-1){
+				push(st,S);
+				target_y--;
+			}
+			step--;
 		}
-
-		int min_d=0;//鬼とAIの最少の距離の配列の要素
-		for(int i=1; i<AI_NUM; i++)//最短距離の要素を探索 
-			if( distance[i] < distance[min_d] ) min_d = i;
-
-		//鬼とAIのx,y成分のそれぞれの差の正負によって行動決定
-		if((cx-ai[min_d].x)>0) {
-			if(Stage[cx-1][cy]!=1)
-				return W;
-		}
-		else if((cx-ai[min_d].x)<0){
-			if(Stage[cx+1][cy]!=1)
-				return E;
-		}
-		if((cy-ai[min_d].y)<0){
-			if(Stage[cx][cy+1]!=1)
-				return S;
-		}
-		if((cy-ai[min_d].y)>0){
-			if(Stage[cx][cy-1]!=1)
-				return N;
-		}
-		else return STOP;
-
-/***********************************************************
-　　toshiの鬼AI終わり
-**********************************************************/
-
-		/*
-		r=GetRand(4);
-		switch(r%4){
-		case 0:
-			if(Stage[cx][cy-1]!=1)
-				return N;
-			break;
-		case 1:
-			if(Stage[cx+1][cy]!=1)
-				return E;
-			break;
-		case 2:
-			if(Stage[cx][cy+1]!=1)
-				return S;
-			break;
-		case 3:
-			if(Stage[cx-1][cy]!=1)
-				return W;
-			break;
-		}
-		*/
+		
+		return pop(st);
 	}
 	else{//Aが押されている
 		if( Buf[ KEY_INPUT_UP ] == 1 || Buf[ KEY_INPUT_N ] == 1 )//Nか↑が押されている

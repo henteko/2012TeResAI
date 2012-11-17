@@ -42,7 +42,8 @@ Action aiTest(int view[2*VISIBLE+1][2*VISIBLE+1])//8/25:zero:’Ç‹L
 					}else{
 						direct=-90;
 					}
-				}else{
+				}
+				else{
 					double t=dy/dx;
 					if(dx>0){
 						direct=atan(t)/PI*180;

@@ -18,47 +18,50 @@ int colswitch(int c){
 	return Cr;
 }
 
-void ranking(AI_T ai[],int deth[]){
+int ranking(AI_T ai[],int deth[]){
 	int hoge,Cr;
 	int j ;
 	int space=0;
-	int drawX=500;
-	for(int i=0;i<AI_NUM;i++){
-
-		ai[i].life = deth[i];
-		j=i;
-		//mainŠÖ”‚æ‚èdeth[]‚ðˆø”‚ÉŽæ‚èA¬‚³‚¢‡‚É•À‚Ñ‘Ö‚¦
-		while(j>0&&deth[j-1]>deth[j]){
-			hoge = deth[j-1];
-			deth[j-1] = deth[j];
-			deth[j] = hoge;
-			j--;
+	static int drawX=500,time=100;
+	if(drawX==500){
+		for(int i=0;i<AI_NUM;i++){
+			if(ai[i].entry==0)deth[i]=ROUND_MAX+1;
+			ai[i].life = deth[i];
+			j=i;
+			//mainŠÖ”‚æ‚èdeth[]‚ðˆø”‚ÉŽæ‚èA¬‚³‚¢‡‚É•À‚Ñ‘Ö‚¦
+			while(j>0&&deth[j-1]>deth[j]){
+				hoge = deth[j-1];
+				deth[j-1] = deth[j];
+				deth[j] = hoge;
+				j--;
+			}
 		}
 	}
-	while(drawX>0){
-		space=1;
-		ClearDrawScreen();
-		for(int i = 0;i<AI_NUM;i++){
-			for(int k=0;k<AI_NUM;k++){
-				if(ai[k].life==deth[i]){
-					if(i>0 && deth[i-1]==deth[i])continue;
+	space=1;
+	
+	if(drawX>0)drawX-=10;
 
+	if(drawX<=0){
+		if(time>0)time--;
+		if(GetMouseInput()==1 && time<=0){
+			return 1;
+		}
+	}
+	ClearDrawScreen();
+
+	for(int i = 0;i<AI_NUM;i++){
+		for(int k=0;k<AI_NUM;k++){
+			if(ai[k].life==deth[i]){
+				if(i>0 && deth[i-1]==deth[i])continue;
+				if(deth[i]<=ROUND_MAX){
 					Cr = colswitch(i+1);
-
-				
-					DrawFormatString(50+drawX*space,200+space*20,Cr,"%d ˆÊ %d ‰ñ",i+1,deth[i]);
-
-					DrawString(130+drawX*space,200+space*20,ai[k].name,GetColor(255,0,0));
-			
-					DrawGraph(200+drawX*space,200+space*20,ai[k].Graph,TRUE);
-
-					
-
+					DrawFormatString(100+drawX*space,50+space*35,Cr,"%d ˆÊ %d ‰ñ",i+1,deth[i]);
+					DrawString(250+drawX*space,50+space*35,ai[k].name,GetColor(255,0,0));
+					DrawRotaGraph(400+drawX*space,50+space*35,1,0,ai[k].Graph,TRUE,0);
 					space++;
 				}
 			}
 		}
-		drawX-=10;
-		WaitTimer(1000/60);
 	}
+	return 0;
 }

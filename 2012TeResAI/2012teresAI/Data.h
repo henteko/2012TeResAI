@@ -6,9 +6,9 @@
 #include <math.h>
 using namespace std;
 
-#define AI_NUM 2
+#define AI_NUM 3
 #define TAGGER_NUM 2
-#define ROUND_MAX 100
+#define ROUND_MAX 1000
 #define TIME_LIMIT 20
 //ステージの規模
 #define WIDTH 32
@@ -49,12 +49,13 @@ typedef struct{
 	Action act;//AIの行動
 	int life;//
 	int view[2*VISIBLE+1][2*VISIBLE+1];//
+	int entry;
 } AI_T;
 
 typedef struct{
 	char name[100];//名前
 	int Graph;
-	Action (*moveFunc)(int tagger_x , int tagger_y,int Stage[WIDTH][HEIGHT],AI_T ai[]);		// 行動を返す関数
+	Action (*moveFunc)(int tagger_x , int tagger_y,int Stage[WIDTH][HEIGHT]);		// 行動を返す関数
 	int x;
 	int y;
 	int s_x;
@@ -64,7 +65,20 @@ typedef struct{
 } Tagger;
 
 
-void intro(AI_T *ai);
+
+#define STACK_MAX 100
+typedef struct{
+	Action a[STACK_MAX];
+	unsigned int count;
+}stack;
+
+void push(stack *s, Action dir);
+Action pop(stack *s);
+
+
+
+
+int intro(AI_T *ai);
 void make_Stage(int Stage[WIDTH][HEIGHT]);
 int init_Tagger(Tagger *tagger,int Stage[WIDTH][HEIGHT]);
 void init_Ai(AI_T *ai,int Stage[WIDTH][HEIGHT]);
@@ -77,4 +91,4 @@ void setview_Ai(AI_T *ai,int Stage[WIDTH][HEIGHT]);
 int death_Ai(AI_T ai,Tagger tagger);
 void result(AI_T ai[],int death[]);
 void update_stage(int Stage[WIDTH][HEIGHT],AI_T ai[],Tagger tagger);
-void ranking(AI_T ai[],int deth[]);//7/23 tao31 追加
+int ranking(AI_T ai[],int deth[]);//7/23 tao31 追加

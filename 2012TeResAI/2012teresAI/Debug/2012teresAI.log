@@ -1,67 +1,17 @@
-﻿2012/10/24 13:34:48 にビルドを開始しました。
+﻿2012/11/17 17:09:42 にビルドを開始しました。
      1>ノード 2 上のプロジェクト "C:\Users\zero\Documents\GitHub\2012TeResAI\2012TeResAI\2012teresAI\2012teresAI.vcxproj" (build ターゲット)。
      1>InitializeBuildStatus:
          "AlwaysCreate" が指定されたため "Debug\2012teresAI.unsuccessfulbuild" を作成しています。
        ClCompile:
-         すべての出力が最新のものです。
-         c:\Program Files\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I"C:\Users\zero\Documents\GitHub\2012TeResAI\2012TeResAI\2012teresAI\DX lib\DxLib_VC\プロジェクトに追加すべきファイル_VC用" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _MBCS /Gm /EHsc /RTC1 /MTd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt aiSample.cpp aiTest.cpp death_Ai.cpp draw.cpp Init_Ai.cpp Init_Tagger.cpp Intro.cpp main.cpp make_Stage.cpp next_Ai.cpp next_Tagger.cpp Ranking.cpp result.cpp setview_Ai.cpp taggerSample.cpp taggerTest.cpp update_Ai.cpp update_stage.cpp update_Tagger.cpp
-         update_Tagger.cpp
-     1>c:\users\zero\documents\github\2012teresai\2012teresai\2012teresai\update_tagger.cpp(46): warning C4244: '=' : 'double' から 'int' への変換です。データが失われる可能性があります。
-     1>c:\users\zero\documents\github\2012teresai\2012teresai\2012teresai\update_tagger.cpp(47): warning C4244: '=' : 'double' から 'int' への変換です。データが失われる可能性があります。
-         update_stage.cpp
-         update_Ai.cpp
-     1>c:\users\zero\documents\github\2012teresai\2012teresai\2012teresai\update_ai.cpp(46): warning C4244: '=' : 'double' から 'int' への変換です。データが失われる可能性があります。
-     1>c:\users\zero\documents\github\2012teresai\2012teresai\2012teresai\update_ai.cpp(47): warning C4244: '=' : 'double' から 'int' への変換です。データが失われる可能性があります。
-         taggerTest.cpp
-         taggerSample.cpp
-     1>c:\users\zero\documents\github\2012teresai\2012teresai\2012teresai\taggersample.cpp(25): warning C4101: 'dy' : ローカル変数は 1 度も使われていません。
-     1>c:\users\zero\documents\github\2012teresai\2012teresai\2012teresai\taggersample.cpp(25): warning C4101: 'target_y' : ローカル変数は 1 度も使われていません。
-     1>c:\users\zero\documents\github\2012teresai\2012teresai\2012teresai\taggersample.cpp(25): warning C4101: 'dist' : ローカル変数は 1 度も使われていません。
-     1>c:\users\zero\documents\github\2012teresai\2012teresai\2012teresai\taggersample.cpp(25): warning C4101: 'target_d' : ローカル変数は 1 度も使われていません。
-     1>c:\users\zero\documents\github\2012teresai\2012teresai\2012teresai\taggersample.cpp(25): warning C4101: 'target_x' : ローカル変数は 1 度も使われていません。
-     1>c:\users\zero\documents\github\2012teresai\2012teresai\2012teresai\taggersample.cpp(23): warning C4101: 'r' : ローカル変数は 1 度も使われていません。
-     1>c:\users\zero\documents\github\2012teresai\2012teresai\2012teresai\taggersample.cpp(25): warning C4101: 'dx' : ローカル変数は 1 度も使われていません。
-         setview_Ai.cpp
-         result.cpp
-         Ranking.cpp
-         next_Tagger.cpp
-     1>c:\users\zero\documents\github\2012teresai\2012teresai\2012teresai\next_tagger.cpp(10): warning C4101: 'dy' : ローカル変数は 1 度も使われていません。
-     1>c:\users\zero\documents\github\2012teresai\2012teresai\2012teresai\next_tagger.cpp(10): warning C4101: 'target_y' : ローカル変数は 1 度も使われていません。
-     1>c:\users\zero\documents\github\2012teresai\2012teresai\2012teresai\next_tagger.cpp(10): warning C4101: 'dist' : ローカル変数は 1 度も使われていません。
-     1>c:\users\zero\documents\github\2012teresai\2012teresai\2012teresai\next_tagger.cpp(10): warning C4101: 'target_d' : ローカル変数は 1 度も使われていません。
-     1>c:\users\zero\documents\github\2012teresai\2012teresai\2012teresai\next_tagger.cpp(10): warning C4101: 'target_x' : ローカル変数は 1 度も使われていません。
-     1>c:\users\zero\documents\github\2012teresai\2012teresai\2012teresai\next_tagger.cpp(8): warning C4101: 'r' : ローカル変数は 1 度も使われていません。
-     1>c:\users\zero\documents\github\2012teresai\2012teresai\2012teresai\next_tagger.cpp(10): warning C4101: 'dx' : ローカル変数は 1 度も使われていません。
-         next_Ai.cpp
-         make_Stage.cpp
-         main.cpp
-     1>c:\users\zero\documents\github\2012teresai\2012teresai\2012teresai\main.cpp(15): warning C4996: 'freopen': This function or variable may be unsafe. Consider using freopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files\microsoft visual studio 10.0\vc\include\stdio.h(249) : 'freopen' の宣言を確認してください。
-     1>c:\users\zero\documents\github\2012teresai\2012teresai\2012teresai\main.cpp(16): warning C4996: 'freopen': This function or variable may be unsafe. Consider using freopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files\microsoft visual studio 10.0\vc\include\stdio.h(249) : 'freopen' の宣言を確認してください。
-         Intro.cpp
-         Init_Tagger.cpp
-         Init_Ai.cpp
-     1>c:\users\zero\documents\github\2012teresai\2012teresai\2012teresai\init_ai.cpp(57): warning C4244: '=' : 'double' から 'int' への変換です。データが失われる可能性があります。
-     1>c:\users\zero\documents\github\2012teresai\2012teresai\2012teresai\init_ai.cpp(58): warning C4244: '=' : 'double' から 'int' への変換です。データが失われる可能性があります。
-         draw.cpp
-     1>c:\users\zero\documents\github\2012teresai\2012teresai\2012teresai\draw.cpp(96): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files\microsoft visual studio 10.0\vc\include\string.h(110) : 'strcat' の宣言を確認してください。
-     1>c:\users\zero\documents\github\2012teresai\2012teresai\2012teresai\draw.cpp(99): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files\microsoft visual studio 10.0\vc\include\string.h(110) : 'strcat' の宣言を確認してください。
-         death_Ai.cpp
-         aiTest.cpp
-     1>c:\users\zero\documents\github\2012teresai\2012teresai\2012teresai\aitest.cpp(23): warning C4101: 'r' : ローカル変数は 1 度も使われていません。
-         aiSample.cpp
-     1>c:\users\zero\documents\github\2012teresai\2012teresai\2012teresai\aisample.cpp(22): warning C4101: 'r' : ローカル変数は 1 度も使われていません。
+         c:\Program Files\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I"C:\Users\zero\Documents\GitHub\2012TeResAI\2012TeResAI\2012teresAI\DX lib\DxLib_VC\プロジェクトに追加すべきファイル_VC用" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _MBCS /Gm /EHsc /RTC1 /MTd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt Player.cpp aiMsZero.cpp
+         aiMsZero.cpp
+         Player.cpp
          コードを生成中...
-     1>c:\users\zero\documents\github\2012teresai\2012teresai\2012teresai\aitest.cpp(152): warning C4715: 'aiTest' : 値を返さないコントロール パスがあります。
-     1>c:\users\zero\documents\github\2012teresai\2012teresai\2012teresai\init_ai.cpp(16): warning C4715: 'distans_tag_ai' : 値を返さないコントロール パスがあります。
-     1>c:\users\zero\documents\github\2012teresai\2012teresai\2012teresai\next_ai.cpp(28): warning C4715: 'next_Ai' : 値を返さないコントロール パスがあります。
        ManifestResourceCompile:
          すべての出力が最新のものです。
        Link:
          c:\Program Files\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\zero\Documents\GitHub\2012TeResAI\2012TeResAI\2012teresAI\Debug\2012teresAI.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Users\zero\Documents\GitHub\2012TeResAI\2012TeResAI\2012teresAI\DX lib\DxLib_VC\プロジェクトに追加すべきファイル_VC用" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Debug\2012teresAI.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:\Users\zero\Documents\GitHub\2012TeResAI\2012TeResAI\2012teresAI\Debug\2012teresAI.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\zero\Documents\GitHub\2012TeResAI\2012TeResAI\2012teresAI\Debug\2012teresAI.lib" /MACHINE:X86 Debug\2012teresAI.exe.embed.manifest.res
+         Debug\aiMsZero.obj
          Debug\aiSample.obj
          Debug\aiTest.obj
          Debug\death_Ai.obj
@@ -73,9 +23,11 @@
          Debug\make_Stage.obj
          Debug\next_Ai.obj
          Debug\next_Tagger.obj
+         Debug\Player.obj
          Debug\Ranking.obj
          Debug\result.obj
          Debug\setview_Ai.obj
+         Debug\Stack.obj
          Debug\taggerSample.obj
          Debug\taggerTest.obj
          Debug\update_Ai.obj
@@ -94,4 +46,4 @@
 
 ビルドに成功しました。
 
-経過時間 00:01:01.56
+経過時間 00:00:06.72

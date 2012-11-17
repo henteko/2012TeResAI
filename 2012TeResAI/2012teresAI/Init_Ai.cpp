@@ -28,7 +28,8 @@ void init_Ai(AI_T *ai,int Stage[WIDTH][HEIGHT]){
 	//	init_ai->moveFunc = !移動関数名!;
 	//!!![重要]!!!!一番初め(aiSample)以外、最初にinit_ai++;を書く!!!!!!!!!!
 	//関数名などが被ると駄目です　名前は早い者勝ちで(基本自分のハンドルネーム)
-
+	
+	/*
 	// AI0 (aiSample)
 	extern void aiSampleInit(AI_T &myAi);
 	aiSampleInit(*init_ai);
@@ -43,6 +44,7 @@ void init_Ai(AI_T *ai,int Stage[WIDTH][HEIGHT]){
 	extern Action aiTest(int view[2*VISIBLE+1][2*VISIBLE+1]);
 	init_ai->moveFunc = aiTest;
 	// AI1
+	*/
 
 
 
@@ -61,6 +63,6 @@ void init_Ai(AI_T *ai,int Stage[WIDTH][HEIGHT]){
 		ai->life=1;
 
 
-		Stage[ai->x][ai->y]=2;
+		if(ai->entry==1)Stage[ai->x][ai->y]=2;
 	}
 }

@@ -10,7 +10,11 @@ void update_stage(int Stage[WIDTH][HEIGHT],AI_T ai[],Tagger tagger){
 		}
 	}
 	for(int i=0;i<AI_NUM;i++){
-		Stage[ai[i].x][ai[i].y]=2;
+		if(ai[i].entry==1)
+			Stage[ai[i].x][ai[i].y]=2;
+		else 
+			Stage[ai[i].x][ai[i].y]=0;
+			
 	}
 	Stage[tagger.x][tagger.y]=3;
 }

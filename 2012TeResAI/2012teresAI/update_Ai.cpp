@@ -51,5 +51,4 @@ void update_Ai(AI_T *ai,int Stage[WIDTH][HEIGHT]){
 		ai->act=STOP;
 		ai->step=0;
 	}
-
 }
