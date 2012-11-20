@@ -8,8 +8,8 @@
 **********************************************************/
 void taggerTestInit(Tagger &myTagger)
 {
-	myTagger.Graph = LoadGraph("Tagger_image\\aooni.jpg");  //‰æ‘œ‚Ìİ’è
-	strcpy_s(myTagger.name, "taggerTest");  //©•ª‚ÌAI‚Ì–¼‘Oİ’è
+	myTagger.Graph = LoadGraph("Tagger_image\\tagger.png");  //‰æ‘œ‚Ìİ’è
+	strcpy_s(myTagger.name, "Tagger");  //©•ª‚ÌAI‚Ì–¼‘Oİ’è
 }
 
 void taggerTestMark(int ax,int ay,int step,int map[WIDTH][HEIGHT]);

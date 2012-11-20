@@ -43,6 +43,9 @@ void make_Stage(int Stage[WIDTH][HEIGHT]){
 				Stage[x][y]=0;
 				miti[x][y]=0;
 			}
+			if(x==2 || y==2 || x==WIDTH-3 || y==HEIGHT-3){
+				Stage[x][y]=0;
+			}
 			if(x==0 || y==0 || x==WIDTH-1 || y==HEIGHT-1){
 				Stage[x][y]=1;
 			}

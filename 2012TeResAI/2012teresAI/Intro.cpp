@@ -6,45 +6,52 @@
 int intro(AI_T *ai){
 	AI_T *init_ai = ai;
 
-	int gametitle;
-	gametitle = LoadGraph("media\\chofu_fes2.bmp");
+	static int gametitle = LoadGraph("media\\chofu_fes2.bmp");
 
-	//	テンプレ
-	//	extern void !初期化関数名!(AI_T &myAi);
-	//	!初期化関数名!(ai[!aiの番号!]);
-	//	extern Action !移動関数名!(int view[2*VISIBLE+1][2*VISIBLE+1]);
-	//	init_ai->moveFunc = !移動関数名!;
-	//!!![重要]!!!!一番初め(aiSample)以外、最初にinit_ai++;を書く!!!!!!!!!!
-	//関数名などが被ると駄目です　名前は早い者勝ちで(基本自分のハンドルネーム)
+	static int start=0;
+	if(start==0){
+		start=1;
+		
+		//	テンプレ
+		//	extern void !初期化関数名!(AI_T &myAi);
+		//	!初期化関数名!(ai[!aiの番号!]);
+		//	extern Action !移動関数名!(int view[2*VISIBLE+1][2*VISIBLE+1]);
+		//	init_ai->moveFunc = !移動関数名!;
+		//!!![重要]!!!!一番初め(aiSample)以外、最初にinit_ai++;を書く!!!!!!!!!!
+		//関数名などが被ると駄目です　名前は早い者勝ちで(基本自分のハンドルネーム)
 
-	// Player
-	extern void PlayerInit(AI_T &myAi);
-	PlayerInit(*init_ai);
-	extern Action Player(int view[2*VISIBLE+1][2*VISIBLE+1]);
-	init_ai->moveFunc = Player;
-	// Player
+		// Player
+		extern void PlayerInit(AI_T &myAi);
+		PlayerInit(*init_ai);
+		extern Action Player(int view[2*VISIBLE+1][2*VISIBLE+1]);
+		init_ai->moveFunc = Player;
+		// Player
 
-	// AI0 (aiSample)
-	init_ai++;
-	extern void aiSampleInit(AI_T &myAi);
-	aiSampleInit(*init_ai);
-	extern Action aiSample(int view[2*VISIBLE+1][2*VISIBLE+1]);
-	init_ai->moveFunc = aiSample;
-	// AI0
+		// AI0 (aiSample)
+		init_ai++;
+		extern void aiSampleInit(AI_T &myAi);
+		aiSampleInit(*init_ai);
+		extern Action aiSample(int view[2*VISIBLE+1][2*VISIBLE+1]);
+		init_ai->moveFunc = aiSample;
+		// AI0
+	
+		// AI1 (aiTest)
+		init_ai++;
+		extern void aiTestInit(AI_T &myAi);
+		aiTestInit(*init_ai);
+		extern Action aiTest(int view[2*VISIBLE+1][2*VISIBLE+1]);
+		init_ai->moveFunc = aiTest;
+		// AI1
 
-	// AI1 (aiTest)
-	init_ai++;
-	extern void aiTestInit(AI_T &myAi);
-	aiTestInit(*init_ai);
-	extern Action aiTest(int view[2*VISIBLE+1][2*VISIBLE+1]);
-	init_ai->moveFunc = aiTest;
-	// AI1
-
-	/*//test デモ
-	DrawString(200,290,"AI_name",GetColor(0,255,205),0);
-	DrawCircle(300,300,5,GetColor(255,0,0),1);
-	//本当は下のほうでエントリーを表示する予定AI_T ai[]*/
-
+		/*AI追加欄
+		init_ai++;
+		extern void AI名Init(AI_T &myAi);
+		AI名Init(*init_ai);
+		extern Action AI名(int view[2*VISIBLE+1][2*VISIBLE+1]);
+		init_ai->moveFunc=AI名;
+		*/
+	}
+	
 	int entryX=320,entryY=315;
 	int startX=320,startY=360;
 

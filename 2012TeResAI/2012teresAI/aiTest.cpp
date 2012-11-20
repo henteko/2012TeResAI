@@ -82,25 +82,25 @@ Action aiTest(int view[2*VISIBLE+1][2*VISIBLE+1])//8/25:zero:追記
 			if(view[cx][cy-1]!=1)
 				return N;
 			else{
-				if(view[cx-1][cy]!=1){
-					return W;
-				}
-				else if(view[cx+1][cy]!=1){
+				if(view[cx+1][cy]!=1){
 					return E;
+				}
+				else if(view[cx-1][cy]!=1){
+					return W;
 				}else{
 					return S;
 				}
 			}
 		}
 		else if(direct<45){
-			if(view[cx-1][cy]!=1)
+			if(view[cx+1][cy]!=1)
 				return E;
 			else{
-				if(view[cx][cy-1]!=1){
-					return N;
-				}
-				else if(view[cx][cy+1]!=1){
+				if(view[cx][cy+1]!=1){
 					return S;
+				}
+				else if(view[cx][cy-1]!=1){
+					return N;
 				}else{
 					return W;
 				}
@@ -110,11 +110,11 @@ Action aiTest(int view[2*VISIBLE+1][2*VISIBLE+1])//8/25:zero:追記
 			if(view[cx][cy+1]!=1)
 				return S;
 			else{
-				if(view[cx+1][cy]!=1){
-					return E;
-				}
-				else if(view[cx-1][cy]!=1){
+				if(view[cx-1][cy]!=1){
 					return W;
+				}
+				else if(view[cx+1][cy]!=1){
+					return E;
 				}else{
 					return N;
 				}
@@ -124,11 +124,11 @@ Action aiTest(int view[2*VISIBLE+1][2*VISIBLE+1])//8/25:zero:追記
 			if(view[cx-1][cy]!=1)
 				return W;
 			else{
-				if(view[cx][cy+1]!=1){
-					return S;
-				}
-				else if(view[cx][cy-1]!=1){
+				if(view[cx][cy-1]!=1){
 					return N;
+				}
+				else if(view[cx][cy+1]!=1){
+					return S;
 				}else{
 					return E;
 				}
@@ -138,11 +138,11 @@ Action aiTest(int view[2*VISIBLE+1][2*VISIBLE+1])//8/25:zero:追記
 			if(view[cx][cy-1]!=1)
 				return N;
 			else{
-				if(view[cx-1][cy]!=1){
-					return W;
-				}
-				else if(view[cx+1][cy]!=1){
+				if(view[cx+1][cy]!=1){
 					return E;
+				}
+				else if(view[cx-1][cy]!=1){
+					return W;
 				}else{
 					return S;
 				}

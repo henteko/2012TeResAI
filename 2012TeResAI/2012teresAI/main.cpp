@@ -3,8 +3,9 @@
 int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow )
 {
 	ChangeWindowMode(TRUE);
+	SetDrawMode( DX_DRAWMODE_BILINEAR ) ;
 	SetScreenMemToVramFlag( FALSE );
-	//SetAlwaysRunFlag(TRUE) ;
+	SetAlwaysRunFlag(TRUE) ;
 	SetDrawScreen( DX_SCREEN_BACK);
 	if(DxLib_Init()==-1)		// ‚c‚wƒ‰ƒCƒuƒ‰ƒŠ‰Šú‰»ˆ—
 	{
@@ -35,6 +36,7 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
 	ai[0].entry=0;
 
 	while(ProcessMessage()!=-1){
+		int speed=0;
 		switch(gamemode){
 		case OPENING:
 			start=intro(ai);
@@ -65,8 +67,11 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
 					ai[i].act = ai[i].moveFunc(ai[i].view);
 				}
 			}
-
-			update_Tagger(&tagger[tagger_num],STAGE);
+			if(TimeLimit>TIME_LIMIT*45*79)speed=0;
+			else if(TimeLimit>TIME_LIMIT*30*79)speed=1;
+			else if(TimeLimit>TIME_LIMIT*15*79)speed=1;
+			else speed=3;
+			update_Tagger(&tagger[tagger_num],STAGE,speed);
 			for(int i=0;i<AI_NUM;i++){
 				if(ai[i].entry==1)
 					update_Ai(&ai[i],STAGE);
@@ -79,7 +84,7 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
 			
 			DrawFormatString(500,15,GetColor(0,255,0),"TIME %d",TimeLimit);
 			
-			if(tagger[tagger_num].step==0){
+			if(1){
 				for(int i=0;i<AI_NUM;i++){
 					if(death_Ai(ai[i],tagger[tagger_num])==1 && ai[i].entry==1){
 						death[i]++;

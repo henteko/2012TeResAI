@@ -1,21 +1,21 @@
 //‹S‚ÌXV(AI‚Æ“¯‚¶)‚½‚¾‚µ‹S‚ª‚Q”{‚Ìƒy[ƒX‚ÅXV
 #include "Data.h"
 
-void update_Tagger(Tagger *tagger,int Stage[WIDTH][HEIGHT]){
+void update_Tagger(Tagger *tagger,int Stage[WIDTH][HEIGHT],int speed){
 	//8/3 zero’Ç‹L:‹S‚ÌˆÚ“®‘¬“x‚ğTAGGER_SPEED‚Å’è‹`‚µ‚½
-	tagger->step+=TAGGER_SPEED;
+	tagger->step+=TAGGER_SPEED+speed;
 	switch(tagger->act){
 	case N:
-		tagger->s_y-=TAGGER_SPEED;
+		tagger->s_y-=TAGGER_SPEED+speed;
 		break;
 	case E:
-		tagger->s_x+=TAGGER_SPEED;
+		tagger->s_x+=TAGGER_SPEED+speed;
 		break;
 	case S:
-		tagger->s_y+=TAGGER_SPEED;
+		tagger->s_y+=TAGGER_SPEED+speed;
 		break;
 	case W:
-		tagger->s_x-=TAGGER_SPEED;
+		tagger->s_x-=TAGGER_SPEED+speed;
 		break;
 	case STOP:
 		tagger->act=STOP; //	toshi : AI‚É~‚Ü‚é‚Æ‚¢‚¤‘I‘ğˆ‚ª‚È‚©‚Á‚½‚Ì‚Å’Ç‰Á
@@ -47,9 +47,10 @@ void update_Tagger(Tagger *tagger,int Stage[WIDTH][HEIGHT]){
 		tagger->s_y=(tagger->y+0.5)*BOX;
 	}
 
-	if(tagger->step==BOX){
+	if(tagger->step>=BOX){
 		tagger->act=STOP;
 		tagger->step=0;
+
 	}
 
 }

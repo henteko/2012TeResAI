@@ -9,8 +9,8 @@
 **********************************************************/
 void taggerSampleInit(Tagger &myTagger)
 {
-	myTagger.Graph = LoadGraph("Tagger_image\\aooni.jpg");  //‰æ‘œ‚Ìİ’è
-	strcpy_s(myTagger.name, "taggerSample");  //©•ª‚ÌAI‚Ì–¼‘Oİ’è
+	myTagger.Graph = LoadGraph("Tagger_image\\chaser.png");  //‰æ‘œ‚Ìİ’è
+	strcpy_s(myTagger.name, "Chaser");  //©•ª‚ÌAI‚Ì–¼‘Oİ’è
 }
 /**********************************************************
 	AI‚Ìs“®‚ğ•Ô‚·ŠÖ”

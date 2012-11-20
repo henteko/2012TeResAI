@@ -8,7 +8,7 @@ using namespace std;
 
 #define AI_NUM 3
 #define TAGGER_NUM 2
-#define ROUND_MAX 1000
+#define ROUND_MAX 100
 #define TIME_LIMIT 20
 //ステージの規模
 #define WIDTH 32
@@ -21,7 +21,7 @@ using namespace std;
 //AIの移動速度
 #define AI_SPEED 4
 //鬼の移動速度
-#define TAGGER_SPEED 5
+#define TAGGER_SPEED 2
 typedef enum{
 	OPENING,
 	SETTING,
@@ -86,7 +86,7 @@ void draw(int stage[WIDTH][HEIGHT],AI_T ai[],Tagger tagger);
 Action next_Ai(int view[2*VISIBLE+1][2*VISIBLE+1]);
 Action next_Tagger(Tagger tagger,int Stage[WIDTH][HEIGHT],AI_T ai[]);//toshi:引数AI_T ai[]追加
 void update_Ai(AI_T *ai,int Stage[WIDTH][HEIGHT]);
-void update_Tagger(Tagger *tagger,int Stage[WIDTH][HEIGHT]);
+void update_Tagger(Tagger *tagger,int Stage[WIDTH][HEIGHT],int speed);
 void setview_Ai(AI_T *ai,int Stage[WIDTH][HEIGHT]);
 int death_Ai(AI_T ai,Tagger tagger);
 void result(AI_T ai[],int death[]);
