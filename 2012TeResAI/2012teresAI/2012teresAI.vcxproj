@@ -82,11 +82,13 @@
   <ItemGroup>
     <ClCompile Include="aiSample.cpp" />
     <ClCompile Include="aiTest.cpp" />
+    <ClCompile Include="AI_MsZero.cpp" />
     <ClCompile Include="death_Ai.cpp" />
     <ClCompile Include="draw.cpp" />
     <ClCompile Include="Init_Ai.cpp" />
     <ClCompile Include="Init_Tagger.cpp" />
     <ClCompile Include="Intro.cpp" />
+    <ClCompile Include="kuzumi.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="make_Stage.cpp" />
     <ClCompile Include="next_Ai.cpp" />

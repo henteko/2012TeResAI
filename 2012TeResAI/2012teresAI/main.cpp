@@ -3,9 +3,9 @@
 int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow )
 {
 	ChangeWindowMode(TRUE);
-	SetDrawMode( DX_DRAWMODE_BILINEAR ) ;
-	SetScreenMemToVramFlag( FALSE );
-	SetAlwaysRunFlag(TRUE) ;
+	SetDrawMode(DX_DRAWMODE_BILINEAR);
+	SetScreenMemToVramFlag(FALSE);
+	SetAlwaysRunFlag(TRUE);
 	SetDrawScreen( DX_SCREEN_BACK);
 	if(DxLib_Init()==-1)		// ÇcÇwÉâÉCÉuÉâÉäèâä˙âªèàóù
 	{
@@ -16,7 +16,7 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
 	/*
 	AllocConsole();
 	freopen("CONOUT$","w",stdout);
-	freopen("CONIN$","r",stdin);
+	freopen("CONIN$","r",stdin);z
 	*/
 
 	Mode gamemode=OPENING;

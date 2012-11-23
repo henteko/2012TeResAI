@@ -6,7 +6,7 @@
 #include <math.h>
 using namespace std;
 
-#define AI_NUM 3
+#define AI_NUM 5
 #define TAGGER_NUM 2
 #define ROUND_MAX 100
 #define TIME_LIMIT 20

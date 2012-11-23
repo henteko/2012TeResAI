@@ -42,6 +42,22 @@ int intro(AI_T *ai){
 		extern Action aiTest(int view[2*VISIBLE+1][2*VISIBLE+1]);
 		init_ai->moveFunc = aiTest;
 		// AI1
+		
+		//kuzumi
+		init_ai++;
+		extern void kuzumiInit(AI_T &myAi);
+		kuzumiInit(*init_ai);
+		extern Action kuzumi(int view[2*VISIBLE+1][2*VISIBLE+1]);
+		init_ai->moveFunc=kuzumi;
+		//
+
+		//AI_MsZero
+		init_ai++;
+		extern void AI_MsZeroInit(AI_T &myAi);
+		AI_MsZeroInit(*init_ai);
+		extern Action AI_MsZero(int view[2*VISIBLE+1][2*VISIBLE+1]);
+		init_ai->moveFunc=AI_MsZero;
+		//
 
 		/*AI’Ç‰Á—“
 		init_ai++;

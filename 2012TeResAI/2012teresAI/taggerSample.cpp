@@ -92,22 +92,27 @@ Action taggerSample(int tagger_x,int tagger_y,int Stage[WIDTH][HEIGHT])
 			step++;
 			if(flag==1)break;
 		}while(1);
-
+		
+		int rand=GetRand(5)+4;
 		while(step>1){
 			if(stage_cp[target_x-1][target_y]==step-1){
-				push(st,E);
+				if(step<rand)
+					push(st,E);
 				target_x--;
 			}
 			else if(stage_cp[target_x+1][target_y]==step-1){
-				push(st,W);
+				if(step<rand)
+					push(st,W);
 				target_x++;
 			}
 			else if(stage_cp[target_x][target_y+1]==step-1){
-				push(st,N);
+				if(step<rand)
+					push(st,N);
 				target_y++;
 			}
 			else if(stage_cp[target_x][target_y-1]==step-1){
-				push(st,S);
+				if(step<rand)
+					push(st,S);
 				target_y--;
 			}
 			step--;

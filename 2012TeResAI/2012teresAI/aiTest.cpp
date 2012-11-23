@@ -20,6 +20,35 @@ void aiTestInit(AI_T &myAi)
 **********************************************************/
 Action aiTest(int view[2*VISIBLE+1][2*VISIBLE+1])//8/25:zero:’Ç‹L
 {
+	int tagger_x = -1, tagger_y = 1;
+	int sub_x, sub_y;
+	int i, j;
+	for(i=0; i<2*VISIBLE+1; i++)
+		for(j=0; j<2*VISIBLE+1; j++) {
+			if(view[i][j] == 3) {
+				tagger_x = i;
+				tagger_y = j;
+			}
+		}
+	if(tagger_x == -1)
+		return STOP;
+
+	sub_x = VISIBLE - tagger_x;
+	sub_y = VISIBLE - tagger_y;
+
+	if(abs(sub_x) < abs(sub_y)) {
+		if(sub_x > 0)
+			return E;
+		else
+			return W;
+	} else {
+		if(sub_y > 0)
+			return S;
+		else
+			return N;
+	}
+	return STOP;
+		/*
 	int r;
 	int cx=VISIBLE,cy=VISIBLE;
 	int danger=0;
@@ -150,4 +179,5 @@ Action aiTest(int view[2*VISIBLE+1][2*VISIBLE+1])//8/25:zero:’Ç‹L
 		}
 		return STOP;
 	}
+	*/
 }
