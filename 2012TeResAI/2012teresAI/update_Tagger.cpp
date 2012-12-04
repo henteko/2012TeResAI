@@ -48,6 +48,8 @@ void update_Tagger(Tagger *tagger,int Stage[WIDTH][HEIGHT],int speed){
 	}
 
 	if(tagger->step>=BOX){
+		tagger->s_x=(tagger->x)*BOX+10;
+		tagger->s_y=(tagger->y)*BOX+10;
 		tagger->act=STOP;
 		tagger->step=0;
 

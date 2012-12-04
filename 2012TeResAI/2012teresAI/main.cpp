@@ -3,6 +3,7 @@
 int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow )
 {
 	ChangeWindowMode(TRUE);
+	//SetMouseDispFlag(TRUE);
 	SetDrawMode(DX_DRAWMODE_BILINEAR);
 	SetScreenMemToVramFlag(FALSE);
 	SetAlwaysRunFlag(TRUE);

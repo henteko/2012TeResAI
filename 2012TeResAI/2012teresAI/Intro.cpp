@@ -58,6 +58,55 @@ int intro(AI_T *ai){
 		extern Action AI_MsZero(int view[2*VISIBLE+1][2*VISIBLE+1]);
 		init_ai->moveFunc=AI_MsZero;
 		//
+		init_ai++;
+		extern void taoaiInit(AI_T &myAi);
+		taoaiInit(*init_ai);
+		extern Action taoai(int view[2*VISIBLE+1][2*VISIBLE+1]);
+		init_ai->moveFunc=taoai;
+
+		init_ai++;
+		extern void AINomeaningInit(AI_T &myAi);
+		AINomeaningInit(*init_ai);
+		extern Action AINomeaning(int view[2*VISIBLE+1][2*VISIBLE+1]);
+		init_ai->moveFunc=AINomeaning;
+
+		init_ai++;
+		extern void toshi_aiInit(AI_T &myAi);
+		toshi_aiInit(*init_ai);
+		extern Action toshi_ai(int view[2*VISIBLE+1][2*VISIBLE+1]);
+		init_ai->moveFunc=toshi_ai;
+		
+		init_ai++;
+		extern void nununuInit(AI_T &myAi);
+		nununuInit(*init_ai);
+		extern Action nununu(int view[2*VISIBLE+1][2*VISIBLE+1]);
+		init_ai->moveFunc=nununu;
+		
+		init_ai++;
+		extern void KenkinoInit(AI_T &myAi);
+		KenkinoInit(*init_ai);
+		extern Action Kenkino(int view[2*VISIBLE+1][2*VISIBLE+1]);
+		init_ai->moveFunc=Kenkino;
+
+		init_ai++;
+		extern void hotaInit(AI_T &myAi);
+		hotaInit(*init_ai);
+		extern Action hota(int view[2*VISIBLE+1][2*VISIBLE+1]);
+		init_ai->moveFunc=hota;
+		//11
+
+		init_ai++;
+		extern void hentekoInit(AI_T &myAi);
+		hentekoInit(*init_ai);
+		extern Action henteko(int view[2*VISIBLE+1][2*VISIBLE+1]);
+		init_ai->moveFunc=henteko;
+		//12
+
+		init_ai++;
+		extern void TsuuroInit(AI_T &myAi);
+		TsuuroInit(*init_ai);
+		extern Action Tsuuro(int view[2*VISIBLE+1][2*VISIBLE+1]);
+		init_ai->moveFunc=Tsuuro;
 
 		/*AI’Ç‰Á—“
 		init_ai++;

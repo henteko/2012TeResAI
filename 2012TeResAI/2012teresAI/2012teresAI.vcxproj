@@ -82,17 +82,22 @@
   <ItemGroup>
     <ClCompile Include="aiSample.cpp" />
     <ClCompile Include="aiTest.cpp" />
+    <ClCompile Include="AI_hota.cpp" />
     <ClCompile Include="AI_MsZero.cpp" />
+    <ClCompile Include="ai_nomeaning.cpp" />
     <ClCompile Include="death_Ai.cpp" />
     <ClCompile Include="draw.cpp" />
+    <ClCompile Include="henteko.cpp" />
     <ClCompile Include="Init_Ai.cpp" />
     <ClCompile Include="Init_Tagger.cpp" />
     <ClCompile Include="Intro.cpp" />
+    <ClCompile Include="Kenkino.cpp" />
     <ClCompile Include="kuzumi.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="make_Stage.cpp" />
     <ClCompile Include="next_Ai.cpp" />
     <ClCompile Include="next_Tagger.cpp" />
+    <ClCompile Include="nununu.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Ranking.cpp" />
     <ClCompile Include="result.cpp" />
@@ -100,12 +105,18 @@
     <ClCompile Include="Stack.cpp" />
     <ClCompile Include="taggerSample.cpp" />
     <ClCompile Include="taggerTest.cpp" />
+    <ClCompile Include="taoai.cpp" />
+    <ClCompile Include="toshi.cpp" />
+    <ClCompile Include="Tsuuro.cpp" />
     <ClCompile Include="update_Ai.cpp" />
     <ClCompile Include="update_stage.cpp" />
     <ClCompile Include="update_Tagger.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Data.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="AI_image\taoai.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

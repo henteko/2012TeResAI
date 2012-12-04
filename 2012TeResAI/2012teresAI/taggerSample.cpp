@@ -40,7 +40,7 @@ Action taggerSample(int tagger_x,int tagger_y,int Stage[WIDTH][HEIGHT])
 		{
 			//DrawString( 50, 100, "Center", 0xffffff);
 			//WaitTimer(500);
-			while(st->count > 0) pop(st); // スタックを空にする
+			st->count = 0; // スタックを空にする
 		}
 		if(st->count > 0)return pop(st);
 
@@ -70,6 +70,7 @@ Action taggerSample(int tagger_x,int tagger_y,int Stage[WIDTH][HEIGHT])
 			}
 		}
 		int step=1;
+		if(ai_n == 0) return STOP;
 		do{
 			for(int i=0;i<WIDTH;i++){
 				for(int j=0;j<HEIGHT;j++){
@@ -94,7 +95,7 @@ Action taggerSample(int tagger_x,int tagger_y,int Stage[WIDTH][HEIGHT])
 		}while(1);
 		
 		int rand=GetRand(5)+4;
-		while(step>1){
+		for(; step>1; step--){
 			if(stage_cp[target_x-1][target_y]==step-1){
 				if(step<rand)
 					push(st,E);
@@ -115,9 +116,11 @@ Action taggerSample(int tagger_x,int tagger_y,int Stage[WIDTH][HEIGHT])
 					push(st,S);
 				target_y--;
 			}
-			step--;
-		}
-		
+			else {
+				st->count = 0;
+				return STOP;
+			}
+		}		
 		return pop(st);
 	}
 	else{//Aが押されている
